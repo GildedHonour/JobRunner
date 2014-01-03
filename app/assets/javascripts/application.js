@@ -15,3 +15,4 @@
 //= require jquery.typewatch
 //= require app
 //= require contacts
+//= require companies

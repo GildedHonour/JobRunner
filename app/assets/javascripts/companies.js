@@ -1,13 +1,13 @@
-App.Contacts = {};
+App.Companies = {};
 
-App.Contacts.Index = {
+App.Companies.Index = {
   searchField: $('#typeahead-search'),
 
   init: function() {
-    this.initializeContactsSearch();
+    this.initializeCompaniesSearch();
   },
 
-  initializeContactsSearch: function() {
+  initializeCompaniesSearch: function() {
     this.searchField.typeWatch({
       wait: 750,
       captureLength: 0,
@@ -24,7 +24,7 @@ App.Contacts.Index = {
 };
 
 $(function(){
-  if($('body.contacts.index').length){
-    App.Contacts.Index.init();
+  if($('body.companies.index').length){
+    App.Companies.Index.init();
   }
 });

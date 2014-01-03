@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  respond_to :html
+  respond_to :html, :js
 
   def create
     @company = Company.new(company_params)
@@ -8,7 +8,7 @@ class CompaniesController < ApplicationController
   end
 
   def index
-    @companies = Company.all
+    @companies = params[:search].present? ? Company.search(params[:search]) : Company.all.order(:name)
     respond_with @companies
   end
 

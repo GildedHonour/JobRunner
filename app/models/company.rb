@@ -24,4 +24,12 @@ class Company < ActiveRecord::Base
 
   # Validations
   validates :name, presence: true
+
+  class << self
+    def search(term)
+      return Company.none if term.blank?
+      term_like = "%#{term}%"
+      Company.where("name ILIKE ?", term_like)
+    end
+  end
 end
