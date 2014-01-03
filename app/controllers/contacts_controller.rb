@@ -15,7 +15,6 @@ class ContactsController < ApplicationController
     else
       @contacts = Contact.order(:first_name).page(params[:page]).per(PAGE_SIZE)
     end
-
     respond_with @contacts
   end
 
