@@ -1,0 +1,2 @@
+class ClientAffiliation < Affiliation
+end

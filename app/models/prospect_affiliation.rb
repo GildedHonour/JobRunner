@@ -1,0 +1,2 @@
+class ProspectAffiliation < Affiliation
+end

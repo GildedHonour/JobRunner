@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 end
+
+# Provides dynamic helpers like current_user or user_signed_in?, when devise_for is not used.
+Devise.add_mapping(:user, {})

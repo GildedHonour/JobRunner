@@ -1,7 +1,7 @@
 DatabaseCleaner.strategy = :truncation
 DatabaseCleaner.clean
 
-320.times do
+200.times do
   Contact.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -13,8 +13,8 @@ DatabaseCleaner.clean
   )
 end
 
-120.times do
-  Company.create(
+50.times do
+  company = Company.create(
     name: Faker::Company.name,
     website: Faker::Internet.domain_name,
     address: Faker::Address.street_address,
@@ -22,6 +22,8 @@ end
     state: Faker::Address.us_state,
     zip: Faker::Address.zip_code
   )
+  company.client_affiliates << Company.order("RANDOM()").limit(5)
+  company.prospect_affiliates << Company.order("RANDOM()").limit(5)
 end
 
 User.create!(email: 'sean@engageyourcause.com', password: 'password')
