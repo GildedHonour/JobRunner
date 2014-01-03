@@ -20,6 +20,8 @@ class Company < ActiveRecord::Base
   has_many :prospect_principal_affiliations, -> { where type: ProspectAffiliation.to_s }, foreign_key: 'affiliate_id', dependent: :destroy, class_name: 'Affiliation'
   has_many :prospect_principals, through: :prospect_principal_affiliations, class_name: 'Company', source: :principal
 
+  has_many :contacts
+
   # Validations
   validates :name, presence: true
 end
