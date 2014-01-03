@@ -15,6 +15,7 @@ class ContactsController < ApplicationController
   def show
     @contact = Contact.find(params[:id])
     @company = @contact.company
+    @notes = Note.where(:contact_id => @contact)
     respond_with @contact
   end
 

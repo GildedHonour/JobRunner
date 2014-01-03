@@ -63,25 +63,41 @@
           %table
             %tr
               %td.tlabel.for.attribute Birthday
-              %td January 1, 1972
+              %td 
+                = @contact.birthday
             %tr
-              %td
-              %td
+              %td.tlabel.for.attribute Holiday Card
+              %td 
+                = @contact.holiday_card
             %tr
-              %td
-              %td
+              %td.tlabel.for.attribute Holiday Gift
+              %td 
+                = @contact.gift
             %tr
-              %td
-              %td
+              %td.tlabel.for.attribute Birthday
+              %td 
+                = @contact.birthday
             %tr
-              %td
-              %td
+              %td.tlabel.for.attribute MMI Ballgame Invite
+              %td 
+                = @contact.mmi_ballgame
             %tr
-              %td
-              %td
+              %td.tlabel.for.attribute Wall Calendar
+              %td 
+                = @contact.wall_calendar
             %tr
-              %td
-              %td
+              %td.tlabel.for.attribute Email Optout
+              %td 
+                = @contact.do_not_email
+            %tr
+              %td.tlabel.for.attribute Mail Optout
+              %td 
+                = @contact.do_not_mail
       .col-sm-6
         .board.for.contact
           %h3 Notes
+          - @notes.each do |n|
+            %div 
+              = n.updated_at
+            %div
+              = n.note 
