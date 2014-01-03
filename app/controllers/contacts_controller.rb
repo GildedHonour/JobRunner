@@ -14,6 +14,7 @@ class ContactsController < ApplicationController
 
   def show
     @contact = Contact.find(params[:id])
+    @company = @contact.company
     respond_with @contact
   end
 

@@ -31,16 +31,14 @@
       .col-sm-6
         .board.for.contact
           %h3 Relationships
-          %h2 Company Name Here
-          %h4 Title Here
+          %h2 
+            = @company.name
+          %h4
+            = @contact.job_title
           %h5 Affiliations
           %table.table.table-hover
             %tr
-              %td Affiliated Company Name - MMI
-              %td Role: Client
-              %td Status: Active
-            %tr
-              %td Avalon
+              %td Affiliation name
               %td Role: Client
               %td Status: Active
       .col-sm-6
@@ -49,7 +47,8 @@
           %table
             %tr
               %td.tlabel.for.attribute Email
-              %td chip@pmgdirect.net
+              %td
+                = @contact.email
             %tr
               %td
               %td
