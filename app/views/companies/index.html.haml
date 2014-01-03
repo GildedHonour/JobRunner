@@ -14,3 +14,5 @@
             Role(s)
       %tbody#companies-listing
         = render @companies
+    #companies-pagination
+      = paginate(@companies)

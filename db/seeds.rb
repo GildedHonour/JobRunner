@@ -1,7 +1,7 @@
 DatabaseCleaner.strategy = :truncation
 DatabaseCleaner.clean
 
-50.times do
+100.times do
   company = Company.create(
     name: Faker::Company.name,
     website: Faker::Internet.domain_name,
@@ -14,7 +14,7 @@ DatabaseCleaner.clean
   company.prospect_affiliates << Company.order("RANDOM()").limit(5)
 end
 
-200.times do
+1500.times do
   Contact.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,

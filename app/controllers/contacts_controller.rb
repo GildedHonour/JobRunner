@@ -1,6 +1,8 @@
 class ContactsController < ApplicationController
   respond_to :html, :js
 
+  PAGE_SIZE = 100
+
   def create
     @contact = Contact.new(contact_params)
     @contact.save
@@ -8,7 +10,11 @@ class ContactsController < ApplicationController
   end
 
   def index
-    @contacts = params[:search].present? ? Contact.search(params[:search]) : Contact.all.order(:first_name)
+    if params[:search].present?
+      @contacts = Contact.search(params[:search]).page(params[:page]).per(PAGE_SIZE)
+    else
+      @contacts = Contact.order(:first_name).page(params[:page]).per(PAGE_SIZE)
+    end
     respond_with @contacts
   end
 

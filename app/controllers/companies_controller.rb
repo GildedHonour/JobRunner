@@ -1,6 +1,8 @@
 class CompaniesController < ApplicationController
   respond_to :html, :js
 
+  PAGE_SIZE = 100
+
   def create
     @company = Company.new(company_params)
     @company.save
@@ -8,7 +10,11 @@ class CompaniesController < ApplicationController
   end
 
   def index
-    @companies = params[:search].present? ? Company.search(params[:search]) : Company.all.order(:name)
+    if params[:search].present?
+      @companies = Company.search(params[:search]).page(params[:page]).per(PAGE_SIZE)
+    else
+      @companies = Company.order(:name).page(params[:page]).per(PAGE_SIZE)
+    end
     respond_with @companies
   end
 

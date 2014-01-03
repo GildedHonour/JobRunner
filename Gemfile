@@ -7,7 +7,10 @@ gem "rails", "4.0.2"
 # Authentication
 gem "devise"
 
-# View
+# Model related
+gem "kaminari"
+
+# View related
 gem "haml-rails"
 
 # Assets
