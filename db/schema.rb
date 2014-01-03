@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20140103184106) do
   end
 
   create_table "contacts", force: true do |t|
+    t.integer "company_id"
     t.string  "first_name"
     t.string  "last_name"
     t.string  "address"

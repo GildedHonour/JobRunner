@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  respond_to :html
+  respond_to :html, :js
 
   def create
     @contact = Contact.new(contact_params)
@@ -8,7 +8,7 @@ class ContactsController < ApplicationController
   end
 
   def index
-    @contacts = Contact.all
+    @contacts = params[:search].present? ? Contact.search(params[:search]) : Contact.all.order(:first_name)
     respond_with @contacts
   end
 

@@ -5,7 +5,7 @@
       Jobrunner
     = stylesheet_link_tag "application", media: "all"
     = csrf_meta_tags
-  %body
+  %body{ class: "#{controller.controller_name} #{controller.action_name}" }
     #main
       .row
         .col-sm-12
