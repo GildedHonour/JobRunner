@@ -1,6 +1,7 @@
 class CreateContacts < ActiveRecord::Migration
   def change
     create_table :contacts do |t|
+      t.integer :company_id
       t.string :first_name
       t.string :last_name
       t.string :address
@@ -14,5 +15,7 @@ class CreateContacts < ActiveRecord::Migration
       t.string :prefix
       t.string :job_title
     end
+
+    add_index :contacts, :company_id
   end
 end

@@ -1,5 +1,5 @@
 .col-sm-9.for.content
-  = render "action_panel"
+  = render "action_panel", search_url: companies_url
   .contacts.holder
     %table.table.for.contacts.table-hover
       %thead
@@ -12,14 +12,5 @@
             Affiliation(s)
           %th
             Role(s)
-      %tbody
-        - @companies.each do |company|
-          %tr
-            %td
-              = check_box_tag "select-contact"
-            %td
-              = link_to company.name, company_url(company)
-            %td
-              Each Affiliation
-            %td
-              Each role
+      %tbody#companies-listing
+        = render @companies
