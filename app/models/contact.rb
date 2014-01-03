@@ -5,7 +5,7 @@ class Contact < ActiveRecord::Base
   belongs_to  :company
   has_many	:notes, :dependent => :destroy
 
-  accepts_nested_atrributes_for :notes, 
+  accepts_nested_attributes_for :notes 
 
   def full_name
     "#{self.first_name} #{self.last_name}"
