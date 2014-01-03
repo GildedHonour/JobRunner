@@ -1,0 +1,205 @@
+// Note: PSD pt to px 1.42857143
+
+// Colors
+// --------------------------------------------------------------
+
+$black: #2c3333; // very dark blue-black. use carefully.
+
+$green: #7fc244; // green for links and other 
+
+// neutrals -- range of turquoise-ish grays for all your shading needs
+$gray-06: #dfe3e3; // main navigation background collapsed
+$gray-05: #444848; // subheads, body text, inputs
+$gray-04: #798F8F; // icons, lighter type
+$gray-03: #9CB3B3; // light headers
+$gray-02: #DBE4E4; // hairlines
+$gray-01: #D1DCDC; // borders, footer 555a5a
+
+// blacks
+$black-02: #555a5a; // small navigation elements
+$black-01: #2c3333; // label black, others
+
+// highlights/brand colors
+// -> might not be exact; eye dropper-ed from logo PNGs
+$pmg: #548B29;
+$engage: #682B87;
+$mmi: #2791DE; 
+$mailsmart: #F5A932;
+
+$pmg-background: #7fc244;
+
+$background-gray: #f8fafa;
+
+
+// Typography
+// --------------------------------------------------------------
+// -> I know this is a lot of webfonts & weights, which is a lot to download. 
+// -> Will try to trim these down as I revise the design.
+// 
+// -> Based loosely on "perfect fifth" modular scale: 
+// -> http://modularscale.com/scale/?px1=48&px2=16&ra1=1.5&ra2=0
+
+// rem size = [ pixel size ] / $base-font-size
+$base-font-size: 16px;
+
+body, html {
+  height: 100%;
+  background-color: $background-gray;
+}
+
+#main {
+  max-width: 1400px;
+}
+
+table {
+  background-color: #fff;
+}
+
+// page titles, main headers
+h1, %h1 {
+	font-family: "Verb Light", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+	font-size: 48px;
+	font-size: 3rem;
+	line-height: 1.2;
+	letter-spacing: -0.2em;
+	color: $black;
+}
+
+	// secondary parts of the headline, like "Mr" in "Mr. Imahn Crowder"
+	h1.subhead, %h1-subhead {
+		color: $gray-03;
+	}
+
+// section headers
+h2, %h2 {
+	font-family: "Verb Extra Bold", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+	font-weight: 700;
+	font-size: 26px;
+	font-size: 1.625rem;
+	line-height: 1.2;
+	letter-spacing: 0;
+	color: $black;
+}
+
+// subheads
+h3, %h3 {
+	font-family: "Lora Regular", "Georgia", "Times", serif;
+	font-size: 18px;
+	font-size: 1.125rem;
+	line-height: 1.4;
+	letter-spacing: 0;
+	color: $gray-04;
+}
+
+// labels for tiles/tabs/sections
+h4, %h4 {
+	font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+	font-size: 14px;
+	font-size: 0.875rem;
+	line-height: 1.4;
+	letter-spacing: 0;
+	color: $pmg; // or whatever brand colors applies
+	text-transform: uppercase;
+}
+
+// meta info, small subheads
+h5, %h5 {
+	font-family: "Verb Extra Bold", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+	font-weight: 700;
+	font-size: 12px;
+	font-size: 0.75rem;
+	line-height: 1.4;
+	letter-spacing: 0;
+	color: $gray-04;
+	text-transform: uppercase;
+}
+
+// main body type
+body, p {
+	font-family: "Lora Regular", "Georgia", "Times", serif;
+	font-size: 18px;
+	font-size: 1.125rem;
+	line-height: 1.5;
+	letter-spacing: 0;
+	color: $gray-05;
+}
+
+	body strong, p strong {
+		font-family: "Lora bold", "Georgia", "Times", serif;
+		font-weight: bold;
+		font-size: 18px;
+		font-size: 1.125rem;
+		line-height: 1.5;
+		letter-spacing: 0;
+		color: $black;
+	}
+
+	body em, p em {
+		font-family: "Lora italic", "Georgia", "Times", serif;
+		font-style: italic;
+		font-size: 18px;
+		font-size: 1.125rem;
+		line-height: 1.5;
+		letter-spacing: 0;
+		color: $gray-05;
+	}
+
+// sidebars and lists of things
+ul, li, dl, dd, aside {
+	font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+	font-size: 16px;
+	font-size: 1rem;
+	line-height: 1.5;
+	letter-spacing: 0;
+	color: $gray-05;
+}
+
+// same as above but lighter. used for labels in lists, like "birthday" or "role"
+dt, aside.label {
+	font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+	font-size: 16px;
+	font-size: 1rem;
+	line-height: 1.5;
+	letter-spacing: 0;
+	color: $gray-04;
+}
+
+	aside strong {
+		font-family: "Verb Extra Bold", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+		font-weight: 700;
+		font-size: 16px;
+		font-size: 1rem;
+		line-height: 1.5;
+		letter-spacing: 0;
+		color: $gray-05;
+	}
+
+// used for fields and inputs - placeholders and entered text
+input, select {
+	font-family: "Verb Light", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+	font-size: 16px;
+	font-size: 1rem;
+	line-height: 1.5;
+	letter-spacing: 0;
+	color: $gray-04;
+}
+
+// meta info, captions, footnotes
+small, .caption {
+	font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+	font-size: 14px;
+	font-size: 0.875rem;
+	line-height: 1.5;
+	letter-spacing: 0;
+	color: $gray-05;
+}
+
+	small strong, .caption strong {
+		font-family: "Verb Extra Bold", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+		font-weight: 700;
+		font-size: 14px;
+		font-size: 0.875rem;
+		line-height: 1.5;
+		letter-spacing: 0;
+		color: $gray-05;
+	}

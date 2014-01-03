@@ -1,0 +1,68 @@
+// ==========================================================================
+// Helpers for converting units (rems, percent, etc.)
+// ==========================================================================
+
+// Eric Meyer's awesome strip unit helper
+// http://stackoverflow.com/questions/12328259/how-do-you-strip-the-unit-from-any-number-in-sass/12335841#12335841
+@function strip-units($number) {
+  @return $number / ($number * 0 + 1);
+}
+
+// Converts "px" to "em" using the ($)em-base -- changed to 16px
+@function convert-to-em($value, $base-value: 16px)  {
+  $value: strip-units($value) / strip-units($base-value) * 1em;
+  @if ($value == 0em) { $value: 0; } // Turn 0em into 0
+  @return $value;
+}
+
+// Working in ems is annoying. Think in pixels by using this handy function, em-calc(#)
+// Just enter the number, no need to mention "px"
+@function em-calc($values, $base-value: 16px) {
+  $max: length($values); // Get the total number of parameters passed
+
+  // If there is only 1 parameter, then return it as an integer.
+  // This is done because a list can't be multiplied or divided even if it contains a single value
+  @if $max == 1 { @return convert-to-em(nth($values, 1), $base-value); }
+
+  $emValues: (); // This will eventually store the converted $values in a list
+  @for $i from 1 through $max {
+    $emValues: append($emValues, convert-to-em(nth($values, $i), $base-value));
+  }
+  @return $emValues;
+}
+
+// convert to rem
+// @param $base (optional): base font size
+// based on http://www.stubbornella.org/content/2013/07/01/easy-peasy-rem-conversion-with-sass/
+@function rem($px-size, $base: $base-font-size) {
+  @return #{strip-units($px-size/$base)}rem;
+}
+
+@function percent($px-size, $base: $base-font-size) {
+  @return (strip-units($px-size/$base-font-size))*100%;
+}
+
+// based on https://github.com/bitmanic/rem
+// @param $px-values: number or list of numbers (0 3px 3px 0)
+// -> NONZERO VALUES MUST HAVE UNITS
+@mixin rem($property, $px-values, $base: $base-font-size) {
+  // Print the first line in pixel values
+  #{$property}: $px-values;
+  // If there is only one (numeric) value, return the property/value line for it.
+  @if type-of($px-values) == "number" {
+    #{$property}: rem($px-values, $base);
+  } @else {
+    // Create an empty list that we can dump values into
+    $rem-values: ();
+    @each $value in $px-values {
+      // If the value is zero or not a number, return it
+      @if $value == 0 or type-of( $value ) != "number" {
+        $rem-values: append($rem-values, $value); 
+      } @else {
+        $rem-values: append($rem-values, rem($value, $base)); 
+      }
+    }
+    // Return the property and its list of converted values
+    #{$property}: $rem-values; 
+  } 
+}

@@ -1,0 +1,14 @@
+.action-panel
+  = render "search"
+  %nav.internal.page.actions
+    %ul.action.options
+      %li
+        Display by:
+      %li
+        = link_to "Company", companies_url, class: active_class_if_controller("companies")
+      %li
+        = link_to "Person", contacts_url, class: active_class_if_controller("contacts")
+      %li.pull-right.actions.dropdown
+        = link_to "#" do
+          Actions
+          %b.caret

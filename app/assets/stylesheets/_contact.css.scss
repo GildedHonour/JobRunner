@@ -1,0 +1,92 @@
+.contact.intro {
+  // Panel styles
+  padding: 0 0 0 rem(35px);
+  background-color: $background-gray;
+}
+
+.go.back {
+  font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+  font-size: rem(14px);
+  padding: rem(10px) rem(25px);
+  margin-bottom: rem(40px);
+
+  a {
+    color: $black-02;
+    border-bottom: 4px solid $gray-06;
+    display: block;
+    padding-left: rem(25px);
+    padding-bottom: 1rem;
+  }
+  .glyphicon-chevron-left {
+    font-size: rem(22px);
+    vertical-align: sub;
+  }
+}
+
+.basic.contact.info {
+  font-family: "Verb Light", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+}
+
+.contact.name {
+  font-size: rem(58px);
+  border-bottom: 5px solid $black-01;
+  padding-left: rem(25px);
+}
+
+.secondary.contact.info {
+  margin: 1rem 0 2rem;
+  padding-left: rem(25px);
+  font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+  font-size: rem(20px);
+  span.label {
+    font-family: "Verb Extra Bold", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+    color: $black-01;
+    font-size: rem(20px);
+  }
+
+}
+
+.contact.details {
+//  padding: rem(0) rem(25px) rem(15px) rem(69px);
+  background-color: #fff;
+  border-top: 5px solid $gray-02;
+  padding: 0 0 0 rem(75px);
+}
+
+.board.for.contact {
+  width: 100%;
+}
+
+.board.for.contact h3 {
+  border-top: 5px solid $green;
+  display: inline-block;
+  color: $green;
+  text-transform: uppercase;
+  font-family: "Verb Extra Bold", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+  font-size: rem(20px);
+  font-weight: bold;
+  margin-top: rem(-8px);
+  padding-top: rem(20px);
+}
+
+.board.for.contact h2 {
+  margin-top: rem(10px);
+  padding-top: 0;
+  font-family: "Verb Extra Bold", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+  font-size: rem(37px);
+}
+
+.board.for.contact h4 {
+  font-family: "Lora Regular", "Georgia", "Times", serif;
+  font-size: rem(26px);
+  color: #666;
+  text-transform: none;
+  margin-bottom: rem(36px);
+}
+
+.board.for.contact h5, th {
+  font-family: "Verb Black", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+  font-size: rem(17px);
+  border-bottom: 5px solid $gray-02;
+}
+

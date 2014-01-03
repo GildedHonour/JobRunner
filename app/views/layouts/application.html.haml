@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %title
+      Jobrunner
+    = stylesheet_link_tag "application", media: "all"
+    = csrf_meta_tags
+  %body
+    #main
+      .row
+        .col-sm-12
+          = render "left_nav"
+          = yield
+
+    = javascript_include_tag "application"

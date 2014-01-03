@@ -1,0 +1,20 @@
+.for.left.navigation
+  .navigation
+    .branding.elements
+      .brand
+        = image_tag "pmg-mini.png"
+      .brand.extended{style: "display: none;"}
+        Production Management Group
+    .clearfix
+    .navigation.elements
+      .icon.for.navigation
+        = link_to root_url do
+          %span.glyphicon.glyphicon-home>
+      .icon.for.navigation
+        = link_to root_url do
+          %span.glyphicon.glyphicon-list-alt>
+      .icon.for.navigation
+        %span.glyphicon.glyphicon-map-marker
+
+      .icon.for.navigation
+        %span.glyphicon.glyphicon-dashboard

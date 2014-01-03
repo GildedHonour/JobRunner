@@ -1,0 +1,22 @@
+.for.left.navigation {
+  background-color: $gray-06;
+  position: fixed;
+  height: 100%;
+  width: 70px;
+}
+
+.navigation.elements {
+  margin-top: rem(100px);
+}
+
+.brand {
+  background-color: $pmg-background;
+  width: 100%;
+  text-align: center;
+}
+
+.icon.for.navigation {
+  font-size: rem(18pt);
+  text-align: center;
+  padding: rem(15px) 0;
+}

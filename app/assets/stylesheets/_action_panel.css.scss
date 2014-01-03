@@ -1,0 +1,68 @@
+.action-panel {
+  
+  // Panel styles
+  padding: rem(22pt) rem(22pt) rem(8pt);
+  background-color: $background-gray;
+  border: 1px solid $gray-02;
+  @include box-shadow($gray-02 rem(1px) rem(1px) 1px);
+  margin-bottom: rem(7px);
+  
+  // Search form styles
+  .search-container {
+    position: relative;
+  }
+
+  .glyphicon {
+    position: absolute;
+    padding: rem(8pt) rem(14pt);
+    font-size: rem(24pt);
+  }
+
+  input {
+    color: $gray-05;
+    font-size: rem(24pt);
+    padding-left: rem(48pt);
+    @include box-shadow($gray-02 rem(1px) rem(1px) 0px);
+    // @include border-radius(rem(1px));
+    min-height: rem(45pt);
+  }
+
+  // Actions styles
+  nav {
+    padding: rem(20pt) rem(18pt) 0 rem(12pt);
+    font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+    text-transform: uppercase;
+    font-size: rem(14pt);
+  }
+
+  ul.action.options {
+    display: inline-block;
+    -webkit-padding-start: 0;
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  nav ul li {
+    list-style: none;
+    display: inline;
+    margin-left: rem(10pt);
+    font-size: rem(14pt);
+
+    a {
+      color: $gray-04;
+      margin-left: rem(12pt);
+    }
+
+    a.active {
+      color: $green;
+      font-weight: bold;
+      border-bottom: 6px solid $green;
+      padding-bottom: rem(12pt);
+    }
+  } 
+
+  nav ul li.pull-right a {
+    font-weight: bold;
+    color: $gray-05;
+  }
+}

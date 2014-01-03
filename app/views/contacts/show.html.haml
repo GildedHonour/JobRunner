@@ -1,0 +1,88 @@
+.col-sm-11.for.content
+  .contact.intro
+    .row
+      .col-sm-9.go.back
+        = link_to contacts_url do
+          %span.glyphicon.glyphicon-chevron-left
+          Back to contacts list
+      .col-sm-3
+        = render "profile"
+    .row
+      .col-sm-12.basic.contact.info
+        .contact.name
+          = @contact.full_name
+        .secondary.contact.info
+          %span.label
+            Email
+          = @contact.email
+          %span.label
+            Phone
+          = @contact.phone
+          %span.label
+            Address
+          = @contact.address
+          = @contact.address2
+          = @contact.city
+          = @contact.state
+          = @contact.zip
+
+  .contact.details
+    .first.contact.row
+      .col-sm-6
+        .board.for.contact
+          %h3 Relationships
+          %h2 Company Name Here
+          %h4 Title Here
+          %h5 Affiliations
+          %table.table.table-hover
+            %tr
+              %td Affiliated Company Name - MMI
+              %td Role: Client
+              %td Status: Active
+            %tr
+              %td Avalon
+              %td Role: Client
+              %td Status: Active
+      .col-sm-6
+        .board.for.contact
+          %h3 User Account
+          %table
+            %tr
+              %td.tlabel.for.attribute Email
+              %td chip@pmgdirect.net
+            %tr
+              %td
+              %td
+            %tr
+              %td
+              %td
+  .contact.details
+    .second.contact.row
+      .col-sm-6
+        .board.for.contact
+          %h3 Communications
+          %table
+            %tr
+              %td.tlabel.for.attribute Birthday
+              %td January 1, 1972
+            %tr
+              %td
+              %td
+            %tr
+              %td
+              %td
+            %tr
+              %td
+              %td
+            %tr
+              %td
+              %td
+            %tr
+              %td
+              %td
+            %tr
+              %td
+              %td
+      .col-sm-6
+        .board.for.contact
+          %h3 Notes

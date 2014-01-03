@@ -1,0 +1,77 @@
+.col-sm-12.for.content
+  .contact.intro
+    .row
+      .col-sm-9.go.back
+        = link_to companies_url do
+          %span.glyphicon.glyphicon-chevron-left
+          Back to companies list
+      .col-sm-3
+        = render "profile"
+    .row
+      .col-sm-12.basic.contact.info
+        .contact.name
+          = @company.name
+        .secondary.contact.info
+          %span.label
+            Address
+          = @company.address
+          = @company.address2
+          = @company.city
+          = @company.state
+          = @company.zip
+          %span.label Web
+          %span.label Phone
+  .contact.details
+    .first.contact.row
+      .col-sm-12
+        .board.for.contact
+          %h3 Relationships
+          %table.table.table-hover
+            %tr
+              %th Affiliations
+              %th Role(s)
+              %th Status
+              %th Added
+              %th Last Modified
+            %tr
+              %td Affiliated Company Name - MMI
+              %td Partner
+              %td Active
+              %td Jan 1, 2013
+              %td Jan 1, 2013
+            %tr
+              %td Avalon
+              %td Client
+              %td Active
+              %td Jan 1, 2013
+              %td Jan 1, 2013
+  .contact.details
+    .second.contact.row
+      .col-sm-12
+        .board.for.contact
+          %h3 People
+          %table.table.table-hover
+            %tr
+              %th Name
+              %th Title
+              %th Email
+              %th Status
+              %th Last Modified
+            %tr
+              %td Paul Amos
+              %td Supreme Overlord
+              %td pamos@mmidrect.com
+              %td O 410.290.0667
+              %td Active
+            %tr
+              %td Paul Amos
+              %td Supreme Overlord
+              %td pamos@mmidrect.com
+              %td O 410.290.0667
+              %td Active
+            %tr
+              %td Paul Amos
+              %td Supreme Overlord
+              %td pamos@mmidrect.com
+              %td O 410.290.0667
+              %td Active

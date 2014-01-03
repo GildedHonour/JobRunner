@@ -1,0 +1,36 @@
+.for.profile.and.help {
+  width: 100%;
+  background-color: $background-gray;
+  font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+  font-size: rem(16pt);
+  color: #a2a2a2;
+  display: block;
+  a {
+    cursor: pointer;
+  }
+}
+
+.for.profile, .for.help {
+  background-color: #000;
+  padding: rem(15pt) rem(0);
+  text-align: center;
+  margin-top: rem(-8pt);
+}
+
+.for.profile {
+  width: 82.888888%; // adjusting boostrap fluid width slightly to account for the added margin below
+}
+
+.for.help {
+  margin-left: 1px;
+}
+
+.on.listing.pages {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+  width: 20.3%;
+  position: absolute;
+  right: 0;
+}

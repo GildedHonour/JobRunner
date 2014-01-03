@@ -1,0 +1,26 @@
+.col-sm-9.for.content
+  = render "action_panel"
+
+  .contacts.holder
+    %table.table.for.contacts.table-hover
+      %thead
+        %tr
+          %th
+            = check_box_tag "select-contact"
+          %th
+            Name
+          %th
+            Company
+          %th
+            Title
+      %tbody
+        - @contacts.each do |contact|
+          %tr
+            %td
+              = check_box_tag "select-contact"
+            %td
+              = link_to contact.full_name, contact_url(contact)
+            %td
+              = contact.email
+            %td
+              = contact.job_title
