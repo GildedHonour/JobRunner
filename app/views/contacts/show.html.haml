@@ -10,7 +10,10 @@
     .row
       .col-sm-12.basic.contact.info
         .contact.name
-          = @contact.full_name
+          %span#first_name{data: { "type" => "text", "pk" => "#{@contact.id}", "url" => "/contacts/#{@contact.id}", "title" => "Enter First Name" }}
+            = @contact.first_name
+          %span#last_name{data: { "type" => "text", "pk" => "#{@contact.id}", "url" => "/contacts/#{@contact.id}", "title" => "Enter Last Name" }}
+            = @contact.last_name
         .secondary.contact.info
           %span.label
             Email

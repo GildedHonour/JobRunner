@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.typewatch
+//= require bootstrap-editable
 //= require app
 //= require contacts
 //= require companies

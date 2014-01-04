@@ -28,11 +28,18 @@ class ContactsController < ApplicationController
   def update
     @contact = Contact.find(params[:id])
     @contact.update_attributes(contact_params)
-    respond_with @contact
+    respond_to do |format|
+      if @contact.save
+        format.html { render @contact }
+        format.js 
+      else
+        format.html { render :action => :edit }
+      end
+    end
   end
 
   private
   def contact_params
-    params.require(:contact).permit(:name, notes_attributes: [:note])
+    params.require(:contact).permit(:first_name, :last_name, notes_attributes: [:note])
   end
 end
