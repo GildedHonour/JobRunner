@@ -11,10 +11,16 @@ class CompaniesController < ApplicationController
 
   def index
     if params[:search].present?
-      @companies = Company.search(params[:search]).page(params[:page]).per(PAGE_SIZE)
+      @companies = Company.search(params[:search])
     else
-      @companies = Company.order(:name).page(params[:page]).per(PAGE_SIZE)
+      @companies = Company.order(:name)
     end
+    @companies = Company.find_affiliated_to_company(params[:selected_companies].split(',')).order(:name) if params[:selected_companies].present?
+
+    @companies = @companies.page(params[:page]).per(PAGE_SIZE)
+
+    @all_principals = Company.all_principals.group_by(&:internal)
+
     respond_with @companies
   end
 

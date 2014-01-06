@@ -10,6 +10,7 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :website
       t.string :phone
       t.string :company_type
+      t.boolean :internal
     end
   end
 end

@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20140103213141) do
     t.string  "website"
     t.string  "phone"
     t.string  "company_type"
+    t.boolean "internal"
   end
 
   create_table "contacts", force: true do |t|

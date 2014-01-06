@@ -16,3 +16,21 @@
         = render @companies
     #companies-pagination
       = paginate(@companies)
+.col-sm-2.for.sidebar
+  %h2
+    Filters:
+  %h2
+    Affiliations
+  #affiliations-filter
+    .well
+      %ul.list-unstyled
+        - @all_principals[true].each do |principal|
+          %li.checkbox
+            = check_box_tag "affiliation_filter[company_ids]", principal.id
+            = principal.name
+    .well
+      %ul.list-unstyled
+        - @all_principals[false].each do |principal|
+          %li.checkbox
+            = check_box_tag "affiliation_filter[company_ids]", principal.id
+            = principal.name

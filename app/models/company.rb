@@ -31,5 +31,13 @@ class Company < ActiveRecord::Base
       term_like = "%#{term}%"
       Company.where("name ILIKE ?", term_like)
     end
+
+    def find_affiliated_to_company(company_ids)
+      Company.includes(:principal_affiliations).where('affiliations.principal_id IN (?)', company_ids).references(:affiliate_affiliations)
+    end
+
+    def all_principals
+      Company.order("name").find(*Affiliation.pluck(:principal_id).uniq)
+    end
   end
 end
