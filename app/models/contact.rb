@@ -17,5 +17,9 @@ class Contact < ActiveRecord::Base
       term_like = "%#{term}%"
       Contact.includes(:company).where("first_name ILIKE ? OR last_name ILIKE ? OR companies.name ILIKE ?", term_like, term_like, term_like)
     end
+
+    def find_affiliated_to_company(company_ids)
+      Contact.includes(company: :principal_affiliations).where('affiliations.principal_id IN (?)', company_ids).references(:affiliate_affiliations)
+    end
   end
 end

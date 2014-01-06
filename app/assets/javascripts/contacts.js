@@ -2,9 +2,11 @@ App.Contacts = {};
 
 App.Contacts.Index = {
   searchField: $('#typeahead-search'),
+  affiliationsFilter: $('#affiliations-filter'),
 
   init: function() {
     this.initializeContactsSearch();
+    this.initializeFilters();
   },
 
   initializeContactsSearch: function() {
@@ -20,6 +22,21 @@ App.Contacts.Index = {
         });
       }
     })
+  },
+
+  initializeFilters: function() {
+    this.affiliationsFilter.on('change', function() {
+      var selectedCompanies = $.map($('input[name="affiliation_filter[company_ids]"]:checked'), function(principal_input) {
+        return $(principal_input).val();
+      });
+
+      $.ajax({
+        method: 'GET',
+        url: '/contacts/',
+        data: { 'selected_companies': selectedCompanies.join(',') },
+        dataType: 'script'
+      });
+    });
   }
 };
 

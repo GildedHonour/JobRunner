@@ -1,6 +1,15 @@
 DatabaseCleaner.strategy = :truncation
 DatabaseCleaner.clean
 
+contact_job_titles = [
+  "Developer",
+  "Designer",
+  "Project Manager",
+  "Business Development",
+  "Marketing Manager",
+  "Sales Lead"
+]
+
 100.times do |i|
   company = Company.create(
     name: Faker::Company.name,
@@ -23,6 +32,7 @@ end
     address: Faker::Address.street_address,
     city: Faker::Address.city,
     state: Faker::Address.us_state,
+    job_title: contact_job_titles.sample,
     zip: Faker::Address.zip_code,
     company_id: Company.order("RANDOM()").first.id
   )

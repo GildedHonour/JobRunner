@@ -11,10 +11,16 @@ class ContactsController < ApplicationController
 
   def index
     if params[:search].present?
-      @contacts = Contact.search(params[:search]).page(params[:page]).per(PAGE_SIZE)
+      @contacts = Contact.search(params[:search])
     else
-      @contacts = Contact.order(:first_name).page(params[:page]).per(PAGE_SIZE)
+      @contacts = Contact.order(:first_name)
     end
+    @contacts = Contact.find_affiliated_to_company(params[:selected_companies].split(',')).order(:first_name) if params[:selected_companies].present?
+
+    @contacts = @contacts.page(params[:page]).per(PAGE_SIZE)
+
+    @all_principals = Company.all_principals.group_by(&:internal)
+
     respond_with @contacts
   end
 
