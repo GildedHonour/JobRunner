@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    %title
+      Jobrunner
+    = stylesheet_link_tag "application", media: "all"
+    = csrf_meta_tags
+  %body
+    #main{ style: 'margin-top: 80px;'}
+      .row
+        .col-sm-4.col-md-offset-4
+          - if notice || alert
+            %p.alert.alert-warning
+              = notice || alert
+      .row
+        .col-sm-4.col-md-offset-4
+          = yield

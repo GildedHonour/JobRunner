@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20140103213141) do
   end
 
   create_table "contacts", force: true do |t|
+    t.integer "company_id"
     t.string  "first_name"
     t.string  "last_name"
     t.string  "address"
@@ -54,7 +55,6 @@ ActiveRecord::Schema.define(version: 20140103213141) do
     t.date    "birthday"
     t.string  "prefix"
     t.string  "job_title"
-    t.integer "company_id"
     t.boolean "holiday_card"
     t.boolean "do_not_email"
     t.boolean "do_not_mail"
@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 20140103213141) do
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
     t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
