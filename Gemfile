@@ -30,6 +30,7 @@ gem "pg"
 gem "unicorn"
 
 # File uploads
+gem "fog", "~> 1.3.1" # Required by carrierwave
 gem "carrierwave"
 gem "rmagick"
 
