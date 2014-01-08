@@ -8,6 +8,7 @@ gem "rails", "4.0.2"
 gem "devise"
 
 # Model related
+gem "enumerize"
 gem "kaminari"
 
 # View related

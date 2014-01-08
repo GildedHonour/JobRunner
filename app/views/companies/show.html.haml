@@ -33,26 +33,26 @@
               %th Status
               %th Added
               %th Last Modified
-            - @company.client_affiliates.each do |af|
+            - @company.client_affiliates.each do |affiliate|
               %tr
                 %td
-                  = af.name
+                  = affiliate.name
                 %td 
-                  - @company.client_affiliate_affiliations.each do |aa|
-                    = aa.role
+                  - @company.client_affiliate_affiliations.each do |affiliation|
+                    = affiliation.role.humanize
                     %br
                 %td 
-                  - @company.client_affiliate_affiliations.each do |aa|
-                    = human_status(aa.status)
+                  - @company.client_affiliate_affiliations.each do |affiliation|
+                    = affiliation.status.humanize
                     %br
                 %td 
-                  - @company.client_affiliate_affiliations.each do |aa|
-                    = aa.created_at
+                  - @company.client_affiliate_affiliations.each do |affiliation|
+                    = l(affiliation.created_at, format: :only_date)
                     %br
                 %td 
-                  - @company.client_affiliate_affiliations.each do |aa|
-                    = aa.updated_at
-                    %br              
+                  - @company.client_affiliate_affiliations.each do |affiliation|
+                    = l(affiliation.updated_at, format: :only_date)
+                    %br
   .contact.details
     .second.contact.row
       .col-sm-12
@@ -66,16 +66,17 @@
               %th Phone
               %th Status
               %th Last Modified
-            - @company.contacts.each do |c|
+            - @company.contacts.each do |contact|
               %tr
                 %td 
-                  = link_to c.full_name, contact_url(c)
+                  = link_to contact.full_name, contact_url(contact)
                 %td 
-                  = c.job_title
+                  = contact.job_title
                 %td 
-                  = c.email
+                  = contact.email
                 %td 
-                  = c.phone
-                %td Need to add active status to contacts
+                  = number_to_phone(contact.phone)
                 %td
-                  = c.updated_at
+                  = contact.status.humanize
+                %td
+                  = l(contact.updated_at, format: :only_date)

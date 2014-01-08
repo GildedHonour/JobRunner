@@ -11,24 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140108035910) do
+ActiveRecord::Schema.define(version: 20140103202152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "affiliations", force: true do |t|
-    t.string   "type"
-    t.integer  "status",       default: 0
+    t.string   "role"
+    t.string   "status"
     t.integer  "affiliate_id"
     t.integer  "principal_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "role"
   end
 
   add_index "affiliations", ["affiliate_id"], name: "index_affiliations_on_affiliate_id", using: :btree
   add_index "affiliations", ["principal_id"], name: "index_affiliations_on_principal_id", using: :btree
-  add_index "affiliations", ["type"], name: "index_affiliations_on_type", using: :btree
+  add_index "affiliations", ["role"], name: "index_affiliations_on_role", using: :btree
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -65,6 +64,7 @@ ActiveRecord::Schema.define(version: 20140108035910) do
     t.string   "gift"
     t.boolean  "mmi_ballgame"
     t.boolean  "wall_calendar"
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

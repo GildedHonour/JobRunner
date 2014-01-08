@@ -11,6 +11,8 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :phone
       t.string :company_type
       t.boolean :internal
+
+      t.timestamps
     end
   end
 end

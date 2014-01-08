@@ -1,9 +1,9 @@
 class Affiliation < ActiveRecord::Base
-  # When we get Rails 4.1 - http://edgeapi.rubyonrails.org/classes/ActiveRecord/Enum.html
-  # enum status: [ :active, :archived ]
+  extend Enumerize
 
   belongs_to :affiliate, class_name: 'Company'
   belongs_to :principal, class_name: 'Company'
 
-  ROLES = ['Prospct', 'Client', 'Supplier', 'List Broker', 'List Manager', 'List Owner']
+  enumerize :role, in: %i(prospect client supplier list_broker list_manager list_owner unassigned), default: :unassigned
+  enumerize :status, in: %i(active inactive), default: :active
 end

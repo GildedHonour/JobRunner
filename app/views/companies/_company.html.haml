@@ -3,11 +3,13 @@
     = check_box_tag "select-company"
   %td
     = link_to company.name, company_url(company)
-  / this should go into a helper method that responds with two hashes? one query but two hashes
+
+  - affiliations = company.client_affiliate_affiliations
   %td
-    - company.client_affiliates.each do |af| 
-      = af.name
+    - affiliations.each do |affiliation|
+      = affiliation.affiliate.name
       %br
   %td
-    - company.client_affiliate_affiliations.each do |af| 
-      = af.role
+    - affiliations.each do |affiliation|
+      = affiliation.role.humanize
+      %br

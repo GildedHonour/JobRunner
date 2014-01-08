@@ -49,12 +49,12 @@
                 %td 
                   - @company.client_affiliate_affiliations.each do |aa|
                     Role:
-                    = aa.role
+                    = aa.role.humanize
                     %br
                 %td 
                   - @company.client_affiliate_affiliations.each do |aa|
                     Status:
-                    = human_status(aa.status)
+                    = aa.status.humanize
                     %br
       .col-sm-6
         .board.for.contact
