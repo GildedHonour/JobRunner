@@ -2,6 +2,8 @@
   %td
     = check_box_tag "select-company"
   %td
+    = image_tag company.company_logo.mini_thumb.url, alt: company.name
+  %td
     = link_to company.name, company_url(company)
 
   - affiliations = company.client_affiliate_affiliations

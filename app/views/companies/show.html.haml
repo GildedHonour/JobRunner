@@ -8,7 +8,9 @@
       .col-sm-3
         = render "profile"
     .row
-      .col-sm-12.basic.contact.info
+      .col-sm-2.basic.company.logo
+        = image_tag @company.company_logo.url, alt: @company.name
+      .col-sm-10.basic.contact.info
         .contact.name
           = @company.name
         .secondary.contact.info

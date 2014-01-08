@@ -22,6 +22,8 @@ class Company < ActiveRecord::Base
 
   has_many :contacts
 
+  mount_uploader :company_logo, CompanyLogoUploader
+
   # Validations
   validates :name, presence: true
 

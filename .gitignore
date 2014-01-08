@@ -10,7 +10,7 @@
 # Ignore the default SQLite database.
 database.yml
 .idea
-
+public/uploads
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp

@@ -10,6 +10,8 @@ contact_job_titles = [
   "Sales Lead"
 ]
 
+company_logos = Dir['spec/fixtures/company_logos/*']
+
 100.times do |i|
   company = Company.create(
     name: Faker::Company.name,
@@ -18,7 +20,8 @@ contact_job_titles = [
     city: Faker::Address.city,
     state: Faker::Address.us_state,
     zip: Faker::Address.zip_code,
-    internal: (i % 20).zero?
+    internal: (i % 20).zero?,
+    company_logo: File.open(company_logos.sample)
   )
   company.client_affiliates << Company.order("RANDOM()").where("id <> ?", company.id).limit(5)
   company.prospect_affiliates << Company.order("RANDOM()").where("id <> ?", company.id).limit(5)

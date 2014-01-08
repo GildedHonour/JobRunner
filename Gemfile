@@ -29,6 +29,10 @@ gem "jquery-rails"
 gem "pg"
 gem "unicorn"
 
+# File uploads
+gem "carrierwave"
+gem "rmagick"
+
 # Seed data
 gem "ffaker"
 gem "database_cleaner"

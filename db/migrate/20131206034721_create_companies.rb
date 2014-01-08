@@ -5,6 +5,7 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :address
       t.string :address2
       t.string :city
+      t.string :company_logo
       t.string :state
       t.integer :zip
       t.string :website
