@@ -39,11 +39,11 @@
                   = affiliate.name
                 %td 
                   - @company.client_affiliate_affiliations.each do |affiliation|
-                    = affiliation.role.humanize
+                    = affiliation.role.text
                     %br
                 %td 
                   - @company.client_affiliate_affiliations.each do |affiliation|
-                    = affiliation.status.humanize
+                    = affiliation.status.text
                     %br
                 %td 
                   - @company.client_affiliate_affiliations.each do |affiliation|
@@ -77,6 +77,6 @@
                 %td 
                   = number_to_phone(contact.phone)
                 %td
-                  = contact.status.humanize
+                  = contact.status.text
                 %td
                   = l(contact.updated_at, format: :only_date)
