@@ -10,10 +10,12 @@
     .row
       .col-sm-12.basic.contact.info
         .contact.name
-          %span#first_name{data: { "type" => "text", "pk" => "#{@contact.id}", "url" => "/contacts/#{@contact.id}", "title" => "Enter First Name" }}
+          %span.editable{ data: { "name" => "first_name",  "type" => "text", "pk" => "#{@contact.id}", "title" => "Enter First Name" }}
             = @contact.first_name
-          %span#last_name{data: { "type" => "text", "pk" => "#{@contact.id}", "url" => "/contacts/#{@contact.id}", "title" => "Enter Last Name" }}
+          %span.editable{ data: { "name" => "last_name", "type" => "text", "pk" => "#{@contact.id}", "title" => "Enter Last Name" }}
             = @contact.last_name
+          %button.btn.btn-primary.to.edit.pull-right{ data: { "toggle" => "modal", "target" => "#edit-contact-modal" }} 
+            Edit
         .secondary.contact.info
           %span.label
             Email
@@ -40,10 +42,20 @@
             = @contact.job_title
           %h5 Affiliations
           %table.table.table-hover
-            %tr
-              %td Affiliation name
-              %td Role: Client
-              %td Status: Active
+            - @company.client_affiliates.each do |af|
+              %tr
+                %td
+                  = af.name
+                %td 
+                  - @company.client_affiliate_affiliations.each do |aa|
+                    Role:
+                    = aa.role
+                    %br
+                %td 
+                  - @company.client_affiliate_affiliations.each do |aa|
+                    Status:
+                    = human_status(aa.status)
+                    %br
       .col-sm-6
         .board.for.contact
           %h3 User Account
@@ -67,27 +79,11 @@
             %tr
               %td.tlabel.for.attribute Birthday
               %td 
-                = @contact.birthday
-            %tr
-              %td.tlabel.for.attribute Holiday Card
-              %td 
-                = @contact.holiday_card
-            %tr
-              %td.tlabel.for.attribute Holiday Gift
-              %td 
-                = @contact.gift
-            %tr
-              %td.tlabel.for.attribute Birthday
-              %td 
-                = @contact.birthday
+                = @contact.birthday # format month and day
             %tr
               %td.tlabel.for.attribute MMI Ballgame Invite
               %td 
                 = @contact.mmi_ballgame
-            %tr
-              %td.tlabel.for.attribute Wall Calendar
-              %td 
-                = @contact.wall_calendar
             %tr
               %td.tlabel.for.attribute Email Optout
               %td 
@@ -104,3 +100,10 @@
               = n.updated_at
             %div
               = n.note 
+.modal#edit-contact-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        Edit contact
+      .modal-body
+        = render :partial => 'form'

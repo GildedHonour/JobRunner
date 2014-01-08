@@ -15,6 +15,7 @@
 //= require jquery.typewatch
 //= require bootstrap/tooltip
 //= require bootstrap/popover
+//= require bootstrap/modal
 //= require bootstrap-editable
 //= require app
 //= require contacts

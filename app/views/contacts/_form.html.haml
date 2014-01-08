@@ -1,0 +1,21 @@
+= simple_form_for @contact do |f|
+	= f.input :prefix
+	= f.input :first_name
+	= f.input :last_name
+	= f.input :address
+	= f.input :address2
+	= f.input :city
+	= f.input :state
+	= f.input :zip
+	= f.input :email
+	= f.input :phone
+	= f.input :birthday
+	= f.input :job_title
+	= f.input :holiday_card
+	= f.input :do_not_email
+	= f.input :do_not_mail
+	= f.input :gift
+	= f.input :mmi_ballgame
+	= f.input :wall_calendar
+	= f.association :company
+	= f.button :submit, "Save", :class => "btn btn-large btn-primary"

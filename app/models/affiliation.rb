@@ -4,4 +4,6 @@ class Affiliation < ActiveRecord::Base
 
   belongs_to :affiliate, class_name: 'Company'
   belongs_to :principal, class_name: 'Company'
+
+  ROLES = ['Prospct', 'Client', 'Supplier', 'List Broker', 'List Manager', 'List Owner']
 end

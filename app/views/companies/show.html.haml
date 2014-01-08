@@ -33,18 +33,26 @@
               %th Status
               %th Added
               %th Last Modified
-            %tr
-              %td Affiliated Company Name - MMI
-              %td Partner
-              %td Active
-              %td Jan 1, 2013
-              %td Jan 1, 2013
-            %tr
-              %td Avalon
-              %td Client
-              %td Active
-              %td Jan 1, 2013
-              %td Jan 1, 2013
+            - @company.client_affiliates.each do |af|
+              %tr
+                %td
+                  = af.name
+                %td 
+                  - @company.client_affiliate_affiliations.each do |aa|
+                    = aa.role
+                    %br
+                %td 
+                  - @company.client_affiliate_affiliations.each do |aa|
+                    = human_status(aa.status)
+                    %br
+                %td 
+                  - @company.client_affiliate_affiliations.each do |aa|
+                    = aa.created_at
+                    %br
+                %td 
+                  - @company.client_affiliate_affiliations.each do |aa|
+                    = aa.updated_at
+                    %br              
   .contact.details
     .second.contact.row
       .col-sm-12
@@ -55,23 +63,19 @@
               %th Name
               %th Title
               %th Email
+              %th Phone
               %th Status
               %th Last Modified
-            %tr
-              %td Paul Amos
-              %td Supreme Overlord
-              %td pamos@mmidrect.com
-              %td O 410.290.0667
-              %td Active
-            %tr
-              %td Paul Amos
-              %td Supreme Overlord
-              %td pamos@mmidrect.com
-              %td O 410.290.0667
-              %td Active
-            %tr
-              %td Paul Amos
-              %td Supreme Overlord
-              %td pamos@mmidrect.com
-              %td O 410.290.0667
-              %td Active
+            - @company.contacts.each do |c|
+              %tr
+                %td 
+                  = link_to c.full_name, contact_url(c)
+                %td 
+                  = c.job_title
+                %td 
+                  = c.email
+                %td 
+                  = c.phone
+                %td Need to add active status to contacts
+                %td
+                  = c.updated_at
