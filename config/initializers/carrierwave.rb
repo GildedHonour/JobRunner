@@ -11,6 +11,7 @@ if Rails.env.production?
     config.fog_directory  = 'jobrunner-staging'
     config.fog_public     = false
     config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}
+    config.asset_host = "//jobrunner-staging.s3.amazonaws.com"
   end
 else
   CarrierWave.configure do |config|
