@@ -8,11 +8,13 @@
       .col-sm-3
         = render "profile"
     .row
-      .col-sm-2.basic.company.logo
+      .col-sm-1.basic.company.logo
         = image_tag @company.company_logo.url, alt: @company.name
-      .col-sm-10.basic.contact.info
+      .col-sm-11.basic.contact.info
         .contact.name
           = @company.name
+          %button.btn.btn-primary.to.edit.pull-right{ data: { "toggle" => "modal", "target" => "#edit-modal" }}
+            Edit
         .secondary.contact.info
           %span.label
             Address
@@ -35,24 +37,24 @@
               %th Status
               %th Added
               %th Last Modified
-            - @company.client_affiliates.each do |affiliate|
+            - @company.affiliates.each do |affiliate|
               %tr
                 %td
-                  = affiliate.name
+                  = affiliate.name 
                 %td 
-                  - @company.client_affiliate_affiliations.each do |affiliation|
+                  - @company.affiliate_affiliations.each do |affiliation|
                     = affiliation.role.text
                     %br
                 %td 
-                  - @company.client_affiliate_affiliations.each do |affiliation|
+                  - @company.affiliate_affiliations.each do |affiliation|
                     = affiliation.status.text
                     %br
                 %td 
-                  - @company.client_affiliate_affiliations.each do |affiliation|
+                  - @company.affiliate_affiliations.each do |affiliation|
                     = l(affiliation.created_at, format: :only_date)
                     %br
                 %td 
-                  - @company.client_affiliate_affiliations.each do |affiliation|
+                  - @company.affiliate_affiliations.each do |affiliation|
                     = l(affiliation.updated_at, format: :only_date)
                     %br
   .contact.details
@@ -82,3 +84,10 @@
                   = contact.status.text
                 %td
                   = l(contact.updated_at, format: :only_date)
+.modal#edit-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        Edit company
+      .modal-body
+        = render :partial => 'form'

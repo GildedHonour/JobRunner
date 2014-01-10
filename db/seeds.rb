@@ -23,8 +23,8 @@ company_logos = Dir['spec/fixtures/company_logos/*']
     internal: (i % 20).zero?,
     company_logo: File.open(company_logos.sample)
   )
-  company.client_affiliates << Company.order("RANDOM()").where("id <> ?", company.id).limit(5)
-  company.prospect_affiliates << Company.order("RANDOM()").where("id <> ?", company.id).limit(5)
+  company.affiliates << Company.order("RANDOM()").where("id <> ?", company.id).limit(3)
+  # company.prospect_affiliates << Company.order("RANDOM()").where("id <> ?", company.id).limit(5)
 end
 
 1500.times do

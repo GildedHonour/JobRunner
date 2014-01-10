@@ -6,7 +6,7 @@
   %td
     = link_to company.name, company_url(company)
 
-  - affiliations = company.client_affiliate_affiliations
+  - affiliations = company.affiliate_affiliations
   %td
     - affiliations.each do |affiliation|
       = affiliation.affiliate.name

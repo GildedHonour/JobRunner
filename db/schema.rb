@@ -11,30 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140103202152) do
+ActiveRecord::Schema.define(version: 20140108192356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "affiliations", force: true do |t|
-    t.string   "role"
-    t.string   "status"
+    t.string   "type"
     t.integer  "affiliate_id"
     t.integer  "principal_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "role"
+    t.string   "status",       default: "active"
   end
 
   add_index "affiliations", ["affiliate_id"], name: "index_affiliations_on_affiliate_id", using: :btree
   add_index "affiliations", ["principal_id"], name: "index_affiliations_on_principal_id", using: :btree
-  add_index "affiliations", ["role"], name: "index_affiliations_on_role", using: :btree
+  add_index "affiliations", ["type"], name: "index_affiliations_on_type", using: :btree
 
   create_table "companies", force: true do |t|
     t.string   "name"
     t.string   "address"
     t.string   "address2"
     t.string   "city"
-    t.string   "company_logo"
     t.string   "state"
     t.integer  "zip"
     t.string   "website"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20140103202152) do
     t.boolean  "internal"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "company_logo"
   end
 
   create_table "contacts", force: true do |t|
@@ -65,9 +66,9 @@ ActiveRecord::Schema.define(version: 20140103202152) do
     t.string   "gift"
     t.boolean  "mmi_ballgame"
     t.boolean  "wall_calendar"
-    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
   end
 
   add_index "contacts", ["company_id"], name: "index_contacts_on_company_id", using: :btree

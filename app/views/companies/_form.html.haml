@@ -1,0 +1,11 @@
+= simple_form_for @company do |f|
+	= f.input :name
+	= f.input :address
+	= f.input :address2
+	= f.input :city
+	= f.input :state
+	= f.input :zip
+	= f.input :website
+	= f.input :phone
+	= f.association :affiliate_affiliations, :label_method => lambda { |affiliation| Company.find(affiliation.affiliate_id).name }
+	= f.button :submit, "Save", :class => "btn btn-large btn-primary"

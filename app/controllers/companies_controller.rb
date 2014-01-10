@@ -29,6 +29,13 @@ class CompaniesController < ApplicationController
     respond_with @company
   end
 
+  def edit
+    @company = Company.find(params[:id])
+    @contact = Contact.where(:company_id => @company)
+    @affiliations = Affiliation.where(:principal_id => @company)
+    respond_with @contact
+  end
+
   def update
     @company = Company.find(params[:id])
     @company.update_attributes(company_params)
@@ -37,6 +44,6 @@ class CompaniesController < ApplicationController
 
   private
   def company_params
-    params.require(:company).permit(:name)
+    params.require(:company).permit(:name, :address, :address2, :city, :state, :zip, :website, :phone, affiliate_affiliation_ids: [])
   end
 end

@@ -14,7 +14,7 @@
             = @contact.first_name
           %span.editable{ data: { "name" => "last_name", "type" => "text", "pk" => "#{@contact.id}", "title" => "Enter Last Name" }}
             = @contact.last_name
-          %button.btn.btn-primary.to.edit.pull-right{ data: { "toggle" => "modal", "target" => "#edit-contact-modal" }} 
+          %button.btn.btn-primary.to.edit.pull-right{ data: { "toggle" => "modal", "target" => "#edit-modal" }} 
             Edit
         .secondary.contact.info
           %span.label
@@ -42,17 +42,17 @@
             = @contact.job_title
           %h5 Affiliations
           %table.table.table-hover
-            - @company.client_affiliates.each do |af|
+            - @company.affiliates.each do |af|
               %tr
                 %td
                   = af.name
                 %td 
-                  - @company.client_affiliate_affiliations.each do |aa|
+                  - @company.affiliate_affiliations.each do |aa|
                     Role:
                     = aa.role.text
                     %br
                 %td 
-                  - @company.client_affiliate_affiliations.each do |aa|
+                  - @company.affiliate_affiliations.each do |aa|
                     Status:
                     = aa.status.text
                     %br
@@ -100,7 +100,7 @@
               = n.updated_at
             %div
               = n.note 
-.modal#edit-contact-modal
+.modal#edit-modal
   .modal-dialog
     .modal-content
       .modal-header
