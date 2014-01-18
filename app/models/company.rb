@@ -1,4 +1,6 @@
 class Company < ActiveRecord::Base
+
+  has_many :addresses, as: :addressable, dependent: :destroy
   # All affiliations
   has_many :affiliate_affiliations, foreign_key: 'principal_id', dependent: :destroy, class_name: 'Affiliation'
   has_many :affiliates, through: :affiliate_affiliations, source: :affiliate, class_name: 'Company'
@@ -20,7 +22,7 @@ class Company < ActiveRecord::Base
   has_many :prospect_principal_affiliations, -> { where role: 'prospect' }, foreign_key: 'affiliate_id', dependent: :destroy, class_name: 'Affiliation'
   has_many :prospect_principals, through: :prospect_principal_affiliations, class_name: 'Company', source: :principal
 
-  has_many :contacts
+  has_many :contacts, dependent: :destroy
 
   mount_uploader :company_logo, CompanyLogoUploader
 

@@ -13,7 +13,7 @@ gem "kaminari"
 
 # View related
 gem "haml-rails"
-gem "simple_form"
+gem "simple_form", github: "plataformatec/simple_form" #Latest for Bootstrap support
 
 # Assets
 gem "sass-rails", "~> 4.0.0"

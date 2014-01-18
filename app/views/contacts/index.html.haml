@@ -1,6 +1,5 @@
 .col-sm-9.for.content
   = render "action_panel", search_url: contacts_url
-
   .contacts.holder
     %table.table.for.contacts.table-hover
       %thead
@@ -16,7 +15,8 @@
       %tbody#contacts-listing
         %tr
           %td.add.a.contact{:colspan => 4}
-            + Add a new contact
+            %button{ type: "button", class: "btn btn-link btn-sm", data: { toggle: "modal", target: "#add-contact-modal" } }
+              + Add a new contact
         = render @contacts
 
     #contacts-pagination
@@ -41,3 +41,5 @@
           %li.checkbox
             = check_box_tag "affiliation_filter[company_ids]", principal.id
             = principal.name
+
+= render "new"

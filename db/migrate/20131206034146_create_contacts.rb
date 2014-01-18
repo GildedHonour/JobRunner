@@ -4,13 +4,8 @@ class CreateContacts < ActiveRecord::Migration
       t.references :company, index: true
       t.string :first_name
       t.string :last_name
-      t.string :address
-      t.string :address2
-      t.string :city
-      t.string :state
-      t.integer :zip
-      t.string :email
-      t.string :phone
+      t.hstore :emails
+      t.hstore :phone
       t.date :birthday
       t.string :prefix
       t.string :job_title

@@ -4,10 +4,14 @@ class Contact < ActiveRecord::Base
   validates :first_name ,presence: true
   validates :last_name, presence: true
 
-  belongs_to  :company
-  has_many  :notes, dependent: :destroy
+  belongs_to :company
+  has_many :addresses, as: :addressable
+  has_many :notes, dependent: :destroy
+  serialize :emails, Email
+  serialize :phone_numbers, PhoneNumber
 
   enumerize :status, in: %i(active inactive), default: :active
+  enumerize :prefix, in: %i(Mr. Mrs. Ms. Miss.)
 
   accepts_nested_attributes_for :notes
 

@@ -11,10 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140103202152) do
+ActiveRecord::Schema.define(version: 20140118141629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
+
+  create_table "addresses", force: true do |t|
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
+    t.text     "address_line_1"
+    t.text     "address_line_2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "addresses", ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type", using: :btree
 
   create_table "affiliations", force: true do |t|
     t.string   "role"
@@ -27,16 +42,10 @@ ActiveRecord::Schema.define(version: 20140103202152) do
 
   add_index "affiliations", ["affiliate_id"], name: "index_affiliations_on_affiliate_id", using: :btree
   add_index "affiliations", ["principal_id"], name: "index_affiliations_on_principal_id", using: :btree
-  add_index "affiliations", ["role"], name: "index_affiliations_on_role", using: :btree
 
   create_table "companies", force: true do |t|
     t.string   "name"
-    t.string   "address"
-    t.string   "address2"
-    t.string   "city"
     t.string   "company_logo"
-    t.string   "state"
-    t.integer  "zip"
     t.string   "website"
     t.string   "phone"
     t.string   "company_type"
@@ -49,13 +58,8 @@ ActiveRecord::Schema.define(version: 20140103202152) do
     t.integer  "company_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "address"
-    t.string   "address2"
-    t.string   "city"
-    t.string   "state"
-    t.integer  "zip"
-    t.string   "email"
-    t.string   "phone"
+    t.hstore   "emails"
+    t.hstore   "phone"
     t.date     "birthday"
     t.string   "prefix"
     t.string   "job_title"
