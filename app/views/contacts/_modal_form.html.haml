@@ -8,11 +8,11 @@
         - contact.errors.full_messages.each do |message|
           %p
             = message
-    - elsif contact.previous_changes.present?
+    - if @success_message
       .alert.alert-success
         %a.close{ "data-dismiss" => "alert", href: "#" } ×
-        %p
-          Contact saved.
+        %h4
+          = @success_message
 
     .row
       .col-md-10.col-md-offset-1

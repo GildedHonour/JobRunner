@@ -1,5 +1,5 @@
 class Address < ActiveRecord::Base
-  belongs_to :addressable, polymorphic: true
+  belongs_to :addressable, polymorphic: true, touch: true
 
   validates :address_line_1, presence: true
   validates :city, presence: true

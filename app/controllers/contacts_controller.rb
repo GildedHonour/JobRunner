@@ -6,7 +6,8 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(contact_params)
     @contact.company = Company.first
-    @contact.save
+    @success_message = "Contact saved." if @contact.save
+
     respond_to do |format|
       format.js { render("new") }
     end
@@ -16,6 +17,7 @@ class ContactsController < ApplicationController
     @contact = Contact.find(params[:id])
     @contact.update_attributes(contact_params)
     @contact.company = Company.first
+    @success_message = "Contact updated." if @contact.save
 
     respond_to do |format|
       format.js { render("new") }
@@ -54,7 +56,9 @@ class ContactsController < ApplicationController
   private
   def contact_params
     params.require(:contact).permit(:first_name, :last_name, :prefix,
-                                    addresses_attributes: [:id, :address_line_1, :address_line_2, :city, :state, :zip, :_destroy]
+                                    addresses_attributes: [:id, :address_line_1, :address_line_2, :city, :state, :zip, :_destroy],
+                                    emails_attributes: [:id, :value, :_destroy],
+                                    phone_numbers_attributes: [:id, :kind, :value, :_destroy]
     )
   end
 end
