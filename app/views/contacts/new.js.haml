@@ -1,0 +1,8 @@
+:plain
+  if($('#modal-form .alert').length) {
+    $('#modal-form .alert').slideUp(function() {
+      $('#modal-form').html('#{j(render("modal_form", contact: @contact))}');
+    });
+  } else {
+    $('#modal-form').html('#{j(render("modal_form", contact: @contact))}');
+  };

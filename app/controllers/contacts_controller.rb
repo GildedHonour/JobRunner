@@ -5,8 +5,21 @@ class ContactsController < ApplicationController
 
   def create
     @contact = Contact.new(contact_params)
+    @contact.company = Company.first
     @contact.save
-    respond_with @contact
+    respond_to do |format|
+      format.js { render("new") }
+    end
+  end
+
+  def update
+    @contact = Contact.find(params[:id])
+    @contact.update_attributes(contact_params)
+    @contact.company = Company.first
+
+    respond_to do |format|
+      format.js { render("new") }
+    end
   end
 
   def index
@@ -38,20 +51,10 @@ class ContactsController < ApplicationController
     respond_with @contact
   end
 
-  def update
-    @contact = Contact.find(params[:id])
-    @contact.update_attributes(contact_params)
-    respond_to do |format|
-      if @contact.save
-        format.html { respond_with @contact }
-      else
-        format.html { render :action => :edit }
-      end
-    end
-  end
-
   private
   def contact_params
-    params.require(:contact).permit(:first_name, :last_name, :prefix, :address, :address2, :city, :state, :zip, :email, :phone, :birthday, :job_title, :holiday_card, :do_not_email, :do_not_mail, :gift, :mmi_ballgame, :wall_calendar, :company_id, notes_attributes: [:note])
+    params.require(:contact).permit(:first_name, :last_name, :prefix,
+                                    addresses_attributes: [:id, :address_line_1, :address_line_2, :city, :state, :zip, :_destroy]
+    )
   end
 end

@@ -13,9 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.typewatch
+//= require jquery_nested_form
 //= require bootstrap/tooltip
 //= require bootstrap/popover
 //= require bootstrap/modal
+//= require bootstrap/alert
 //= require bootstrap-editable
 //= require app
 //= require contacts

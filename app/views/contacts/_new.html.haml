@@ -5,57 +5,6 @@
         %button.close{ "aria-hidden" => "true", "data-dismiss" => "modal", type: "button" } ×
         %h4.modal-title
           Add a contact
-      .modal-body
-        .row
-          .col-md-10.col-md-offset-1
-            = form_for :contact, html: { class: "form-horizontal" } do |f|
-              .row
-                %h2
-                  Name
-                .col-md-2
-                  = f.select :prefix, options_for_select(Contact.prefix.options), { include_blank: false }, { class: "form-control" }
-                .col-md-5
-                  = f.text_field :first_name, placeholder: "First Name", class: "form-control"
-                .col-md-5
-                  = f.text_field :last_name, placeholder: "Last Name", class: "form-control"
 
-              .row.top-buffer-30
-                %h2
-                  Contact Info
-                .col-md-2.control-label
-                  %label{ for: "address" } Address
-                .col-md-10
-                  .address
-                    .form-group
-                      .col-md-6
-                        %input.form-control{ placeholder: "Address Line 1" }/
-                      .col-md-6
-                        %input.form-control{ placeholder: "Address Line 2" }/
-                    .form-group
-                      .col-md-6
-                        %input.form-control{ placeholder: "City" }/
-                      .col-md-3
-                        %input.form-control{ placeholder: "State" }/
-                      .col-md-3
-                        %input.form-control{ placeholder: "Zip" }/
-                  .address.top-buffer-30
-                    .form-group
-                      .col-md-6
-                        %input.form-control{ placeholder: "Address Line 1" }/
-                      .col-md-6
-                        %input.form-control{ placeholder: "Address Line 2" }/
-                    .form-group
-                      .col-md-6
-                        %input.form-control{ placeholder: "City" }/
-                      .col-md-3
-                        %input.form-control{ placeholder: "State" }/
-                      .col-md-3
-                        %input.form-control{ placeholder: "Zip" }/
-
-                  .top-buffer-30
-                    = link_to "Add another address", "#", class: "btn btn-default"
-
-
-      .modal-footer
-        %button.btn.btn-default{ "data-dismiss" => "modal", type: "button" } Close
-        %button.btn.btn-primary{type: "button"} Save
+      #modal-form
+        = render "modal_form", contact: contact

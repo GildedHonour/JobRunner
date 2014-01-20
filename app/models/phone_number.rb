@@ -1,6 +1,8 @@
-class PhoneNumber
+class PhoneNumber < ActiveRecord::Base
   extend Enumerize
+  belongs_to :phonable, polymorphic: true
 
-  attr_accessor :value
-  enumerize :type, in: %i(office residence)
+  enumerize :kind, in: %i(office residence), default: :office
+
+  validates :value, presence: true
 end

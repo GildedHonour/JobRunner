@@ -209,3 +209,11 @@ small, .caption {
 .top-buffer-30 {
   margin-top: 30px;
 }
+
+.bottom-buffer-30 {
+  margin-bottom: 30px;
+}
+
+.field_with_errors {
+  @extend .has-error;
+}

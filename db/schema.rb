@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140118141629) do
+ActiveRecord::Schema.define(version: 20140120125051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20140118141629) do
     t.string   "first_name"
     t.string   "last_name"
     t.hstore   "emails"
-    t.hstore   "phone"
+    t.hstore   "phone_numbers"
     t.date     "birthday"
     t.string   "prefix"
     t.string   "job_title"
@@ -76,12 +76,33 @@ ActiveRecord::Schema.define(version: 20140118141629) do
 
   add_index "contacts", ["company_id"], name: "index_contacts_on_company_id", using: :btree
 
+  create_table "emails", force: true do |t|
+    t.integer  "emailable_id"
+    t.string   "emailable_type"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "emails", ["emailable_id", "emailable_type"], name: "index_emails_on_emailable_id_and_emailable_type", using: :btree
+
   create_table "notes", force: true do |t|
     t.text    "note"
     t.integer "contact_id"
   end
 
   add_index "notes", ["contact_id"], name: "index_notes_on_contact_id", using: :btree
+
+  create_table "phone_numbers", force: true do |t|
+    t.integer  "phonable_id"
+    t.string   "phonable_type"
+    t.string   "value"
+    t.string   "kind"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "phone_numbers", ["phonable_id", "phonable_type"], name: "index_phone_numbers_on_phonable_id_and_phonable_type", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
