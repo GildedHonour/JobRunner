@@ -3,6 +3,8 @@ class CreateNotes < ActiveRecord::Migration
     create_table :notes do |t|
       t.text :note
       t.belongs_to :contact, index: true
+
+      t.timestamps
     end
   end
 end

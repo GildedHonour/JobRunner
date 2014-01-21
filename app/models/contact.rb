@@ -5,11 +5,11 @@ class Contact < ActiveRecord::Base
   validates :last_name, presence: true
 
   belongs_to :company
-  has_many :addresses, as: :addressable
-  has_many :notes, dependent: :destroy
+  has_many :addresses, -> { order "created_at ASC" }, dependent: :destroy, as: :addressable
+  has_many :notes, -> { order "created_at ASC" }, dependent: :destroy
 
-  has_many :emails, as: :emailable, dependent: :destroy
-  has_many :phone_numbers, as: :phonable, dependent: :destroy
+  has_many :emails, -> { order "created_at ASC" }, as: :emailable, dependent: :destroy
+  has_many :phone_numbers, -> { order "created_at ASC" }, as: :phonable, dependent: :destroy
 
   enumerize :status, in: %i(active inactive), default: :active
   enumerize :prefix, in: %i(Mr. Mrs. Ms. Miss.)

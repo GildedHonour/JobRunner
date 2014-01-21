@@ -5,4 +5,8 @@ class PhoneNumber < ActiveRecord::Base
   enumerize :kind, in: %i(office residence), default: :office
 
   validates :value, presence: true
+
+  def to_s
+    self.value
+  end
 end

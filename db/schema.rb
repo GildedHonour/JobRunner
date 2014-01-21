@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20140120125051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
 
   create_table "addresses", force: true do |t|
     t.integer  "addressable_id"
@@ -58,8 +57,6 @@ ActiveRecord::Schema.define(version: 20140120125051) do
     t.integer  "company_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.hstore   "emails"
-    t.hstore   "phone_numbers"
     t.date     "birthday"
     t.string   "prefix"
     t.string   "job_title"
@@ -87,8 +84,10 @@ ActiveRecord::Schema.define(version: 20140120125051) do
   add_index "emails", ["emailable_id", "emailable_type"], name: "index_emails_on_emailable_id_and_emailable_type", using: :btree
 
   create_table "notes", force: true do |t|
-    t.text    "note"
-    t.integer "contact_id"
+    t.text     "note"
+    t.integer  "contact_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "notes", ["contact_id"], name: "index_notes_on_contact_id", using: :btree

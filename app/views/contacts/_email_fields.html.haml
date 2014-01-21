@@ -1,0 +1,12 @@
+.row.top-buffer-30
+  .col-md-2.control-label
+    %label{ for: "email" } Email
+  .col-md-10
+    = f.fields_for :emails, contact.emails.present? ? contact.emails : contact.emails.build do |email_form|
+      .form-group
+        .col-md-9
+          = email_form.text_field :value, placeholder: "Email", class: "form-control"
+        .col-md-3
+          = email_form.link_to_remove "Remove", class: "btn btn-danger btn-xs pull-right"
+
+    = f.link_to_add  "Add another email", :emails, class: "btn btn-default"

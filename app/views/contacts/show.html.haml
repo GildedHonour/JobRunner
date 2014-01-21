@@ -10,26 +10,28 @@
     .row
       .col-sm-12.basic.contact.info
         .contact.name
-          %span.editable{ data: { "name" => "first_name",  "type" => "text", "pk" => "#{@contact.id}", "title" => "Enter First Name" }}
+          %span
             = @contact.first_name
-          %span.editable{ data: { "name" => "last_name", "type" => "text", "pk" => "#{@contact.id}", "title" => "Enter Last Name" }}
+          %span
             = @contact.last_name
-          %button.btn.btn-primary.to.edit.pull-right{ data: { "toggle" => "modal", "target" => "#edit-modal" }} 
+          %button.btn.btn-primary.to.edit.pull-right{ data: { toggle: "modal", target: "#edit-contact-modal" }}
             Edit
         .secondary.contact.info
           %span.label
             Email
-          = @contact.email
+          = @contact.emails.join(",")
           %span.label
             Phone
-          = @contact.phone
+          = @contact.phone_numbers.join(",")
           %span.label
             Address
-          = @contact.address
-          = @contact.address2
-          = @contact.city
-          = @contact.state
-          = @contact.zip
+            - @contact.addresses.each do |address|
+              .address
+                = address.address_line_1
+                = address.address_line_2
+                = address.city
+                = address.state
+                = address.zip
 
   .contact.details
     .first.contact.row
@@ -37,25 +39,23 @@
         .board.for.contact
           %h3 Relationships
           %h2 
-            = @company.name
+            = @contact.company.name
           %h4
             = @contact.job_title
           %h5 Affiliations
           %table.table.table-hover
-            - @company.affiliates.each do |af|
+            - @contact.company.affiliate_affiliations.each do |affiliate_affiliation|
               %tr
                 %td
-                  = af.name
+                  = affiliate_affiliation.affiliate.name
                 %td 
-                  - @company.affiliate_affiliations.each do |aa|
-                    Role:
-                    = aa.role.text
-                    %br
+                  Role:
+                  = affiliate_affiliation.role.text
+                  %br
                 %td 
-                  - @company.affiliate_affiliations.each do |aa|
-                    Status:
-                    = aa.status.text
-                    %br
+                  Status:
+                  = affiliate_affiliation.status.text
+                  %br
       .col-sm-6
         .board.for.contact
           %h3 User Account
@@ -63,7 +63,7 @@
             %tr
               %td.tlabel.for.attribute Email
               %td
-                = @contact.email
+                = @contact.emails.join(",")
             %tr
               %td
               %td
@@ -79,7 +79,7 @@
             %tr
               %td.tlabel.for.attribute Birthday
               %td 
-                = @contact.birthday # format month and day
+                = @contact.birthday
             %tr
               %td.tlabel.for.attribute MMI Ballgame Invite
               %td 
@@ -95,15 +95,10 @@
       .col-sm-6
         .board.for.contact
           %h3 Notes
-          - @notes.each do |n|
+          - @contact.notes.each do |n|
             %div 
-              = n.updated_at
+              = l(n.updated_at)
             %div
-              = n.note 
-.modal#edit-modal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        Edit contact
-      .modal-body
-        = render :partial => 'form'
+              = n.note
+
+= render "edit", contact: @contact

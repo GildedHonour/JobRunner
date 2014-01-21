@@ -1,10 +1,11 @@
-#add-contact-modal.modal.fade{ role:  "modal" }
+#edit-contact-modal.modal.fade{ role:  "modal" }
   .modal-dialog
     .modal-content
       .modal-header
         %button.close{ "data-dismiss" => "modal", type: "button" } ×
         %h4.modal-title
-          Add a contact
+          Edit
+          = contact.full_name
 
       #modal-form
         = render "form", contact: contact

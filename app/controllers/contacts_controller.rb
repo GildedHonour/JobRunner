@@ -5,7 +5,6 @@ class ContactsController < ApplicationController
 
   def create
     @contact = Contact.new(contact_params)
-    @contact.company = Company.first
     @success_message = "Contact saved." if @contact.save
 
     respond_to do |format|
@@ -16,7 +15,6 @@ class ContactsController < ApplicationController
   def update
     @contact = Contact.find(params[:id])
     @contact.update_attributes(contact_params)
-    @contact.company = Company.first
     @success_message = "Contact updated." if @contact.save
 
     respond_to do |format|
@@ -41,21 +39,17 @@ class ContactsController < ApplicationController
 
   def show
     @contact = Contact.find(params[:id])
-    @company = @contact.company
-    @notes = Note.where(:contact_id => @contact)
     respond_with @contact
   end
 
   def edit
     @contact = Contact.find(params[:id])
-    @company = @contact.company
-    @notes = Note.where(:contact_id => @contact)
     respond_with @contact
   end
 
   private
   def contact_params
-    params.require(:contact).permit(:first_name, :last_name, :prefix,
+    params.require(:contact).permit(:first_name, :last_name, :prefix, :job_title, :company_id,
                                     addresses_attributes: [:id, :address_line_1, :address_line_2, :city, :state, :zip, :_destroy],
                                     emails_attributes: [:id, :value, :_destroy],
                                     phone_numbers_attributes: [:id, :kind, :value, :_destroy]
