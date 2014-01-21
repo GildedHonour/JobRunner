@@ -12,13 +12,12 @@
             Company
           %th
             Title
-      %tbody#contacts-listing
+      %tbody
         %tr
-          %td.add.a.contact{:colspan => 4}
-            %button{ type: "button", class: "btn btn-link btn-sm", data: { toggle: "modal", target: "#add-contact-modal" } }
+          %td.add.a.contact{ colspan: 4 }
             = link_to "+ Add a new contact", new_contact_url, class: "btn btn-link btn-sm", remote: true
+      %tbody#contacts-listing
         = render @contacts
-
     #contacts-pagination
       = paginate(@contacts)
 
