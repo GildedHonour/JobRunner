@@ -3,10 +3,22 @@ class ContactsController < ApplicationController
 
   PAGE_SIZE = 100
 
+  def new
+    @contact = Contact.new(params[:contact])
+    respond_with @contact
+  end
+
   def create
     @contact = Contact.new(contact_params)
     @success_message = "Contact saved." if @contact.save
 
+    respond_to do |format|
+      format.js { render("new") }
+    end
+  end
+
+  def edit
+    @contact = Contact.find(params[:id])
     respond_to do |format|
       format.js { render("new") }
     end
@@ -38,11 +50,6 @@ class ContactsController < ApplicationController
   end
 
   def show
-    @contact = Contact.find(params[:id])
-    respond_with @contact
-  end
-
-  def edit
     @contact = Contact.find(params[:id])
     respond_with @contact
   end

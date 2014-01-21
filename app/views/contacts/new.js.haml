@@ -1,8 +1,1 @@
-:plain
-  if($('#modal-form .alert').length) {
-    $('#modal-form .alert').slideUp(function() {
-      $('#modal-form').html('#{j(render("form", contact: @contact))}');
-    });
-  } else {
-    $('#modal-form').html('#{j(render("form", contact: @contact))}');
-  };
+$('#page-modal').html('#{j(render("new"))}').modal();

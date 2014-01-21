@@ -2,7 +2,7 @@
   .col-md-2.control-label
     %label{ for: "phone_numbers" } Phone
   .col-md-10
-    = f.fields_for :phone_numbers, contact.phone_numbers.present? ? contact.phone_numbers : contact.phone_numbers.build do |phone_number_form|
+    = f.fields_for :phone_numbers, @contact.phone_numbers.present? ? @contact.phone_numbers : @contact.phone_numbers.build do |phone_number_form|
       .form-group
         .col-md-4
           = phone_number_form.select :kind, PhoneNumber.kind.options, { include_blank: false }, { class: "form-control" }

@@ -14,8 +14,7 @@
             = @contact.first_name
           %span
             = @contact.last_name
-          %button.btn.btn-primary.to.edit.pull-right{ data: { toggle: "modal", target: "#edit-contact-modal" }}
-            Edit
+          = link_to "Edit", edit_contact_url(@contact), class: "btn btn-primary to edit pull-right", remote: true
         .secondary.contact.info
           %span.label
             Email
@@ -100,5 +99,3 @@
               = l(n.updated_at)
             %div
               = n.note
-
-= render "edit", contact: @contact
