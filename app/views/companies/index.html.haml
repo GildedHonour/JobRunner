@@ -13,6 +13,10 @@
             Affiliation(s)
           %th
             Role(s)
+      %tbody
+        %tr
+          %td.add.a.company{ colspan: 5 }
+            = link_to "+ Add a new company", new_company_url, class: "btn btn-link btn-sm", remote: true
       %tbody#companies-listing
         = render @companies
     #companies-pagination

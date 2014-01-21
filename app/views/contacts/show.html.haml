@@ -24,13 +24,13 @@
           = @contact.phone_numbers.join(",")
           %span.label
             Address
-            - @contact.addresses.each do |address|
-              .address
-                = address.address_line_1
-                = address.address_line_2
-                = address.city
-                = address.state
-                = address.zip
+          - @contact.addresses.each do |address|
+            .address
+              = address.address_line_1
+              = address.address_line_2
+              = address.city
+              = address.state
+              = address.zip
 
   .contact.details
     .first.contact.row

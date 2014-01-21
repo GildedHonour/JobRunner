@@ -1,0 +1,49 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %button.close{ "data-dismiss" => "modal", type: "button" } ×
+      %h4.modal-title
+        - if(@company.persisted?)
+          Edit #{@company.name}
+        - else
+          Add a company
+
+    #modal-form
+      = nested_form_for @company, html: { class: "form-horizontal" }, remote: true do |f|
+        .modal-body
+          - if @company.errors.any?
+            .alert.alert-danger
+              %a.close{ "data-dismiss" => "alert", href: "#" } ×
+              %h4
+                Oh snap! You got an error!
+              - @company.errors.full_messages.each do |message|
+                %p
+                  = message
+          - if @success_message
+            .alert.alert-success
+              %a.close{ "data-dismiss" => "alert", href: "#" } ×
+              %h4
+                = @success_message
+
+          .row
+            .col-md-10.col-md-offset-1
+              .row
+                .col-md-10
+                  = f.text_field :name, placeholder: "Company Name", class: "form-control"
+
+              .row.top-buffer-30
+                %h2
+                  Contact Info
+                .row
+                  .form-group
+                    %label.col-md-2.control-label{ for: "website" } Website
+                    .col-md-5
+                      = f.text_field :website, class: "form-control"
+                %hr
+                = render 'address_fields', f: f
+                %hr
+                = render 'phone_number_fields', f: f
+
+        .modal-footer
+          %button.btn.btn-default{ "data-dismiss" => "modal", type: "button" } Close
+          = f.submit "Save", class: "btn btn-primary", data: { toggle: "button", "loading-text" => "Saving" }

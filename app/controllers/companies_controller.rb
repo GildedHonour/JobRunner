@@ -3,10 +3,35 @@ class CompaniesController < ApplicationController
 
   PAGE_SIZE = 100
 
+  def new
+    @company = Company.new(params[:company])
+    respond_with @company
+  end
+
   def create
     @company = Company.new(company_params)
-    @company.save
-    respond_with @company
+    @success_message = "Company saved." if @company.save
+
+    respond_to do |format|
+      format.js { render("new") }
+    end
+  end
+
+  def edit
+    @company = Company.find(params[:id])
+    respond_to do |format|
+      format.js { render("new") }
+    end
+  end
+
+  def update
+    @company = Company.find(params[:id])
+    @company.update_attributes(company_params)
+    @success_message = "Company updated." if @company.save
+
+    respond_to do |format|
+      format.js { render("new") }
+    end
   end
 
   def index
@@ -29,21 +54,11 @@ class CompaniesController < ApplicationController
     respond_with @company
   end
 
-  def edit
-    @company = Company.find(params[:id])
-    @contact = Contact.where(:company_id => @company)
-    @affiliations = Affiliation.where(:principal_id => @company)
-    respond_with @contact
-  end
-
-  def update
-    @company = Company.find(params[:id])
-    @company.update_attributes(company_params)
-    respond_with @company
-  end
-
   private
   def company_params
-    params.require(:company).permit(:name, :address, :address2, :city, :state, :zip, :website, :phone, affiliate_affiliation_ids: [])
+    params.require(:company).permit(:name, :website, :phone,
+                                    addresses_attributes: [:id, :address_line_1, :address_line_2, :city, :state, :zip, :_destroy],
+                                    phone_numbers_attributes: [:id, :kind, :value, :_destroy]
+    )
   end
 end

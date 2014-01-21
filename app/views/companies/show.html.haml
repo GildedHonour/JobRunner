@@ -13,18 +13,25 @@
       .col-sm-11.basic.contact.info
         .contact.name
           = @company.name
-          %button.btn.btn-primary.to.edit.pull-right{ data: { "toggle" => "modal", "target" => "#edit-modal" }}
-            Edit
+          = link_to "Edit", edit_company_url(@company), class: "btn btn-primary to edit pull-right", remote: true
         .secondary.contact.info
           %span.label
             Address
-          = @company.address
-          = @company.address2
-          = @company.city
-          = @company.state
-          = @company.zip
-          %span.label Web
-          %span.label Phone
+          - @company.addresses.each do |address|
+            .address
+              = address.address_line_1
+              = address.address_line_2
+              = address.city
+              = address.state
+              = address.zip
+          %span.label
+            Web
+          = @company.website
+
+          %span.label
+            Phone
+          = @company.phone_numbers.join(",")
+
   .contact.details
     .first.contact.row
       .col-sm-12
@@ -77,17 +84,10 @@
                 %td 
                   = contact.job_title
                 %td 
-                  = contact.email
+                  = contact.emails.join(",")
                 %td 
-                  = number_to_phone(contact.phone)
+                  = contact.phone_numbers.join(",")
                 %td
                   = contact.status.text
                 %td
                   = l(contact.updated_at, format: :only_date)
-.modal#edit-modal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        Edit company
-      .modal-body
-        = render :partial => 'form'
