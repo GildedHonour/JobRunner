@@ -78,19 +78,23 @@
             %tr
               %td.tlabel.for.attribute Birthday
               %td 
-                = @contact.birthday
+                = @contact.birthday && l(@contact.birthday, format: :only_date_month)
             %tr
-              %td.tlabel.for.attribute MMI Ballgame Invite
-              %td 
-                = @contact.mmi_ballgame
+              %td.tlabel.for.attribute MMI Ballgame
+              %td
+                = human_boolean(@contact.mmi_ballgame)
             %tr
-              %td.tlabel.for.attribute Email Optout
+              %td.tlabel.for.attribute Wall calendar
               %td 
-                = @contact.do_not_email
+                = human_boolean(@contact.wall_calendar)
+            %tr
+              %td.tlabel.for.attribute Holiday card
+              %td 
+                = human_boolean(@contact.holiday_card)
             %tr
               %td.tlabel.for.attribute Mail Optout
               %td 
-                = @contact.do_not_mail
+                = human_boolean(@contact.do_not_mail)
       .col-sm-6
         .board.for.contact
           %h3 Notes

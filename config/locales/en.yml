@@ -3,3 +3,6 @@ en:
     formats:
       default: "%b %e,%Y at %I:%M%p"
       only_date: "%b %e,%Y"
+  date:
+    formats:
+      only_date_month: "%b %e"
