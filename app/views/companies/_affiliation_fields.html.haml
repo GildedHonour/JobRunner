@@ -1,0 +1,14 @@
+.row
+  .col-md-12
+    = f.fields_for :affiliate_affiliations, @company.affiliate_affiliations.present? ? @company.affiliate_affiliations : @company.affiliate_affiliations.build do |affiliation_form|
+      .form-group
+        %label.col-md-2.control-label
+          Company
+        .col-md-5
+          = affiliation_form.select :affiliate_id, Company.all.map{ |company| [company.name, company.id] }, { include_blank: true }, class: "form-control"
+        .col-md-3
+          = affiliation_form.select :role, Affiliation.role.options, {}, { class: "form-control" }
+        .col-md-2
+          = affiliation_form.link_to_remove "Remove", class: "btn btn-danger btn-xs pull-right"
+
+    = f.link_to_add  "Add another relationship", :affiliate_affiliations, class: "btn btn-default"

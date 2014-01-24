@@ -9,30 +9,17 @@ class Company < ActiveRecord::Base
   has_many :principal_affiliations, foreign_key: 'affiliate_id', dependent: :destroy, class_name: 'Affiliation'
   has_many :principals, through: :principal_affiliations, source: :principal, class_name: 'Company'
 
-  # Client affiliations
-  has_many :client_affiliate_affiliations, -> { where role: 'client' }, foreign_key: 'principal_id', dependent: :destroy, class_name: 'Affiliation'
-  has_many :client_affiliates, through: :client_affiliate_affiliations, class_name: 'Company', source: :affiliate
-
-  has_many :client_principal_affiliations, -> { where role: 'client' }, foreign_key: 'affiliate_id', dependent: :destroy, class_name: 'Affiliation'
-  has_many :client_principals, through: :client_principal_affiliations, class_name: 'Company', source: :principal
-
-  # Prospect affiliations
-  has_many :prospect_affiliate_affiliations, -> { where role: 'prospect' }, foreign_key: 'principal_id', dependent: :destroy, class_name: 'Affiliation'
-  has_many :prospect_affiliates, through: :prospect_affiliate_affiliations, class_name: 'Company', source: :affiliate
-
-  has_many :prospect_principal_affiliations, -> { where role: 'prospect' }, foreign_key: 'affiliate_id', dependent: :destroy, class_name: 'Affiliation'
-  has_many :prospect_principals, through: :prospect_principal_affiliations, class_name: 'Company', source: :principal
-
   has_many :contacts, dependent: :destroy
   has_many :phone_numbers, -> { order "created_at ASC" }, as: :phonable, dependent: :destroy
 
   accepts_nested_attributes_for :addresses, reject_if: lambda { |address| address[:address_line_1].blank? }, allow_destroy: true
   accepts_nested_attributes_for :phone_numbers, reject_if: lambda { |phone_number| phone_number[:value].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :affiliate_affiliations, reject_if: lambda { |affiliation| affiliation[:affiliate_id].blank? }, allow_destroy: true
 
   mount_uploader :company_logo, CompanyLogoUploader
 
   # Validations
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 
   class << self
     def search(term)
