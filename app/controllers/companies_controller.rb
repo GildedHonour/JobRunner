@@ -54,6 +54,23 @@ class CompaniesController < ApplicationController
     respond_with @company
   end
 
+  def edit_affiliations
+    @company = Company.find(params[:company_id])
+    respond_to do |format|
+      format.js { render("edit_affiliations") }
+    end
+  end
+
+  def update_affiliations
+    @company = Company.find(params[:company_id])
+    @company.update_attributes(company_params)
+    @success_message = "Relationships updated." if @company.save
+
+    respond_to do |format|
+      format.js { render("edit_affiliations") }
+    end
+  end
+
   private
   def company_params
     params.require(:company).permit(:name, :website, :phone,
