@@ -1,4 +1,4 @@
-.col-sm-12.for.content
+.col-sm-11.for.content
   .contact.intro
     .row
       .col-sm-9.go.back
@@ -13,12 +13,13 @@
       .col-sm-11.basic.contact.info
         .contact.name
           = @company.name
-          = link_to "Edit", edit_company_url(@company), class: "btn btn-primary to edit pull-right", remote: true
+          = link_to edit_company_url(@company), class: "btn-fam no-border pull-right", remote: true do
+            %i.fa.fa-pencil.pull-right
         .secondary.contact.info
           %span.label
             Address
           - @company.addresses.each do |address|
-            .address
+            %span.address
               = address.address_line_1
               = address.address_line_2
               = address.city

@@ -1,20 +1,39 @@
-.for.left.navigation
-  .navigation
-    .branding.elements
-      .brand
-        = image_tag "pmg-mini.png"
-      .brand.extended{style: "display: none;"}
-        Production Management Group
-    .clearfix
-    .navigation.elements
-      .icon.for.navigation
-        = link_to root_url do
-          %span.glyphicon.glyphicon-home>
-      .icon.for.navigation
-        = link_to root_url do
-          %span.glyphicon.glyphicon-list-alt>
-      .icon.for.navigation
-        %span.glyphicon.glyphicon-map-marker
-
-      .icon.for.navigation
-        %span.glyphicon.glyphicon-dashboard
+.family.menu
+  .closed.menu.wrapper
+    .brand
+      %img{alt: "", src: "http://pmgtest.s3.amazonaws.com/pmg/pmg-mini.png"}/
+    .left.side
+      %a{href: ""}
+        .menu.item
+          %i.fa.fa-home
+      %a{href: ""}
+        .menu.item.active
+          %i.fa.fa-book
+      %a{href: ""}
+        .menu.item
+          %i.fa.fa-map-marker
+      %a{href: ""}
+        .menu.item
+          %i.fa.fa-archive
+      %a{href: ""}
+        .menu.item
+          %i.fa.fa-ellipsis-v
+  .expanded.menu.wrapper{style: "display: none;"}
+    .brand.text PMG
+    .right.side
+      %a{href: ""}
+        .menu.item.expanded
+          %span.menu.expanded.text Home
+      %a{href: ""}
+        .menu.item.expanded.active
+          %span.menu.expanded.text Contacts
+      %a{href: ""}
+        .menu.item.expanded
+          %span.menu.expanded.text Mail Tracker
+      %a{href: ""}
+        .menu.item.expanded
+          %span.menu.expanded.text List Fullfillment
+      %a{href: ""}
+        .menu.item.expanded
+          %span.menu.expanded.text
+            %i.fa.fa-ellipsis-h

@@ -1,43 +1,43 @@
 @font-face {
     font-family: 'Verb Black';
-    src: asset-path('/assets/verbblack-webfont.eot');
-    src: asset-path('/assets/verbblack-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-path('/assets/verbblack-webfont.woff') format('woff'),
-         asset-path('/assets/verbblack-webfont.ttf') format('truetype'),
-         asset-path('/assets/verbblack-webfont.svg#verbblack') format('svg');
+    src: url('/assets/verbblack-webfont.eot');
+    src: url('/assets/verbblack-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/verbblack-webfont.woff') format('woff'),
+         url('/assets/verbblack-webfont.ttf') format('truetype'),
+         url('/assets/verbblack-webfont.svg#verbblack') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'verbblack_italic';
-    src: asset-path('/assets/verbblack-italic-webfont.eot');
-    src: asset-path('/assets/verbblack-italic-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-path('/assets/verbblack-italic-webfont.woff') format('woff'),
-         asset-path('/assets/verbblack-italic-webfont.ttf') format('truetype'),
-         asset-path('/assets/verbblack-italic-webfont.svg#verbblack_italic') format('svg');
+    src: url('/assets/verbblack-italic-webfont.eot');
+    src: url('/assets/verbblack-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/verbblack-italic-webfont.woff') format('woff'),
+         url('/assets/verbblack-italic-webfont.ttf') format('truetype'),
+         url('/assets/verbblack-italic-webfont.svg#verbblack_italic') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Verb Regular';
-    src: asset-path('/assets/verbbold-italic-webfont.eot');
-    src: asset-path('/assets/verbbold-italic-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-path('/assets/verbbold-italic-webfont.woff') format('woff'),
-         asset-path('/assets/verbbold-italic-webfont.ttf') format('truetype'),
-         asset-path('/assets/verbbold-italic-webfont.svg#verbbold_italic') format('svg');
+    src: url('/assets/verbbold-italic-webfont.eot');
+    src: url('/assets/verbbold-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/verbbold-italic-webfont.woff') format('woff'),
+         url('/assets/verbbold-italic-webfont.ttf') format('truetype'),
+         url('/assets/verbbold-italic-webfont.svg#verbbold_italic') format('svg');
     font-weight: bold;
     font-style: italic;
 }
 
 @font-face {
     font-family: 'Verb Regular';
-    src: asset-path('/assets/verbbold-webfont.eot');
-    src: asset-path('/assets/verbbold-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-path('/assets/verbbold-webfont.woff') format('woff'),
-         asset-path('/assets/verbbold-webfont.ttf') format('truetype'),
-         asset-path('/assets/verbbold-webfont.svg#verbbold') format('svg');
+    src: url('/assets/verbbold-webfont.eot');
+    src: url('/assets/verbbold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/verbbold-webfont.woff') format('woff'),
+         url('/assets/verbbold-webfont.ttf') format('truetype'),
+         url('/assets/verbbold-webfont.svg#verbbold') format('svg');
     font-weight: bold;
     font-style: normal;
 
@@ -48,11 +48,11 @@
 
 @font-face {
     font-family: 'verbextrabold_italic';
-    src: asset-path('/assets/verbextrabold-italic-webfont.eot');
-    src: asset-path('/assets/verbextrabold-italic-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-path('/assets/verbextrabold-italic-webfont.woff') format('woff'),
-         asset-path('/assets/verbextrabold-italic-webfont.ttf') format('truetype'),
-         asset-path('/assets/verbextrabold-italic-webfont.svg#verbextrabold_italic') format('svg');
+    src: url('/assets/verbextrabold-italic-webfont.eot');
+    src: url('/assets/verbextrabold-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/verbextrabold-italic-webfont.woff') format('woff'),
+         url('/assets/verbextrabold-italic-webfont.ttf') format('truetype'),
+         url('/assets/verbextrabold-italic-webfont.svg#verbextrabold_italic') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -62,12 +62,12 @@
 
 
 @font-face {
-    font-family: 'verbextrabold';
-    src: asset-path('/assets/verbextrabold-webfont.eot');
-    src: asset-path('/assets/verbextrabold-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-path('/assets/verbextrabold-webfont.woff') format('woff'),
-         asset-path('/assets/verbextrabold-webfont.ttf') format('truetype'),
-         asset-path('/assets/verbextrabold-webfont.svg#verbextrabold') format('svg');
+    font-family: 'Verb Extra Bold';
+    src: url('/assets/verbextrabold-webfont.eot');
+    src: url('/assets/verbextrabold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/verbextrabold-webfont.woff') format('woff'),
+         url('/assets/verbextrabold-webfont.ttf') format('truetype'),
+         url('/assets/verbextrabold-webfont.svg#verbextrabold') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -78,11 +78,11 @@
 
 @font-face {
     font-family: 'verbextralight_italic';
-    src: asset-path('/assets/verbextralight-italic-webfont.eot');
-    src: asset-path('/assets/verbextralight-italic-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-path('/assets/verbextralight-italic-webfont.woff') format('woff'),
-         asset-path('/assets/verbextralight-italic-webfont.ttf') format('truetype'),
-         asset-path('/assets/verbextralight-italic-webfont.svg#verbextralight_italic') format('svg');
+    src: url('/assets/verbextralight-italic-webfont.eot');
+    src: url('/assets/verbextralight-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/verbextralight-italic-webfont.woff') format('woff'),
+         url('/assets/verbextralight-italic-webfont.ttf') format('truetype'),
+         url('/assets/verbextralight-italic-webfont.svg#verbextralight_italic') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -93,11 +93,11 @@
 
 @font-face {
     font-family: 'verbextralight';
-    src: asset-path('/assets/verbextralight-webfont.eot');
-    src: asset-path('/assets/verbextralight-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-path('/assets/verbextralight-webfont.woff') format('woff'),
-         asset-path('/assets/verbextralight-webfont.ttf') format('truetype'),
-         asset-path('/assets/verbextralight-webfont.svg#verbextralight') format('svg');
+    src: url('/assets/verbextralight-webfont.eot');
+    src: url('/assets/verbextralight-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/verbextralight-webfont.woff') format('woff'),
+         url('/assets/verbextralight-webfont.ttf') format('truetype'),
+         url('/assets/verbextralight-webfont.svg#verbextralight') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -108,11 +108,11 @@
 
 @font-face {
     font-family: 'Verb Light';
-    src: asset-path('/assets/verblight-italic-webfont.eot');
-    src: asset-path('/assets/verblight-italic-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-path('/assets/verblight-italic-webfont.woff') format('woff'),
-         asset-path('/assets/verblight-italic-webfont.ttf') format('truetype'),
-         asset-path('/assets/verblight-italic-webfont.svg#verblight_italic') format('svg');
+    src: url('/assets/verblight-italic-webfont.eot');
+    src: url('/assets/verblight-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/verblight-italic-webfont.woff') format('woff'),
+         url('/assets/verblight-italic-webfont.ttf') format('truetype'),
+         url('/assets/verblight-italic-webfont.svg#verblight_italic') format('svg');
     font-weight: normal;
     font-style: italic;
 
@@ -123,11 +123,11 @@
 
 @font-face {
     font-family: 'Verb Light';
-    src: asset-path('/assets/verblight-webfont.eot');
-    src: asset-path('/assets/verblight-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-path('/assets/verblight-webfont.woff') format('woff'),
-         asset-path('/assets/verblight-webfont.ttf') format('truetype'),
-         asset-path('/assets/verblight-webfont.svg#verblight') format('svg');
+    src: url('/assets/verblight-webfont.eot');
+    src: url('/assets/verblight-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/verblight-webfont.woff') format('woff'),
+         url('/assets/verblight-webfont.ttf') format('truetype'),
+         url('/assets/verblight-webfont.svg#verblight') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -138,11 +138,11 @@
 
 @font-face {
     font-family: 'verbmedium_italic';
-    src: asset-path('/assets/verbmedium-italic-webfont.eot');
-    src: asset-path('/assets/verbmedium-italic-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-path('/assets/verbmedium-italic-webfont.woff') format('woff'),
-         asset-path('/assets/verbmedium-italic-webfont.ttf') format('truetype'),
-         asset-path('/assets/verbmedium-italic-webfont.svg#verbmedium_italic') format('svg');
+    src: url('/assets/verbmedium-italic-webfont.eot');
+    src: url('/assets/verbmedium-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/verbmedium-italic-webfont.woff') format('woff'),
+         url('/assets/verbmedium-italic-webfont.ttf') format('truetype'),
+         url('/assets/verbmedium-italic-webfont.svg#verbmedium_italic') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -153,11 +153,11 @@
 
 @font-face {
     font-family: 'verbmedium';
-    src: asset-path('/assets/verbmedium-webfont.eot');
-    src: asset-path('/assets/verbmedium-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-path('/assets/verbmedium-webfont.woff') format('woff'),
-         asset-path('/assets/verbmedium-webfont.ttf') format('truetype'),
-         asset-path('/assets/verbmedium-webfont.svg#verbmedium') format('svg');
+    src: url('/assets/verbmedium-webfont.eot');
+    src: url('/assets/verbmedium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/verbmedium-webfont.woff') format('woff'),
+         url('/assets/verbmedium-webfont.ttf') format('truetype'),
+         url('/assets/verbmedium-webfont.svg#verbmedium') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -168,11 +168,11 @@
 
 @font-face {
     font-family: 'Verb Regular';
-    src: asset-path('/assets/verbregular-italic-webfont.eot');
-    src: asset-path('/assets/verbregular-italic-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-path('/assets/verbregular-italic-webfont.woff') format('woff'),
-         asset-path('/assets/verbregular-italic-webfont.ttf') format('truetype'),
-         asset-path('/assets/verbregular-italic-webfont.svg#verbregular_italic') format('svg');
+    src: url('/assets/verbregular-italic-webfont.eot');
+    src: url('/assets/verbregular-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/verbregular-italic-webfont.woff') format('woff'),
+         url('/assets/verbregular-italic-webfont.ttf') format('truetype'),
+         url('/assets/verbregular-italic-webfont.svg#verbregular_italic') format('svg');
     font-weight: normal;
     font-style: italic;
 
@@ -183,11 +183,11 @@
 
 @font-face {
     font-family: 'Verb Regular';
-    src: asset-path('/assets/verbregular-webfont.eot');
-    src: asset-path('/assets/verbregular-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-path('/assets/verbregular-webfont.woff') format('woff'),
-         asset-path('/assets/verbregular-webfont.ttf') format('truetype'),
-         asset-path('/assets/verbregular-webfont.svg#verbregular') format('svg');
+    src: url('/assets/verbregular-webfont.eot');
+    src: url('/assets/verbregular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/verbregular-webfont.woff') format('woff'),
+         url('/assets/verbregular-webfont.ttf') format('truetype'),
+         url('/assets/verbregular-webfont.svg#verbregular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -198,11 +198,11 @@
 
 @font-face {
     font-family: 'verbsemibold_italic';
-    src: asset-path('/assets/verbsemibold-italic-webfont.eot');
-    src: asset-path('/assets/verbsemibold-italic-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-path('/assets/verbsemibold-italic-webfont.woff') format('woff'),
-         asset-path('/assets/verbsemibold-italic-webfont.ttf') format('truetype'),
-         asset-path('/assets/verbsemibold-italic-webfont.svg#verbsemibold_italic') format('svg');
+    src: url('/assets/verbsemibold-italic-webfont.eot');
+    src: url('/assets/verbsemibold-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/verbsemibold-italic-webfont.woff') format('woff'),
+         url('/assets/verbsemibold-italic-webfont.ttf') format('truetype'),
+         url('/assets/verbsemibold-italic-webfont.svg#verbsemibold_italic') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -213,11 +213,11 @@
 
 @font-face {
     font-family: 'verbsemibold';
-    src: asset-path('/assets/verbsemibold-webfont.eot');
-    src: asset-path('/assets/verbsemibold-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-path('/assets/verbsemibold-webfont.woff') format('woff'),
-         asset-path('/assets/verbsemibold-webfont.ttf') format('truetype'),
-         asset-path('/assets/verbsemibold-webfont.svg#verbsemibold') format('svg');
+    src: url('/assets/verbsemibold-webfont.eot');
+    src: url('/assets/verbsemibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/verbsemibold-webfont.woff') format('woff'),
+         url('/assets/verbsemibold-webfont.ttf') format('truetype'),
+         url('/assets/verbsemibold-webfont.svg#verbsemibold') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -228,11 +228,11 @@
 
 @font-face {
     font-family: 'verbultra_italic';
-    src: asset-path('/assets/verbultra-italic-webfont.eot');
-    src: asset-path('/assets/verbultra-italic-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-path('/assets/verbultra-italic-webfont.woff') format('woff'),
-         asset-path('/assets/verbultra-italic-webfont.ttf') format('truetype'),
-         asset-path('/assets/verbultra-italic-webfont.svg#verbultra_italic') format('svg');
+    src: url('/assets/verbultra-italic-webfont.eot');
+    src: url('/assets/verbultra-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/verbultra-italic-webfont.woff') format('woff'),
+         url('/assets/verbultra-italic-webfont.ttf') format('truetype'),
+         url('/assets/verbultra-italic-webfont.svg#verbultra_italic') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -243,11 +243,11 @@
 
 @font-face {
     font-family: 'verbultra';
-    src: asset-path('/assets/verbultra-webfont.eot');
-    src: asset-path('/assets/verbultra-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-path('/assets/verbultra-webfont.woff') format('woff'),
-         asset-path('/assets/verbultra-webfont.ttf') format('truetype'),
-         asset-path('/assets/verbultra-webfont.svg#verbultra') format('svg');
+    src: url('/assets/verbultra-webfont.eot');
+    src: url('/assets/verbultra-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/verbultra-webfont.woff') format('woff'),
+         url('/assets/verbultra-webfont.ttf') format('truetype'),
+         url('/assets/verbultra-webfont.svg#verbultra') format('svg');
     font-weight: normal;
     font-style: normal;
 

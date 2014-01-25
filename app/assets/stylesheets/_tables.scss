@@ -1,0 +1,46 @@
+.table thead tr th {
+  border-top: none;
+  font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+  text-transform: uppercase;
+  font-size: 8.25pt;
+  border-bottom: 5px solid #dfe7e7;
+  color: #b0bcbc;
+  padding: 4px 8px;
+  background: transparent;
+}
+
+table thead tr th.sortable {
+  color: #757a7a;
+  border-bottom: 5px solid #293233;
+  .fa-angle-down {
+    font-size: 14pt;
+  }
+}
+
+table td {
+  font-size: 11pt;
+  color: #848686;
+}
+
+.table > tbody > tr > td.add {
+  padding: 4px 0;
+  &:hover {
+    background: transparent;
+  }
+}
+
+td.add .wrap {
+  padding: 8px;
+  background: #f7f9f9;
+  border: 1px solid #e6ebeb;
+  a {
+    color: #b0bdbd;
+  }
+}
+
+td.add .fa-plus {
+  font-size: 14pt;
+  color: #8e9191;
+  vertical-align: bottom;
+  margin-right: 10px;
+}

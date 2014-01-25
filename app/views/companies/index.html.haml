@@ -1,14 +1,14 @@
-.col-sm-9.for.content
+.col-sm-8.for.content
   = render "action_panel", search_url: companies_url
   .contacts.holder
-    %table.table.for.contacts.table-hover
+    %table.table.for.table-hover
       %thead
         %tr
           %th
             = check_box_tag "select-contact"
           %th
-          %th
-            Name
+          %th.sortable
+            Name <i class="fa fa-angle-down"></i
           %th
             Affiliation(s)
           %th
@@ -16,27 +16,31 @@
       %tbody
         %tr
           %td.add.a.company{ colspan: 5 }
-            = link_to "+ Add a new company", new_company_url, class: "btn btn-link btn-sm", remote: true
+            .wrap
+              %i.fa.fa-plus
+              = link_to "Add a new company", new_company_url, remote: true
       %tbody#companies-listing
         = render @companies
     #companies-pagination
       = paginate(@companies)
-.col-sm-3.profile.on.listing.pages
+.col-sm-2.profile.on.listing.pages
   = render "profile"
-  %h2
-    Filters:
-  %h2
-    Affiliations
-  #affiliations-filter
-    .well
-      %ul.list-unstyled
+  .filters.wrapper
+    %h4.filters
+      %i.fa.fa-filter 
+      Filters
+    %h3.filter.header
+      Affiliations <i class="fa fa-angle-down pull-right"></i>
+    #affiliations-filter.filter.wrapper
+      %ul.list.default
         - @all_principals[true].each do |principal|
           %li.checkbox
             = check_box_tag "affiliation_filter[company_ids]", principal.id
             = principal.name
-    .well
-      %ul.list-unstyled
-        - @all_principals[false].each do |principal|
-          %li.checkbox
-            = check_box_tag "affiliation_filter[company_ids]", principal.id
-            = principal.name
+        %li.checkbox
+          External company <i class="fa fa-angle-down"></i>
+        %ul.list.all
+          - @all_principals[false].each do |principal|
+            %li.checkbox
+              = check_box_tag "affiliation_filter[company_ids]", principal.id
+              = principal.name

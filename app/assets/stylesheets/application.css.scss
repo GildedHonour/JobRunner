@@ -1,6 +1,7 @@
 @import "bootstrap";
 @import "bootstrap-editable";
 @import "glyphicons_override";
+@import "compass";
 @import "bourbon";
 @import "fonts";
 @import "helpers";
@@ -11,3 +12,6 @@
 @import "profile";
 @import "contact";
 @import "company";
+@import "buttons";
+@import "tables";
+@import "filters";

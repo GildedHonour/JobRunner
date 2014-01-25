@@ -1,22 +1,98 @@
-.for.left.navigation {
-  background-color: $gray-06;
-  position: fixed;
-  height: 100%;
+.family.menu {
+  float: left;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.closed .brand {
+  background: #74ba3b;
+  border-right: 1px solid #6dad3b;
+}
+
+.closed .brand {
+  margin: 0 auto;
+  text-align: center;
+  height: 65px;
+  vertical-align: middle;
+  display: table-cell;
   width: 70px;
 }
 
-.navigation.elements {
-  margin-top: rem(100px);
+.expanded .brand {
+  background: #7fc04b;
+  padding: 0px 18px;
+  font-size: 12pt;
+  font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+  color: #fff;
+}
+
+.brand.text {
+  height: 65px;
+  display: table-cell;
+  vertical-align: middle;
+  width: 150px;
 }
 
 .brand {
-  background-color: $pmg-background;
-  width: 100%;
-  text-align: center;
+  height: 65px;
 }
 
-.icon.for.navigation {
-  font-size: rem(18pt);
-  text-align: center;
-  padding: rem(15px) 0;
+.menu .side{
+  margin-top: 90px;
+}
+
+.closed.menu.wrapper {
+  background: #d8dddd;
+  width: 70px;
+  min-height: 400px;
+  float: left;
+  height: 100%;
+}
+
+.expanded.menu.wrapper {
+  background: #f2f3f3;
+  width: 150px;
+  min-height: 400px;
+  float: left;
+  height: 100%;
+}
+
+.menu.item {
+  padding: 0px 18px;
+  height: 58px;
+  font-size: 12pt;
+  font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+  color: #798f8f;
+}
+
+.menu.item:hover {
+  color: #000;
+}
+
+.menu.item span, .menu.item i {
+  display: table-cell;
+  height: 58px;
+  vertical-align: middle;
+}
+
+.closed .menu.item {
+  text-align: -webkit-center;
+}
+
+.menu.item i {
+  font-size: 16pt;
+}
+
+.closed.menu.wrapper .menu.item.active {
+  background: #272d2d;
+  color: #fff;
+  border-right: 1px solid #000;
+}
+
+.expanded.menu.wrapper .menu.item.active {
+  background: #3b3f3f;
+  color: #fff;
+  border-right: 1px solid #000;
 }

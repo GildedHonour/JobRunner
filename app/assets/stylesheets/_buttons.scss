@@ -1,0 +1,53 @@
+.btn-fam {
+	font-size: 12pt;
+	@include border-radius(20px, 20px);
+	border-color: #d6e0e0;
+	border-width: 5px;
+	background-color: #fff;
+	min-width: 90px;
+	font-family: "verbsemibold", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+	color: #91aaaa;
+	padding: 6px inherit;
+	border-style: solid;
+	.fa {
+		font-size: 14pt;
+	}
+	&:hover {
+		border-color: shade(#d6e0e0, 20%);
+		color: shade(#91aaaa, 20%);
+	}
+}
+
+.btn-fam.mmi {
+	border-color: #009ae0;
+	&:hover {
+		border-color: shade(#009ae0, 20%);
+		color: shade(#91aaaa, 20%);
+	}
+}
+
+.btn-fam.pmg {
+	border-color: #74ba3b;
+	&:hover {
+		border-color: shade(#74ba3b, 20%);
+		color: shade(#91aaaa, 20%);
+	}
+}
+
+// MOVE TO A HELPER AREA?
+.square {
+	@include border-radius(6px, 6px);
+}
+
+.no-border {
+	border: none;
+	@include border-radius(0px, 0px);
+	&:hover {
+		color: shade(#91aaaa, 20%);
+	}
+}
+
+.btn-fam.err:hover {
+	border-color: #c51b36;
+	color: #c51b36;
+}

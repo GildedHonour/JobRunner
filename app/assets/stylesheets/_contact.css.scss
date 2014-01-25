@@ -31,6 +31,10 @@
   font-size: rem(58px);
   border-bottom: 5px solid $black-01;
   padding-left: rem(25px);
+  .btn-fam {
+    position: relative;
+    bottom: -20px;
+  }
 }
 
 .secondary.contact.info {
@@ -88,5 +92,9 @@
   font-family: "Verb Black", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
   font-size: rem(17px);
   border-bottom: 5px solid $gray-02;
+}
+
+.board.for.contact.communications table {
+  width: 50%;
 }
 

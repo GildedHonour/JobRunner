@@ -18,6 +18,7 @@ gem "simple_form", github: "plataformatec/simple_form" #Latest for Bootstrap sup
 
 # Assets
 gem "sass-rails", "~> 4.0.0"
+gem "compass-rails", "~> 1.1.2"
 gem "bootstrap-sass", "~> 3.0.3.0"
 gem "bourbon"
 gem "uglifier", ">= 1.3.0"

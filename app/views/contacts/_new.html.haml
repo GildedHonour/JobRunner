@@ -2,11 +2,11 @@
   .modal-content
     .modal-header
       %button.close{ "data-dismiss" => "modal", type: "button" } ×
-      %h4.modal-title
+      %h1.modal-title
         - if(@contact.persisted?)
           Edit #{@contact.full_name}
         - else
-          Add a contact
+          Add a person
 
     #modal-form
       = nested_form_for @contact, html: { class: "form-horizontal" }, remote: true do |f|
@@ -28,8 +28,6 @@
           .row
             .col-md-10.col-md-offset-1
               .row
-                %h2
-                  Name
                 .col-md-2
                   = f.select :prefix, Contact.prefix.options, { include_blank: false }, { class: "form-control" }
                 .col-md-5

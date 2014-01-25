@@ -1,28 +1,32 @@
-.for.profile.and.help {
-  width: 100%;
-  background-color: $background-gray;
+.profile.and.help {
+  height: 60px;
+  background-color: #272d2d;
   font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
-  font-size: rem(16pt);
   color: #a2a2a2;
   display: block;
+  text-align: center;
   a {
     cursor: pointer;
   }
+  overflow: hidden;
 }
 
-.for.profile, .for.help {
-  background-color: #000;
-  padding: rem(15pt) rem(0);
-  text-align: center;
-  margin-top: rem(-8pt);
+._profile {
+  width: 72%;
+  font-size: 13pt;
+  float: left;
+  padding: 20px 0 0;
+  height: 60px;
 }
 
-.for.profile {
-  width: 82.888888%; // adjusting boostrap fluid width slightly to account for the added margin below
-}
-
-.for.help {
-  margin-left: 1px;
+._help {
+  font-size: 25pt;
+  padding-top: 7px;
+  color: #74ba3b;
+  border-left: 1px solid #c6c8c8;
+  float: left;
+  width: 28%;
+  height: 60px;
 }
 
 .on.listing.pages {
@@ -30,7 +34,5 @@
   margin-right: 0;
   padding-left: 0;
   padding-right: 0;
-  width: 20.3%;
-  position: absolute;
-  right: 0;
+  width: 26%;
 }

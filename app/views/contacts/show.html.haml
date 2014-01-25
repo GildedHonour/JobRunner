@@ -13,8 +13,9 @@
           %span
             = @contact.first_name
           %span
-            = @contact.last_name
-          = link_to "Edit", edit_contact_url(@contact), class: "btn btn-primary to edit pull-right", remote: true
+            = @contact.last_name  
+          = link_to edit_contact_url(@contact), class: "btn-fam no-border pull-right", remote: true do
+            %i.fa.fa-pencil.pull-right
         .secondary.contact.info
           %span.label
             Email
@@ -25,7 +26,7 @@
           %span.label
             Address
           - @contact.addresses.each do |address|
-            .address
+            %span.address
               = address.address_line_1
               = address.address_line_2
               = address.city
@@ -72,7 +73,7 @@
   .contact.details
     .second.contact.row
       .col-sm-6
-        .board.for.contact
+        .board.for.contact.communications
           %h3 Communications
           %table
             %tr
@@ -96,7 +97,7 @@
               %td 
                 = human_boolean(@contact.do_not_mail)
       .col-sm-6
-        .board.for.contact
+        .board.for.contact.notes
           %h3 Notes
           - @contact.notes.each do |n|
             %div 

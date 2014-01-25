@@ -1,0 +1,41 @@
+.filters.wrapper {
+	padding: 30px 20px;
+	width: 80%;
+}
+
+h4.filters{
+	font-size: 10pt;
+	text-transform: uppercase;
+	color: #abc0c0;
+	i {
+		color: #000;
+	}
+}
+
+h3.filter.header {
+	font-size: 13.5pt;
+	color: #434848;
+	font-family: "Verb Light", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+}
+
+.filter.wrapper {
+	border-bottom: 4px solid #d0dcdc;
+}
+
+.filters li {
+	font-size: 9pt;
+	color: #98a9a9;
+	.checked {
+		color: #9bd07d;
+	}
+}
+
+.filters .list.all {
+	display: none;
+}
+
+// reset
+
+.filters ul {
+	padding-left: 0;
+}

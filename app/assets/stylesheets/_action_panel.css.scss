@@ -1,5 +1,10 @@
 .action-panel {
   
+  h1 {
+    margin-left: 10px;
+    margin-top: 0;
+  }
+
   // Panel styles
   padding: rem(22pt) rem(22pt) rem(8pt);
   background-color: $background-gray;
@@ -14,14 +19,14 @@
 
   .glyphicon {
     position: absolute;
-    padding: rem(8pt) rem(14pt);
+    padding: rem(14pt) rem(14pt);
     font-size: rem(24pt);
   }
 
   input {
     color: $gray-05;
     font-size: rem(24pt);
-    padding-left: rem(48pt);
+    padding: 25px 40px;
     @include box-shadow($gray-02 rem(1px) rem(1px) 0px);
     // @include border-radius(rem(1px));
     min-height: rem(45pt);

@@ -1,5 +1,4 @@
 .for.content {
-  margin-left: 70px;
   padding-left: 0;
   padding-right: 0;
   font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
@@ -13,17 +12,14 @@
   background-color: #fff;
 }
 
-.table thead tr th {
-  border-top: none;
-  font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
-  text-transform: uppercase;
-  font-size: rem(14pt);
-  border-bottom: 5px solid $gray-01;
-  
-}
+// .table thead tr th {
+//   border-top: none;
+//   font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+//   text-transform: uppercase;
+//   font-size: rem(14pt);
+//   border-bottom: 5px solid $gray-01;
+// }
 
-td.add.a {
-  background: $gray-06;
-  border: 1px solid $gray-08;
-  color: $gray-07;
-}
+// .table thead tr:first {
+  
+// }

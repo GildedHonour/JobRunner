@@ -1,8 +1,8 @@
-.for.profile.and.help
-  .for.profile.col-sm-10
-    %span.glyphicon.glyphicon-user
-    = current_user.email
-    = link_to "(Logout)", destroy_user_session_path, method: "delete"
-
-  .for.help.col-sm-2
-    %span.glyphicon.glyphicon-question-sign
+.profile.and.help.wrapper
+  ._profile
+    %a{href: "#"}
+      %i.fa.fa-user
+      = link_to "Logout", destroy_user_session_path, method: "delete"
+  ._help
+    %a{href: ""}
+      %i.fa.fa-question
