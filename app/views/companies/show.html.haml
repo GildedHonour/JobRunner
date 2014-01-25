@@ -50,21 +50,22 @@
             - @company.affiliates.each do |affiliate|
               %tr
                 %td
-                  = affiliate.name 
+                  = affiliate.name
+                - @affiliations = @company.affiliate_affiliations_of_affiliate(affiliate)
                 %td 
-                  - @company.affiliate_affiliations.each do |affiliation|
+                  - @affiliations.each do |affiliation|
                     = affiliation.role.text
                     %br
                 %td 
-                  - @company.affiliate_affiliations.each do |affiliation|
+                  - @affiliations.each do |affiliation|
                     = affiliation.status.text
                     %br
                 %td 
-                  - @company.affiliate_affiliations.each do |affiliation|
+                  - @affiliations.each do |affiliation|
                     = l(affiliation.created_at, format: :only_date)
                     %br
                 %td 
-                  - @company.affiliate_affiliations.each do |affiliation|
+                  - @affiliations.each do |affiliation|
                     = l(affiliation.updated_at, format: :only_date)
                     %br
   .contact.details
