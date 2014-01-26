@@ -8,10 +8,8 @@
     = csrf_meta_tags
   %body{ class: "#{controller.controller_name} #{controller.action_name}" }
     #main
-      .row
-        .col-sm-12
-          = render "left_nav"
-          = yield
+      = render "left_nav"
+      = yield
     #page-modal.modal.fade
 
     = javascript_include_tag "application"

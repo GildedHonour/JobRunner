@@ -1,0 +1,31 @@
+@import "neat-helpers"; // or "neat-helpers" when in Rails
+
+//$visual-grid: true;
+
+// Change the grid settings
+$column: 35px;
+$gutter: 0px;
+$grid-columns: 24;
+$max-width: 100%;
+$offset: 35px;
+$_gutter: 12px;
+
+// Instead of forcing a gutter on every colum, it's offered when needed
+@mixin set_gutter {
+	margin-left: $_gutter;
+	margin-right: $_gutter;
+}
+
+// Sets the marging offset based on a number
+@mixin offset($number) {
+	margin-left: ($offset*$number);
+}
+
+// Calculate the percentage width of a target based on pixels, returns a percentage
+@function cp($target, $container) {
+  @return calc-percent($target, $container);
+}
+
+// Define your breakpoints
+$tablet: new-breakpoint(max-width 768px 8);
+$mobile: new-breakpoint(max-width 480px 4);

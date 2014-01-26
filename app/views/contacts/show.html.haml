@@ -1,14 +1,13 @@
-.col-sm-11.for.content
-  .contact.intro
-    .row
-      .col-sm-9.go.back
+.neat-row
+  .show.content
+    .contact.intro
+      .go.back
         = link_to contacts_url do
           %span.glyphicon.glyphicon-chevron-left
           Back to contacts list
-      .col-sm-3
+      .profile
         = render "profile"
-    .row
-      .col-sm-12.basic.contact.info
+      .basic.contact.info
         .contact.name
           %span
             = @contact.first_name
@@ -33,9 +32,8 @@
               = address.state
               = address.zip
 
-  .contact.details
-    .first.contact.row
-      .col-sm-6
+    .contact.details
+      .first.contact
         .board.for.contact
           %h3 Relationships
           %h2 
@@ -56,7 +54,6 @@
                   Status:
                   = affiliate_affiliation.status.text
                   %br
-      .col-sm-6
         .board.for.contact
           %h3 User Account
           %table
@@ -70,9 +67,8 @@
             %tr
               %td
               %td
-  .contact.details
-    .second.contact.row
-      .col-sm-6
+    .contact.details
+      .second.contact
         .board.for.contact.communications
           %h3 Communications
           %table
@@ -96,7 +92,6 @@
               %td.tlabel.for.attribute Mail Optout
               %td 
                 = human_boolean(@contact.do_not_mail)
-      .col-sm-6
         .board.for.contact.notes
           %h3 Notes
           - @contact.notes.each do |n|

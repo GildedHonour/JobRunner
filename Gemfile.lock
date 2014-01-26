@@ -118,6 +118,9 @@ GEM
     mime-types (1.25.1)
     minitest (4.7.5)
     multi_json (1.8.2)
+    neat (1.5.0)
+      bourbon (>= 2.1)
+      sass (>= 3.2)
     nested_form (0.3.2)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -225,6 +228,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   letter_opener
+  neat
   nested_form
   pg
   pry-rails

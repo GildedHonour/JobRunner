@@ -1,3 +1,83 @@
+.basic.company.logo {
+	@include span-columns(1.99999999 of 24);
+}
 .company.logo img {
   width: 100%; // update the thumnail width
+}
+
+.basic.company.info {
+  @include span-columns(22.11111111 of 24);
+  font-family: "Verb Light", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+}
+
+.company.name {
+  font-size: rem(58px);
+  border-bottom: 5px solid $black-01;
+  padding-left: rem(25px);
+  .btn-fam {
+    position: relative;
+    bottom: -20px;
+  }
+}
+
+.secondary.company.info {
+  margin: 1rem 0 2rem;
+  padding-left: rem(25px);
+  font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+  font-size: rem(20px);
+  span.label {
+    font-family: "Verb Extra Bold", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+    color: $black-01;
+    font-size: rem(20px);
+  }
+
+}
+
+.company.details {
+//  padding: rem(0) rem(25px) rem(15px) rem(69px);
+  @include row();
+  background-color: #fff;
+  border-top: 5px solid $gray-02;
+  padding: 0 0 0 rem(75px);
+}
+
+.board.for.company {
+  @include span-columns(12 of 24);
+}
+
+.board.for.company h3 {
+  border-top: 5px solid $green;
+  display: inline-block;
+  color: $green;
+  text-transform: uppercase;
+  font-family: "Verb Extra Bold", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+  font-size: rem(20px);
+  font-weight: bold;
+  margin-top: rem(-8px);
+  padding-top: rem(20px);
+}
+
+.board.for.company h2 {
+  margin-top: rem(10px);
+  padding-top: 0;
+  font-family: "Verb Extra Bold", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+  font-size: rem(37px);
+}
+
+.board.for.company h4 {
+  font-family: "Lora Regular", "Georgia", "Times", serif;
+  font-size: rem(26px);
+  color: #666;
+  text-transform: none;
+  margin-bottom: rem(36px);
+}
+
+.board.for.company h5, .board.for.company th {
+  font-family: "Verb Black", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+  font-size: rem(17px);
+  border-bottom: 5px solid $gray-02;
+}
+
+.board.for.company.communications table {
+  width: 50%;
 }

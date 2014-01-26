@@ -30,9 +30,9 @@
 }
 
 .on.listing.pages {
+  @include span-columns(5.84070792);
   margin-left: 0;
   margin-right: 0;
   padding-left: 0;
   padding-right: 0;
-  width: 26%;
 }

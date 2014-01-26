@@ -1,8 +1,17 @@
-.for.content {
+.neat-row {
+	@include outer-container; overflow: hidden; position: relative;
+}
+
+.index.content {
+	@include span-columns(18.1592921);
   padding-left: 0;
   padding-right: 0;
   font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
   font-size: rem(14pt);
+}
+
+.show.content {
+  @include span-columns(24);
 }
 
 .contacts.holder {

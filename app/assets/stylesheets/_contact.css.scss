@@ -1,10 +1,12 @@
 .contact.intro {
   // Panel styles
+  @include row();
   padding: 0 0 0 rem(35px);
   background-color: $background-gray;
 }
 
 .go.back {
+  @include span-columns(18 of 24);
   font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
   font-size: rem(14px);
   padding: rem(10px) rem(25px);
@@ -24,6 +26,7 @@
 }
 
 .basic.contact.info {
+  @include span-columns(24 of 24);
   font-family: "Verb Light", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
 }
 
@@ -52,13 +55,14 @@
 
 .contact.details {
 //  padding: rem(0) rem(25px) rem(15px) rem(69px);
+  @include row();
   background-color: #fff;
   border-top: 5px solid $gray-02;
   padding: 0 0 0 rem(75px);
 }
 
 .board.for.contact {
-  width: 100%;
+  @include span-columns(12 of 24);
 }
 
 .board.for.contact h3 {

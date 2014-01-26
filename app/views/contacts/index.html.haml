@@ -1,45 +1,45 @@
-.col-sm-8.for.content
-  = render "action_panel", search_url: contacts_url
-  .contacts.holder
-    %table.table.table-hover
-      %thead
-        %tr
-          %th
-            = check_box_tag "select-contact"
-          %th.sortable
-            Name <i class="fa fa-angle-down"></i>
-          %th
-            Company
-          %th
-            Title
-      %tbody#contacts-listing
-        %tr
-          %td.add.a.contact{ colspan: 4 }
-            .wrap
-              %i.fa.fa-plus
-              = link_to "Add a new contact", new_contact_url, remote: true
-        = render @contacts
-    #contacts-pagination
-      = paginate(@contacts)
-
-.col-sm-2.profile.on.listing.pages
-  = render "profile"
-  .filters.wrapper
-    %h4.filters
-      %i.fa.fa-filter 
-      Filters
-    %h3.filter.header
-      Affiliations <i class="fa fa-angle-down pull-right"></i>
-    #affiliations-filter.filter.wrapper
-      %ul.list.default
-        - @all_principals[true].each do |principal|
-          %li.checkbox
-            = check_box_tag "affiliation_filter[company_ids]", principal.id
-            = principal.name
-        %li.checkbox
-          External company <i class="fa fa-angle-down"></i>
-        %ul.list.all
-          - @all_principals[false].each do |principal|
+.neat-row
+  .index.content
+    = render "action_panel", search_url: contacts_url
+    .contacts.holder
+      %table.table.table-hover
+        %thead
+          %tr
+            %th
+              = check_box_tag "select-contact"
+            %th.sortable
+              Name <i class="fa fa-angle-down"></i>
+            %th
+              Company
+            %th
+              Title
+        %tbody#contacts-listing
+          %tr
+            %td.add.a.contact{ colspan: 4 }
+              .wrap
+                %i.fa.fa-plus
+                = link_to "Add a new contact", new_contact_url, remote: true
+          = render @contacts
+      #contacts-pagination
+        = paginate(@contacts)
+  .profile.on.listing.pages
+    = render "profile"
+    .filters.wrapper
+      %h4.filters
+        %i.fa.fa-filter 
+        Filters
+      %h3.filter.header
+        Affiliations <i class="fa fa-angle-down pull-right"></i>
+      #affiliations-filter.filter.wrapper
+        %ul.list.default
+          - @all_principals[true].each do |principal|
             %li.checkbox
               = check_box_tag "affiliation_filter[company_ids]", principal.id
               = principal.name
+          %li.checkbox
+            External company <i class="fa fa-angle-down"></i>
+          %ul.list.all
+            - @all_principals[false].each do |principal|
+              %li.checkbox
+                = check_box_tag "affiliation_filter[company_ids]", principal.id
+                = principal.name
