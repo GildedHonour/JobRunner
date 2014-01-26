@@ -1,6 +1,6 @@
 .row
   .col-md-12
-    = f.fields_for :affiliate_affiliations, @company.affiliate_affiliations.present? ? @company.affiliate_affiliations : @company.affiliate_affiliations.build do |affiliation_form|
+    = f.fields_for :affiliate_affiliations, @company.affiliate_affiliations.present? ? @company.affiliate_affiliations.ordered_by_affiliate_name : @company.affiliate_affiliations.build do |affiliation_form|
       .form-group
         %label.col-md-2.control-label
           Company

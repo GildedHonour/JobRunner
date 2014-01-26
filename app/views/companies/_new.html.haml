@@ -28,8 +28,16 @@
           .row
             .col-md-10.col-md-offset-1
               .row
-                .col-md-10
-                  = f.text_field :name, placeholder: "Company Name", class: "form-control"
+                .form-group
+                  .col-md-10
+                    = f.text_field :name, placeholder: "Company Name", class: "form-control"
+                .form-group
+                  %label.col-md-2.control-label{ for: "company_logo" } Logo
+                  .col-md-5
+                    = f.file_field :company_logo, class: "form-control"
+                .form-group
+                  .col-md-5.col-md-2-offset
+                    = image_tag @company.company_logo.url
 
               .row.top-buffer-30
                 %h2

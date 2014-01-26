@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.remotipart
 //= require jquery.typewatch
 //= require jquery_nested_form
 //= require bootstrap/tooltip

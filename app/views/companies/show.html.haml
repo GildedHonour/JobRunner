@@ -37,6 +37,8 @@
         .col-sm-12
           .board.for.company
             %h3 Relationships
+            = link_to company_edit_affiliations_url(@company), class: "btn-fam no-border", remote: true do
+              %i.fa.fa-pencil
             %table.table.table-hover
               %tr
                 %th Affiliations

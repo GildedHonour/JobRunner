@@ -7,7 +7,9 @@ class Affiliation < ActiveRecord::Base
   enumerize :role, in: %i(prospect client supplier list_broker list_manager list_owner), default: :client
   enumerize :status, in: %i(active inactive), default: :active
 
-  validates :affiliate_id, uniqueness: { scope: [:role, :principal_id] }, presence: true
+  validates :affiliate_id, uniqueness: { scope: [:role, :principal_id], message: "The relationship already exists" }, presence: true
   validates :principal_id, presence: true
   validates :role, presence: true
+
+  scope :ordered_by_affiliate_name, -> { includes(:affiliate).order("companies.name") }
 end
