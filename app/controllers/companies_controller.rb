@@ -73,7 +73,7 @@ class CompaniesController < ApplicationController
 
   private
   def company_params
-    params.require(:company).permit(:name, :website, :phone,
+    params.require(:company).permit(:name, :website, :phone, :company_logo,
                                     affiliate_affiliations_attributes: [:id, :affiliate_id, :role, :_destroy],
                                     addresses_attributes: [:id, :address_line_1, :address_line_2, :city, :state, :zip, :_destroy],
                                     phone_numbers_attributes: [:id, :kind, :value, :_destroy]
