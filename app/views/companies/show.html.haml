@@ -1,16 +1,17 @@
 .neat-row
   .show.content
-    .contact.intro
+    .go.and.profile
       .go.back
         = link_to companies_url do
           %span.glyphicon.glyphicon-chevron-left
           Back to companies list
       .profile
         = render "profile"
-      .basic.company.logo
+    .company.intro
+      .company.logo
         = image_tag @company.company_logo.url, alt: @company.name
-      .basic.company.info
-        .contact.name
+      .company.info.pull-right
+        .company.name
           = @company.name
           = link_to edit_company_url(@company), class: "btn-fam no-border pull-right", remote: true do
             %i.fa.fa-pencil.pull-right

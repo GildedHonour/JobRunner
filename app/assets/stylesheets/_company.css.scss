@@ -1,13 +1,19 @@
-.basic.company.logo {
-	@include span-columns(1.99999999 of 24);
+.company.intro, .go.and.profile {
+  @include row();
+}
+
+.company.logo {
+	@include span-columns(1.9);
+  @include offset(1);
 }
 .company.logo img {
   width: 100%; // update the thumnail width
 }
 
-.basic.company.info {
-  @include span-columns(22.11111111 of 24);
+.company.info {
+  @include span-columns(21);
   font-family: "Verb Light", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+
 }
 
 .company.name {
@@ -42,7 +48,7 @@
 }
 
 .board.for.company {
-  @include span-columns(12 of 24);
+  @include span-columns(24);
 }
 
 .board.for.company h3 {
