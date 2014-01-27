@@ -12,7 +12,6 @@ $_gutter: 12px;
 
 // Instead of forcing a gutter on every colum, it's offered when needed
 @mixin set_gutter {
-	margin-left: $_gutter;
 	margin-right: $_gutter;
 }
 

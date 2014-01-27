@@ -1,21 +1,14 @@
-.row
-  .col-md-2.control-label
-    %label{ for: "address" } Address
-  .col-md-10
-    = f.fields_for :addresses, @contact.addresses.present? ? @contact.addresses : @contact.addresses.build do |address_form|
-      .form-group
-        .col-md-6
-          = address_form.text_field :address_line_1, placeholder: "Address Line 1", class: "form-control"
-        .col-md-6
-          = address_form.text_field :address_line_2, placeholder: "Address Line 2", class: "form-control"
-      .form-group
-        .col-md-6
-          = address_form.text_field :city, placeholder: "City", class: "form-control"
-        .col-md-3
-          = address_form.text_field :state, placeholder: "State", class: "form-control"
-        .col-md-3
-          = address_form.text_field :zip, placeholder: "Zip", class: "form-control"
-        .form-group
-          = address_form.link_to_remove "Remove", class: "btn btn-danger btn-xs pull-right"
-
-    = f.link_to_add  "Add another address", :addresses, class: "btn btn-default"
+= f.fields_for :addresses, @contact.addresses.present? ? @contact.addresses : @contact.addresses.build do |address_form|
+  %label{ for: "address" } Address
+  .form-group
+    = address_form.text_field :address_line_1, placeholder: "Address Line 1", class: "form-control"
+    = address_form.text_field :address_line_2, placeholder: "Address Line 2", class: "form-control"
+    = address_form.text_field :city, placeholder: "City", class: "form-control"
+    = address_form.text_field :state, placeholder: "State", class: "form-control"
+    = address_form.text_field :zip, placeholder: "Zip", class: "form-control"
+  .form-group
+    = address_form.link_to_remove "Remove", class: "btn btn-danger btn-xs pull-right"
+  .clearfix
+= f.link_to_add :addresses, class: "btn-fam square" do
+  %i.fa.fa-plus
+  %span Add a new address

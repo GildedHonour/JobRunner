@@ -1,9 +1,115 @@
 .modal-header {
 	border: none; // remove bootstrap defaults
+	text-align: center;
 }
 .modal-body {
 	position: relative;
 	padding: 0px;
+}
+
+.modal-row {
+	@include row();
+	.prefix {
+		@include span-columns(2.4);
+		@include offset(1.5);
+		@include set_gutter;
+	}
+	.first-name, .last-name {
+		@include span-columns(8);
+		@include set_gutter;
+	}
+
+	border-bottom: 1px solid #eeeeee;
+	padding: 20px 0;
+
+	h2 {
+		@include offset(1.5);
+		margin-top: 0;
+	}
+
+	.border-box {
+		@include offset(1.5);
+		@include span-columns(19.4);
+		border: 1px solid #eeeeee;
+		padding: 20px;
+		.form-group {
+			@include span-columns(23);
+			margin-bottom: 10px;
+		}
+		label {
+			@include span-columns(4);
+			@include offset(.5);
+			@include set_gutter;
+		}
+		input.form-control, select.form-control {
+			@include span-columns(18);
+		}
+	}
+
+	.form-group {
+		@include span-columns(20);
+		margin-left: 0;
+		margin-right: 0;
+		margin-bottom: 0;
+	}
+
+	.address {
+		@include offset(1.5);
+		@include row();
+		margin-bottom: 40px;
+
+		label {
+			@include span-columns(4);
+		}
+		input {
+			@include span-columns(20);
+			@include set_gutter;
+			margin-bottom: 10px;
+		}
+	}
+
+	.email, .phone {
+		@include offset(1.5);
+		@include row();
+		margin-bottom: 40px;
+		
+		label {
+			@include span-columns(4);
+		}
+	}
+
+	.email {
+		input.form-control {
+			@include span-columns(14);
+			@include set_gutter;
+		}
+	}
+
+	.phone {
+		input {
+			@include span-columns(14);
+			@include set_gutter;
+		}
+		select {
+			@include span-columns(4);
+			@include set_gutter;
+		}
+	}
+
+	.comms {
+		@include offset(1.5);
+		@include row();
+		label {
+			@include span-columns(4);
+		}
+		.form-group, .checkbox {
+			@include span-columns(20);
+		}
+	}
+
+	.clearfix {
+		margin-bottom: 20px;
+	}
 }
 
 .modal-content {

@@ -1,14 +1,10 @@
-.row.top-buffer-30
-  .col-md-2.control-label
-    %label{ for: "phone_numbers" } Phone
-  .col-md-10
-    = f.fields_for :phone_numbers, @company.phone_numbers.present? ? @company.phone_numbers : @company.phone_numbers.build do |phone_number_form|
-      .form-group
-        .col-md-4
-          = phone_number_form.select :kind, PhoneNumber.kind.options, { include_blank: false }, { class: "form-control" }
-        .col-md-5
-          = phone_number_form.text_field :value, placeholder: "Phone Number", class: "form-control"
-        .col-md-3
-          = phone_number_form.link_to_remove "Remove", class: "btn btn-danger btn-xs pull-right"
+%label{ for: "phone_numbers" } Phone
+= f.fields_for :phone_numbers, @company.phone_numbers.present? ? @company.phone_numbers : @company.phone_numbers.build do |phone_number_form|
+  .form-group
+    = phone_number_form.select :kind, PhoneNumber.kind.options, { include_blank: false }, { class: "form-control" }
+    = phone_number_form.text_field :value, placeholder: "Phone Number", class: "form-control"
+    = phone_number_form.link_to_remove "Remove", class: "btn btn-danger btn-xs pull-right"
 
-    = f.link_to_add  "Add another phone", :phone_numbers, class: "btn btn-default"
+= f.link_to_add :phone_numbers, class: "btn-fam square" do
+  %i.fa.fa-plus
+  %span Add another phone
