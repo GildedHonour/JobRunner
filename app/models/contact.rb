@@ -38,8 +38,10 @@ class Contact < ActiveRecord::Base
       Contact.includes(:company).where("first_name ILIKE ? OR last_name ILIKE ? OR companies.name ILIKE ?", term_like, term_like, term_like)
     end
 
-    def find_affiliated_to_company(company_ids)
-      Contact.includes(company: :principal_affiliations).where('affiliations.principal_id IN (?)', company_ids).references(:affiliate_affiliations)
+    def find_contacts_of_company_and_its_affiliates(company_ids)
+      Contact.includes(company: :principal_affiliations).
+          references(:affiliate_affiliations).
+          where('affiliations.principal_id IN (?) OR company_id IN (?)', company_ids, company_ids)
     end
   end
 end

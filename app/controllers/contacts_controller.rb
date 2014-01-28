@@ -40,7 +40,7 @@ class ContactsController < ApplicationController
     else
       @contacts = Contact.order(:first_name)
     end
-    @contacts = Contact.find_affiliated_to_company(params[:selected_companies].split(',')).order(:first_name) if params[:selected_companies].present?
+    @contacts = Contact.find_contacts_of_company_and_its_affiliates(params[:selected_companies].split(',')).order(:first_name) if params[:selected_companies].present?
 
     @contacts = @contacts.page(params[:page]).per(PAGE_SIZE)
 
