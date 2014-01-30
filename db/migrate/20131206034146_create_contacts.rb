@@ -3,6 +3,7 @@ class CreateContacts < ActiveRecord::Migration
     create_table :contacts do |t|
       t.references :company, index: true
       t.string :first_name
+      t.string :middle_name
       t.string :last_name
       t.date :birthday
       t.string :prefix

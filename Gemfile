@@ -43,6 +43,7 @@ gem "ffaker"
 gem "database_cleaner"
 
 group :development do
+  gem 'awesome_print'
   gem 'letter_opener'
   gem 'quiet_assets'
   gem 'pry-rails'

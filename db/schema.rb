@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20140120125051) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
+    t.string   "country"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(version: 20140120125051) do
   create_table "contacts", force: true do |t|
     t.integer  "company_id"
     t.string   "first_name"
+    t.string   "middle_name"
     t.string   "last_name"
     t.date     "birthday"
     t.string   "prefix"

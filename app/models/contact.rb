@@ -12,7 +12,7 @@ class Contact < ActiveRecord::Base
   has_many :phone_numbers, -> { order "created_at ASC" }, as: :phonable, dependent: :destroy
 
   enumerize :status, in: %i(active inactive), default: :active
-  enumerize :prefix, in: %i(Mr. Mrs. Ms. Miss.)
+  enumerize :prefix, in: %i(Mr. Mrs. Ms. Miss. Prof.)
 
   accepts_nested_attributes_for :notes
   accepts_nested_attributes_for :addresses, reject_if: lambda { |address| address[:address_line_1].blank? }, allow_destroy: true
