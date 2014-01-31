@@ -50,19 +50,19 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    @company = Company.find(params[:id])
+    @company = Company.includes(:affiliates).find(params[:id])
     respond_with @company
   end
 
   def edit_affiliations
-    @company = Company.find(params[:company_id])
+    @company = Company.includes(:affiliates).find(params[:company_id])
     respond_to do |format|
       format.js { render("edit_affiliations") }
     end
   end
 
   def update_affiliations
-    @company = Company.find(params[:company_id])
+    @company = Company.includes(:affiliates).find(params[:company_id])
     @company.update_attributes(company_params)
     @success_message = "Relationships updated." if @company.save
 
@@ -75,7 +75,7 @@ class CompaniesController < ApplicationController
   def company_params
     params.require(:company).permit(:name, :website, :phone, :company_logo,
                                     affiliate_affiliations_attributes: [:id, :affiliate_id, :role, :_destroy],
-                                    addresses_attributes: [:id, :address_line_1, :address_line_2, :city, :state, :zip, :_destroy],
+                                    addresses_attributes: [:id, :address_line_1, :address_line_2, :city, :state, :zip, :country, :_destroy],
                                     phone_numbers_attributes: [:id, :kind, :value, :_destroy]
     )
   end

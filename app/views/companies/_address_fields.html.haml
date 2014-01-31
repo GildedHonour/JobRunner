@@ -9,12 +9,14 @@
         .col-md-6
           = address_form.text_field :address_line_2, placeholder: "Address Line 2", class: "form-control"
       .form-group
-        .col-md-6
+        .col-md-3
           = address_form.text_field :city, placeholder: "City", class: "form-control"
         .col-md-3
           = address_form.text_field :state, placeholder: "State", class: "form-control"
         .col-md-3
           = address_form.text_field :zip, placeholder: "Zip", class: "form-control"
+        .col-md-3
+          = address_form.select :country, Address.country.options, {}, class: "form-control"
         .form-group
           = address_form.link_to_remove "Remove", class: "btn btn-danger btn-xs pull-right"
 

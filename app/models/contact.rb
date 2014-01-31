@@ -28,7 +28,7 @@ class Contact < ActiveRecord::Base
   end
 
   def full_name
-    "#{self.first_name} #{self.last_name}"
+    [self.prefix, self.first_name, self.middle_name, self.last_name].compact.join(" ")
   end
 
   class << self

@@ -61,7 +61,7 @@
 		label {
 			@include span-columns(4);
 		}
-		input {
+		input, select {
 			@include span-columns(20);
 			@include set_gutter;
 			margin-bottom: 10px;

@@ -34,14 +34,14 @@
         Affiliations <i class="fa fa-angle-down pull-right"></i>
       #affiliations-filter.filter.wrapper
         %ul.list.default
-          - @all_principals[true].each do |principal|
+          - (@all_principals[true] || []).each do |principal|
             %li.checkbox
               = check_box_tag "affiliation_filter[company_ids]", principal.id
               = principal.name
           %li.checkbox
             External company <i class="fa fa-angle-down"></i>
           %ul.list.all
-            - @all_principals[false].each do |principal|
+            - (@all_principals[false] ||[]).each do |principal|
               %li.checkbox
                 = check_box_tag "affiliation_filter[company_ids]", principal.id
                 = principal.name

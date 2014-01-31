@@ -10,9 +10,7 @@
       .basic.contact.info
         .contact.name
           %span
-            = @contact.first_name
-          %span
-            = @contact.last_name  
+            = @contact.full_name
           = link_to edit_contact_url(@contact), class: "btn-fam no-border pull-right", remote: true do
             %i.fa.fa-pencil.pull-right
         .secondary.contact.info

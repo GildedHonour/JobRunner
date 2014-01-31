@@ -43,7 +43,7 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
   other_phone =       row[16]
   other_fax =         row[17]
 
-  email_address =     row[18]
+  email =     row[18]
   website =          row[19]
 
   teg_contact =       row[20]
@@ -75,7 +75,7 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
   pmg_source =        row[42]
   msl_source =        row[43]
 
-  puts "Row: #{row_number+=1} - #{pmg_role}"
+  puts "Row: #{row_number+=1}"
 
   (ap "No company on row #{row_number}" && next) if company.blank?
 
@@ -83,20 +83,13 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
     name: company,
     website: website,
     addresses_attributes:     [{ address_line_1: address_line_1, city: city, country: company_value(country), state: state, zip: zip }],
-    phone_numbers_attributes: [
-      { value: business_phone, kind: :business    },
-      { value: mobile_phone,   kind: :mobile      },
-      { value: fax_phone,      kind: :fax         },
-      { value: home_phone,     kind: :home        },
-      { value: other_phone,    kind: :other_phone },
-      { value: other_fax,      kind: :other_fax   }
-    ]
   )
 
   if(first_name.blank?)
     ap "No contact on row #{row_number-1}"
   else
     company.contacts.create!(
+      emails_attributes: [{ value: email }],
       prefix: prefix,
       birthday: (Date.parse("#{birth_day} #{birth_month}") if(birth_day.present? && birth_month.present?)),
       first_name: first_name,
@@ -106,6 +99,14 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
       mmi_ballgame: mmi_ballgame,
       do_not_email: do_not_email.downcase == "true",
       do_not_mail: do_not_mail.downcase == "true",
+      phone_numbers_attributes: [
+          { value: business_phone, kind: :business    },
+          { value: mobile_phone,   kind: :mobile      },
+          { value: fax_phone,      kind: :fax         },
+          { value: home_phone,     kind: :home        },
+          { value: other_phone,    kind: :other_phone },
+          { value: other_fax,      kind: :other_fax   }
+      ]
     )
   end
 
