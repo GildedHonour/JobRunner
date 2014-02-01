@@ -43,7 +43,7 @@
             - @contact.company.affiliate_affiliations.each do |affiliate_affiliation|
               %tr
                 %td
-                  = affiliation.affiliate.name
+                  = affiliate_affiliation.affiliate.name
                 %td 
                   Role:
                   = affiliate_affiliation.role.text
