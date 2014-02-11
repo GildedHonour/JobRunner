@@ -56,15 +56,25 @@
           %h3 User Account
           %table
             %tr
-              %td.tlabel.for.attribute Email
+              %td.tlabel.for.attribute
+                %strong Emails:
               %td
                 = @contact.emails.join(",")
-            %tr
-              %td
-              %td
-            %tr
-              %td
-              %td
+            - if @contact.user.present?
+              %tr
+                %td.tlabel.for.attribute
+                  %strong
+                    User Account:
+                %td
+                  = @contact.user.email
+                  - unless @contact.user.invitation_accepted?
+                    (Pending confirmation)
+            - else
+              %tr
+                %td
+                  = link_to "Add a user account", new_contact_user_url(@contact), remote: true, class: "btn btn-primary"
+                %td
+
     .contact.details
       .second.contact
         .board.for.contact.communications

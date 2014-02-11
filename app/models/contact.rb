@@ -5,6 +5,8 @@ class Contact < ActiveRecord::Base
   validates :last_name, presence: true
 
   belongs_to :company
+  belongs_to :user
+
   has_many :addresses, -> { order "created_at ASC" }, dependent: :destroy, as: :addressable
   has_many :notes, -> { order "created_at ASC" }, dependent: :destroy
 

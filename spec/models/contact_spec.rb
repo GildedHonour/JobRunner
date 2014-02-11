@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Contact do
   describe "associations" do
     it { should belong_to(:company) }
+    it { should belong_to(:user) }
     it { should have_many(:addresses) }
     it { should serialize(:emails).as(Email) }
     it { should serialize(:phone_numbers).as(PhoneNumber) }

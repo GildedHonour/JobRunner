@@ -6,6 +6,7 @@ gem "rails", "4.0.2"
 
 # Authentication
 gem "devise"
+gem "devise_invitable"
 
 # Model related
 gem "enumerize"
