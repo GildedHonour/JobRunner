@@ -12,6 +12,9 @@
           - if notice || alert
             %p.alert.alert-warning
               = notice || alert
+          - if @user.errors.present?
+            %p.alert.alert-warning
+              = @user.errors.full_messages.to_sentence
       .row
         .col-sm-4.col-md-offset-4
           = yield
