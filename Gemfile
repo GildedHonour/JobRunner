@@ -42,9 +42,9 @@ gem "rmagick"
 # Seed data
 gem "ffaker"
 gem "database_cleaner"
+gem 'awesome_print'
 
 group :development do
-  gem 'awesome_print'
   gem 'letter_opener'
   gem 'quiet_assets'
   gem 'pry-rails'
