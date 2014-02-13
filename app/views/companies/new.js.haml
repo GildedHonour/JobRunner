@@ -2,3 +2,6 @@
   $('#page-modal').html("#{j "#{render('new')}"}").modal();
 - else
   $('#page-modal').html("#{j render('new')}").modal();
+
+- if @success_message
+  $('#page-modal').data('base-page-changed', true);

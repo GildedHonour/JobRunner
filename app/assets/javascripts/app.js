@@ -10,4 +10,10 @@ jQuery(function($) {
     $('.family.menu').mouseleave(function () {
         $('.expanded.wrapper').fadeOut();
     });
+
+    $('#page-modal').on('hide.bs.modal', function (e) {
+        if($('#page-modal').data('base-page-changed')) {
+            window.location.reload();
+        }
+    });
 });

@@ -26,8 +26,7 @@ class CompaniesController < ApplicationController
 
   def update
     @company = Company.find(params[:id])
-    @company.update_attributes(company_params)
-    @success_message = "Company updated." if @company.save
+    @success_message = "Company updated." if @company.update_attributes(company_params)
 
     respond_to do |format|
       format.js { render("new") }
