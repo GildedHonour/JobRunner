@@ -1,6 +1,6 @@
 Jobrunner::Application.routes.draw do
   devise_for :users
-  root to: "contacts#index"
+  root to: redirect("/contacts")
 
   resources :contacts do
     resources :users

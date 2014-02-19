@@ -39,7 +39,7 @@ class CompaniesController < ApplicationController
     else
       @companies = Company.order(:name)
     end
-    @companies = Company.find_affiliated_to_company(params[:selected_companies].split(',')).order(:name) if params[:selected_companies].present?
+    @companies = Company.find_affiliated_to_company(params[:c]).order(:name) if params[:c].present?
 
     @companies = @companies.page(params[:page]).per(PAGE_SIZE)
 

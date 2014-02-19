@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  respond_to :html, :js
+  respond_to :html, :j
 
   PAGE_SIZE = 100
 
@@ -39,7 +39,7 @@ class ContactsController < ApplicationController
     else
       @contacts = Contact.order(:first_name)
     end
-    @contacts = Contact.find_contacts_of_company_and_its_affiliates(params[:selected_companies].split(',')).order(:first_name) if params[:selected_companies].present?
+    @contacts = Contact.find_contacts_of_company_and_its_affiliates(params[:c]).order(:first_name) if params[:c].present?
 
     @contacts = @contacts.page(params[:page]).per(PAGE_SIZE)
 

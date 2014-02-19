@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require turbolinks
 //= require jquery.remotipart
 //= require jquery.typewatch
 //= require jquery_nested_form
@@ -19,7 +20,13 @@
 //= require bootstrap/popover
 //= require bootstrap/modal
 //= require bootstrap/alert
-//= require bootstrap-editable
+//= require purl
 //= require app
 //= require contacts
-//= require companies
+
+$(function(){
+    $(document).on('page:change', function() {
+        console.log('page changed');
+    })
+    console.log('page loaded')
+})

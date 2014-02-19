@@ -1,2 +1,2 @@
 %li{class: "#{'active' if page.current?}"}
-  = link_to page, page.current? ? '#' : url, data: { remote: true }, rel: page.next? ? 'next' : page.prev? ? 'prev' : nil
+  = link_to page, page.current? ? '#' : url, rel: page.next? ? 'next' : page.prev? ? 'prev' : nil

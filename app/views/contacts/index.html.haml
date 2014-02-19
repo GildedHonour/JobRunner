@@ -36,12 +36,12 @@
         %ul.list.default
           - (@all_principals[true] || []).each do |principal|
             %li.checkbox
-              = check_box_tag "affiliation_filter[company_ids]", principal.id
+              = check_box_tag "affiliation_filter[company_ids]", principal.id, (params[:c] || []).include?(principal.id.to_s)
               = principal.name
           %li.checkbox
             External company <i class="fa fa-angle-down"></i>
           %ul.list.all
             - (@all_principals[false] || []).each do |principal|
               %li.checkbox
-                = check_box_tag "affiliation_filter[company_ids]", principal.id
+                = check_box_tag "affiliation_filter[company_ids]", principal.id, (params[:c] || []).include?(principal.id.to_s)
                 = principal.name

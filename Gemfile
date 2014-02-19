@@ -28,7 +28,7 @@ gem "coffee-rails", "~> 4.0.0"
 gem "jquery-rails"
 gem "remotipart"
 
-#gem "turbolinks"
+gem "turbolinks"
 
 # Server
 gem "pg"
