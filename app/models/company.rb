@@ -28,8 +28,8 @@ class Company < ActiveRecord::Base
       Company.where("name ILIKE ?", term_like)
     end
 
-    def find_affiliated_to_company(company_ids)
-      Company.includes(:principal_affiliations).where('affiliations.principal_id IN (?)', company_ids).references(:affiliate_affiliations)
+    def affiliated_to_company(company_ids)
+      includes(:principal_affiliations).where('affiliations.principal_id IN (?)', company_ids).references(:affiliate_affiliations)
     end
 
     def all_principals

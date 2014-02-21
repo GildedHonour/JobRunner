@@ -10,10 +10,10 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
-    @success_message = "Company saved." if @company.save
+    success = @company.save
 
     respond_to do |format|
-      format.js { render("new") }
+      format.js { success ? render("success") : render("new") }
     end
   end
 
@@ -26,10 +26,10 @@ class CompaniesController < ApplicationController
 
   def update
     @company = Company.find(params[:id])
-    @success_message = "Company updated." if @company.update_attributes(company_params)
+    success = @company.update_attributes(company_params)
 
     respond_to do |format|
-      format.js { render("new") }
+      format.js { success ? render("success") : render("new") }
     end
   end
 
@@ -39,7 +39,7 @@ class CompaniesController < ApplicationController
     else
       @companies = Company.order(:name)
     end
-    @companies = Company.find_affiliated_to_company(params[:c]).order(:name) if params[:c].present?
+    @companies = @companies.affiliated_to_company(params[:c]).order(:name) if params[:c].present?
 
     @companies = @companies.page(params[:page]).per(PAGE_SIZE)
 

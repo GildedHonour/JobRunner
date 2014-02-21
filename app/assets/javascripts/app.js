@@ -1,5 +1,13 @@
 window.App = {};
 
+window.App = {
+    addParamToCurrentUrl: function(newParam) {
+        var searchParams = $.extend($.url().param(), newParam);
+        var url = $.url().attr('path') + "?" + $.param(searchParams);
+        return url.replace(/\?$/, "");
+    }
+};
+
 // Site wide menu toggle
 jQuery(function($) {
     'use strict';
@@ -9,11 +17,5 @@ jQuery(function($) {
     });
     $('.family.menu').mouseleave(function () {
         $('.expanded.wrapper').fadeOut();
-    });
-
-    $('#page-modal').on('hide.bs.modal', function (e) {
-        if($('#page-modal').data('base-page-changed')) {
-            window.location.reload();
-        }
     });
 });

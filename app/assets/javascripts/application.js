@@ -24,3 +24,4 @@
 //= require purl
 //= require app
 //= require contacts
+//= require companies

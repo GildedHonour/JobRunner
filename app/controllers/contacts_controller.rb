@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  respond_to :html, :j
+  respond_to :html, :js
 
   PAGE_SIZE = 100
 
@@ -10,10 +10,10 @@ class ContactsController < ApplicationController
 
   def create
     @contact = Contact.new(contact_params)
-    @success_message = "Contact saved." if @contact.save
+    success = @contact.save
 
     respond_to do |format|
-      format.js { render("new") }
+      format.js { success ? render("success") : render("new") }
     end
   end
 
@@ -26,10 +26,10 @@ class ContactsController < ApplicationController
 
   def update
     @contact = Contact.find(params[:id])
-    @success_message = "Contact updated." if @contact.update_attributes(contact_params)
+    success = @contact.update_attributes(contact_params)
 
     respond_to do |format|
-      format.js { render("new") }
+      format.js { success ? render("success") : render("new") }
     end
   end
 
@@ -39,7 +39,7 @@ class ContactsController < ApplicationController
     else
       @contacts = Contact.order(:first_name)
     end
-    @contacts = Contact.find_contacts_of_company_and_its_affiliates(params[:c]).order(:first_name) if params[:c].present?
+    @contacts = @contacts.contacts_of_company_and_its_affiliates(params[:c]).order(:first_name) if params[:c].present?
 
     @contacts = @contacts.page(params[:page]).per(PAGE_SIZE)
 

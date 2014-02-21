@@ -218,8 +218,8 @@ small, .caption {
 }
 
 #loading-indicator {
-  position: absolute;
-  top:0;
+  position: fixed;
+  top: 3px;
   left: 40%;
   background: #f7ff6e;
   color: black;
