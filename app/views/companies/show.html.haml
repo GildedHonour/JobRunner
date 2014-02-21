@@ -13,6 +13,8 @@
       .company.info.pull-right
         .company.name
           = @company.name
+          = link_to company_url(@company), class: "btn-fam no-border pull-right", data: { confirm: "Are you sure you want to delete the company '#{@company.name}'?", method: 'delete' } do
+            %i.fa.fa-trash-o.pull-right
           = link_to edit_company_url(@company), class: "btn-fam no-border pull-right", remote: true do
             %i.fa.fa-pencil.pull-right
         .secondary.company.info
@@ -40,6 +42,7 @@
             %h3 Relationships
             = link_to company_edit_affiliations_url(@company), class: "btn-fam no-border", remote: true do
               %i.fa.fa-pencil
+
             %table.table.table-hover
               %tr
                 %th Affiliations

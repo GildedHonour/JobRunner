@@ -53,6 +53,12 @@ class CompaniesController < ApplicationController
     respond_with @company
   end
 
+  def destroy
+    @company = Company.find(params[:id])
+    @company.destroy
+    redirect_to companies_url
+  end
+
   def edit_affiliations
     @company = Company.includes(:affiliates).find(params[:company_id])
     respond_to do |format|

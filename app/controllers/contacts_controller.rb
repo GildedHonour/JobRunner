@@ -53,6 +53,12 @@ class ContactsController < ApplicationController
     respond_with @contact
   end
 
+  def destroy
+    @contact = Contact.find(params[:id])
+    @contact.destroy
+    redirect_to contacts_url
+  end
+
   private
   def contact_params
     params.require(:contact).permit(:first_name, :last_name, :prefix, :job_title, :company_id, :birthday,

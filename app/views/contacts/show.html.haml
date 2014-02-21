@@ -11,8 +11,11 @@
         .contact.name
           %span
             = @contact.full_name
+          = link_to contact_url(@contact), class: "btn-fam no-border pull-right", data: { confirm: "Are you sure you want to delete the contact '#{@contact.full_name}'?", method: 'delete' } do
+            %i.fa.fa-trash-o.pull-right
           = link_to edit_contact_url(@contact), class: "btn-fam no-border pull-right", remote: true do
             %i.fa.fa-pencil.pull-right
+
         .secondary.contact.info
           %span.label
             Email
