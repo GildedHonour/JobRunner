@@ -50,7 +50,7 @@
               - @company.affiliates.each do |affiliate|
                 %tr
                   %td
-                    = affiliate.name 
+                    = link_to affiliate.name, affiliate
                   %td 
                     - @company.affiliate_affiliations.each do |affiliation|
                       = affiliation.role.text
@@ -83,7 +83,7 @@
               - @company.contacts.each do |contact|
                 %tr
                   %td 
-                    = link_to contact.full_name, contact_url(contact)
+                    = link_to contact.full_name, contact
                   %td 
                     = contact.job_title
                   %td 

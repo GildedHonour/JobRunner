@@ -35,7 +35,7 @@
         .board.for.contact
           %h3 Relationships
           %h2 
-            = @contact.company.name
+            = link_to @contact.company.name, @contact.company
           %h4
             = @contact.job_title
           %h5 Affiliations
@@ -43,7 +43,7 @@
             - @contact.company.affiliate_affiliations.each do |affiliate_affiliation|
               %tr
                 %td
-                  = affiliate_affiliation.affiliate.name
+                  = link_to affiliate_affiliation.affiliate.name, affiliate_affiliation.affiliate
                 %td 
                   Role:
                   = affiliate_affiliation.role.text
