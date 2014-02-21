@@ -40,7 +40,7 @@
             = @contact.job_title
           %h5 Affiliations
           %table.table.table-hover
-            - @contact.company.affiliate_affiliations.each do |affiliate_affiliation|
+            - @contact.company.affiliate_affiliations.ordered_by_affiliate_name.each do |affiliate_affiliation|
               %tr
                 %td
                   = link_to affiliate_affiliation.affiliate.name, affiliate_affiliation.affiliate

@@ -9,7 +9,7 @@ class Company < ActiveRecord::Base
   has_many :principal_affiliations, foreign_key: 'affiliate_id', dependent: :destroy, class_name: 'Affiliation'
   has_many :principals, through: :principal_affiliations, source: :principal, class_name: 'Company'
 
-  has_many :contacts, -> { order "created_at" },  dependent: :destroy
+  has_many :contacts, -> { order "first_name" },  dependent: :destroy
   has_many :phone_numbers, -> { order "created_at ASC" }, as: :phonable, dependent: :destroy
 
   accepts_nested_attributes_for :addresses, reject_if: lambda { |address| address[:address_line_1].blank? }, allow_destroy: true
@@ -20,6 +20,8 @@ class Company < ActiveRecord::Base
 
   # Validations
   validates :name, presence: true, uniqueness: true
+
+  scope :ordered_by_affiliate_name, -> { includes(affiliate_affiliations: :affiliate).order("companies.name") }
 
   class << self
     def search(term)

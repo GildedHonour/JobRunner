@@ -47,7 +47,7 @@
                 %th Status
                 %th Added
                 %th Last Modified
-              - @company.affiliates.each do |affiliate|
+              - @company.affiliates.ordered_by_affiliate_name.each do |affiliate|
                 %tr
                   %td
                     = link_to affiliate.name, affiliate
