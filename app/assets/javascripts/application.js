@@ -20,13 +20,7 @@
 //= require bootstrap/popover
 //= require bootstrap/modal
 //= require bootstrap/alert
+//= require progress_indicator
 //= require purl
 //= require app
 //= require contacts
-
-$(function(){
-    $(document).on('page:change', function() {
-        console.log('page changed');
-    })
-    console.log('page loaded')
-})

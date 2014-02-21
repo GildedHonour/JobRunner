@@ -8,6 +8,8 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   %body{ class: "#{controller.controller_name} #{controller.action_name}" }
+    #loading-indicator{style: 'display:none;'}
+      Loading..
     #main
       = render "left_nav"
       = yield
