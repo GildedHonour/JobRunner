@@ -35,7 +35,7 @@ class ContactsController < ApplicationController
 
   def index
     if params[:search].present?
-      @contacts = Contact.search(params[:search])
+      @contacts = Contact.search(params[:search]).order(:first_name)
     else
       @contacts = Contact.order(:first_name)
     end

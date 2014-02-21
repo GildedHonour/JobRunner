@@ -35,7 +35,7 @@ class CompaniesController < ApplicationController
 
   def index
     if params[:search].present?
-      @companies = Company.search(params[:search])
+      @companies = Company.search(params[:search]).order(:name)
     else
       @companies = Company.order(:name)
     end
