@@ -8,9 +8,14 @@
             %th
               = check_box_tag "select-contact"
             %th.sortable
-              Name
-              = link_to "" do
-                %i.fa.fa-angle-down
+              - if(params[:first_name_sort] == "down")
+                = link_to contacts_url(params.merge(first_name_sort: "up")) do
+                  Name
+                  %i.fa.fa-angle-down
+              - else
+                = link_to contacts_url(params.merge(first_name_sort: "down")) do
+                  Name
+                  %i.fa.fa-angle-up
             %th
               Company
             %th
