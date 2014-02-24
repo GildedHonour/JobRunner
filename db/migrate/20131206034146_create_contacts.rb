@@ -10,12 +10,10 @@ class CreateContacts < ActiveRecord::Migration
       t.string :prefix
       t.string :job_title
 
-      t.boolean :holiday_card
       t.boolean :do_not_email
       t.boolean :do_not_mail
       t.string :gift
       t.boolean :mmi_ballgame
-      t.boolean :wall_calendar
 
       t.string :status
 
