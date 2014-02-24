@@ -23,5 +23,4 @@
 //= require progress_indicator
 //= require purl
 //= require app
-//= require contacts
-//= require companies
+//= require index_search_filter_view
