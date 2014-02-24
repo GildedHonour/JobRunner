@@ -18,22 +18,26 @@
           = link_to edit_company_url(@company), class: "btn-fam no-border pull-right", remote: true do
             %i.fa.fa-pencil.pull-right
         .secondary.company.info
-          %span.label
-            Address
-          - @company.addresses.each do |address|
-            %span.address
-              = address.address_line_1
-              = address.address_line_2
-              = address.city
-              = address.state
-              = address.zip
-          %span.label
-            Web
-          = @company.website
+          .pull-left
+            .pull-left
+              %span.label
+                Address
+            .pull-left
+              - @company.addresses.each do |address|
+                .address
+                  = address.address_line_1
+                  = address.address_line_2
+                  = address.city
+                  = address.state
+                  = address.zip
 
-          %span.label
-            Phone
-          = @company.phone_numbers.join(",")
+          .pull-left
+            %span.label Web
+            %span
+              = @company.website
+            %span.label Phone
+            %span
+              = @company.phone_numbers.join(",")
 
     .company.details
       .first.company.row

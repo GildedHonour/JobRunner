@@ -17,21 +17,25 @@
             %i.fa.fa-pencil.pull-right
 
         .secondary.contact.info
-          %span.label
-            Email
-          = @contact.emails.join(",")
-          %span.label
-            Phone
-          = @contact.phone_numbers.join(",")
-          %span.label
-            Address
-          - @contact.addresses.each do |address|
-            %span.address
-              = address.address_line_1
-              = address.address_line_2
-              = address.city
-              = address.state
-              = address.zip
+          .pull-left
+            %span.label
+              Email
+            = @contact.emails.join(",")
+            %span.label
+              Phone
+            = @contact.phone_numbers.join(",")
+          .pull-left
+            .pull-left
+              %span.label
+                Address
+            .pull-left
+              - @contact.addresses.each do |address|
+                .address
+                  = address.address_line_1
+                  = address.address_line_2
+                  = address.city
+                  = address.state
+                  = address.zip
 
     .contact.details
       .first.contact
