@@ -89,16 +89,16 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
     ap "No contact on row #{row_number-1}"
   else
     company.contacts.create!(
-      emails_attributes: [{ value: email }],
-      prefix: prefix,
+      addresses_attributes: [{ address_line_1: address_line_1, city: city, country: company_value(country), state: state, zip: zip }],
       birthday: (Date.parse("#{birth_day} #{birth_month}") if(birth_day.present? && birth_month.present?)),
-      first_name: first_name,
-      middle_name: middle_name,
-      last_name: last_name,
-      job_title: job_title,
-      mmi_ballgame: mmi_ballgame,
       do_not_email: do_not_email.downcase == "true",
       do_not_mail: do_not_mail.downcase == "true",
+      emails_attributes: [{ value: email }],
+      first_name: first_name,
+      job_title: job_title,
+      last_name: last_name,
+      middle_name: middle_name,
+      mmi_ballgame: mmi_ballgame,
       phone_numbers_attributes: [
           { value: business_phone, kind: :business    },
           { value: mobile_phone,   kind: :mobile      },
@@ -106,7 +106,8 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
           { value: home_phone,     kind: :home        },
           { value: other_phone,    kind: :other_phone },
           { value: other_fax,      kind: :other_fax   }
-      ]
+      ],
+      prefix: prefix
     )
   end
 
