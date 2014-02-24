@@ -14,7 +14,7 @@ company_logos = Dir['spec/fixtures/company_logos/*']
 
 100.times do |i|
   company = Company.create!(
-    name: Faker::Company.name,
+    name: "#{Faker::Company.name}-#{i}",
     website: Faker::Internet.domain_name,
     addresses: [
       Address.new(
@@ -31,10 +31,10 @@ company_logos = Dir['spec/fixtures/company_logos/*']
   company.principals << Company.order("RANDOM()").where("id <> ?", company.id).limit(5)
 end
 
-1500.times do
+1500.times do |i|
   Contact.create!(
     first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
+    last_name: "#{Faker::Name.last_name}-#{i}",
     emails: [Email.new(value: Faker::Internet.email)],
     phone_numbers: [PhoneNumber.new(value: Faker::PhoneNumber.phone_number)],
     addresses: [
