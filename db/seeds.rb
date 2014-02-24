@@ -52,3 +52,4 @@ end
 
 User.create!(email: 'sean@engageyourcause.com', password: 'password')
 User.create!(email: 'projects@akshay.cc', password: 'password')
+User.create!(email: 'lori@mmidirect.com', password: 'password')
