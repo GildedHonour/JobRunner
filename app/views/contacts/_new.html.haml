@@ -76,6 +76,10 @@
                 %label
                   = f.check_box :do_not_mail
                   Do not mail
+              .checkbox
+                %label
+                  = f.check_box :send_cookies
+                  Send cookies
 
         .modal-footer
           - if @contact.errors.any?

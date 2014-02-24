@@ -14,6 +14,7 @@ class CreateContacts < ActiveRecord::Migration
       t.boolean :do_not_mail
       t.string :gift
       t.boolean :mmi_ballgame
+      t.boolean :send_cookies
 
       t.string :status
 

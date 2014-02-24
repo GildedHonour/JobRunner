@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20140211114911) do
     t.boolean  "do_not_mail"
     t.string   "gift"
     t.boolean  "mmi_ballgame"
+    t.boolean  "send_cookies"
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"

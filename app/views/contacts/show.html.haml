@@ -96,9 +96,18 @@
               %td
                 = human_boolean(@contact.mmi_ballgame)
             %tr
-              %td.tlabel.for.attribute Mail Optout
+              %td.tlabel.for.attribute Do not email
+              %td
+                = human_boolean(@contact.do_not_email)
+            %tr
+              %td.tlabel.for.attribute Do not mail
               %td 
                 = human_boolean(@contact.do_not_mail)
+            %tr
+              %td.tlabel.for.attribute Send cookies
+              %td
+                = human_boolean(@contact.send_cookies)
+
         .board.for.contact.notes
           %h3 Notes
           - @contact.notes.each do |n|
