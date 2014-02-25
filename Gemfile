@@ -35,7 +35,7 @@ gem "pg"
 gem "unicorn"
 
 # File uploads
-gem "fog", "~> 1.3.1" # Required by carrierwave
+gem "fog", ">= 1.3.1" # Required by carrierwave
 gem "carrierwave"
 gem "rmagick"
 
@@ -45,6 +45,9 @@ gem "database_cleaner"
 gem 'awesome_print'
 
 group :development do
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv', '~> 2.0'
   gem 'letter_opener'
   gem 'quiet_assets'
   gem 'pry-rails'
