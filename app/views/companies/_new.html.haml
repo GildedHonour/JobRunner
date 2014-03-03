@@ -32,8 +32,12 @@
                   .col-md-10
                     = f.text_field :name, placeholder: "Company Name", class: "form-control"
                 .form-group
-                  %label.col-md-2.control-label{ for: "company_logo" } Logo
-                  .col-md-5
+                  %label.col-md-3.control-label{ for: "company_type" } Company Type
+                  .col-md-4
+                    = f.select :company_type_id, CompanyType.all.map{ |c| [c.name, c.id] }, { include_blank: true }, { class: "form-control" }
+                .form-group
+                  %label.col-md-3.control-label{ for: "company_logo" } Logo
+                  .col-md-4
                     = f.file_field :company_logo, class: "form-control"
                 .form-group
                   .col-md-5.col-md-2-offset

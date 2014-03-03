@@ -5,7 +5,7 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :company_logo
       t.string :website
       t.string :phone
-      t.string :company_type
+      t.references :company_type
       t.boolean :internal
 
       t.timestamps
