@@ -4,7 +4,7 @@ class Affiliation < ActiveRecord::Base
   belongs_to :affiliate, class_name: 'Company'
   belongs_to :principal, class_name: 'Company'
 
-  enumerize :role, in: %i(customer client prospect supplier list_broker list_manager list_owner media other_/_admin website_signup website_/_contest_signup), default: :client
+  enumerize :role, in: %i(agency account), default: :account
   enumerize :status, in: %i(active inactive), default: :active
 
   validates :affiliate_id, uniqueness: { scope: [:role, :principal_id], message: "The relationship already exists" }, presence: true

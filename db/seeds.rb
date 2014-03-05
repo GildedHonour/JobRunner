@@ -2,9 +2,8 @@ if ENV['DEVELOPMENT'] || Rails.env.development?
   DatabaseCleaner.strategy = :truncation
   DatabaseCleaner.clean
 
-  require_relative "seeds-production"
-  require_relative "seeds-development"
+  require_relative "seeds_production"
+  require_relative "seeds_development"
 else
-  require_relative "seeds-production"
+  require_relative "seeds_production"
 end
-

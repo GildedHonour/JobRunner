@@ -8,11 +8,14 @@ contact_job_titles = [
 ]
 
 company_logos = Dir['spec/fixtures/company_logos/*']
+company_types = CompanyType.all
+internal_companies = Company.internal
 
 100.times do |i|
   company = Company.create!(
       name: "#{Faker::Company.name}-#{i}",
       website: Faker::Internet.domain_name,
+      company_type: company_types.sample,
       addresses: [
           Address.new(
               address_line_1: Faker::Address.street_address,
@@ -21,11 +24,11 @@ company_logos = Dir['spec/fixtures/company_logos/*']
               zip: Faker::Address.zip_code
           )
       ],
-      internal: (i % 20).zero?,
       company_logo: File.open(company_logos.sample)
   )
   company.affiliates << Company.order("RANDOM()").where("id <> ?", company.id).limit(3)
   company.principals << Company.order("RANDOM()").where("id <> ?", company.id).limit(5)
+  company.internal_company_relationships.create!(internal_company: internal_companies.sample, role:  InternalCompanyRelationship.role.values.sample)
 end
 
 1500.times do |i|
@@ -47,6 +50,3 @@ end
   )
 end
 
-User.create!(email: 'sean@engageyourcause.com', password: 'password')
-User.create!(email: 'projects@akshay.cc', password: 'password')
-User.create!(email: 'lori@mmidirect.com', password: 'password')

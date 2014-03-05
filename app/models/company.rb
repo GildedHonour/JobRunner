@@ -27,6 +27,7 @@ class Company < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   scope :ordered_by_affiliate_name, -> { includes(affiliate_affiliations: :affiliate).order("companies.name") }
+  scope :internal, -> { where(company_type_id: CompanyType.internal.id ) }
 
   class << self
     def search(term)

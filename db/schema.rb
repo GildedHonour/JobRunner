@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 20140303074329) do
     t.string   "website"
     t.string   "phone"
     t.integer  "company_type_id"
-    t.boolean  "internal"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -92,6 +91,16 @@ ActiveRecord::Schema.define(version: 20140303074329) do
 
   add_index "emails", ["emailable_id", "emailable_type"], name: "index_emails_on_emailable_id_and_emailable_type", using: :btree
 
+  create_table "internal_company_relationships", force: true do |t|
+    t.string   "name"
+    t.string   "role"
+    t.string   "status"
+    t.integer  "internal_company_id"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "notes", force: true do |t|
     t.text     "note"
     t.integer  "contact_id"
@@ -111,15 +120,6 @@ ActiveRecord::Schema.define(version: 20140303074329) do
   end
 
   add_index "phone_numbers", ["phonable_id", "phonable_type"], name: "index_phone_numbers_on_phonable_id_and_phonable_type", using: :btree
-
-  create_table "relationships", force: true do |t|
-    t.string   "name"
-    t.string   "role"
-    t.integer  "internal_company_id"
-    t.integer  "company_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

@@ -45,6 +45,22 @@
             = link_to @contact.company.name, @contact.company
           %h4
             = @contact.job_title
+
+          %h5 Relationships
+          %table.table.table-hover
+            - @contact.company.internal_company_relationships.ordered_by_internal_company_name.each do |internal_company_relationship|
+              %tr
+                %td
+                  = link_to internal_company_relationship.internal_company.name, internal_company_relationship.internal_company
+                %td
+                  Role:
+                  = internal_company_relationship.role.text
+                  %br
+                %td
+                  Status:
+                  = internal_company_relationship.status.text
+                  %br
+
           %h5 Affiliations
           %table.table.table-hover
             - @contact.company.affiliate_affiliations.ordered_by_affiliate_name.each do |affiliate_affiliation|
