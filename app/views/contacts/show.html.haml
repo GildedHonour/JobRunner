@@ -46,7 +46,7 @@
           %h4
             = @contact.job_title
 
-          %h5 Relationships
+          %h5 Internal
           %table.table.table-hover
             - @contact.company.internal_company_relationships.ordered_by_internal_company_name.each do |internal_company_relationship|
               %tr
