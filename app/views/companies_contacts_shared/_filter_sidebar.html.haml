@@ -1,0 +1,20 @@
+.filters.wrapper
+  %h4.filters
+    %i.fa.fa-filter
+    Filters
+  %h3.filter.header
+    Relationships
+  .filter.wrapper#relationships-filter
+    %ul.list.default.list-unstyled
+      - Company.internal.ordered_by_name.each do |company|
+        %li.checkbox
+          = check_box_tag "relationship_filter[company_ids]", company.id, (params[:rc] || []).include?(company.id.to_s)
+          = company.name
+  %h3.filter.header
+    Affiliations
+  .filter.wrapper#affiliations-filter
+    %ul.list.default.list-unstyled
+      - Company.all_principals.each do |principal|
+        %li.checkbox
+          = check_box_tag "affiliation_filter[company_ids]", principal.id, (params[:ac] || []).include?(principal.id.to_s)
+          = principal.name

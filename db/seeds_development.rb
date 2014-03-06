@@ -8,12 +8,12 @@ contact_job_titles = [
 ]
 
 company_logos = Dir['spec/fixtures/company_logos/*']
-company_types = CompanyType.all
+company_types = CompanyType.not_internal
 internal_companies = Company.internal
 
 100.times do |i|
   company = Company.create!(
-      name: "#{Faker::Company.name}-#{i}",
+      name: "#{Faker::Company.name}",
       website: Faker::Internet.domain_name,
       company_type: company_types.sample,
       addresses: [
@@ -26,15 +26,21 @@ internal_companies = Company.internal
       ],
       company_logo: File.open(company_logos.sample)
   )
-  company.affiliates << Company.order("RANDOM()").where("id <> ?", company.id).limit(3)
-  company.principals << Company.order("RANDOM()").where("id <> ?", company.id).limit(5)
-  company.internal_company_relationships.create!(internal_company: internal_companies.sample, role:  InternalCompanyRelationship.role.values.sample)
+  Company.order("RANDOM()").where("id NOT IN (?)", internal_companies.map(&:id) + [company.id]).limit(3).each do |affiliate|
+    company.affiliate_affiliations.create(affiliate: affiliate, role: Affiliation.role.values.sample)
+  end
+
+  company.principals << Company.order("RANDOM()").where("id NOT IN (?)", internal_companies.map(&:id) + [company.id]).limit(3)
+
+  internal_companies.sample(2).each do |internal_company|
+    company.internal_company_relationships.create!(internal_company: internal_company, role:  InternalCompanyRelationship.role.values.sample)
+  end
 end
 
-1500.times do |i|
+1000.times do |i|
   Contact.create!(
       first_name: Faker::Name.first_name,
-      last_name: "#{Faker::Name.last_name}-#{i}",
+      last_name: "#{Faker::Name.last_name}",
       emails: [Email.new(value: Faker::Internet.email)],
       phone_numbers: [PhoneNumber.new(value: Faker::PhoneNumber.phone_number)],
       addresses: [

@@ -45,5 +45,9 @@ class Contact < ActiveRecord::Base
           references(:affiliate_affiliations).
           where('affiliations.principal_id IN (?) OR company_id IN (?)', company_ids, company_ids)
     end
+
+    def contacts_of_companies_with_relationship_to(internal_company_ids)
+      Contact.includes(:company).where('company_id IN (?)', internal_company_ids)
+    end
   end
 end

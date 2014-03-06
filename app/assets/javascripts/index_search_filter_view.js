@@ -1,12 +1,20 @@
 App.IndexSearchFilterView = {
     bindEvents: function(bodyClass) {
         $(document).on('change', bodyClass + ' #affiliations-filter', function() {
-            var selectedCompanies = $.map($('input[name="affiliation_filter[company_ids]"]:checked'), function(principal_input) {
-                return $(principal_input).val();
+            var selectedCompanies = $.map($('input[name="affiliation_filter[company_ids]"]:checked'), function(company_input) {
+                return $(company_input).val();
             });
 
-            Turbolinks.visit(App.addParamToCurrentUrl({ c: selectedCompanies }));
-        })
+            Turbolinks.visit(App.addParamToCurrentUrl({ ac: selectedCompanies }));
+        });
+
+        $(document).on('change', bodyClass + ' #relationships-filter', function() {
+            var selectedCompanies = $.map($('input[name="relationship_filter[company_ids]"]:checked'), function(company_input) {
+                return $(company_input).val();
+            });
+
+            Turbolinks.visit(App.addParamToCurrentUrl({ rc: selectedCompanies }));
+        });
     },
 
     initPlugins: function(bodyClass) {

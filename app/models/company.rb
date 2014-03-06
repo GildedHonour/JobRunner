@@ -27,13 +27,14 @@ class Company < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   scope :ordered_by_affiliate_name, -> { includes(affiliate_affiliations: :affiliate).order("companies.name") }
+  scope :ordered_by_name, -> { order("companies.name") }
   scope :internal, -> { where(company_type_id: CompanyType.internal.id ) }
 
   class << self
     def search(term)
       return Company.none if term.blank?
       term_like = "%#{term}%"
-      Company.where("name ILIKE ?", term_like)
+      Company.where("companies.name ILIKE ?", term_like)
     end
 
     def affiliated_to_company(company_ids)
@@ -42,6 +43,10 @@ class Company < ActiveRecord::Base
 
     def all_principals
       Company.order("name").find(*Affiliation.pluck(:principal_id).uniq)
+    end
+
+    def relationship_with_company(company_ids)
+      includes(:internal_company_relationships).where('internal_company_relationships.internal_company_id IN (?)', company_ids)
     end
   end
 

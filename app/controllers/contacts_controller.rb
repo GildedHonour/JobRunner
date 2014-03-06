@@ -35,11 +35,10 @@ class ContactsController < ApplicationController
 
   def index
     @contacts = params[:search].present? ? Contact.search(params[:search]) : Contact.all
-    @contacts = @contacts.contacts_of_company_and_its_affiliates(params[:c]) if params[:c].present?
+    @contacts = @contacts.contacts_of_company_and_its_affiliates(params[:ac]) if params[:ac].present?
+    @contacts = @contacts.contacts_of_companies_with_relationship_to(params[:rc]) if params[:rc].present?
     @contacts = params[:first_name_sort] == "down" ? @contacts.order("first_name DESC") : @contacts.order("first_name ASC")
     @contacts = @contacts.page(params[:page]).per(PAGE_SIZE)
-
-    @all_principals = Company.all_principals.group_by(&:internal)
 
     respond_with @contacts
   end

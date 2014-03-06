@@ -5,13 +5,17 @@
     = image_tag company.company_logo.mini_thumb.url, alt: company.name
   %td
     = link_to company.name, company_url(company)
-
-  - affiliations = company.affiliate_affiliations
   %td
-    - affiliations.each do |affiliation|
-      = affiliation.affiliate.name
-      %br
+    %ul.list-unstyled
+      - company.internal_company_relationships.each do |relationship|
+        %li
+          = relationship.internal_company.name
+          %code
+            = "#{(relationship.role.text)}"
   %td
-    - affiliations.each do |affiliation|
-      = affiliation.role.text
-      %br
+    %ul.list-unstyled
+      - company.affiliate_affiliations.ordered_by_affiliate_name.each do |affiliation|
+        %li
+          = affiliation.affiliate.name
+          %code
+            = "#{(affiliation.role.text)}"

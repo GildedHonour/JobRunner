@@ -35,11 +35,10 @@ class CompaniesController < ApplicationController
 
   def index
     @companies = params[:search].present? ? Company.search(params[:search]) : Company.all
-    @companies = @companies.affiliated_to_company(params[:c]) if params[:c].present?
-    @companies = params[:name_sort] == "down" ? @companies.order("name DESC") : @companies.order("name ASC")
+    @companies = @companies.affiliated_to_company(params[:ac]) if params[:ac].present?
+    @companies = @companies.relationship_with_company(params[:rc]) if params[:rc].present?
+    @companies = params[:name_sort] == "down" ? @companies.order("companies.name DESC") : @companies.order("companies.name ASC")
     @companies = @companies.page(params[:page]).per(PAGE_SIZE)
-
-    @all_principals = Company.all_principals.group_by(&:internal)
 
     respond_with @companies
   end
