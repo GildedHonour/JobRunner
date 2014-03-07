@@ -26,7 +26,9 @@
                 = f.input :website, placeholder: "Website", label: false
                 = f.input :company_type, collection: CompanyType.all, include_blank: "Company Type", label: false
                 = f.input :company_logo
-                = image_tag @company.company_logo.url
+                - if @company.company_logo.present?
+                  = image_tag @company.company_logo.url
+                  = link_to "x", delete_company_logo_company_url , class: "btn btn-danger btn-xs", data: { method: "patch" }
 
         .row.top-buffer-30
           .col-md-12

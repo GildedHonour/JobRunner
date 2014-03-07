@@ -13,6 +13,7 @@ Jobrunner::Application.routes.draw do
 
       get :edit_internal_company_relationships
       patch :update_internal_company_relationships
+      patch :delete_company_logo
     end
   end
 end

@@ -85,6 +85,12 @@ class CompaniesController < ApplicationController
 
   end
 
+  def delete_company_logo
+    @company = Company.find(params[:id])
+    @company.remove_company_logo!
+    redirect_to edit_company_url(@company)
+  end
+
   private
   def company_params
     params.require(:company).permit(:name, :website, :phone, :company_logo, :company_type_id,
