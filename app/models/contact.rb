@@ -1,5 +1,6 @@
 class Contact < ActiveRecord::Base
   extend Enumerize
+  include Archivable
 
   validates :first_name ,presence: true
   validates :last_name, presence: true
@@ -13,7 +14,6 @@ class Contact < ActiveRecord::Base
   has_many :emails, -> { order "created_at ASC" }, as: :emailable, dependent: :destroy
   has_many :phone_numbers, -> { order "created_at ASC" }, as: :phonable, dependent: :destroy
 
-  enumerize :status, in: %i(active inactive), default: :active
   enumerize :prefix, in: %i(Mr. Mrs. Ms. Miss. Prof.)
 
   accepts_nested_attributes_for :notes

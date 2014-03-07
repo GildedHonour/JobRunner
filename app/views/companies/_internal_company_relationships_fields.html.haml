@@ -1,14 +1,29 @@
 .row
   .col-md-12
-    = f.fields_for :internal_company_relationships, (@company.persisted? || @company.internal_company_relationships.present?) ? @company.internal_company_relationships.ordered_by_internal_company_name : @company.internal_company_relationships.build do |relationship_form|
-      .form-group
-        %label.col-md-2.control-label
-          Company
-        .col-md-5
-          = relationship_form.input :internal_company_id, collection: Company.internal, include_blank: "Select company", label: false
-        .col-md-3
-          = relationship_form.input :role, collection: InternalCompanyRelationship.role.options, label: false
-        .col-md-2
-          = relationship_form.link_to_remove "Remove", class: "btn btn-danger btn-xs pull-right"
+    %table.table
+      %thead
+        %tr
+          %th
+            Company
+          %th
+            Role
+          %th
+            Inactive
+          %th
+      %tbody#internal-company-relationships-fields
+        = f.fields_for :internal_company_relationships, (@company.persisted? || @company.internal_company_relationships.present?) ? @company.internal_company_relationships.ordered_by_internal_company_name : @company.internal_company_relationships.build, wrapper: false do |relationship_form|
+          %tr.fields
+            %td
+              .col-md-12
+                = relationship_form.input :internal_company_id, collection: Company.internal, include_blank: "Select company", label: false
+            %td
+              .col-md-12
+                = relationship_form.input :role, collection: InternalCompanyRelationship.role.options, label: false
+            %td
+              .col-md-12
+                = relationship_form.input :archived, label: false, wrapper: false
+            %td
+              .col-md-12
+                = relationship_form.link_to_remove "Remove", class: "btn btn-danger btn-xs", data: { confirm: "Are you sure you want to delete this relationship?"}
 
-    = f.link_to_add  "Add relationship", :internal_company_relationships, class: "btn btn-default"
+    = f.link_to_add  "Add relationship", :internal_company_relationships, class: "btn btn-default", data: { target: "#internal-company-relationships-fields" }

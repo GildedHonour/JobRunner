@@ -5,7 +5,7 @@
       %h4.modal-title
         Manage Affiliations
     #modal-form
-      = nested_form_for @company, url: update_affiliations_company_url(@company), html: { class: "form-horizontal" }, remote: true do |f|
+      = simple_nested_form_for @company, url: update_affiliations_company_url(@company), html: { class: "form-horizontal" }, remote: true do |f|
         .modal-body
           - if @company.errors.any?
             .alert.alert-danger

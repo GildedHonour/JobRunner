@@ -16,7 +16,7 @@ class CreateContacts < ActiveRecord::Migration
       t.boolean :mmi_ballgame
       t.boolean :send_cookies
 
-      t.string :status
+      t.boolean :archived, default: false
 
       t.timestamps
     end

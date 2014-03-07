@@ -16,6 +16,7 @@ internal_companies = Company.internal
       name: "#{Faker::Company.name}",
       website: Faker::Internet.domain_name,
       company_type: company_types.sample,
+      phone_numbers: [PhoneNumber.new(value: Faker::PhoneNumber.phone_number)],
       addresses: [
           Address.new(
               address_line_1: Faker::Address.street_address,

@@ -64,7 +64,7 @@
                   %td
                     = relationship.role.text
                   %td
-                    = relationship.status.text
+                    = relationship.record_status
                   %td
                     = l(relationship.created_at, format: :only_date)
                   %td
@@ -92,7 +92,7 @@
                   %td
                     = affiliation.role.text
                   %td
-                    = affiliation.status.text
+                    = affiliation.record_status
                   %td
                     = l(affiliation.created_at, format: :only_date)
                   %td
@@ -122,6 +122,6 @@
                   %td
                     = contact.phone_numbers.join(",")
                   %td
-                    = contact.status.text
+                    = contact.record_status
                   %td
                     = l(contact.updated_at, format: :only_date)

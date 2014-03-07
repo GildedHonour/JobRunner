@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20140303074329) do
 
   create_table "affiliations", force: true do |t|
     t.string   "role"
-    t.string   "status"
+    t.boolean  "archived",     default: false
     t.integer  "affiliate_id"
     t.integer  "principal_id"
     t.datetime "created_at"
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20140303074329) do
     t.string   "gift"
     t.boolean  "mmi_ballgame"
     t.boolean  "send_cookies"
-    t.string   "status"
+    t.boolean  "archived",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20140303074329) do
   create_table "internal_company_relationships", force: true do |t|
     t.string   "name"
     t.string   "role"
-    t.string   "status"
+    t.boolean  "archived",            default: false
     t.integer  "internal_company_id"
     t.integer  "company_id"
     t.datetime "created_at"
