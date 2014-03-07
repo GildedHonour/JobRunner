@@ -17,19 +17,19 @@
             .panel.panel-default
               .panel-body
                 = f.input :name, placeholder: "Company Name", label: false
+                = f.input :website, placeholder: "Website", label: false
                 = f.input :company_type, collection: CompanyType.all, include_blank: "Company Type", label: false
                 = f.input :company_logo
                 = image_tag @company.company_logo.url
 
-        .row
+        .row.top-buffer-30
           .col-md-12
             %h2
               Contact Info
-            = f.input :website, placeholder: "Website", label: false
             = render 'address_fields', f: f
             = render 'phone_number_fields', f: f
 
-        .row
+        .row.top-buffer-30
           .col-md-4
             %h2
               Relationships
