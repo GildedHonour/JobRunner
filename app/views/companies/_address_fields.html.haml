@@ -1,6 +1,6 @@
 .row
-  = f.fields_for :addresses, @company.addresses.present? ? @company.addresses : @company.addresses.build, wrapper: false do |address_form|
-    #addresses
+  #addresses
+    = f.fields_for :addresses, (@company.persisted? || @company.addresses.present?) ? @company.addresses : @company.addresses.build, wrapper: false do |address_form|
       .col-md-4.fields
         .panel.panel-default
           .panel-heading
@@ -21,4 +21,4 @@
                 = address_form.input :country, collection: Address.country.values.map{|option| [option.upcase, option] }, label: false
             = address_form.link_to_remove "Remove", class: "btn btn-danger"
   .col-md-4
-    = f.link_to_add  "Add another address", :addresses, class: "btn btn-default", data: { target: "#addresses" }
+    = f.link_to_add  "Add address", :addresses, class: "btn btn-default", data: { target: "#addresses" }

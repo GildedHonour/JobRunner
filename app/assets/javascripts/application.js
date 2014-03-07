@@ -16,6 +16,7 @@
 //= require jquery.remotipart
 //= require jquery.typewatch
 //= require jquery_nested_form
+//= require nested_form_custom
 //= require bootstrap/tooltip
 //= require bootstrap/popover
 //= require bootstrap/modal

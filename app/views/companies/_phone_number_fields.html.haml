@@ -1,6 +1,6 @@
 .row.top-buffer-15
-  = f.fields_for :phone_numbers, @company.phone_numbers.present? ? @company.phone_numbers : @company.phone_numbers.build, wrapper: false do |phone_number_form|
-    #phone_numbers
+  #phone_numbers
+    = f.fields_for :phone_numbers, (@company.persisted? || @company.phone_numbers.present?) ? @company.phone_numbers : @company.phone_numbers.build, wrapper: false do |phone_number_form|
       .col-md-4.fields
         .panel.panel-default
           .panel-heading
@@ -11,4 +11,4 @@
             = phone_number_form.input :value, placeholder: "Phone Number", label: false
             = phone_number_form.link_to_remove "Remove", class: "btn btn-danger"
   .col-md-4
-    = f.link_to_add  "Add another phone number", :phone_numbers, class: "btn btn-default", data: { target: "#phone_numbers" }
+    = f.link_to_add  "Add phone number", :phone_numbers, class: "btn btn-default", data: { target: "#phone_numbers" }

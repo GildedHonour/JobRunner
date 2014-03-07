@@ -15,7 +15,6 @@ class CompaniesController < ApplicationController
     else
       render "new"
     end
-    respond_with @company, location: company_url(@company)
   end
 
   def edit
@@ -62,11 +61,10 @@ class CompaniesController < ApplicationController
 
   def update_affiliations
     @company = Company.includes(:affiliates).find(params[:id])
-    @company.update_attributes(company_params)
-    @success_message = "Affiliations updated." if @company.save
-
-    respond_to do |format|
-      format.js { render("edit_affiliations") }
+    if @company.update_attributes(company_params)
+      render "success"
+    else
+      render  "edit_affiliations"
     end
   end
 
@@ -79,12 +77,12 @@ class CompaniesController < ApplicationController
 
   def update_internal_company_relationships
     @company = Company.includes(:internal_companies).find(params[:id])
-    @company.update_attributes(company_params)
-    @success_message = "Relationships updated." if @company.save
-
-    respond_to do |format|
-      format.js { render("edit_internal_company_relationships") }
+    if @company.update_attributes(company_params)
+      render "success"
+    else
+      render "edit_internal_company_relationships"
     end
+
   end
 
   private

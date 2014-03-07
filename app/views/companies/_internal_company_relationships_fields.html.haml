@@ -1,6 +1,6 @@
 .row
   .col-md-12
-    = f.fields_for :internal_company_relationships, @company.internal_company_relationships.present? ? @company.internal_company_relationships.ordered_by_internal_company_name : @company.internal_company_relationships.build do |relationship_form|
+    = f.fields_for :internal_company_relationships, (@company.persisted? || @company.internal_company_relationships.present?) ? @company.internal_company_relationships.ordered_by_internal_company_name : @company.internal_company_relationships.build do |relationship_form|
       .form-group
         %label.col-md-2.control-label
           Company

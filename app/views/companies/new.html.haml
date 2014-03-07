@@ -9,6 +9,12 @@
         = render "profile"
 
     .company.details
+      %h1
+        - if @company.persisted?
+          = "Edit #{@company.name}"
+        - else
+          New Company
+
       = simple_nested_form_for @company do |f|
         .row
           .col-md-4
