@@ -88,6 +88,7 @@ class CompaniesController < ApplicationController
   def delete_company_logo
     @company = Company.find(params[:id])
     @company.remove_company_logo!
+    @company.save
     redirect_to edit_company_url(@company)
   end
 
