@@ -1,7 +1,7 @@
 .row
   = f.fields_for :addresses, @company.addresses.present? ? @company.addresses : @company.addresses.build, wrapper: false do |address_form|
     #addresses
-      .col-md-4
+      .col-md-4.fields
         .panel.panel-default
           .panel-heading
             .panel-title
