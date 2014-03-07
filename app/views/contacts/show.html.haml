@@ -40,13 +40,13 @@
     .contact.details
       .first.contact
         .board.for.contact
-          %h3 Relationships
-          %h2 
+          %h3
+          %h2
             = link_to @contact.company.name, @contact.company
           %h4
             = @contact.job_title
 
-          %h5 Internal
+          %h3 Relationships
           %table.table.table-hover
             - @contact.company.internal_company_relationships.ordered_by_internal_company_name.each do |internal_company_relationship|
               %tr
@@ -61,20 +61,6 @@
                   = internal_company_relationship.status.text
                   %br
 
-          %h5 Affiliations
-          %table.table.table-hover
-            - @contact.company.affiliate_affiliations.ordered_by_affiliate_name.each do |affiliate_affiliation|
-              %tr
-                %td
-                  = link_to affiliate_affiliation.affiliate.name, affiliate_affiliation.affiliate
-                %td 
-                  Role:
-                  = affiliate_affiliation.role.text
-                  %br
-                %td 
-                  Status:
-                  = affiliate_affiliation.status.text
-                  %br
         .board.for.contact
           %h3 User Account
           %table

@@ -52,33 +52,54 @@
 
             %table.table.table-hover
               %tr
-                %th Affiliations
+                %th Company
                 %th Role(s)
                 %th Status
                 %th Added
                 %th Last Modified
-              - @company.affiliates.ordered_by_affiliate_name.each do |affiliate|
+              - @company.internal_company_relationships.ordered_by_internal_company_name.each do |relationship|
                 %tr
                   %td
-                    = link_to affiliate.name, affiliate
-                  %td 
-                    - @company.affiliate_affiliations.each do |affiliation|
-                      = affiliation.role.text
-                      %br
-                  %td 
-                    - @company.affiliate_affiliations.each do |affiliation|
-                      = affiliation.status.text
-                      %br
-                  %td 
-                    - @company.affiliate_affiliations.each do |affiliation|
-                      = l(affiliation.created_at, format: :only_date)
-                      %br
-                  %td 
-                    - @company.affiliate_affiliations.each do |affiliation|
-                      = l(affiliation.updated_at, format: :only_date)
-                      %br
+                    = link_to relationship.internal_company.name, relationship.company
+                  %td
+                    = relationship.role.text
+                  %td
+                    = relationship.status.text
+                  %td
+                    = l(relationship.created_at, format: :only_date)
+                  %td
+                    = l(relationship.updated_at, format: :only_date)
+
     .company.details
       .second.company.row
+        .col-sm-12
+          .board.for.company
+            %h3 Affiliations
+            = link_to company_edit_affiliations_url(@company), class: "btn-fam no-border", remote: true do
+              %i.fa.fa-pencil
+
+            %table.table.table-hover
+              %tr
+                %th Company
+                %th Role(s)
+                %th Status
+                %th Added
+                %th Last Modified
+              - @company.affiliate_affiliations.ordered_by_affiliate_name.each do |affiliation|
+                %tr
+                  %td
+                    = link_to affiliation.affiliate.name, affiliation.affiliate
+                  %td
+                    = affiliation.role.text
+                  %td
+                    = affiliation.status.text
+                  %td
+                    = l(affiliation.created_at, format: :only_date)
+                  %td
+                    = l(affiliation.updated_at, format: :only_date)
+
+    .company.details
+      .third.company.row
         .col-sm-12
           .board.for.company
             %h3 People
@@ -92,13 +113,13 @@
                 %th Last Modified
               - @company.contacts.each do |contact|
                 %tr
-                  %td 
+                  %td
                     = link_to contact.full_name, contact
-                  %td 
+                  %td
                     = contact.job_title
-                  %td 
+                  %td
                     = contact.emails.join(",")
-                  %td 
+                  %td
                     = contact.phone_numbers.join(",")
                   %td
                     = contact.status.text
