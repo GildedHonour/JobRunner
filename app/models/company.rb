@@ -20,6 +20,7 @@ class Company < ActiveRecord::Base
   accepts_nested_attributes_for :addresses, reject_if: lambda { |address| address[:address_line_1].blank? }, allow_destroy: true
   accepts_nested_attributes_for :phone_numbers, reject_if: lambda { |phone_number| phone_number[:value].blank? }, allow_destroy: true
   accepts_nested_attributes_for :affiliate_affiliations, reject_if: lambda { |affiliation| affiliation[:affiliate_id].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :internal_company_relationships, reject_if: lambda { |relationship| relationship[:internal_company_id].blank? }, allow_destroy: true
 
   mount_uploader :company_logo, CompanyLogoUploader
 

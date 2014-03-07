@@ -6,4 +6,8 @@ module ApplicationHelper
   def human_boolean(boolean)
     boolean ? "Yes" : "No"
   end
+
+  def back_url_or(url)
+    session[:back_url] || url
+  end
 end

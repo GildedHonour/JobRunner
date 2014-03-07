@@ -7,7 +7,12 @@ Jobrunner::Application.routes.draw do
   end
 
   resources :companies do
-    get :edit_affiliations
-    patch :update_affiliations
+    member do
+      get :edit_affiliations
+      patch :update_affiliations
+
+      get :edit_internal_company_relationships
+      patch :update_internal_company_relationships
+    end
   end
 end

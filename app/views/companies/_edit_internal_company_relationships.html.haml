@@ -3,9 +3,9 @@
     .modal-header
       %button.close{ "data-dismiss" => "modal", type: "button" } ×
       %h4.modal-title
-        Manage Affiliations
+        Manage Relationships
     #modal-form
-      = nested_form_for @company, url: update_affiliations_company_url(@company), html: { class: "form-horizontal" }, remote: true do |f|
+      = simple_nested_form_for @company, url: update_internal_company_relationships_company_url(@company), html: { class: "form-horizontal" }, remote: true do |f|
         .modal-body
           - if @company.errors.any?
             .alert.alert-danger
@@ -24,7 +24,7 @@
           .row
             .col-md-10.col-md-offset-1
               .row.top-buffer-30
-                = render "affiliation_fields", f: f
+                = render "internal_company_relationships_fields", f: f
         .modal-footer
           %button.btn.btn-default{ "data-dismiss" => "modal", type: "button" } Close
           = f.submit "Save", class: "btn btn-primary", data: { toggle: "button", "loading-text" => "Saving" }

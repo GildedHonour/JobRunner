@@ -10,23 +10,25 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
-    @company.save
-    respond_with @company
+    if @company.save
+      redirect_to company_url(@company)
+    else
+      render "new"
+    end
+    respond_with @company, location: company_url(@company)
   end
 
   def edit
     @company = Company.find(params[:id])
-    respond_to do |format|
-      format.js { render("new") }
-    end
+    render "new"
   end
 
   def update
     @company = Company.find(params[:id])
-    success = @company.update_attributes(company_params)
-
-    respond_to do |format|
-      format.js { success ? render("success") : render("new") }
+    if @company.update_attributes(company_params)
+      redirect_to company_url(@company)
+    else
+      render "new"
     end
   end
 
@@ -52,19 +54,36 @@ class CompaniesController < ApplicationController
   end
 
   def edit_affiliations
-    @company = Company.includes(:affiliates).find(params[:company_id])
+    @company = Company.includes(:affiliates).find(params[:id])
     respond_to do |format|
       format.js { render("edit_affiliations") }
     end
   end
 
   def update_affiliations
-    @company = Company.includes(:affiliates).find(params[:company_id])
+    @company = Company.includes(:affiliates).find(params[:id])
+    @company.update_attributes(company_params)
+    @success_message = "Affiliations updated." if @company.save
+
+    respond_to do |format|
+      format.js { render("edit_affiliations") }
+    end
+  end
+
+  def edit_internal_company_relationships
+    @company = Company.includes(:internal_companies).find(params[:id])
+    respond_to do |format|
+      format.js { render("edit_internal_company_relationships") }
+    end
+  end
+
+  def update_internal_company_relationships
+    @company = Company.includes(:internal_companies).find(params[:id])
     @company.update_attributes(company_params)
     @success_message = "Relationships updated." if @company.save
 
     respond_to do |format|
-      format.js { render("edit_affiliations") }
+      format.js { render("edit_internal_company_relationships") }
     end
   end
 
@@ -72,6 +91,7 @@ class CompaniesController < ApplicationController
   def company_params
     params.require(:company).permit(:name, :website, :phone, :company_logo, :company_type_id,
                                     affiliate_affiliations_attributes: [:id, :affiliate_id, :role, :_destroy],
+                                    internal_company_relationships_attributes: [:id, :internal_company_id, :role, :_destroy],
                                     addresses_attributes: [:id, :address_line_1, :address_line_2, :city, :state, :zip, :country, :_destroy],
                                     phone_numbers_attributes: [:id, :kind, :value, :_destroy]
     )

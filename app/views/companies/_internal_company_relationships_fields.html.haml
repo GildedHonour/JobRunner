@@ -1,0 +1,14 @@
+.row
+  .col-md-12
+    = f.fields_for :internal_company_relationships, @company.internal_company_relationships.present? ? @company.internal_company_relationships.ordered_by_internal_company_name : @company.internal_company_relationships.build do |relationship_form|
+      .form-group
+        %label.col-md-2.control-label
+          Company
+        .col-md-5
+          = relationship_form.input :internal_company_id, collection: Company.internal, include_blank: "Select company", label: false
+        .col-md-3
+          = relationship_form.input :role, collection: InternalCompanyRelationship.role.options, label: false
+        .col-md-2
+          = relationship_form.link_to_remove "Remove", class: "btn btn-danger btn-xs pull-right"
+
+    = f.link_to_add  "Add another relationship", :internal_company_relationships, class: "btn btn-default"
