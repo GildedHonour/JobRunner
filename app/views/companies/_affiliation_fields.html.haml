@@ -5,7 +5,7 @@
         %label.col-md-2.control-label
           Company
         .col-md-5
-          = affiliation_form.select :affiliate_id, Company.all.map{ |company| [company.name, company.id] }, { include_blank: true }, class: "form-control"
+          = affiliation_form.select :affiliate_id, Company.except_internal.map{ |c| ["#{c.name} (#{c.company_type})", c.id] }, { include_blank: true }, class: "form-control"
         .col-md-3
           = affiliation_form.select :role, Affiliation.role.options, {}, { class: "form-control" }
         .col-md-2

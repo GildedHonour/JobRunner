@@ -30,6 +30,7 @@ class Company < ActiveRecord::Base
   scope :ordered_by_affiliate_name, -> { includes(affiliate_affiliations: :affiliate).order("companies.name") }
   scope :ordered_by_name, -> { order("companies.name") }
   scope :internal, -> { where(company_type_id: CompanyType.internal.id ) }
+  scope :except_internal, -> { where("company_type_id != ?", CompanyType.internal.id ) }
 
   class << self
     def search(term)

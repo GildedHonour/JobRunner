@@ -8,6 +8,6 @@ module ApplicationHelper
   end
 
   def back_url_or(url)
-    session[:back_url] || url
+    (request.url == request.referrer) ? url : request.referrer
   end
 end
