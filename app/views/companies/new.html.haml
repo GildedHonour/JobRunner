@@ -1,0 +1,39 @@
+.neat-row
+  .show.content
+    .go.and.profile
+      .go.back
+        = link_to companies_url do
+          %span.glyphicon.glyphicon-chevron-left
+          Back to companies list
+      .profile
+        = render "profile"
+
+    .company.details
+      = simple_nested_form_for @company do |f|
+        .row
+          .col-md-4
+            %h2
+              Profile
+            .panel.panel-default
+              .panel-body
+                = f.input :name, placeholder: "Company Name", label: false
+                = f.input :company_type, collection: CompanyType.all, include_blank: "Company Type", label: false
+                = f.input :company_logo
+                = image_tag @company.company_logo.url
+
+        .row
+          .col-md-12
+            %h2
+              Contact Info
+            = f.input :website, placeholder: "Website", label: false
+            = render 'address_fields', f: f
+            = render 'phone_number_fields', f: f
+
+        .row
+          .col-md-4
+            %h2
+              Relationships
+            = render "affiliation_fields", f: f
+
+        .form-actions
+          = f.submit "Save", class: "btn btn-primary", data: { toggle: "button", "loading-text" => "Saving" }

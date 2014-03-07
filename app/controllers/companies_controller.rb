@@ -10,11 +10,8 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
-    success = @company.save
-
-    respond_to do |format|
-      format.js { success ? render("success") : render("new") }
-    end
+    @company.save
+    respond_with @company
   end
 
   def edit
