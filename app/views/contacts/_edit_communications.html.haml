@@ -1,0 +1,23 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %button.close{ "data-dismiss" => "modal", type: "button" } ×
+      %h4.modal-title
+        Manage Commications
+    #modal-form
+      = simple_nested_form_for @contact, url: update_communications_contact_url(@contact), remote: true do |f|
+        .modal-body
+          .row.top-buffer-30
+            .col-md-10.col-md-offset-1
+              .form-group.form-inline
+                %label.control-label{ for: "birthday" }
+                  Birthday
+                = f.date_select :birthday, { discard_year: true, include_blank: true }, { class: "form-control" }
+              = f.input :mmi_ballgame, label: "Send MMI ballgame emails"
+              = f.input :do_not_email, label: "Do not email"
+              = f.input :do_not_mail, label: "Do not mail"
+              = f.input :send_cookies, label: "Send cookies"
+
+        .modal-footer
+          %button.btn.btn-default{ "data-dismiss" => "modal", type: "button" } Close
+          = f.submit "Save", class: "btn btn-primary", data: { toggle: "button", "loading-text" => "Saving" }

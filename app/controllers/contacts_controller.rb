@@ -53,6 +53,22 @@ class ContactsController < ApplicationController
     redirect_to contacts_url
   end
 
+  def edit_communications
+    @contact = Contact.find(params[:id])
+    respond_to do |format|
+      format.js { render("edit_communications") }
+    end
+  end
+
+  def update_communications
+    @contact = Contact.find(params[:id])
+    if @contact.update_attributes(contact_params)
+      render "success"
+    else
+      render  "edit_communications"
+    end
+  end
+
   private
   def contact_params
     params.require(:contact).permit(:first_name, :last_name, :prefix, :job_title, :company_id, :birthday,
