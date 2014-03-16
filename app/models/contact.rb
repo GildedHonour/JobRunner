@@ -4,6 +4,10 @@ class Contact < ActiveRecord::Base
 
   validates :first_name ,presence: true
   validates :last_name, presence: true
+  validates :prefix, presence: true
+
+  validates :company_id, presence: true
+  validates :job_title, presence: true
 
   belongs_to :company
   belongs_to :user
