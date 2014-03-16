@@ -20,7 +20,7 @@ jQuery(function($) {
     });
 });
 
-//$.webshims.setOptions("basePath", "/assets/webshims/shims/");
+$.webshims.setOptions("basePath", "/webshims/shims/");
 $.webshims.polyfill('forms');
 
 $(document).on("page:load", function() {
