@@ -25,7 +25,7 @@
             %td.add.a.contact{ colspan: 4 }
               .wrap
                 %i.fa.fa-plus
-                = link_to "Add a new contact", new_contact_url, remote: true
+                = link_to "Add a new contact", new_contact_url
           = render @contacts
       #contacts-pagination
         = paginate(@contacts)

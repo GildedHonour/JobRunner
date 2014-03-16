@@ -10,26 +10,25 @@ class ContactsController < ApplicationController
 
   def create
     @contact = Contact.new(contact_params)
-    success = @contact.save
-
-    respond_to do |format|
-      format.js { success ? render("success") : render("new") }
+    if @contact.save
+      redirect_to contact_url(@contact)
+    else
+      render "new"
     end
+
   end
 
   def edit
     @contact = Contact.find(params[:id])
-    respond_to do |format|
-      format.js { render("new") }
-    end
+    render "new"
   end
 
   def update
     @contact = Contact.find(params[:id])
-    success = @contact.update_attributes(contact_params)
-
-    respond_to do |format|
-      format.js { success ? render("success") : render("new") }
+    if @contact.update_attributes(contact_params)
+      redirect_to contact_url(@contact)
+    else
+      render "new"
     end
   end
 

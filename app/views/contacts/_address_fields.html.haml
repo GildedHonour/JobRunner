@@ -1,16 +1,24 @@
-= f.fields_for :addresses, @contact.addresses.present? ? @contact.addresses : @contact.addresses.build do |address_form|
-  %label{ for: "address" } Address
-  .form-group
-    = address_form.text_field :address_line_1, placeholder: "Address Line 1", class: "form-control"
-    = address_form.text_field :address_line_2, placeholder: "Address Line 2", class: "form-control"
-    = address_form.text_field :city, placeholder: "City", class: "form-control"
-    = address_form.text_field :state, placeholder: "State", class: "form-control"
-    = address_form.text_field :zip, placeholder: "Zip", class: "form-control"
-    = address_form.select :country, Address.country.options, {}, class: "form-control"
-
-  .form-group
-    = address_form.link_to_remove "Remove", class: "btn btn-danger btn-xs pull-right"
-  .clearfix
-= f.link_to_add :addresses, class: "btn-fam square" do
-  %i.fa.fa-plus
-  %span Add a new address
+.row
+  #addresses
+    = f.fields_for :addresses, (@contact.persisted? || @contact.addresses.present?) ? @contact.addresses : @contact.addresses.build, wrapper: false do |address_form|
+      .col-md-4.fields
+        .panel.panel-default
+          .panel-heading
+            .panel-title
+              Address
+          .panel-body
+            = address_form.input :address_line_1, as: :string, placeholder: "Address Line 1", label: false
+            = address_form.input :address_line_2, as: :string, placeholder: "Address Line 2", label: false
+            .row
+              .col-md-6
+                = address_form.input :city, placeholder: "City", label: false
+              .col-md-6
+                = address_form.input :state, placeholder: "State", label: false
+            .row
+              .col-md-6
+                = address_form.input :zip, placeholder: "Zip", label: false
+              .col-md-6
+                = address_form.input :country, collection: Address.country.values.map{|option| [option.upcase, option] }, label: false
+            = address_form.link_to_remove "Remove", class: "btn btn-danger"
+  .col-md-4
+    = f.link_to_add  "Add address", :addresses, class: "btn btn-default", data: { target: "#addresses" }
