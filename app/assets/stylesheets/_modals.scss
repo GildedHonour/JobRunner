@@ -1,7 +1,14 @@
 .modal-header {
 	border: none; // remove bootstrap defaults
 	text-align: center;
+    background: #f8fafa;
+    margin-bottom: 30px;
 }
+
+.modal-footer {
+  background: #f8fafa;
+}
+
 .modal-body {
 	position: relative;
 	padding: 0px;

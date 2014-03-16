@@ -2,7 +2,7 @@
   .modal-content
     .modal-header
       %button.close{ "data-dismiss" => "modal", type: "button" } ×
-      %h4.modal-title
+      %h2.modal-title
         Manage Relationships
     #modal-form
       = simple_nested_form_for @company, url: update_internal_company_relationships_company_url(@company), html: { class: "form-horizontal" }, remote: true do |f|
@@ -23,7 +23,7 @@
 
           .row
             .col-md-10.col-md-offset-1
-              .row.top-buffer-30
+              .row
                 = render "internal_company_relationships_fields", f: f
         .modal-footer
           %button.btn.btn-default{ "data-dismiss" => "modal", type: "button" } Close

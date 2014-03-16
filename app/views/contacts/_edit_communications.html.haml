@@ -2,12 +2,12 @@
   .modal-content
     .modal-header
       %button.close{ "data-dismiss" => "modal", type: "button" } ×
-      %h4.modal-title
+      %h2.modal-title
         Manage Commications
     #modal-form
       = simple_nested_form_for @contact, url: update_communications_contact_url(@contact), remote: true do |f|
         .modal-body
-          .row.top-buffer-30
+          .row
             .col-md-10.col-md-offset-1
               .form-group.form-inline
                 %label.control-label{ for: "birthday" }
