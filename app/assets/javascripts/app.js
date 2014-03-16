@@ -19,3 +19,10 @@ jQuery(function($) {
         $('.expanded.wrapper').fadeOut();
     });
 });
+
+//$.webshims.setOptions("basePath", "/assets/webshims/shims/");
+$.webshims.polyfill('forms');
+
+$(document).on("page:load", function() {
+    $(this).updatePolyfill();
+});

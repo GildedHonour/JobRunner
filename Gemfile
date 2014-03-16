@@ -16,6 +16,7 @@ gem "kaminari"
 gem "haml-rails"
 gem "nested_form"
 gem "simple_form", github: "plataformatec/simple_form" #Latest for Bootstrap support
+gem "webshims-rails"
 
 # Assets
 gem "sass-rails", "~> 4.0.0"

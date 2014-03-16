@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require webshims/extras/modernizr-custom
+//= require webshims/polyfiller
 //= require jquery.maskedinput.min.js
 //= require jquery.typewatch
 //= require jquery_nested_form
