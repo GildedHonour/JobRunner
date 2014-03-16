@@ -180,7 +180,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
     rake (10.1.1)
-    remotipart (1.2.1)
     rmagick (2.13.2)
     rspec-core (2.14.7)
     rspec-expectations (2.14.5)
@@ -269,7 +268,6 @@ DEPENDENCIES
   quiet_assets
   rails (= 4.0.2)
   rails_12factor
-  remotipart
   rmagick
   rspec-rails
   sass-rails (~> 4.0.0)

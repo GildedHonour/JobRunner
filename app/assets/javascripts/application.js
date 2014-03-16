@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require jquery.remotipart
+//= require jquery.maskedinput.min.js
 //= require jquery.typewatch
 //= require jquery_nested_form
 //= require nested_form_custom
@@ -22,6 +22,7 @@
 //= require bootstrap/modal
 //= require bootstrap/alert
 //= require progress_indicator
+//= require phone_number
 //= require purl
 //= require app
 //= require index_search_filter_view

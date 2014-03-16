@@ -19,15 +19,7 @@ class Contact < ActiveRecord::Base
   accepts_nested_attributes_for :notes
   accepts_nested_attributes_for :addresses, reject_if: lambda { |address| address[:address_line_1].blank? }, allow_destroy: true
   accepts_nested_attributes_for :emails, reject_if: lambda { |email| email[:value].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :phone_numbers, reject_if: lambda { |phone_number| phone_number[:value].blank? }, allow_destroy: true
-
-  def default_email_address
-    self.email_addresses.first.try(:value)
-  end
-
-  def default_phone_number
-    self.phone_numbers.first.try(:value)
-  end
+  accepts_nested_attributes_for :phone_numbers, reject_if: lambda { |phone_number| phone_number[:phone_number].blank? }, allow_destroy: true
 
   def full_name
     [self.prefix, self.first_name, self.middle_name, self.last_name].compact.join(" ")

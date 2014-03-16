@@ -60,7 +60,7 @@ class ContactsController < ApplicationController
                                     :mmi_ballgame, :do_not_mail, :do_not_email, :send_cookies,
                                     addresses_attributes: [:id, :address_line_1, :address_line_2, :city, :state, :zip, :country, :_destroy],
                                     emails_attributes: [:id, :value, :_destroy],
-                                    phone_numbers_attributes: [:id, :kind, :value, :_destroy]
+                                    phone_numbers_attributes: [:id, :extension, :kind, :phone_number, :_destroy]
     )
   end
 end

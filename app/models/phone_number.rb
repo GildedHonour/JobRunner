@@ -4,9 +4,13 @@ class PhoneNumber < ActiveRecord::Base
 
   enumerize :kind, in: %i(business mobile fax home other_phone other_fax), default: :business
 
-  validates :value, presence: true
+  validates :phone_number, presence: true
 
   def to_s
-    self.value
+    if(self.extension.present?)
+      "#{self.phone_number} #{self.extension}"
+    else
+      "#{self.phone_number}"
+    end
   end
 end

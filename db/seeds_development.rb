@@ -16,7 +16,7 @@ internal_companies = Company.internal
       name: "#{Faker::Company.name}",
       website: Faker::Internet.domain_name,
       company_type: company_types.sample,
-      phone_numbers: [PhoneNumber.new(value: Faker::PhoneNumber.phone_number)],
+      phone_numbers: [PhoneNumber.new(phone_number: Faker::PhoneNumber.short_phone_number)],
       addresses: [
           Address.new(
               address_line_1: Faker::Address.street_address,
@@ -43,7 +43,7 @@ end
       first_name: Faker::Name.first_name,
       last_name: "#{Faker::Name.last_name}",
       emails: [Email.new(value: Faker::Internet.email)],
-      phone_numbers: [PhoneNumber.new(value: Faker::PhoneNumber.phone_number)],
+      phone_numbers: [PhoneNumber.new(phone_number: Faker::PhoneNumber.short_phone_number)],
       addresses: [
           Address.new(
               address_line_1: Faker::Address.street_address,
