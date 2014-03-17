@@ -1,6 +1,6 @@
 .notes {
   li {
-    border: 1px solid $pmg-background;
+    border: 3px solid $gray-02;
     @include border-radius(rem(1px));
     padding: 10px;
     margin-bottom: 10px;

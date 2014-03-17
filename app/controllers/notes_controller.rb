@@ -27,6 +27,13 @@ class NotesController < ApplicationController
     redirect_to note.notable
   end
 
+  def destroy
+    note = Note.find(params[:id])
+    note.destroy
+
+    redirect_to note.notable
+  end
+
   private
   def note_params
     params.require(:note).permit(:notable_id, :notable_type, :note)
