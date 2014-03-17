@@ -102,13 +102,16 @@ ActiveRecord::Schema.define(version: 20140303074329) do
   end
 
   create_table "notes", force: true do |t|
+    t.integer  "notable_id"
+    t.string   "notable_type"
     t.text     "note"
-    t.integer  "contact_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "notes", ["contact_id"], name: "index_notes_on_contact_id", using: :btree
+  add_index "notes", ["notable_id", "notable_type"], name: "index_notes_on_notable_id_and_notable_type", using: :btree
+  add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
 
   create_table "phone_numbers", force: true do |t|
     t.integer  "phonable_id"

@@ -13,7 +13,7 @@ class Contact < ActiveRecord::Base
   belongs_to :user
 
   has_many :addresses, -> { order "created_at ASC" }, dependent: :destroy, as: :addressable
-  has_many :notes, -> { order "created_at ASC" }, dependent: :destroy
+  has_many :notes, -> { order "created_at DESC" }, dependent: :destroy, as: :notable
 
   has_many :emails, -> { order "created_at ASC" }, as: :emailable, dependent: :destroy
   has_many :phone_numbers, -> { order "created_at ASC" }, as: :phonable, dependent: :destroy

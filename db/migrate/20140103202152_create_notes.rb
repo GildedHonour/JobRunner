@@ -1,8 +1,9 @@
 class CreateNotes < ActiveRecord::Migration
   def change
     create_table :notes do |t|
+      t.references :notable, polymorphic: true, index: true
       t.text :note
-      t.belongs_to :contact, index: true
+      t.references :user, index: true
 
       t.timestamps
     end
