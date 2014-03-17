@@ -7,10 +7,6 @@
     "Media"
 ].each { |company_type| CompanyType.find_or_create_by!(name: company_type) }
 
-User.create!(email: 'sean@engageyourcause.com', password: 'password')
-User.create!(email: 'projects@akshay.cc', password: 'password')
-User.create!(email: 'lori@mmidirect.com', password: 'password')
-
 %w(PMG MMI TEG MSL).each do |internal_company|
   Company.create!(
     name: internal_company,
@@ -26,3 +22,30 @@ User.create!(email: 'lori@mmidirect.com', password: 'password')
     ]
   )
 end
+
+Contact.create!(
+    first_name: "Sean",
+    last_name: "Powell",
+    prefix: "Mr.",
+    job_title: "Project Manager",
+    user: User.new(email: 'sean@engageyourcause.com', password: 'password'),
+    company: Company.all.sample
+)
+
+Contact.create!(
+    first_name: "Akshay",
+    last_name: "Rawat",
+    prefix: "Mr.",
+    job_title: "Developer",
+    user: User.new(email: 'projects@akshay.cc', password: 'password'),
+    company: Company.all.sample
+)
+
+Contact.create!(
+    first_name: "Lori",
+    last_name: "Barao",
+    prefix: "Ms.",
+    job_title: "Project Manager",
+    user: User.new(email: 'lori@mmidirect.com', password: 'password'),
+    company: Company.all.sample
+)

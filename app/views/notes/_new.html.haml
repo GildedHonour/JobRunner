@@ -1,0 +1,22 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %button.close{ "data-dismiss" => "modal", type: "button" } ×
+      %h2.modal-title
+        -if @note.persisted?
+          Edit Note
+        - else
+          Add a Note
+
+    #modal-form
+      = simple_form_for @note do |f|
+        .modal-body
+          .row
+            .col-md-10.col-md-offset-1
+              = f.input :note, label: false, placeholder: "Enter text", input_html: { rows: 6 }
+              = f.hidden_field :notable_id
+              = f.hidden_field :notable_type
+
+        .modal-footer
+          %button.btn.btn-default{ "data-dismiss" => "modal", type: "button" } Close
+          = f.submit "Save", class: "btn btn-primary", data: { toggle: "button", "loading-text" => "Saving" }

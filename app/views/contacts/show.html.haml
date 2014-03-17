@@ -116,9 +116,17 @@
                 = human_boolean(@contact.send_cookies)
 
         .board.for.contact.notes
-          %h3 Notes
-          - @contact.notes.each do |n|
-            %div 
-              = l(n.updated_at)
-            %div
-              = n.note
+          %h3
+            Notes
+            = link_to new_note_url(notable_id: @contact.id, notable_type: "Contact"), class: "btn-fam no-border", remote: true do
+              %i.fa.fa-plus
+
+          %ul.list-unstyled.notes
+            - @contact.notes.each do |note|
+              %li
+                .note
+                  = simple_format(note.note)
+                .meta.text-muted
+                  = l(note.updated_at)
+                  = note.user.contacts.first.full_name
+                  = link_to "edit", edit_note_url(note), remote: true

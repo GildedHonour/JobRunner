@@ -4,7 +4,6 @@ Jobrunner::Application.routes.draw do
 
   resources :contacts do
     resources :users
-
     member do
       get :edit_communications
       patch :update_communications
@@ -22,4 +21,5 @@ Jobrunner::Application.routes.draw do
       patch :delete_company_logo
     end
   end
+  resources :notes
 end

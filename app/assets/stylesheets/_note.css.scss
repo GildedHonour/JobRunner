@@ -1,0 +1,11 @@
+.notes {
+  li {
+    border: 1px solid $pmg-background;
+    @include border-radius(rem(1px));
+    padding: 10px;
+    margin-bottom: 10px;
+    .meta {
+      padding-top: 5px;
+    }
+  }
+}
