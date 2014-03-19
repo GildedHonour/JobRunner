@@ -11,6 +11,7 @@ Jobrunner::Application.routes.draw do
   end
 
   resources :companies do
+    resources :contacts
     member do
       get :edit_affiliations
       patch :update_affiliations

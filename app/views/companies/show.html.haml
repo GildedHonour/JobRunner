@@ -4,7 +4,7 @@
       .go.back
         = link_to companies_url do
           %span.glyphicon.glyphicon-chevron-left
-          Back to companies list
+          View all companies
       .profile
         = render "profile"
     .company.intro
@@ -51,24 +51,26 @@
               %i.fa.fa-pencil
 
             %table.table.table-hover
-              %tr
-                %th Company
-                %th Role(s)
-                %th Status
-                %th Added
-                %th Last Modified
-              - @company.internal_company_relationships.ordered_by_internal_company_name.each do |relationship|
+              %thead
                 %tr
-                  %td
-                    = link_to relationship.internal_company.name, relationship.company
-                  %td
-                    = relationship.role.text
-                  %td
-                    = relationship.record_status
-                  %td
-                    = l(relationship.created_at, format: :only_date)
-                  %td
-                    = l(relationship.updated_at, format: :only_date)
+                  %th Company
+                  %th Role(s)
+                  %th Status
+                  %th Added
+                  %th Last Modified
+              %tbody
+                - @company.internal_company_relationships.ordered_by_internal_company_name.each do |relationship|
+                  %tr
+                    %td
+                      = link_to relationship.internal_company.name, relationship.company
+                    %td
+                      = relationship.role.text
+                    %td
+                      = relationship.record_status
+                    %td
+                      = l(relationship.created_at, format: :only_date)
+                    %td
+                      = l(relationship.updated_at, format: :only_date)
 
     .company.details
       .second.company.row
@@ -79,24 +81,26 @@
               %i.fa.fa-pencil
 
             %table.table.table-hover
-              %tr
-                %th Company
-                %th Role(s)
-                %th Status
-                %th Added
-                %th Last Modified
-              - @company.affiliate_affiliations.ordered_by_affiliate_name.each do |affiliation|
+              %thead
                 %tr
-                  %td
-                    = link_to affiliation.affiliate.name, affiliation.affiliate
-                  %td
-                    = affiliation.role.text
-                  %td
-                    = affiliation.record_status
-                  %td
-                    = l(affiliation.created_at, format: :only_date)
-                  %td
-                    = l(affiliation.updated_at, format: :only_date)
+                  %th Company
+                  %th Role(s)
+                  %th Status
+                  %th Added
+                  %th Last Modified
+              %tbody
+                - @company.affiliate_affiliations.ordered_by_affiliate_name.each do |affiliation|
+                  %tr
+                    %td
+                      = link_to affiliation.affiliate.name, affiliation.affiliate
+                    %td
+                      = affiliation.role.text
+                    %td
+                      = affiliation.record_status
+                    %td
+                      = l(affiliation.created_at, format: :only_date)
+                    %td
+                      = l(affiliation.updated_at, format: :only_date)
 
     .company.details
       .third.company.row
@@ -104,24 +108,31 @@
           .board.for.company
             %h3 People
             %table.table.table-hover
-              %tr
-                %th Name
-                %th Title
-                %th Email
-                %th Phone
-                %th Status
-                %th Last Modified
-              - @company.contacts.each do |contact|
+              %thead
                 %tr
-                  %td
-                    = link_to contact.full_name, contact
-                  %td
-                    = contact.job_title
-                  %td
-                    = contact.emails.join(",")
-                  %td
-                    = contact.phone_numbers.join(",")
-                  %td
-                    = contact.record_status
-                  %td
-                    = l(contact.updated_at, format: :only_date)
+                  %th Name
+                  %th Title
+                  %th Email
+                  %th Phone
+                  %th Status
+                  %th Last Modified
+              %tbody
+                %tr
+                  %td.add.a.contact{ colspan: 6 }
+                    .wrap
+                      %i.fa.fa-plus
+                      = link_to "Add a new contact", new_company_contact_url(@company)
+                - @company.contacts.each do |contact|
+                  %tr
+                    %td
+                      = link_to contact.full_name, company_contact_url(@company, contact)
+                    %td
+                      = contact.job_title
+                    %td
+                      = contact.emails.join(",")
+                    %td
+                      = contact.phone_numbers.join(",")
+                    %td
+                      = contact.record_status
+                    %td
+                      = l(contact.updated_at, format: :only_date)

@@ -2,9 +2,14 @@
   .show.content
     .go.and.profile
       .go.back
-        = link_to contacts_url do
-          %span.glyphicon.glyphicon-chevron-left
-          Back to contacts list
+        - if(@company)
+          = link_to company_url(@company) do
+            %span.glyphicon.glyphicon-chevron-left
+            = "Back to #{@company.name}"
+        - else
+          = link_to contacts_url do
+            %span.glyphicon.glyphicon-chevron-left
+            View all contacts list
       .profile
         = render "profile"
 
@@ -15,7 +20,12 @@
         - else
           New Contact
 
-      = simple_nested_form_for @contact do |f|
+      - if(@company)
+        %h2
+          Company:
+          = @company.name
+
+      = simple_nested_form_for [@company, @contact] do |f|
         .row
           .col-md-12
             %h2
@@ -41,8 +51,11 @@
                       Company Relationship
                   .panel-body
                     .row
-                      .col-md-6
-                        = f.input :company_id, collection: Company.all.map{ |c| [c.name, c.id] }, include_blank: "Select Company", label: false
+                      - if @company
+                        = f.hidden_field :company_id
+                      - else
+                        .col-md-6
+                          = f.input :company_id, collection: Company.all.map{ |c| [c.name, c.id] }, include_blank: "Select Company", label: false
                       .col-md-6
                         = f.input :job_title, placeholder: "Job Title", label: false
 

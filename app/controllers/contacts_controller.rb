@@ -3,37 +3,38 @@ class ContactsController < ApplicationController
 
   PAGE_SIZE = 100
 
+  before_filter :load_contacts
+
   def new
-    @contact = Contact.new(params[:contact])
+    @contact = @contacts.build
     respond_with @contact
   end
 
   def create
-    @contact = Contact.new(contact_params)
+    @contact = @contacts.build(contact_params)
     if @contact.save
-      redirect_to contact_url(@contact)
+      redirect_to save_success_url
     else
       render "new"
     end
-
   end
 
   def edit
-    @contact = Contact.find(params[:id])
+    @contact = @contacts.find(params[:id])
     render "new"
   end
 
   def update
-    @contact = Contact.find(params[:id])
+    @contact = @contacts.find(params[:id])
     if @contact.update_attributes(contact_params)
-      redirect_to contact_url(@contact)
+      redirect_to save_success_url
     else
       render "new"
     end
   end
 
   def index
-    @contacts = params[:search].present? ? Contact.search(params[:search]) : Contact.all
+    @contacts = params[:search].present? ? @contacts.search(params[:search]) : @contacts
     @contacts = @contacts.contacts_of_company_and_its_affiliates(params[:ac]) if params[:ac].present?
     @contacts = @contacts.contacts_of_companies_with_relationship_to(params[:rc]) if params[:rc].present?
     @contacts = params[:first_name_sort] == "down" ? @contacts.order("first_name DESC") : @contacts.order("first_name ASC")
@@ -43,25 +44,25 @@ class ContactsController < ApplicationController
   end
 
   def show
-    @contact = Contact.find(params[:id])
+    @contact = @contacts.find(params[:id])
     respond_with @contact
   end
 
   def destroy
-    @contact = Contact.find(params[:id])
+    @contact = @contacts.find(params[:id])
     @contact.destroy
-    redirect_to contacts_url
+    redirect_to destroy_success_url
   end
 
   def edit_communications
-    @contact = Contact.find(params[:id])
+    @contact = @contacts.find(params[:id])
     respond_to do |format|
       format.js { render("edit_communications") }
     end
   end
 
   def update_communications
-    @contact = Contact.find(params[:id])
+    @contact = @contacts.find(params[:id])
     if @contact.update_attributes(contact_params)
       render "success"
     else
@@ -77,5 +78,18 @@ class ContactsController < ApplicationController
                                     emails_attributes: [:id, :value, :_destroy],
                                     phone_numbers_attributes: [:id, :extension, :kind, :phone_number, :_destroy]
     )
+  end
+
+  def load_contacts
+    @company = Company.find(params[:company_id]) if params[:company_id].present?
+    @contacts = @company ? @company.contacts : Contact.scoped
+  end
+
+  def save_success_url
+    @company ? company_url(@company) : contact_url(@contact)
+  end
+
+  def destroy_success_url
+    @company ? company_url(@company) : contacts_url
   end
 end

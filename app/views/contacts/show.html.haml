@@ -2,18 +2,23 @@
   .show.content
     .contact.intro
       .go.back
-        = link_to contacts_url do
-          %span.glyphicon.glyphicon-chevron-left
-          Back to contacts list
+        - if(@company)
+          = link_to company_url(@company) do
+            %span.glyphicon.glyphicon-chevron-left
+            = "Back to #{@company.name}"
+        - else
+          = link_to contacts_url do
+            %span.glyphicon.glyphicon-chevron-left
+            View all contacts
       .profile
         = render "profile"
       .basic.contact.info
         .contact.name
           %span
             = @contact.full_name
-          = link_to contact_url(@contact), class: "btn-fam no-border pull-right", data: { confirm: "Are you sure you want to delete the contact '#{@contact.full_name}'?", method: 'delete' } do
+          = link_to url_for([@company, @contact]), class: "btn-fam no-border pull-right", data: { confirm: "Are you sure you want to delete the contact '#{@contact.full_name}'?", method: 'delete' } do
             %i.fa.fa-trash-o.pull-right
-          = link_to edit_contact_url(@contact), class: "btn-fam no-border pull-right" do
+          = link_to url_for([:edit, @company, @contact]), class: "btn-fam no-border pull-right" do
             %i.fa.fa-pencil.pull-right
 
         .secondary.contact.info
