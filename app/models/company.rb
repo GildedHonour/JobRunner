@@ -10,7 +10,7 @@ class Company < ActiveRecord::Base
   has_many :principals, through: :principal_affiliations, source: :principal, class_name: 'Company'
 
   has_many :internal_company_relationships
-  has_many :internal_companies, through: :internal_company_relationships, source: :company, class_name: 'Company'
+  has_many :internal_companies, through: :internal_company_relationships, source: :internal_company, class_name: 'Company'
 
   has_many :contacts, -> { order "first_name" },  dependent: :destroy
   has_many :phone_numbers, -> { order "created_at ASC" }, as: :phonable, dependent: :destroy

@@ -1,11 +1,11 @@
 - require 'csv'
 
+- max_relationships = @companies.map{ |c| c.internal_companies.size }.max
 - content = CSV.generate do |csv|
-  - csv << ["Company Name", "Address", "Address 2", "City", "State", "Zip", "Country", "Website", "Primary Phone"]
+  - csv << (["Company Name", "Address", "Address 2", "City", "State", "Zip", "Country", "Website", "Primary Phone"] + max_relationships.times.map{ "Relationship" })
   - @companies.each do |company|
     - address = company.addresses.first || Address.new
     - phone_number = company.phone_numbers.first || PhoneNumber.new
-    - csv << [company.name, address.address_line_1, address.address_line_2, address.city, address.state, address.zip, address.country.upcase, company.website, phone_number]
-    - ap [company.name, address.address_line_1, address.address_line_2, address.city, address.state, address.zip, address.country.upcase, company.website, phone_number].size
+    - csv << ([company.name, address.address_line_1, address.address_line_2, address.city, address.state, address.zip, address.country.upcase, company.website, phone_number] + company.internal_companies.map{ |company| company.name })
 
 = raw content
