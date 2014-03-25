@@ -43,12 +43,14 @@ end
       first_name: Faker::Name.first_name,
       last_name: "#{Faker::Name.last_name}",
       prefix: Contact.prefix.values.sample,
+      birthday: ((20 + i) % 60).years.ago,
       job_title: "Project Manager",
       emails: [Email.new(value: Faker::Internet.email)],
       phone_numbers: [PhoneNumber.new(phone_number: Faker.numerify("(###) ###-####"))],
       addresses: [
           Address.new(
               address_line_1: Faker::Address.street_address,
+              address_line_2: Faker::Address.street_address,
               city: Faker::Address.city,
               state: Faker::Address.us_state,
               zip: Faker::Address.zip_code

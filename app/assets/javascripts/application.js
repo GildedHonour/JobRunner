@@ -23,6 +23,7 @@
 //= require bootstrap/popover
 //= require bootstrap/modal
 //= require bootstrap/alert
+//= require bootstrap/dropdown
 //= require progress_indicator
 //= require phone_number
 //= require purl

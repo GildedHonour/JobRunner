@@ -11,6 +11,9 @@
       %li
         = link_to "Person", contacts_url, class: active_class_if_controller("contacts")
       %li.pull-right.actions.dropdown
-        = link_to "#" do
+        = link_to "#", data: { toggle: "dropdown" } do
           Actions
           %b.caret
+        %ul.dropdown-menu
+          %li{ style: "display: block;" }
+            = link_to "Export as CSV", csv_export_url

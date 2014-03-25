@@ -1,0 +1,11 @@
+- require 'csv'
+
+- content = CSV.generate do |csv|
+  - csv << ["Prefix", "First Name", "Middle Name", "Last Name", "Primary Email", "Job Title", "Address", "Address 2", "City", "State", "Zip", "Country", "Birthday", "Do Not Email", "Do Not Mail", "Gift", "Cookie", "Ballgame", "Primary Phone", "Notes"]
+  - @contacts.each do |contact|
+    - address = contact.addresses.first || Address.new
+    - phone_number = contact.phone_numbers.first || PhoneNumber.new
+    - notes = contact.notes.present? ? contact.notes.map(&:note).join(".") : "None"
+    - csv << [contact.prefix, contact.first_name, contact.middle_name, contact.last_name, contact.emails.first, contact.job_title, address.address_line_1, address.address_line_2, address.city, address.state, address.zip, address.country.upcase, contact.birthday, human_boolean(contact.do_not_email), human_boolean(contact.do_not_mail), contact.gift, human_boolean(contact.send_cookies), human_boolean(contact.mmi_ballgame), phone_number, notes]
+
+= raw content

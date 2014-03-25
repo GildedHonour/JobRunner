@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  respond_to :html, :js
+  respond_to :html, :js, :csv
 
   PAGE_SIZE = 100
 
@@ -72,7 +72,7 @@ class ContactsController < ApplicationController
 
   private
   def contact_params
-    params.require(:contact).permit(:first_name, :last_name, :prefix, :job_title, :company_id, :birthday,
+    params.require(:contact).permit(:first_name, :middle_name, :last_name, :prefix, :job_title, :company_id, :birthday,
                                     :mmi_ballgame, :do_not_mail, :do_not_email, :send_cookies,
                                     addresses_attributes: [:id, :address_line_1, :address_line_2, :city, :state, :zip, :country, :_destroy],
                                     emails_attributes: [:id, :value, :_destroy],

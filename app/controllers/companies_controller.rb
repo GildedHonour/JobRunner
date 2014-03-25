@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  respond_to :html, :js
+  respond_to :html, :js, :csv
 
   PAGE_SIZE = 100
 

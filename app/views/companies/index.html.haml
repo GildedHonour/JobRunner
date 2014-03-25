@@ -1,6 +1,6 @@
 .neat-row
   .index.content
-    = render "action_panel", search_url: companies_url
+    = render "action_panel", search_url: companies_url, csv_export_url: companies_url(params.merge(format: 'csv'))
     .contacts.holder
       %table.table.for.table-hover
         %thead

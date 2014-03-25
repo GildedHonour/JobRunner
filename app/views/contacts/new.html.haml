@@ -31,7 +31,7 @@
             %h2
               Profile
             .row
-              .col-md-4
+              .col-md-6
                 .panel.panel-default
                   .panel-heading
                     .panel-title
@@ -40,11 +40,13 @@
                     .row
                       .col-md-3
                         = f.input :prefix, collection: Contact.prefix.options, include_blank: "Prefix", label: false
-                      .col-md-4
+                      .col-md-3
                         = f.input :first_name, placeholder: "First Name", label: false
-                      .col-md-5
+                      .col-md-3
+                        = f.input :middle_name, placeholder: "Middle Name", label: false
+                      .col-md-3
                         = f.input :last_name, placeholder: "Last Name", label: false
-              .col-md-4
+              .col-md-5
                 .panel.panel-default
                   .panel-heading
                     .panel-title
