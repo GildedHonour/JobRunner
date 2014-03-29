@@ -11,7 +11,8 @@ module Archivable
 
   module ClassMethods
     def with_archived_status(archived)
-      where(archived: archived.to_s == "true")
+      statuses = [archived].flatten
+      where("archived IN (?)", statuses.map{ |s| s.to_s == "true" })
     end
   end
 end

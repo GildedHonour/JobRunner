@@ -36,9 +36,13 @@
 
     = content_for :view_specific_filters do
       %h3.filter.header
-        Affiliations
+        = link_to 'javascript:void(0)', data: { toggle: "collapse", target: "#affiliations-filter ul" }, class: "#{'collapsed' if params[:ac].blank?}" do
+          Affiliations
+          %i.glyphicon.glyphicon-chevron-up.pull-right
+          %i.glyphicon.glyphicon-chevron-down.pull-right
+
       .filter.wrapper#affiliations-filter
-        %ul.list.default.list-unstyled
+        %ul.list.default.list-unstyled{ class: "#{'collapse' if params[:ac].blank?}" }
           - Company.all_principals.each do |principal|
             %li.checkbox
               = check_box_tag "affiliation_filter[company_ids]", principal.id, (params[:ac] || []).include?(principal.id.to_s)

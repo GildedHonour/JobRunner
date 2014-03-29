@@ -13,13 +13,39 @@ h4.filters{
 }
 
 h3.filter.header {
+  margin-bottom: 0px;
+  a {
 	font-size: 13.5pt;
 	color: #434848;
 	font-family: "Verb Light", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+    display: block;
+
+    .glyphicon-chevron-up {
+      display: inherit;
+      margin-right: 10px;
+    }
+    .glyphicon-chevron-down {
+      display: none;
+      margin-right: 10px;
+    }
+    &.collapsed {
+      .glyphicon-chevron-up {
+        display: none;
+      }
+      .glyphicon-chevron-down {
+        display: inherit;
+      }
+    }
+  }
+
 }
 
 .filter.wrapper {
-	border-bottom: 4px solid #d0dcdc;
+    @include clearfix();
+    border-bottom: 4px solid #d0dcdc;
+    & > ul {
+      margin-bottom: 0px;
+    }
 }
 
 .filters li {

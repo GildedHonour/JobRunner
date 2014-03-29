@@ -3,27 +3,39 @@
     %i.fa.fa-filter
     Filters
   %h3.filter.header
-    Relationships
+    = link_to 'javascript:void(0)', data: { toggle: "collapse", target: "#relationships-filter ul" } do
+      Relationships
+      %i.glyphicon.glyphicon-chevron-up.pull-right
+      %i.glyphicon.glyphicon-chevron-down.pull-right
+
   .filter.wrapper#relationships-filter
-    %ul.list.default.list-unstyled
+    %ul.list.default.list-unstyled.in
       - Company.internal.ordered_by_name.each do |company|
         %li.checkbox
           = check_box_tag "relationship_filter[company_ids]", company.id, (params[:rc] || []).include?(company.id.to_s)
           = company.name
 
   %h3.filter.header
-    Role
+    = link_to 'javascript:void(0)', data: { toggle: "collapse", target: "#company-types-filter ul" } do
+      Role
+      %i.glyphicon.glyphicon-chevron-up.pull-right
+      %i.glyphicon.glyphicon-chevron-down.pull-right
+
   .filter.wrapper#company-types-filter
-    %ul.list.default.list-unstyled
+    %ul.list.default.list-unstyled.in
       - CompanyType.ordered_by_name.each do |company_type|
         %li.checkbox
           = check_box_tag "company_type_filter[company_type_ids]", company_type.id, (params[:ct] || []).include?(company_type.id.to_s)
           = company_type.name
 
   %h3.filter.header
-    Status
+    = link_to 'javascript:void(0)', data: { toggle: "collapse", target: "#archived-filter ul" } do
+      Status
+      %i.glyphicon.glyphicon-chevron-up.pull-right
+      %i.glyphicon.glyphicon-chevron-down.pull-right
+
   .filter.wrapper#archived-filter
-    %ul.list.default.list-unstyled
+    %ul.list.default.list-unstyled.in
       %li.checkbox
         = check_box_tag "archived_filter[archived]", false, (params[:a] || []).include?("false")
         Active
