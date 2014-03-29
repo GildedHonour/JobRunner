@@ -21,26 +21,30 @@
           = link_to url_for([:edit, @company, @contact]), class: "btn-fam no-border pull-right" do
             %i.fa.fa-pencil.pull-right
 
-        .secondary.contact.info
-          .pull-left
-            %span.label
-              Email
-            = @contact.emails.join(",")
-            %span.label
-              Phone
-            = @contact.phone_numbers.join(",")
-          .pull-left
-            .pull-left
-              %span.label
-                Address
-            .pull-left
-              - @contact.addresses.each do |address|
-                .address
-                  = address.address_line_1
-                  = address.address_line_2
-                  = address.city
-                  = address.state
-                  = address.zip
+        .secondary.contact.info.row
+          .col-sm-3
+            .row
+              .col-sm-3
+                %span.label
+                  Email
+              .col-sm-9
+                = @contact.emails.join("<br>").html_safe
+          .col-sm-3
+            .row
+              .col-sm-3
+                %span.label
+                  Phone
+              .col-sm-9
+                = @contact.phone_numbers.join("<br>").html_safe
+          .col-sm-6
+            .row
+              .col-sm-2
+                %span.label
+                  Address
+              .col-sm-10
+                - @contact.addresses.each do |address|
+                  .address
+                    = "#{address.address_line_1}, #{address.address_line_2}, #{address.city}, #{address.state}, #{address.zip}"
 
     .contact.details
       .first.contact

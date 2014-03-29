@@ -20,6 +20,7 @@ internal_companies = Company.internal
       addresses: [
           Address.new(
               address_line_1: Faker::Address.street_address,
+              address_line_2: Faker::Address.street_name,
               city: Faker::Address.city,
               state: Faker::Address.us_state,
               zip: Faker::Address.zip_code
@@ -50,7 +51,7 @@ end
       addresses: [
           Address.new(
               address_line_1: Faker::Address.street_address,
-              address_line_2: Faker::Address.street_address,
+              address_line_2: Faker::Address.street_name,
               city: Faker::Address.city,
               state: Faker::Address.us_state,
               zip: Faker::Address.zip_code
