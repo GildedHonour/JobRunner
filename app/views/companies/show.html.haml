@@ -17,30 +17,29 @@
             %i.fa.fa-trash-o.pull-right
           = link_to edit_company_url(@company), class: "btn-fam no-border pull-right" do
             %i.fa.fa-pencil.pull-right
-        .secondary.company.info
-          .pull-left
+        .secondary.company.info.row
+          .col-sm-2
             %span.label
               = @company.company_type
-          .pull-left
-            .pull-left
-              %span.label
-                Address
-            .pull-left
-              - @company.addresses.each do |address|
-                .address
-                  = address.address_line_1
-                  = address.address_line_2
-                  = address.city
-                  = address.state
-                  = address.zip
-
-          .pull-left
+          .col-sm-4
+            .row
+              .col-sm-3
+                %span.label
+                  Phone
+              .col-sm-9
+                = @company.phone_numbers.join("<br>").html_safe
+          .col-sm-3
             %span.label Web
-            %span
-              = @company.website
-            %span.label Phone
-            %span
-              = @company.phone_numbers.join(",")
+            = @company.website
+          .col-sm-3
+            .row
+              .col-sm-4
+                %span.label
+                  Address
+              .col-sm-8
+                - @company.addresses.each do |address|
+                  .address
+                    = "#{address.address_line_1}, #{address.address_line_2}, #{address.city}, #{address.state}, #{address.zip}"
 
     .company.details
       .first.company.row

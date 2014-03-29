@@ -7,10 +7,10 @@ class PhoneNumber < ActiveRecord::Base
   validates :phone_number, presence: true
 
   def to_s
-    if(self.extension.present?)
-      "#{self.phone_number} #{self.extension}"
-    else
-      "#{self.phone_number}"
-    end
+    str = self.phone_number
+    str = "#{str} #{self.extension}" if self.extension.present?
+    str = "#{kind.humanize}: #{str}" if self.kind.present?
+
+    str
   end
 end
