@@ -35,9 +35,12 @@ class ContactsController < ApplicationController
 
   def index
     @contacts = params[:search].present? ? @contacts.search(params[:search]) : @contacts
-    @contacts = @contacts.contacts_of_company_and_its_affiliates(params[:ac]) if params[:ac].present?
-    @contacts = @contacts.with_birthday_months(params[:bm]) if params[:bm].present?
+
+    @contacts = @contacts.contacts_of_company_and_its_affiliates(params[:ac])     if params[:ac].present?
+    @contacts = @contacts.with_archived_status(params[:a])                        if params[:a].present?
+    @contacts = @contacts.with_birthday_months(params[:bm])                       if params[:bm].present?
     @contacts = @contacts.contacts_of_companies_with_relationship_to(params[:rc]) if params[:rc].present?
+
     @contacts = params[:first_name_sort] == "down" ? @contacts.order("first_name DESC") : @contacts.order("first_name ASC")
     @contacts = @contacts.page(params[:page]).per(PAGE_SIZE)
 

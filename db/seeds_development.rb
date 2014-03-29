@@ -11,7 +11,7 @@ company_logos = Dir['spec/fixtures/company_logos/*']
 company_types = CompanyType.not_internal
 internal_companies = Company.internal
 
-100.times do |i|
+80.times do |i|
   company = Company.create!(
       name: "#{Faker::Company.name}",
       website: Faker::Internet.domain_name,
@@ -38,7 +38,7 @@ internal_companies = Company.internal
   end
 end
 
-700.times do |i|
+300.times do |i|
   Contact.create!(
       first_name: Faker::Name.first_name,
       last_name: "#{Faker::Name.last_name}",

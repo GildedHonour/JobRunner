@@ -6,6 +6,7 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :website
       t.string :phone
       t.references :company_type
+      t.boolean :archived, default: false
 
       t.timestamps
     end

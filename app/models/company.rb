@@ -1,4 +1,5 @@
 class Company < ActiveRecord::Base
+  include Archivable
 
   has_many :addresses, -> { order "created_at" }, dependent: :destroy, as: :addressable
 
@@ -9,7 +10,7 @@ class Company < ActiveRecord::Base
   has_many :principal_affiliations, foreign_key: 'affiliate_id', dependent: :destroy, class_name: 'Affiliation'
   has_many :principals, through: :principal_affiliations, source: :principal, class_name: 'Company'
 
-  has_many :internal_company_relationships
+  has_many :internal_company_relationships, dependent: :destroy
   has_many :internal_companies, through: :internal_company_relationships, source: :internal_company, class_name: 'Company'
 
   has_many :contacts, -> { order "first_name" },  dependent: :destroy

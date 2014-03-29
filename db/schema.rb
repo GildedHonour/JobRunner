@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20140303074329) do
     t.string   "website"
     t.string   "phone"
     t.integer  "company_type_id"
+    t.boolean  "archived",        default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

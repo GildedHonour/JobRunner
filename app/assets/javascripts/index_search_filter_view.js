@@ -6,6 +6,11 @@ App.IndexSearchFilterView = {
             selectionInputName: "affiliation_filter[company_ids]"
         },
         {
+            selector: "#archived-filter",
+            searchKeyName: "a",
+            selectionInputName: "archived_filter[archived]"
+        },
+        {
             selector: "#birthdays-filter",
             searchKeyName: "bm",
             selectionInputName: "birthday_filter[month_ids]"

@@ -20,4 +20,15 @@
           = check_box_tag "company_type_filter[company_type_ids]", company_type.id, (params[:ct] || []).include?(company_type.id.to_s)
           = company_type.name
 
+  %h3.filter.header
+    Status
+  .filter.wrapper#archived-filter
+    %ul.list.default.list-unstyled
+      %li.checkbox
+        = check_box_tag "archived_filter[archived]", false, (params[:a] || []).include?("false")
+        Active
+      %li.checkbox
+        = check_box_tag "archived_filter[archived]", true, (params[:a] || []).include?("true")
+        Inactive
+
   = yield :view_specific_filters
