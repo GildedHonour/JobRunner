@@ -48,6 +48,10 @@ class Company < ActiveRecord::Base
       Company.order("name").find(*Affiliation.pluck(:principal_id).uniq)
     end
 
+    def with_company_types(company_type_ids)
+      where(company_type_id: company_type_ids)
+    end
+
     def relationship_with_company(company_ids)
       includes(:internal_company_relationships).where('internal_company_relationships.internal_company_id IN (?)', company_ids)
     end

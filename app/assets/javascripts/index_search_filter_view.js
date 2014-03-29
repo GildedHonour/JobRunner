@@ -1,19 +1,38 @@
 App.IndexSearchFilterView = {
+    filters: [
+        {
+            selector: "#affiliations-filter",
+            searchKeyName: "ac",
+            selectionInputName: "affiliation_filter[company_ids]"
+        },
+        {
+            selector: "#birthdays-filter",
+            searchKeyName: "bm",
+            selectionInputName: "birthday_filter[month_ids]"
+        },
+        {
+            selector: "#company-types-filter",
+            searchKeyName: "ct",
+            selectionInputName: "company_type_filter[company_type_ids]"
+        },
+        {
+            selector: "#relationships-filter",
+            searchKeyName: "rc",
+            selectionInputName: "relationship_filter[company_ids]"
+        }
+    ],
+
     bindEvents: function(bodyClass) {
-        $(document).on('change', bodyClass + ' #affiliations-filter', function() {
-            var selectedCompanies = $.map($('input[name="affiliation_filter[company_ids]"]:checked'), function(company_input) {
-                return $(company_input).val();
+        $.each(this.filters, function(index, filter) {
+            $(document).on('change', bodyClass + ' ' + filter.selector, function() {
+                var selectedCompanies = $.map($('input[name="' + filter.selectionInputName + '"]:checked'), function(company_input) {
+                    return $(company_input).val();
+                });
+
+                var filterParam = {};
+                filterParam[filter.searchKeyName] = selectedCompanies;
+                Turbolinks.visit(App.addParamToCurrentUrl(filterParam));
             });
-
-            Turbolinks.visit(App.addParamToCurrentUrl({ ac: selectedCompanies }));
-        });
-
-        $(document).on('change', bodyClass + ' #relationships-filter', function() {
-            var selectedCompanies = $.map($('input[name="relationship_filter[company_ids]"]:checked'), function(company_input) {
-                return $(company_input).val();
-            });
-
-            Turbolinks.visit(App.addParamToCurrentUrl({ rc: selectedCompanies }));
         });
     },
 

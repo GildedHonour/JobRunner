@@ -35,6 +35,7 @@ class CompaniesController < ApplicationController
     @companies = params[:search].present? ? Company.search(params[:search]) : Company.all
     @companies = @companies.affiliated_to_company(params[:ac]) if params[:ac].present?
     @companies = @companies.relationship_with_company(params[:rc]) if params[:rc].present?
+    @companies = @companies.with_company_types(params[:ct]) if params[:ct].present?
     @companies = params[:name_sort] == "down" ? @companies.order("companies.name DESC") : @companies.order("companies.name ASC")
     @companies = @companies.page(params[:page]).per(PAGE_SIZE)
 

@@ -10,11 +10,14 @@
         %li.checkbox
           = check_box_tag "relationship_filter[company_ids]", company.id, (params[:rc] || []).include?(company.id.to_s)
           = company.name
+
   %h3.filter.header
-    Affiliations
-  .filter.wrapper#affiliations-filter
+    Role
+  .filter.wrapper#company-types-filter
     %ul.list.default.list-unstyled
-      - Company.all_principals.each do |principal|
+      - CompanyType.ordered_by_name.each do |company_type|
         %li.checkbox
-          = check_box_tag "affiliation_filter[company_ids]", principal.id, (params[:ac] || []).include?(principal.id.to_s)
-          = principal.name
+          = check_box_tag "company_type_filter[company_type_ids]", company_type.id, (params[:ct] || []).include?(company_type.id.to_s)
+          = company_type.name
+
+  = yield :view_specific_filters

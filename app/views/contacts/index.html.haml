@@ -31,4 +31,16 @@
         = paginate(@contacts)
   .profile.on.listing.pages
     = render "profile"
+
+    = content_for :view_specific_filters do
+      %h3.filter.header
+        Birthday
+      .filter.wrapper#birthdays-filter
+        %ul.list.default.list-unstyled
+          - Date::MONTHNAMES.compact.each_with_index do |month, index|
+            - month_index = index + 1;
+            %li.checkbox
+              = check_box_tag "birthday_filter[month_ids]", month_index, (params[:bm] || []).include?(month_index.to_s)
+              = month
+
     = render "companies_contacts_shared/filter_sidebar"

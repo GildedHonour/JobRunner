@@ -33,4 +33,15 @@
         = paginate(@companies)
   .profile.on.listing.pages
     = render "profile"
+
+    = content_for :view_specific_filters do
+      %h3.filter.header
+        Affiliations
+      .filter.wrapper#affiliations-filter
+        %ul.list.default.list-unstyled
+          - Company.all_principals.each do |principal|
+            %li.checkbox
+              = check_box_tag "affiliation_filter[company_ids]", principal.id, (params[:ac] || []).include?(principal.id.to_s)
+              = principal.name
+
     = render "companies_contacts_shared/filter_sidebar"

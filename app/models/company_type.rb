@@ -1,6 +1,8 @@
 class CompanyType < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
+  scope :ordered_by_name, -> { order("company_types.name") }
+
   def self.internal
     where("name ILIKE 'internal'").first
   end

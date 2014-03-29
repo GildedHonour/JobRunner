@@ -36,6 +36,10 @@ class Contact < ActiveRecord::Base
       Contact.includes(:company).where("first_name ILIKE ? OR last_name ILIKE ? OR companies.name ILIKE ?", term_like, term_like, term_like)
     end
 
+    def with_birthday_months(month_ids)
+      where('extract(month from birthday) IN (?)', month_ids)
+    end
+
     def contacts_of_company_and_its_affiliates(company_ids)
       Contact.includes(company: :principal_affiliations).
           references(:affiliate_affiliations).
