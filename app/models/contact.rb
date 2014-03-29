@@ -40,14 +40,12 @@ class Contact < ActiveRecord::Base
       where('extract(month from birthday) IN (?)', month_ids)
     end
 
-    def contacts_of_company_and_its_affiliates(company_ids)
-      Contact.includes(company: :principal_affiliations).
-          references(:affiliate_affiliations).
-          where('affiliations.principal_id IN (?) OR company_id IN (?)', company_ids, company_ids)
+    def contacts_of_companies_with_relationship_to(internal_company_ids)
+      Contact.includes(:company).where('companies.company_id IN (?)', internal_company_ids)
     end
 
-    def contacts_of_companies_with_relationship_to(internal_company_ids)
-      Contact.includes(:company).where('company_id IN (?)', internal_company_ids)
+    def contacts_of_companies_with_company_types(company_type_ids)
+      Contact.includes(:company).where('companies.company_type_id IN (?)', company_type_ids)
     end
   end
 end
