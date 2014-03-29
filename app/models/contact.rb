@@ -33,7 +33,7 @@ class Contact < ActiveRecord::Base
     def search(term)
       return Contact.none if term.blank?
       term_like = "%#{term}%"
-      Contact.includes(:company).where("first_name ILIKE ? OR last_name ILIKE ? OR companies.name ILIKE ?", term_like, term_like, term_like)
+      includes(:company).references(:company).where("first_name ILIKE ? OR last_name ILIKE ? OR companies.name ILIKE ?", term_like, term_like, term_like)
     end
 
     def with_birthday_months(month_ids)
@@ -41,11 +41,11 @@ class Contact < ActiveRecord::Base
     end
 
     def contacts_of_companies_with_relationship_to(internal_company_ids)
-      Contact.includes(:company).where('companies.company_id IN (?)', internal_company_ids)
+      includes(company: :internal_company_relationships).where('internal_company_relationships.internal_company_id IN (?)', internal_company_ids)
     end
 
     def contacts_of_companies_with_company_types(company_type_ids)
-      Contact.includes(:company).where('companies.company_type_id IN (?)', company_type_ids)
+      includes(:company).references(:company).where('companies.company_type_id IN (?)', company_type_ids)
     end
   end
 end

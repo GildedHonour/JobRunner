@@ -86,7 +86,7 @@ class ContactsController < ApplicationController
 
   def load_contacts
     @company = Company.find(params[:company_id]) if params[:company_id].present?
-    @contacts = @company ? @company.contacts : Contact.scoped
+    @contacts = @company ? @company.contacts : Contact.all
   end
 
   def save_success_url

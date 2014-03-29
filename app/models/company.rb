@@ -38,11 +38,11 @@ class Company < ActiveRecord::Base
     def search(term)
       return Company.none if term.blank?
       term_like = "%#{term}%"
-      Company.where("companies.name ILIKE ?", term_like)
+      where("companies.name ILIKE ?", term_like)
     end
 
     def affiliated_to_company(company_ids)
-      includes(:principal_affiliations).where('affiliations.principal_id IN (?)', company_ids).references(:affiliate_affiliations)
+      includes(:principal_affiliations).references(:principal_affiliations).where('affiliations.principal_id IN (?)', company_ids).references(:affiliate_affiliations)
     end
 
     def all_principals
@@ -54,7 +54,7 @@ class Company < ActiveRecord::Base
     end
 
     def relationship_with_company(company_ids)
-      includes(:internal_company_relationships).where('internal_company_relationships.internal_company_id IN (?)', company_ids)
+      includes(:internal_company_relationships).references(:internal_company_relationships).where('internal_company_relationships.internal_company_id IN (?)', company_ids)
     end
   end
 
