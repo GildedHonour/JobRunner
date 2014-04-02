@@ -56,6 +56,13 @@ class Company < ActiveRecord::Base
     def relationship_with_company(company_ids)
       includes(:internal_company_relationships).references(:internal_company_relationships).where('internal_company_relationships.internal_company_id IN (?)', company_ids)
     end
+
+    def with_affiliations_and_relationships_with_archived_status(archived_status)
+      archived_status = [archived_status].flatten.map{ |status| status.to_s == "true" }
+      includes([:principal_affiliations, :internal_company_relationships]).
+        references([:principal_affiliations, :internal_company_relationships]).
+        where("affiliations.archived IN (?) OR internal_company_relationships.archived IN (?)", archived_status, archived_status)
+    end
   end
 
   def affiliate_affiliations_of_affiliate(company)
