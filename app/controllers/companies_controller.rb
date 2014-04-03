@@ -40,7 +40,7 @@ class CompaniesController < ApplicationController
     @companies = @companies.with_company_types(params[:ct])                                 if params[:ct].present?
 
     @companies = params[:name_sort] == "down" ? @companies.order("companies.name DESC") : @companies.order("companies.name ASC")
-    @companies = @companies.page(params[:page]).per(PAGE_SIZE)
+    @companies = @companies.page(params[:page]).per(PAGE_SIZE) unless request.format == :csv
 
     respond_with @companies
   end

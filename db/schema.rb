@@ -69,11 +69,12 @@ ActiveRecord::Schema.define(version: 20140303074329) do
     t.date     "birthday"
     t.string   "prefix"
     t.string   "job_title"
+    t.text     "source"
     t.boolean  "do_not_email"
     t.boolean  "do_not_mail"
-    t.string   "gift"
     t.boolean  "mmi_ballgame"
     t.boolean  "send_cookies"
+    t.boolean  "contest"
     t.boolean  "archived",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -42,7 +42,7 @@ class ContactsController < ApplicationController
     @contacts = @contacts.contacts_of_companies_with_relationship_to(params[:rc]) if params[:rc].present?
 
     @contacts = params[:first_name_sort] == "down" ? @contacts.order("first_name DESC") : @contacts.order("first_name ASC")
-    @contacts = @contacts.page(params[:page]).per(PAGE_SIZE)
+    @contacts = @contacts.page(params[:page]).per(PAGE_SIZE) unless request.format == :csv
 
     respond_with @contacts
   end
@@ -77,7 +77,7 @@ class ContactsController < ApplicationController
   private
   def contact_params
     params.require(:contact).permit(:first_name, :middle_name, :last_name, :prefix, :job_title, :company_id, :birthday,
-                                    :mmi_ballgame, :do_not_mail, :do_not_email, :send_cookies,
+                                    :contest, :mmi_ballgame, :do_not_mail, :do_not_email, :send_cookies, :source,
                                     addresses_attributes: [:id, :address_line_1, :address_line_2, :city, :state, :zip, :country, :_destroy],
                                     emails_attributes: [:id, :value, :_destroy],
                                     phone_numbers_attributes: [:id, :extension, :kind, :phone_number, :_destroy]

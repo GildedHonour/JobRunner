@@ -5,18 +5,22 @@
       %h2.modal-title
         Manage Commications
     #modal-form
-      = simple_nested_form_for @contact, url: update_communications_contact_url(@contact), remote: true do |f|
+      = simple_nested_form_for @contact, url: update_communications_contact_url(@contact), remote: true, html: { class: "form-horizontal" }, wrapper: :horizontal_form do |f|
         .modal-body
           .row
-            .col-md-10.col-md-offset-1
+            .col-sm-10.col-sm-offset-2
               .form-group.form-inline
                 %label.control-label{ for: "birthday" }
                   Birthday
                 = f.date_select :birthday, { discard_year: true, include_blank: true }, { class: "form-control" }
+
+              = f.input :do_not_email
+              = f.input :do_not_mail
+              = f.input :contest, label: "Send contest emails"
+              = f.input :send_cookies
               = f.input :mmi_ballgame, label: "Send MMI ballgame emails"
-              = f.input :do_not_email, label: "Do not email"
-              = f.input :do_not_mail, label: "Do not mail"
-              = f.input :send_cookies, label: "Send cookies"
+              .col-sm-11
+                = f.input :source, as: :string
 
         .modal-footer
           %button.btn.btn-default{ "data-dismiss" => "modal", type: "button" } Close

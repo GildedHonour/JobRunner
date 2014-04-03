@@ -105,24 +105,32 @@
           %table
             %tr
               %td.tlabel.for.attribute Birthday
-              %td 
-                = @contact.birthday && l(@contact.birthday, format: :only_date_month)
-            %tr
-              %td.tlabel.for.attribute MMI Ballgame
               %td
-                = human_boolean(@contact.mmi_ballgame)
+                = @contact.birthday && l(@contact.birthday, format: :only_date_month)
             %tr
               %td.tlabel.for.attribute Do not email
               %td
                 = human_boolean(@contact.do_not_email)
             %tr
               %td.tlabel.for.attribute Do not mail
-              %td 
+              %td
                 = human_boolean(@contact.do_not_mail)
+            %tr
+              %td.tlabel.for.attribute Send contest emails
+              %td
+                = human_boolean(@contact.contest)
             %tr
               %td.tlabel.for.attribute Send cookies
               %td
                 = human_boolean(@contact.send_cookies)
+            %tr
+              %td.tlabel.for.attribute Send MMI ballgame emails
+              %td
+                = human_boolean(@contact.mmi_ballgame)
+            %tr
+              %td.tlabel.for.attribute Source
+              %td
+                = @contact.source
 
         .board.for.contact.notes
           %h3
