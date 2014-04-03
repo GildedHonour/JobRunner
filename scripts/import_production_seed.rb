@@ -4,6 +4,13 @@ def company_value(country)
   Address.country.values.include?(country.to_s.downcase) ? country.to_s.downcase : :usa
 end
 
+def company_type_value(company_type_string)
+  return nil if company_type_string.blank?
+  ct = CompanyType.where(name: company_type_string).first
+  raise "No company type found for #{company_type_string}" if ct.blank?
+  ct
+end
+
 def internal_relationship_role_value(value)
   value.gsub(" ", "_").downcase
 end
@@ -73,14 +80,16 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
   (ap "No company on row #{row_number}" && next) if company.blank?
 
   company = Company.where(name: company).first || Company.create!(
+    company_type: company_type_value(company_type),
     name: company,
     website: website,
-    addresses_attributes:     [{ address_line_1: address_line_1, city: city, country: company_value(country), state: state, zip: zip }],
+    addresses_attributes:     [{ address_line_1: address_line_1, city: city, country: company_value(country), state: state, zip: zip }]
   )
 
   if(first_name.blank?)
     ap "No contact on row #{row_number-1}"
   else
+    ap "Importing contact #{first_name} - #{last_name} #{row_number-1}"
     company.contacts.create!(
       addresses_attributes: [{ address_line_1: address_line_1, city: city, country: company_value(country), state: state, zip: zip }],
       birthday: (Date.parse("#{birth_day} #{birth_month}") if(birth_day.present? && birth_month.present?)),
@@ -104,13 +113,16 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
     )
   end
 
-  if(teg_role.present?)
+  if teg_role.present?
     InternalCompanyRelationship.create!(internal_company: teg, company: company, role: internal_relationship_role_value(teg_role)) if InternalCompanyRelationship.where(internal_company_id: teg, company_id: company, role: internal_relationship_role_value(teg_role)).blank?
-  elsif(mmi_role.present?)
+  end
+  if mmi_role.present?
     InternalCompanyRelationship.create!(internal_company: mmi, company: company, role: internal_relationship_role_value(mmi_role)) if InternalCompanyRelationship.where(internal_company_id: mmi, company_id: company, role: internal_relationship_role_value(mmi_role)).blank?
-  elsif(pmg_role.present?)
+  end
+  if pmg_role.present?
     InternalCompanyRelationship.create!(internal_company: pmg, company: company, role: internal_relationship_role_value(pmg_role)) if InternalCompanyRelationship.where(internal_company_id: pmg, company_id: company, role: internal_relationship_role_value(pmg_role)).blank?
-  elsif(msl_role.present?)
+  end
+  if msl_role.present?
     InternalCompanyRelationship.create!(internal_company: msl, company: company, role: internal_relationship_role_value(msl_role)) if InternalCompanyRelationship.where(internal_company_id: msl, company_id: company, role: internal_relationship_role_value(msl_role)).blank?
   end
 end

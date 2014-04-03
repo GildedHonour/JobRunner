@@ -44,7 +44,7 @@
               .col-sm-10
                 - @contact.addresses.each do |address|
                   .address
-                    = "#{address.address_line_1}, #{address.address_line_2}, #{address.city}, #{address.state}, #{address.zip}"
+                    = [address.address_line_1, address.address_line_2, address.city, address.state, address.zip].compact.join(", ")
 
     .contact.details
       .first.contact
