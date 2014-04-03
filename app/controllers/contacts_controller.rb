@@ -77,7 +77,7 @@ class ContactsController < ApplicationController
   private
   def contact_params
     params.require(:contact).permit(:first_name, :middle_name, :last_name, :prefix, :job_title, :company_id, :birthday,
-                                    :contest, :mmi_ballgame, :do_not_mail, :do_not_email, :send_cookies, :source,
+                                    :contest_participant, :mmi_ballgame, :do_not_mail, :do_not_email, :send_cookies, :source,
                                     addresses_attributes: [:id, :address_line_1, :address_line_2, :city, :state, :zip, :country, :_destroy],
                                     emails_attributes: [:id, :value, :_destroy],
                                     phone_numbers_attributes: [:id, :extension, :kind, :phone_number, :_destroy]

@@ -15,7 +15,7 @@ class CreateContacts < ActiveRecord::Migration
       t.boolean :do_not_mail
       t.boolean :mmi_ballgame
       t.boolean :send_cookies
-      t.boolean :contest
+      t.boolean :contest_participant
 
       t.boolean :archived, default: false
 

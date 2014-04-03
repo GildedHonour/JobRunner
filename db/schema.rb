@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(version: 20140303074329) do
     t.boolean  "do_not_mail"
     t.boolean  "mmi_ballgame"
     t.boolean  "send_cookies"
-    t.boolean  "contest"
-    t.boolean  "archived",     default: false
+    t.boolean  "contest_participant"
+    t.boolean  "archived",            default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
