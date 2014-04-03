@@ -6,8 +6,6 @@
         %thead
           %tr
             %th
-              = check_box_tag "select-contact"
-            %th
             %th.sortable
               - if(params[:name_sort] == "down")
                 = link_to companies_url(params.merge(name_sort: "up")) do

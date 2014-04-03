@@ -5,8 +5,6 @@
       %table.table.table-hover
         %thead
           %tr
-            %th
-              = check_box_tag "select-contact"
             %th.sortable
               - if(params[:first_name_sort] == "down")
                 = link_to contacts_url(params.merge(first_name_sort: "up")) do
