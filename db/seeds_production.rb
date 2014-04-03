@@ -1,10 +1,11 @@
 [
-    "Internal",
     "Agency",
-    "Supplier/Service Provider",
-    "Nonprofit",
     "Commercial",
-    "Media"
+    "Internal",
+    "Media",
+    "Other / Admin",
+    "Nonprofit",
+    "Supplier / Service Provider",
 ].each { |company_type| CompanyType.find_or_create_by!(name: company_type) }
 
 [

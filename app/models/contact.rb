@@ -7,7 +7,6 @@ class Contact < ActiveRecord::Base
   validates :prefix, presence: true
 
   validates :company_id, presence: true
-  validates :job_title, presence: true
 
   belongs_to :company
   belongs_to :user

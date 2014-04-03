@@ -27,7 +27,6 @@ class Company < ActiveRecord::Base
 
   # Validations
   validates :name, presence: true, uniqueness: true
-  validates :company_type_id, presence: true
 
   scope :ordered_by_affiliate_name, -> { includes(affiliate_affiliations: :affiliate).order("companies.name") }
   scope :ordered_by_name, -> { order("companies.name") }

@@ -4,20 +4,15 @@ def company_value(country)
   Address.country.values.include?(country.to_s.downcase) ? country.to_s.downcase : :usa
 end
 
-def affiliation_role_value(value)
+def internal_relationship_role_value(value)
   value.gsub(" ", "_").downcase
 end
 
-DatabaseCleaner.strategy = :truncation
-DatabaseCleaner.clean
+mmi = Company.where(name: "MMI").first
+msl = Company.where(name: "MSL").first
+pmg = Company.where(name: "PMG").first
+teg = Company.where(name: "TEG").first
 
-mmi = Company.create!(name: "MMI", internal: true)
-msl = Company.create!(name: "MSL", internal: true)
-pmg = Company.create!(name: "PMG", internal: true)
-teg = Company.create!(name: "TEG", internal: true)
-
-User.create!(email: 'sean@engageyourcause.com', password: 'password')
-User.create!(email: 'projects@akshay.cc', password: 'password')
 
 import_file = "spec/fixtures/export_data.csv"
 row_number = 1
@@ -43,43 +38,41 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
   other_phone =       row[16]
   other_fax =         row[17]
 
-  email =     row[18]
-  website =          row[19]
+  email =             row[18]
+  website =           row[19]
 
-  teg_contact =       row[20]
-  teg_role =          row[21]
-  teg_status =        row[22]
+  company_type =      row[20]
+  contest =           row[21]
+  source =            row[22]
 
-  mmi_contact =       row[23]
-  mmi_role =          row[24]
+  teg_status =        row[23]
+  teg_role =          row[24]
+
   mmi_status =        row[25]
+  mmi_role =          row[26]
 
-  pmg_contact =       row[26]
-  pmg_role =          row[27]
-  pmg_status =        row[28]
+  pmg_status =        row[27]
+  pmg_role =          row[28]
 
-  msl_contact =       row[29]
+  msl_status =        row[29]
   msl_role =          row[30]
-  msl_status =        row[31]
 
-  birth_day =         row[32]
-  birth_month =       row[33]
+  birth_day =         row[31]
+  birth_month =       row[32]
 
-  cookies =           row[34]
-  mmi_ballgame =      row[35]
-  do_not_email =       row[36]
-  do_not_mail =       row[37]
+  cookies =           row[33]
+  mmi_ballgame =      row[34]
+  do_not_email =      row[35]
+  do_not_mail =       row[36]
 
-  teg_source =        row[40]
-  mmi_source =        row[41]
-  pmg_source =        row[42]
-  msl_source =        row[43]
+  id =                row[37]
+  notes =             row[38]
 
   puts "Row: #{row_number+=1}"
 
   (ap "No company on row #{row_number}" && next) if company.blank?
 
-  company = Company.where(name: company).first || Company.create(
+  company = Company.where(name: company).first || Company.create!(
     name: company,
     website: website,
     addresses_attributes:     [{ address_line_1: address_line_1, city: city, country: company_value(country), state: state, zip: zip }],
@@ -111,17 +104,17 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
     )
   end
 
-  if(teg_contact.to_s.downcase == "true")
-    Affiliation.create!(principal: teg, affiliate: company, role: affiliation_role_value(teg_role)) if Affiliation.where(principal_id: teg, affiliate_id: company, role: affiliation_role_value(teg_role)).blank?
-  elsif(mmi_contact.to_s.downcase == "true")
-    Affiliation.create!(principal: mmi, affiliate: company, role: affiliation_role_value(mmi_role)) if Affiliation.where(principal_id: mmi, affiliate_id: company, role: affiliation_role_value(mmi_role)).blank?
-  elsif(pmg_contact.to_s.downcase == "true")
-    Affiliation.create!(principal: pmg, affiliate: company, role: affiliation_role_value(pmg_role)) if Affiliation.where(principal_id: pmg, affiliate_id: company, role: affiliation_role_value(pmg_role)).blank?
-  elsif(msl_contact.to_s.downcase == "true")
-    Affiliation.create!(principal: msl, affiliate: company, role: affiliation_role_value(msl_role)) if Affiliation.where(principal_id: msl, affiliate_id: company, role: affiliation_role_value(msl_role)).blank?
+  if(teg_role.present?)
+    InternalCompanyRelationship.create!(internal_company: teg, company: company, role: internal_relationship_role_value(teg_role)) if InternalCompanyRelationship.where(internal_company_id: teg, company_id: company, role: internal_relationship_role_value(teg_role)).blank?
+  elsif(mmi_role.present?)
+    InternalCompanyRelationship.create!(internal_company: mmi, company: company, role: internal_relationship_role_value(mmi_role)) if InternalCompanyRelationship.where(internal_company_id: mmi, company_id: company, role: internal_relationship_role_value(mmi_role)).blank?
+  elsif(pmg_role.present?)
+    InternalCompanyRelationship.create!(internal_company: pmg, company: company, role: internal_relationship_role_value(pmg_role)) if InternalCompanyRelationship.where(internal_company_id: pmg, company_id: company, role: internal_relationship_role_value(pmg_role)).blank?
+  elsif(msl_role.present?)
+    InternalCompanyRelationship.create!(internal_company: msl, company: company, role: internal_relationship_role_value(msl_role)) if InternalCompanyRelationship.where(internal_company_id: msl, company_id: company, role: internal_relationship_role_value(msl_role)).blank?
   end
 end
 
 ap "No. of companies created: #{Company.count}"
 ap "No. of companies created: #{Contact.count}"
-ap "No. of affiliations created: #{Affiliation.count}"
+ap "No. of affiliations created: #{InternalCompanyRelationship.count}"
