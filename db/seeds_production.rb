@@ -7,6 +7,13 @@
     "Media"
 ].each { |company_type| CompanyType.find_or_create_by!(name: company_type) }
 
+[
+  "MMI Website",
+  "MSL Website",
+  "PMG website",
+  "TEG Website"
+].each { |contact_source| ContactSource.find_or_create_by!(name: contact_source) }
+
 %w(PMG MMI TEG MSL).each do |internal_company|
   Company.create!(
     name: internal_company,

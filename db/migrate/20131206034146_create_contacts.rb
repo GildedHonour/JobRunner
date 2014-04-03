@@ -9,7 +9,6 @@ class CreateContacts < ActiveRecord::Migration
       t.date :birthday
       t.string :prefix
       t.string :job_title
-      t.text :source
 
       t.boolean :do_not_email
       t.boolean :do_not_mail
