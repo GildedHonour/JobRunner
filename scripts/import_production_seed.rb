@@ -11,8 +11,21 @@ def company_type_value(company_type_string)
   ct
 end
 
+def phone_number_attributes(kind, phone_number_string)
+  return {} if phone_number_string.blank?
+
+  phone_number_string.gsub!(/^\+1\s/, "")
+
+  digits = phone_number_string.split("").select{|b|b=~ /\d/}
+  raise "invalid phone #{phone_number_string} - #{digits.size} and #{digits}" unless [10, 12, 13, 14].include?(digits.size)
+
+  attributes = { kind: kind, phone_number: "(#{digits[0..2].join}) #{digits[3..5].join}-#{digits[6..10].join}" }
+  attributes.merge!({ extension: "#{digits[11..14].join}" }) if digits.size >= 12
+  attributes
+end
+
 def internal_relationship_role_value(value)
-  value.gsub(" ", "_").downcase
+  value.gsub(/\.|\(|\)|\-|\s/, "").downcase
 end
 
 mmi = Company.where(name: "MMI").first
@@ -102,12 +115,12 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
       middle_name: middle_name,
       mmi_ballgame: mmi_ballgame,
       phone_numbers_attributes: [
-          { value: business_phone, kind: :business    },
-          { value: mobile_phone,   kind: :mobile      },
-          { value: fax_phone,      kind: :fax         },
-          { value: home_phone,     kind: :home        },
-          { value: other_phone,    kind: :other_phone },
-          { value: other_fax,      kind: :other_fax   }
+          phone_number_attributes(:business, business_phone),
+          phone_number_attributes(:mobile, mobile_phone),
+          phone_number_attributes(:fax, fax_phone),
+          phone_number_attributes(:home, home_phone),
+          phone_number_attributes(:other_phone, other_phone),
+          phone_number_attributes(:other_fax, other_fax),
       ],
       prefix: prefix
     )

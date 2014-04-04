@@ -8,7 +8,7 @@ class PhoneNumber < ActiveRecord::Base
 
   def to_s
     str = self.phone_number
-    str = "#{str} #{self.extension}" if self.extension.present?
+    str = "#{str} x#{self.extension}" if self.extension.present?
     str = "#{kind.humanize}: #{str}" if self.kind.present?
 
     str
