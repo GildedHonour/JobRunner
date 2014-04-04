@@ -113,7 +113,7 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
   if(first_name.blank?)
     puts "No contact on row #{row_number-1} for company: #{company_name}"
   else
-    company.contacts.create!(
+    contact = company.contacts.create!(
       addresses_attributes: [{ address_line_1: address_line_1, city: city, country: country_value(country), state: state, zip: zip }],
       birthday: (Date.parse("#{birth_day} #{birth_month}") if(birth_day.present? && birth_month.present?)),
       do_not_email: parse_boolean(do_not_email),
@@ -135,10 +135,10 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
           phone_number_attributes(:other_fax, other_fax),
       ],
       archived: parse_boolean(inactive_contact),
-      notes: [ Note.new(note: note) ],
       prefix: prefix
     )
   end
+  contact.notes.create!(note: note) if note.present?
 
   if teg_role.present?
     InternalCompanyRelationship.create!(internal_company: teg, company: company, role: internal_relationship_role_value(teg_role), archived: !(teg_status.to_s.downcase.strip == "active")) if InternalCompanyRelationship.where(internal_company_id: teg, company_id: company, role: internal_relationship_role_value(teg_role)).blank?
