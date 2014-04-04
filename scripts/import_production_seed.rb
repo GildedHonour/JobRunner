@@ -42,7 +42,7 @@ import_file = "spec/fixtures/export_data.csv"
 row_number = 1
 
 CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
-  company =           row[0]
+  company_name =           row[0]
   prefix =            row[1]
   first_name =        row[2]
   middle_name =       row[3]
@@ -94,21 +94,21 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
 
   inactive_contact =  row[43]
 
-  puts "Row: #{row_number+=1}"
+  row_number+=1
+  #puts "Row: #{row_number}"
 
-  (ap "No company on row #{row_number}" && next) if company.blank?
+  (puts "No company on row #{row_number}" && next) if company_name.blank?
 
-  company = Company.where(name: company).first || Company.create!(
+  company = Company.where(name: company_name).first || Company.create!(
     company_type: company_type_value(company_type),
-    name: company,
+    name: company_name,
     website: website,
     addresses_attributes:     [{ address_line_1: address_line_1, city: city, country: company_value(country), state: state, zip: zip }]
   )
 
   if(first_name.blank?)
-    ap "No contact on row #{row_number-1}"
+    puts "No contact on row #{row_number-1} for company: #{company_name}"
   else
-    ap "Importing contact #{first_name} - #{last_name} #{row_number-1}"
     company.contacts.create!(
       addresses_attributes: [{ address_line_1: address_line_1, city: city, country: company_value(country), state: state, zip: zip }],
       birthday: (Date.parse("#{birth_day} #{birth_month}") if(birth_day.present? && birth_month.present?)),
