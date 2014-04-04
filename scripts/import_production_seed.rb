@@ -90,7 +90,9 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
   do_not_mail =       row[36]
 
   id =                row[37]
-  note =             row[38]
+  note =              row[38]
+
+  inactive_contact =  row[43]
 
   puts "Row: #{row_number+=1}"
 
@@ -128,6 +130,7 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
           phone_number_attributes(:other_phone, other_phone),
           phone_number_attributes(:other_fax, other_fax),
       ],
+      archived: parse_boolean(inactive_contact),
       notes: [ Note.new(note: note) ],
       prefix: prefix
     )
