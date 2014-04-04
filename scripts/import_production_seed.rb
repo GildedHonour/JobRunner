@@ -28,6 +28,10 @@ def internal_relationship_role_value(value)
   value.gsub(/\.|\(|\)|\-|\s/, "").downcase
 end
 
+def parse_boolean(string)
+  %w(true 1 y).include?(string.to_s.downcase.strip)
+end
+
 mmi = Company.where(name: "MMI").first
 msl = Company.where(name: "MSL").first
 pmg = Company.where(name: "PMG").first
@@ -62,7 +66,7 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
   website =           row[19]
 
   company_type =      row[20]
-  contest =           row[21]
+  contest_participant = row[21]
   source =            row[22]
 
   teg_status =        row[23]
@@ -80,13 +84,13 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
   birth_day =         row[31]
   birth_month =       row[32]
 
-  cookies =           row[33]
+  send_cookies =      row[33]
   mmi_ballgame =      row[34]
   do_not_email =      row[35]
   do_not_mail =       row[36]
 
   id =                row[37]
-  notes =             row[38]
+  note =             row[38]
 
   puts "Row: #{row_number+=1}"
 
@@ -106,8 +110,10 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
     company.contacts.create!(
       addresses_attributes: [{ address_line_1: address_line_1, city: city, country: company_value(country), state: state, zip: zip }],
       birthday: (Date.parse("#{birth_day} #{birth_month}") if(birth_day.present? && birth_month.present?)),
-      do_not_email: do_not_email.downcase == "true",
-      do_not_mail: do_not_mail.downcase == "true",
+      do_not_email: parse_boolean(do_not_email),
+      do_not_mail: parse_boolean(do_not_mail),
+      contest_participant: parse_boolean(contest_participant),
+      send_cookies: parse_boolean(send_cookies),
       emails_attributes: [{ value: email }],
       first_name: first_name,
       job_title: job_title,
@@ -122,6 +128,7 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
           phone_number_attributes(:other_phone, other_phone),
           phone_number_attributes(:other_fax, other_fax),
       ],
+      notes: [ Note.new(note: note) ],
       prefix: prefix
     )
   end

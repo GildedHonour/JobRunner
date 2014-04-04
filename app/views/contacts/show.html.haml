@@ -141,7 +141,8 @@
                   = simple_format(note.note)
                 .meta.text-muted
                   = l(note.updated_at)
-                  = note.user.contacts.first.full_name
+                  - if note.user #Imported from legacy data
+                    = note.user.contacts.first.full_name
                   = link_to "edit", edit_note_url(note), remote: true
                   |
                   = link_to "delete", note_url(note), data: { confirm: "Are you sure?", method: 'delete' }
