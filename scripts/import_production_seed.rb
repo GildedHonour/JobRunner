@@ -137,16 +137,16 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
   end
 
   if teg_role.present?
-    InternalCompanyRelationship.create!(internal_company: teg, company: company, role: internal_relationship_role_value(teg_role)) if InternalCompanyRelationship.where(internal_company_id: teg, company_id: company, role: internal_relationship_role_value(teg_role)).blank?
+    InternalCompanyRelationship.create!(internal_company: teg, company: company, role: internal_relationship_role_value(teg_role), archived: !(teg_status.to_s.downcase.strip == "active")) if InternalCompanyRelationship.where(internal_company_id: teg, company_id: company, role: internal_relationship_role_value(teg_role)).blank?
   end
   if mmi_role.present?
-    InternalCompanyRelationship.create!(internal_company: mmi, company: company, role: internal_relationship_role_value(mmi_role)) if InternalCompanyRelationship.where(internal_company_id: mmi, company_id: company, role: internal_relationship_role_value(mmi_role)).blank?
+    InternalCompanyRelationship.create!(internal_company: mmi, company: company, role: internal_relationship_role_value(mmi_role), archived: !(mmi_status.to_s.downcase.strip == "active")) if InternalCompanyRelationship.where(internal_company_id: mmi, company_id: company, role: internal_relationship_role_value(mmi_role)).blank?
   end
   if pmg_role.present?
-    InternalCompanyRelationship.create!(internal_company: pmg, company: company, role: internal_relationship_role_value(pmg_role)) if InternalCompanyRelationship.where(internal_company_id: pmg, company_id: company, role: internal_relationship_role_value(pmg_role)).blank?
+    InternalCompanyRelationship.create!(internal_company: pmg, company: company, role: internal_relationship_role_value(pmg_role), archived: !(pmg_status.to_s.downcase.strip == "active")) if InternalCompanyRelationship.where(internal_company_id: pmg, company_id: company, role: internal_relationship_role_value(pmg_role)).blank?
   end
   if msl_role.present?
-    InternalCompanyRelationship.create!(internal_company: msl, company: company, role: internal_relationship_role_value(msl_role)) if InternalCompanyRelationship.where(internal_company_id: msl, company_id: company, role: internal_relationship_role_value(msl_role)).blank?
+    InternalCompanyRelationship.create!(internal_company: msl, company: company, role: internal_relationship_role_value(msl_role), archived: !(msl_status.to_s.downcase.strip == "active")) if InternalCompanyRelationship.where(internal_company_id: msl, company_id: company, role: internal_relationship_role_value(msl_role)).blank?
   end
 end
 
