@@ -1,6 +1,6 @@
 require 'csv'
 
-def company_value(country)
+def country_value(country)
   Address.country.values.include?(country.to_s.downcase) ? country.to_s.downcase : :usa
 end
 
@@ -103,14 +103,18 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
     company_type: company_type_value(company_type),
     name: company_name,
     website: website,
-    addresses_attributes:     [{ address_line_1: address_line_1, city: city, country: company_value(country), state: state, zip: zip }]
+    addresses_attributes:     [{ address_line_1: address_line_1, city: city, country: country_value(country), state: state, zip: zip }]
   )
+
+  if address_line_1.present? && company.addresses.none? { |address| "#{address.address_line_1} #{address.city} #{address.zip}" == "#{address_line_1} #{city} #{zip}" }
+    company.addresses.create!({ address_line_1: address_line_1, city: city, country: country_value(country), state: state, zip: zip })
+  end
 
   if(first_name.blank?)
     puts "No contact on row #{row_number-1} for company: #{company_name}"
   else
     company.contacts.create!(
-      addresses_attributes: [{ address_line_1: address_line_1, city: city, country: company_value(country), state: state, zip: zip }],
+      addresses_attributes: [{ address_line_1: address_line_1, city: city, country: country_value(country), state: state, zip: zip }],
       birthday: (Date.parse("#{birth_day} #{birth_month}") if(birth_day.present? && birth_month.present?)),
       do_not_email: parse_boolean(do_not_email),
       do_not_mail: parse_boolean(do_not_mail),
@@ -151,5 +155,6 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
 end
 
 ap "No. of companies created: #{Company.count}"
-ap "No. of companies created: #{Contact.count}"
-ap "No. of affiliations created: #{InternalCompanyRelationship.count}"
+ap "No. of contacts created: #{Contact.count}"
+ap "No. of addresses created: #{Address.count}"
+ap "No. of relationships created: #{InternalCompanyRelationship.count}"
