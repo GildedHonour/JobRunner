@@ -97,38 +97,48 @@
                 %td
 
     .contact.details
-      .second.contact
+      .contact
         .board.for.contact.communications
           %h3
             Communications
-            = link_to edit_communications_contact_url(@contact), class: "btn-fam no-border", remote: true do
+            = link_to edit_section_contact_url(@contact, section: "communications"), class: "btn-fam no-border", remote: true do
               %i.fa.fa-pencil
-          %table
-            %tr
-              %td.tlabel.for.attribute Birthday
-              %td
-                = @contact.birthday && l(@contact.birthday, format: :only_date_month)
-            %tr
-              %td.tlabel.for.attribute Do not email
-              %td
-                = human_boolean(@contact.do_not_email)
-            %tr
-              %td.tlabel.for.attribute Do not mail
-              %td
-                = human_boolean(@contact.do_not_mail)
-            %tr
-              %td.tlabel.for.attribute Contest participant
-              %td
-                = human_boolean(@contact.contest_participant)
-            %tr
-              %td.tlabel.for.attribute Send cookies
-              %td
-                = human_boolean(@contact.send_cookies)
-            %tr
-              %td.tlabel.for.attribute Send MMI ballgame emails
-              %td
-                = human_boolean(@contact.mmi_ballgame)
 
+          %dl.dl-horizontal
+            %dt.tlabel.for.attribute Do not email
+            %dd
+              = human_boolean(@contact.do_not_email)
+            %dt.tlabel.for.attribute Do not mail
+            %dd
+              = human_boolean(@contact.do_not_mail)
+            %dt.tlabel.for.attribute Send cookies
+            %dd
+              = human_boolean(@contact.send_cookies)
+            %dt.tlabel.for.attribute Send MMI ballgame emails
+            %dd
+              = human_boolean(@contact.send_mmi_ballgame_emails)
+
+        .board.for.contact.other
+          %h3
+            Other
+            = link_to edit_section_contact_url(@contact, section: "other"), class: "btn-fam no-border", remote: true do
+              %i.fa.fa-pencil
+          %dl.dl-horizontal
+            %dt
+              Birthday
+            %dd
+              = @contact.birthday && l(@contact.birthday, format: :only_date_month)
+            %dt
+              Contest Participant
+            %dd
+              = human_boolean(@contact.contest_participant)
+            %dt
+              Sources
+            %dd
+              = @contact.contact_sources.to_sentence
+
+    .contact.details
+      .second.contact
         .board.for.contact.notes
           %h3
             Notes

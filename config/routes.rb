@@ -5,8 +5,8 @@ Jobrunner::Application.routes.draw do
   resources :contacts do
     resources :users
     member do
-      get :edit_communications
-      patch :update_communications
+      get :edit_section
+      patch :update_section
     end
   end
 

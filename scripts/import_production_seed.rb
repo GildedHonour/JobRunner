@@ -85,7 +85,7 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
   birth_month =       row[32]
 
   send_cookies =      row[33]
-  mmi_ballgame =      row[34]
+  send_mmi_ballgame_emails =      row[34]
   do_not_email =      row[35]
   do_not_mail =       row[36]
 
@@ -125,7 +125,7 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
       job_title: job_title,
       last_name: last_name,
       middle_name: middle_name,
-      mmi_ballgame: mmi_ballgame,
+      send_mmi_ballgame_emails: send_mmi_ballgame_emails,
       phone_numbers_attributes: [
           phone_number_attributes(:business, business_phone),
           phone_number_attributes(:mobile, mobile_phone),
@@ -138,7 +138,10 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
       prefix: prefix
     )
   end
+
   contact.notes.create!(note: note) if note.present?
+  contact_source = ContactSource.where(name: source).first
+  contact.contact_sources << contact_source if contact_source.present?
 
   if teg_role.present?
     InternalCompanyRelationship.create!(internal_company: teg, company: company, role: internal_relationship_role_value(teg_role), archived: !(teg_status.to_s.downcase.strip == "active")) if InternalCompanyRelationship.where(internal_company_id: teg, company_id: company, role: internal_relationship_role_value(teg_role)).blank?

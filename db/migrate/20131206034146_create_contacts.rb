@@ -12,7 +12,7 @@ class CreateContacts < ActiveRecord::Migration
 
       t.boolean :do_not_email
       t.boolean :do_not_mail
-      t.boolean :mmi_ballgame
+      t.boolean :send_mmi_ballgame_emails
       t.boolean :send_cookies
       t.boolean :contest_participant
 

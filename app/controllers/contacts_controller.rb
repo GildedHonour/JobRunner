@@ -20,12 +20,10 @@ class ContactsController < ApplicationController
   end
 
   def edit
-    @contact = @contacts.find(params[:id])
     render "new"
   end
 
   def update
-    @contact = @contacts.find(params[:id])
     if @contact.update_attributes(contact_params)
       redirect_to save_success_url
     else
@@ -49,36 +47,34 @@ class ContactsController < ApplicationController
   end
 
   def show
-    @contact = @contacts.find(params[:id])
     respond_with @contact
   end
 
   def destroy
-    @contact = @contacts.find(params[:id])
     @contact.destroy
     redirect_to destroy_success_url
   end
 
-  def edit_communications
-    @contact = @contacts.find(params[:id])
+  def edit_section
+    @section = params[:section]
     respond_to do |format|
-      format.js { render("edit_communications") }
+      format.js { render("edit_section") }
     end
   end
 
-  def update_communications
-    @contact = @contacts.find(params[:id])
+  def update_section
+    @section = params[:section]
     if @contact.update_attributes(contact_params)
       render "success"
     else
-      render  "edit_communications"
+      render "edit_section"
     end
   end
 
   private
   def contact_params
     params.require(:contact).permit(:first_name, :middle_name, :last_name, :prefix, :job_title, :company_id, :birthday,
-                                    :contest_participant, :mmi_ballgame, :do_not_mail, :do_not_email, :send_cookies,
+                                    :contest_participant, :send_mmi_ballgame_emails, :do_not_mail, :do_not_email, :send_cookies, contact_source_ids: [],
                                     addresses_attributes: [:id, :address_line_1, :address_line_2, :city, :state, :zip, :country, :_destroy],
                                     emails_attributes: [:id, :value, :_destroy],
                                     phone_numbers_attributes: [:id, :extension, :kind, :phone_number, :_destroy]
@@ -88,6 +84,7 @@ class ContactsController < ApplicationController
   def load_contacts
     @company = Company.find(params[:company_id]) if params[:company_id].present?
     @contacts = @company ? @company.contacts : Contact.all
+    @contact = @contacts.find(params[:id]) if params[:id].present?
   end
 
   def save_success_url

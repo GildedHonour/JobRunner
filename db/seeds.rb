@@ -3,7 +3,7 @@ if ENV['DEVELOPMENT'] || Rails.env.development?
   DatabaseCleaner.clean
 
   require_relative "seeds_production"
-  # require_relative "seeds_development"
+  require_relative "seeds_development"
 else
   require_relative "seeds_production"
 end

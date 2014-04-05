@@ -63,6 +63,7 @@
 
 .board.for.contact {
   @include span-columns(12 of 24);
+  padding-bottom: 50px;
 }
 
 .board.for.contact h3 {

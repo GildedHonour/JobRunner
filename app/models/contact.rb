@@ -16,6 +16,8 @@ class Contact < ActiveRecord::Base
   has_many :emails, -> { order "created_at ASC" }, as: :emailable, dependent: :destroy
   has_many :phone_numbers, -> { order "created_at ASC" }, as: :phonable, dependent: :destroy
 
+  has_and_belongs_to_many :contact_sources
+
   enumerize :prefix, in: %i(Mr. Mrs. Ms. Miss. Prof.)
 
   accepts_nested_attributes_for :notes
