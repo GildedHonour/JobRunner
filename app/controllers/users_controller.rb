@@ -14,10 +14,9 @@ class UsersController < ApplicationController
       user.contacts << @contact
     end
 
-    @success_message = "The user has been invited." unless @user.errors.present?
-
+    partial = @user.errors.present? ? "new" : "success"
     respond_to do |format|
-      format.js { render("new") }
+      format.js { render(partial) }
     end
   end
 

@@ -11,16 +11,9 @@
           - if @user.errors.any?
             .alert.alert-danger
               %a.close{ "data-dismiss" => "alert", href: "#" } ×
-              %h4
-                Oh snap! You got an error!
               - @user.errors.full_messages.each do |message|
                 %p
                   = message
-          - if @success_message
-            .alert.alert-success
-              %a.close{ "data-dismiss" => "alert", href: "#" } ×
-              %h4
-                = @success_message
           .row
             .col-md-10.col-md-offset-1
               .row

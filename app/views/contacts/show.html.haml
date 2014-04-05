@@ -75,26 +75,15 @@
 
         .board.for.contact
           %h3 User Account
-          %table
-            %tr
-              %td.tlabel.for.attribute
-                %strong Emails:
-              %td
-                = @contact.emails.join(",")
-            - if @contact.user.present?
-              %tr
-                %td.tlabel.for.attribute
-                  %strong
-                    User Account:
-                %td
-                  = @contact.user.email
-                  - unless @contact.user.invitation_accepted?
-                    (Pending confirmation)
-            - else
-              %tr
-                %td
-                  = link_to "Add a user account", new_contact_user_url(@contact), remote: true, class: "btn btn-primary"
-                %td
+          %dl.dl-horizontal
+            %dt Account
+            %dd
+              - if @contact.user.present?
+                = @contact.user.email
+                - unless @contact.user.invitation_accepted?
+                  (Pending confirmation)
+              - else
+                = link_to "Invite user", new_contact_user_url(@contact), remote: true, class: "btn btn-primary"
 
     .contact.details
       .contact
@@ -103,18 +92,17 @@
             Communications
             = link_to edit_section_contact_url(@contact, section: "communications"), class: "btn-fam no-border", remote: true do
               %i.fa.fa-pencil
-
           %dl.dl-horizontal
-            %dt.tlabel.for.attribute Do not email
+            %dt Do not email
             %dd
               = human_boolean(@contact.do_not_email)
-            %dt.tlabel.for.attribute Do not mail
+            %dt Do not mail
             %dd
               = human_boolean(@contact.do_not_mail)
-            %dt.tlabel.for.attribute Send cookies
+            %dt Send cookies
             %dd
               = human_boolean(@contact.send_cookies)
-            %dt.tlabel.for.attribute Send MMI ballgame emails
+            %dt Send MMI ballgame emails
             %dd
               = human_boolean(@contact.send_mmi_ballgame_emails)
 
