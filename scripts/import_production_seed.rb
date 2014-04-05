@@ -195,6 +195,22 @@ CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
   )
 end
 
+Company.all.each do |company|
+  if company.contacts.size > 1
+    phone_numbers_grouped_by_phone_number_kind = company.contacts.collect_concat(&:phone_numbers).group_by(&:kind)
+    phone_numbers_grouped_by_phone_number_kind.each do |kind, phone_numbers|
+      if phone_numbers.size == company.contacts.size && phone_numbers.map(&:to_s).uniq.size == 1
+        company.phone_numbers.create!(phone_numbers.first.attributes.slice(*%w(kind phone_number extension)))
+      end
+    end
+  end
+end
+
+supplier_company_type = CompanyType.where(name: "Supplier / Service Provider").first
+Company.includes(:internal_company_relationships).where("internal_company_relationships.role = ?", 'supplier').each do |company|
+  company.update_attribute(:company_type_id, supplier_company_type.id)
+end
+
 contact = Contact.where(first_name: "Sean", last_name: "Powell").first
 User.create!(email: 'sean@engageyourcause.com', password: 'password', contacts: [contact])
 
