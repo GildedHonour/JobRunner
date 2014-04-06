@@ -5,13 +5,11 @@
       %h2.modal-title
         Manage Affiliations
     #modal-form
-      = simple_nested_form_for @company, url: update_affiliations_company_url(@company), html: { class: "form-horizontal" }, remote: true do |f|
+      = simple_nested_form_for @company, url: update_section_company_url(@company, section: "affiliations"), html: { class: "form-horizontal" }, remote: true do |f|
         .modal-body
           - if @company.errors.any?
             .alert.alert-danger
               %a.close{ "data-dismiss" => "alert", href: "#" } ×
-              %h4
-                Oh snap! You got an error!
               - @company.errors.full_messages.each do |message|
                 %p
                   = message

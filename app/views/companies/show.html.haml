@@ -46,7 +46,7 @@
         .col-sm-12
           .board.for.company
             %h3 Relationships
-            = link_to edit_internal_company_relationships_company_url(@company), class: "btn-fam no-border", remote: true do
+            = link_to edit_section_company_url(@company, section: "internal_company_relationships"), class: "btn-fam no-border", remote: true do
               %i.fa.fa-pencil
 
             %table.table.table-hover
@@ -76,7 +76,7 @@
         .col-sm-12
           .board.for.company
             %h3 Affiliations
-            = link_to edit_affiliations_company_url(@company), class: "btn-fam no-border", remote: true do
+            = link_to edit_section_company_url(@company, section: "affiliations"), class: "btn-fam no-border", remote: true do
               %i.fa.fa-pencil
 
             %table.table.table-hover

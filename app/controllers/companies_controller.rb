@@ -3,6 +3,8 @@ class CompaniesController < ApplicationController
 
   PAGE_SIZE = 100
 
+  before_filter :load_company
+
   def new
     @company = Company.new(params[:company])
     respond_with @company
@@ -18,12 +20,10 @@ class CompaniesController < ApplicationController
   end
 
   def edit
-    @company = Company.find(params[:id])
     render "new"
   end
 
   def update
-    @company = Company.find(params[:id])
     if @company.update_attributes(company_params)
       redirect_to company_url(@company)
     else
@@ -47,57 +47,41 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    @company = Company.includes(:affiliates).find(params[:id])
     respond_with @company
   end
 
   def destroy
-    @company = Company.find(params[:id])
     @company.destroy
     redirect_to companies_url
   end
 
-  def edit_affiliations
-    @company = Company.includes(:affiliates).find(params[:id])
+  def edit_section
+    @section = params[:section]
     respond_to do |format|
-      format.js { render("edit_affiliations") }
+      format.js { render("edit_section") }
     end
   end
 
-  def update_affiliations
-    @company = Company.includes(:affiliates).find(params[:id])
+  def update_section
+    @section = params[:section]
     if @company.update_attributes(company_params)
       render "success"
     else
-      render  "edit_affiliations"
+      render  "edit_section"
     end
-  end
-
-  def edit_internal_company_relationships
-    @company = Company.includes(:internal_companies).find(params[:id])
-    respond_to do |format|
-      format.js { render("edit_internal_company_relationships") }
-    end
-  end
-
-  def update_internal_company_relationships
-    @company = Company.includes(:internal_companies).find(params[:id])
-    if @company.update_attributes(company_params)
-      render "success"
-    else
-      render "edit_internal_company_relationships"
-    end
-
   end
 
   def delete_company_logo
-    @company = Company.find(params[:id])
     @company.remove_company_logo!
     @company.save
     redirect_to edit_company_url(@company)
   end
 
   private
+  def load_company
+    @company = Company.includes(:internal_companies, :affiliates).find(params[:id]) if params[:id].present?
+  end
+
   def company_params
     params.require(:company).permit(:name, :website, :phone, :company_logo, :company_type_id,
                                     affiliate_affiliations_attributes: [:id, :archived, :affiliate_id, :role, :_destroy],

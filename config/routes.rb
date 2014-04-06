@@ -13,11 +13,8 @@ Jobrunner::Application.routes.draw do
   resources :companies do
     resources :contacts
     member do
-      get :edit_affiliations
-      patch :update_affiliations
-
-      get :edit_internal_company_relationships
-      patch :update_internal_company_relationships
+      get :edit_section
+      patch :update_section
 
       patch :delete_company_logo
     end
