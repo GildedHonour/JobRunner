@@ -3,6 +3,15 @@ class ApplicationController < ActionController::Base
   layout :determine_layout
 
   before_filter :authenticate_user!
+  helper_method :companies_url_with_saved_filters, :contacts_url_with_saved_filters
+
+  def companies_url_with_saved_filters
+    companies_url(session[:company_filter_params] || {})
+  end
+
+  def contacts_url_with_saved_filters
+    contacts_url(session[:contact_filter_params] || {})
+  end
 
   private
   def determine_layout

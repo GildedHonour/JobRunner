@@ -2,7 +2,7 @@
   .show.content
     .go.and.profile
       .go.back
-        = link_to companies_url do
+        = link_to companies_url_with_saved_filters do
           %span.glyphicon.glyphicon-chevron-left
           Back to companies list
       .profile
@@ -39,5 +39,5 @@
 
         %br
         .form-group
-          = link_to "Back", back_url_or(companies_url), class: "btn btn-default"
+          = link_to "Back", back_url_or(companies_url_with_saved_filters), class: "btn btn-default"
           = f.submit "Save", class: "btn btn-primary"

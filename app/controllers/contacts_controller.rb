@@ -4,6 +4,8 @@ class ContactsController < ApplicationController
   PAGE_SIZE = 100
 
   before_filter :load_contacts
+  before_filter :save_filters, only: :index
+
 
   def new
     @contact = @contacts.build
@@ -81,17 +83,26 @@ class ContactsController < ApplicationController
     )
   end
 
+  def destroy_success_url
+    @company ? company_url(@company) : contacts_url_with_saved_filters
+  end
+
   def load_contacts
     @company = Company.find(params[:company_id]) if params[:company_id].present?
     @contacts = @company ? @company.contacts : Contact.all
     @contact = @contacts.find(params[:id]) if params[:id].present?
   end
 
-  def save_success_url
-    @company ? company_url(@company) : contact_url(@contact)
+  def save_filters
+    active_filters = %i(a bm ct irr rc search name_sort).select{ |filter_param| params[filter_param].present? }
+    if active_filters.present?
+      session[:contact_filter_params] = params.slice(*active_filters)
+    else
+      session[:contact_filter_params] = nil
+    end
   end
 
-  def destroy_success_url
-    @company ? company_url(@company) : contacts_url
+  def save_success_url
+    @company ? company_url(@company) : contact_url(@contact)
   end
 end

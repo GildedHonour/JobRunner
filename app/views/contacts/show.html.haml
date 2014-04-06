@@ -7,7 +7,7 @@
             %span.glyphicon.glyphicon-chevron-left
             = "Back to #{@company.name}"
         - else
-          = link_to contacts_url do
+          = link_to contacts_url_with_saved_filters do
             %span.glyphicon.glyphicon-chevron-left
             View all contacts
       .profile

@@ -7,9 +7,9 @@
       %li
         Display by:
       %li
-        = link_to "Company", companies_url, class: active_class_if_controller("companies")
+        = link_to "Company", companies_url_with_saved_filters, class: active_class_if_controller("companies")
       %li
-        = link_to "Person", contacts_url, class: active_class_if_controller("contacts")
+        = link_to "Person", contacts_url_with_saved_filters, class: active_class_if_controller("contacts")
       %li.pull-right.actions.dropdown
         = link_to "#", data: { toggle: "dropdown" } do
           Actions
