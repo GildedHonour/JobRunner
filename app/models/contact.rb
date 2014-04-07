@@ -4,7 +4,6 @@ class Contact < ActiveRecord::Base
 
   validates :first_name ,presence: true
   validates :last_name, presence: true
-  validates :prefix, presence: true
 
   validates :company_id, presence: true
 
@@ -32,7 +31,7 @@ class Contact < ActiveRecord::Base
     def search(term)
       return Contact.none if term.blank?
       term_like = "%#{term}%"
-      includes(:company).references(:company).where("first_name ILIKE ? OR last_name ILIKE ? OR companies.name ILIKE ?", term_like, term_like, term_like)
+      includes(:company).references(:company).where("first_name ILIKE ? OR last_name ILIKE ? OR concat(first_name, last_name) ILIKE ? OR companies.name ILIKE ?", term_like, term_like, term_like.gsub(/\s/, ""), term_like)
     end
 
     def with_birthday_months(month_ids)

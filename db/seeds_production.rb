@@ -30,30 +30,3 @@
     ]
   )
 end
-
-Contact.create!(
-    first_name: "Sean",
-    last_name: "Powell",
-    prefix: "Mr.",
-    job_title: "Project Manager",
-    user: User.new(email: 'sean@engageyourcause.com', password: 'password'),
-    company: Company.all.sample
-)
-
-Contact.create!(
-    first_name: "Akshay",
-    last_name: "Rawat",
-    prefix: "Mr.",
-    job_title: "Developer",
-    user: User.new(email: 'projects@akshay.cc', password: 'password'),
-    company: Company.all.sample
-)
-
-Contact.create!(
-    first_name: "Lori",
-    last_name: "Barao",
-    prefix: "Ms.",
-    job_title: "Project Manager",
-    user: User.new(email: 'lori@mmidirect.com', password: 'password'),
-    company: Company.all.sample
-)

@@ -52,8 +52,9 @@
           %h3
           %h2
             = link_to @contact.company.name, @contact.company
-            &mdash;
-            = @contact.job_title
+            - if @contact.job_title
+              &mdash;
+              = @contact.job_title
 
           %h3
             = @contact.company.name

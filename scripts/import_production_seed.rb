@@ -158,3 +158,42 @@ ap "No. of companies created: #{Company.count}"
 ap "No. of contacts created: #{Contact.count}"
 ap "No. of addresses created: #{Address.count}"
 ap "No. of relationships created: #{InternalCompanyRelationship.count}"
+
+
+import_file = "spec/fixtures/employee_list.csv"
+row_number = 1
+
+CSV.foreach(import_file, encoding: "windows-1251:utf-8", headers: true) do |row|
+  company_name =      row[0]
+  name =              row[1]
+  business_phone =    row[2]
+  mobile_phone =      row[3]
+  fax_phone =         row[4]
+  home_phone =        row[5]
+
+  row_number+=1
+  # puts "Row: #{row_number} :#{row}"
+
+  name_parts = name.split(" ")
+  first_name, last_name = name_parts[0], name_parts[1] if name_parts.size == 2
+  first_name, middle_name, last_name = name_parts[0], name_parts[1], name_parts[2] if name_parts.size == 3
+
+  company = Company.where(name: company_name).first
+  company.contacts.create!(
+      first_name: first_name,
+      middle_name: middle_name,
+      last_name: last_name,
+      phone_numbers_attributes: [
+          phone_number_attributes(:business, business_phone),
+          phone_number_attributes(:mobile, mobile_phone),
+          phone_number_attributes(:fax, fax_phone),
+          phone_number_attributes(:home, home_phone),
+      ],
+  )
+end
+
+contact = Contact.where(first_name: "Sean", last_name: "Powell").first
+User.create!(email: 'sean@engageyourcause.com', password: 'password', contacts: [contact])
+
+contact = Contact.where(first_name: "Lori", last_name: "Barao").first
+User.create!(email: 'lori@mmidirect.com', password: 'password', contacts: [contact])
