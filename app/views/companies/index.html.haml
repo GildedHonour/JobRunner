@@ -38,6 +38,7 @@
           Affiliations of
           %i.glyphicon.glyphicon-chevron-up.pull-right
           %i.glyphicon.glyphicon-chevron-down.pull-right
+          = button_tag "?", data: { toggle: "tooltip", title: tooltip_text_for_filter(:affiliations_of) }, class: "btn btn-link btn-xs filter-help"
 
       .filter.wrapper#affiliations-filter
         %ul.list.default.list-unstyled{ class: "#{'collapse' if params[:ac].blank?}" }

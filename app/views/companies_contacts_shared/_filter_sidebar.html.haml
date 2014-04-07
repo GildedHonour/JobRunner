@@ -7,6 +7,7 @@
       Relationships
       %i.glyphicon.glyphicon-chevron-up.pull-right
       %i.glyphicon.glyphicon-chevron-down.pull-right
+      = button_tag "?", data: { toggle: "tooltip", title: tooltip_text_for_filter(:relationships) }, class: "btn btn-link btn-xs filter-help"
 
   .filter.wrapper#relationships-filter
     %ul.list.default.list-unstyled.in
@@ -20,6 +21,7 @@
       Status
       %i.glyphicon.glyphicon-chevron-up.pull-right
       %i.glyphicon.glyphicon-chevron-down.pull-right
+      = button_tag "?", data: { toggle: "tooltip", title: tooltip_text_for_filter(:status) }, class: "btn btn-link btn-xs filter-help"
 
   .filter.wrapper#archived-filter
     %ul.list.default.list-unstyled.in
@@ -35,6 +37,7 @@
       Company Type
       %i.glyphicon.glyphicon-chevron-up.pull-right
       %i.glyphicon.glyphicon-chevron-down.pull-right
+      = button_tag "?", data: { toggle: "tooltip", title: tooltip_text_for_filter(:company_type) }, class: "btn btn-link btn-xs filter-help"
 
   .filter.wrapper#company-types-filter
     %ul.list.default.list-unstyled.in

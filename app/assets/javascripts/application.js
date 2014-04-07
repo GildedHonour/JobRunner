@@ -26,6 +26,7 @@
 //= require bootstrap/alert
 //= require bootstrap/dropdown
 //= require bootstrap/collapse
+//= require bootstrap_init
 //= require app
 //= require progress_indicator
 //= require phone_number

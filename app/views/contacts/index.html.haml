@@ -36,6 +36,7 @@
           Birthday
           %i.glyphicon.glyphicon-chevron-up.pull-right
           %i.glyphicon.glyphicon-chevron-down.pull-right
+          = button_tag "?", data: { toggle: "tooltip", title: tooltip_text_for_filter(:birthday)}, class: "btn btn-link btn-xs filter-help"
 
       .filter.wrapper#birthdays-filter
         %ul.list.default.list-unstyled.in
