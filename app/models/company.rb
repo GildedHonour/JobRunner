@@ -46,7 +46,7 @@ class Company < ActiveRecord::Base
 
     def all_principals
       principal_ids = Affiliation.pluck(:principal_id).uniq
-      principal_ids.present? ? Company.order("name").find(*principal_ids) : Company.none
+      principal_ids.present? ? Company.order("name").where(id: principal_ids) : Company.none
     end
 
     def with_company_types(company_type_ids)
