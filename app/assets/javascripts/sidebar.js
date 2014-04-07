@@ -1,5 +1,4 @@
-jQuery(function($) {
-    'use strict';
+$(function() {
     $(".family.menu").height( $("#main").height() );
     $('.family.menu').hover(function () {
         $('.expanded.wrapper').fadeIn();
