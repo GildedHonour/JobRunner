@@ -31,6 +31,7 @@
 //= require progress_indicator
 //= require phone_number
 //= require purl
+//= require contacts
 //= require sidebar
 //= require url_helper
 //= require index_search_filter_view

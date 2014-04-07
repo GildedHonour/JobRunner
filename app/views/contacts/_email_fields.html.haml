@@ -10,7 +10,7 @@
             .row
               .form-group
                 .col-md-9
-                  = email_form.input :value, placeholder: "Email", label: false
+                  = email_form.input :value, placeholder: "Email", label: false, input_html: { required: true }
                 .col-md-3
                   = email_form.link_to_remove "Remove", class: "btn btn-danger"
 

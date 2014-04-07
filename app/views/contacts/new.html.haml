@@ -25,7 +25,7 @@
           Company:
           = @company.name
 
-      = simple_nested_form_for [@company, @contact] do |f|
+      = simple_nested_form_for [@company, @contact], html: { id: "contact_form", novalidate: false } do |f|
         .row
           .col-md-12
             %h2
@@ -65,6 +65,8 @@
           .col-md-12
             %h2
               Contact Info
+            .row
+              #contact_info_errors_container
             = render 'address_fields', f: f
             = render 'phone_number_fields', f: f
             = render 'email_fields', f: f

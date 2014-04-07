@@ -10,7 +10,7 @@
             = phone_number_form.input :kind, collection: PhoneNumber.kind.options, include_blank: false, label: false
             .row
               .col-md-8
-                = phone_number_form.input :phone_number, placeholder: "Phone Number", label: false, input_html: { data: "phone-number-input", autocomplete: "off" }
+                = phone_number_form.input :phone_number, placeholder: "Phone Number", label: false, input_html: { data: "phone-number-input", autocomplete: "off", required: true }
               .col-md-4
                 = phone_number_form.input :extension, placeholder: "Extension", label: false, input_html: { data: "phone-number-extension-input", autocomplete: "off" }
             = phone_number_form.link_to_remove "Remove", class: "btn btn-danger"
