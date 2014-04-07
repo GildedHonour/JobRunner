@@ -1,4 +1,6 @@
 $(document).on('page:change', function() {
+
+//    These validations are only client side since a lot of imported data is partially invalid based on the rules below.
     $(document).on('submit', 'body.contacts form#contact_form', function() {
         var errors = [];
         if($('#addresses .fields:visible').length == 0) {
