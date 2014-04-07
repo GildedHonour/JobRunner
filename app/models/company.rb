@@ -53,6 +53,10 @@ class Company < ActiveRecord::Base
       where(company_type_id: company_type_ids)
     end
 
+    def with_internal_relationship_role(roles)
+      includes(:internal_company_relationships).references(:internal_company_relationships).where('internal_company_relationships.role IN (?)', roles)
+    end
+
     def relationship_with_company(company_ids)
       includes(:internal_company_relationships).references(:internal_company_relationships).where('internal_company_relationships.internal_company_id IN (?)', company_ids)
     end

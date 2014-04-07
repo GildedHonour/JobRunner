@@ -39,7 +39,11 @@ class Contact < ActiveRecord::Base
     end
 
     def contacts_of_companies_with_relationship_to(internal_company_ids)
-      includes(company: :internal_company_relationships).where('internal_company_relationships.internal_company_id IN (?)', internal_company_ids)
+      includes(company: :internal_company_relationships).references(:internal_company_relationships).where('internal_company_relationships.internal_company_id IN (?)', internal_company_ids)
+    end
+
+    def contacts_of_companies_with_internal_relationship_role(roles)
+      includes(company: :internal_company_relationships).references(:internal_company_relationships).where('internal_company_relationships.role IN (?)', roles)
     end
 
     def contacts_of_companies_with_company_types(company_type_ids)

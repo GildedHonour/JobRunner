@@ -2,13 +2,13 @@
   %h4.filters
     %i.fa.fa-filter
     Filters
+
   %h3.filter.header
     = link_to 'javascript:void(0)', data: { toggle: "collapse", target: "#relationships-filter ul" } do
       Relationships
       %i.glyphicon.glyphicon-chevron-up.pull-right
       %i.glyphicon.glyphicon-chevron-down.pull-right
       = button_tag "?", data: { toggle: "tooltip", title: tooltip_text_for_filter(:relationships) }, class: "btn btn-link btn-xs filter-help"
-
   .filter.wrapper#relationships-filter
     %ul.list.default.list-unstyled.in
       - Company.internal.ordered_by_name.each do |company|
@@ -17,12 +17,25 @@
           = company.name
 
   %h3.filter.header
+    = link_to 'javascript:void(0)', data: { toggle: "collapse", target: "#relationships-filter ul" } do
+      Roles
+      %i.glyphicon.glyphicon-chevron-up.pull-right
+      %i.glyphicon.glyphicon-chevron-down.pull-right
+      = button_tag "?", data: { toggle: "tooltip", title: tooltip_text_for_filter(:roles) }, class: "btn btn-link btn-xs filter-help"
+
+  .filter.wrapper#internal-relationship-roles-filter
+    %ul.list.default.list-unstyled.in
+      - InternalCompanyRelationship.role.values.sort.each do |role|
+        %li.checkbox
+          = check_box_tag "internal_relationship_role_filter[roles]", role, (params[:irr] || []).include?(role)
+          = role.humanize
+
+  %h3.filter.header
     = link_to 'javascript:void(0)', data: { toggle: "collapse", target: "#archived-filter ul" } do
       Status
       %i.glyphicon.glyphicon-chevron-up.pull-right
       %i.glyphicon.glyphicon-chevron-down.pull-right
       = button_tag "?", data: { toggle: "tooltip", title: tooltip_text_for_filter(:status) }, class: "btn btn-link btn-xs filter-help"
-
   .filter.wrapper#archived-filter
     %ul.list.default.list-unstyled.in
       %li.checkbox
@@ -38,7 +51,6 @@
       %i.glyphicon.glyphicon-chevron-up.pull-right
       %i.glyphicon.glyphicon-chevron-down.pull-right
       = button_tag "?", data: { toggle: "tooltip", title: tooltip_text_for_filter(:company_type) }, class: "btn btn-link btn-xs filter-help"
-
   .filter.wrapper#company-types-filter
     %ul.list.default.list-unstyled.in
       - CompanyType.ordered_by_name.each do |company_type|

@@ -21,6 +21,11 @@ App.IndexSearchFilterView = {
             selectionInputName: "company_type_filter[company_type_ids]"
         },
         {
+            selector: "#internal-relationship-roles-filter",
+            searchKeyName: "irr",
+            selectionInputName: "internal_relationship_role_filter[roles]"
+        },
+        {
             selector: "#relationships-filter",
             searchKeyName: "rc",
             selectionInputName: "relationship_filter[company_ids]"
