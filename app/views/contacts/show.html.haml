@@ -28,7 +28,7 @@
                 %span.label
                   Email
               .col-sm-9
-                = @contact.emails.join("<br>").html_safe
+                = @contact.emails.map{ |email| mail_to(email) }.join("<br>").html_safe
           .col-sm-3
             .row
               .col-sm-3

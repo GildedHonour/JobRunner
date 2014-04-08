@@ -128,7 +128,7 @@
                     %td
                       = contact.job_title
                     %td
-                      = contact.emails.join(",")
+                      = contact.emails.map{ |email| mail_to(email) }.join("<br>").html_safe
                     %td
                       = contact.phone_numbers.join(",")
                     %td
