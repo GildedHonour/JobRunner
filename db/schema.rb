@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140405172649) do
+ActiveRecord::Schema.define(version: 20140408194207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,10 +80,8 @@ ActiveRecord::Schema.define(version: 20140405172649) do
     t.string   "job_title"
     t.boolean  "do_not_email"
     t.boolean  "do_not_mail"
-    t.boolean  "send_mmi_ballgame_emails"
-    t.boolean  "send_cookies"
     t.boolean  "contest_participant"
-    t.boolean  "archived",                 default: false
+    t.boolean  "archived",            default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
