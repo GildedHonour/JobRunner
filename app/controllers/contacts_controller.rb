@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  respond_to :html, :js, :csv
+  respond_to :html, :js, :csv, :vcf
 
   PAGE_SIZE = 100
 
@@ -49,7 +49,10 @@ class ContactsController < ApplicationController
   end
 
   def show
-    respond_with @contact
+    respond_with do |format|
+      format.html { respond_with @contact }
+      format.vcf { send_data(@contact.to_vcf, filename: "#{@contact.full_name}.vcf", "Content-Disposition" => "attachment", "Content-type" => "text/x-vcard; charset=utf-8") }
+    end
   end
 
   def destroy

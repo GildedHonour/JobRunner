@@ -16,10 +16,12 @@
         .contact.name
           %span
             = @contact.full_name
-          = link_to url_for([@company, @contact]), class: "btn-fam no-border pull-right", data: { confirm: "Are you sure you want to delete the contact '#{@contact.full_name}'?", method: 'delete' } do
+          = link_to url_for([@company, @contact]), class: "btn-fam no-border pull-right", title: "Delete", data: { confirm: "Are you sure you want to delete the contact '#{@contact.full_name}'?", method: 'delete', toggle: "tooltip" } do
             %i.fa.fa-trash-o.pull-right
-          = link_to url_for([:edit, @company, @contact]), class: "btn-fam no-border pull-right" do
+          = link_to url_for([:edit, @company, @contact]), class: "btn-fam no-border pull-right", title: "Edit Contact", data: { toggle: "tooltip" }  do
             %i.fa.fa-pencil.pull-right
+          = link_to contact_url(@contact, format: 'vcf'), class: "btn-fam no-border pull-right", title: "Download VCard", data: { toggle: "tooltip" } do
+            %i.fa.fa-phone.pull-right
 
         .secondary.contact.info.row
           .col-sm-3

@@ -52,4 +52,37 @@ class Contact < ActiveRecord::Base
       includes(:company).references(:company).where('companies.company_type_id IN (?)', company_type_ids)
     end
   end
+
+  def to_vcf
+    card = Vpim::Vcard::Maker.make2 do |maker|
+      maker.add_name do |name|
+        name.prefix = self.prefix if self.prefix.present?
+        name.given = self.first_name
+        name.family = self.last_name
+      end
+      maker.org = self.company.name
+
+      self.phone_numbers.each do |phone_number|
+        phone_number_str = phone_number.phone_number
+        phone_number_str = "#{phone_number_str} x#{phone_number.extension}" if phone_number.extension.present?
+        maker.add_tel(phone_number_str) { |t| t.location = phone_number.kind }
+      end
+
+      self.emails.each do |email|
+        maker.add_email(email.value)
+      end
+
+      self.addresses.each do |address|
+        maker.add_addr do |addr|
+          addr.pobox = address.address_line_1
+          addr.street = address.address_line_2 if address.address_line_2.present?
+          addr.locality = address.city
+          addr.region = address.state
+          addr.country = address.country.text.upcase if address.country.present?
+        end
+      end
+    end
+
+    card.to_s
+  end
 end

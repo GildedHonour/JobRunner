@@ -16,6 +16,7 @@ gem "kaminari"
 gem "haml-rails"
 gem "nested_form"
 gem 'simple_form', '~> 3.0.0', github: 'plataformatec/simple_form', branch: 'master'
+gem "vpim"
 gem "webshims-rails"
 
 # Assets
