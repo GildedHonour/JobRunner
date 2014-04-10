@@ -7,8 +7,7 @@ a:hover {
 }
 
 .closed .brand {
-  background: #74ba3b;
-  border-right: 1px solid #6dad3b;
+  background: #7cc351;
 }
 
 .closed .brand {
@@ -21,7 +20,7 @@ a:hover {
 }
 
 .expanded .brand {
-  background: #7fc04b;
+  background: #87c85f;
   padding: 0px 18px;
   font-size: 12pt;
   font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
@@ -37,16 +36,19 @@ a:hover {
 
 .brand {
   height: 65px;
+    border-bottom: 1px solid #a8d393;
+    border-right: 1px solid #75b74e;
 }
 
 .menu .side{
-  margin-top: 90px;
+  padding-top: 90px;
+    border-right: 1px solid #cdd5d5;
 }
 
 .closed.menu.wrapper {
-  background: #d8dddd;
+  background: #dbe4e4;
   width: 70px;
-  min-height: 400px;
+  min-height: 1000px;
   float: left;
   height: 100%;
 }
@@ -54,7 +56,7 @@ a:hover {
 .expanded.menu.wrapper {
   background: #f2f3f3;
   width: 150px;
-  min-height: 400px;
+  min-height: 1000px;
   float: left;
   height: 100%;
 }
@@ -88,7 +90,8 @@ a:hover {
 .closed.menu.wrapper .menu.item.active {
   background: #272d2d;
   color: #fff;
-  border-right: 1px solid #000;
+  border-right: 1px solid #2c3333;
+    margin-right: -1px;
 }
 
 .expanded.menu.wrapper .menu.item.active {

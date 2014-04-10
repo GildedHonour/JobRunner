@@ -1,27 +1,33 @@
 .neat-row
   .show.content
     .contact.intro
-      .go.back
-        - if(@company)
-          = link_to company_url(@company) do
-            %span.glyphicon.glyphicon-chevron-left
-            = "Back to #{@company.name}"
-        - else
-          = link_to contacts_url_with_saved_filters do
-            %span.glyphicon.glyphicon-chevron-left
-            View all contacts
-      .profile
-        = render "profile"
+      .neat-row.contact-action
+        .go.back
+          - if(@company)
+            = link_to company_url(@company) do
+              %span.glyphicon.glyphicon-chevron-left
+              = "Back to #{@company.name}"
+          - else
+            = link_to contacts_url_with_saved_filters do
+              %span.glyphicon.glyphicon-chevron-left
+              Back to contacts list
+        .profile-container
+          = render "profile"
       .basic.contact.info
         .contact.name
           %span
+            %span.prefix
+              = @contact.prefix
             = @contact.full_name
-          = link_to url_for([@company, @contact]), class: "btn-fam no-border pull-right", title: "Delete", data: { confirm: "Are you sure you want to delete the contact '#{@contact.full_name}'?", method: 'delete', toggle: "tooltip" } do
-            %i.fa.fa-trash-o.pull-right
-          = link_to url_for([:edit, @company, @contact]), class: "btn-fam no-border pull-right", title: "Edit Contact", data: { toggle: "tooltip" }  do
-            %i.fa.fa-pencil.pull-right
-          = link_to contact_url(@contact, format: 'vcf'), class: "btn-fam no-border pull-right", title: "Download VCard", data: { toggle: "tooltip" } do
-            %i.fa.fa-phone.pull-right
+          = link_to url_for([@company, @contact]), class: "btn-fam pull-right err", title: "Delete", data: { confirm: "Are you sure you want to delete the contact '#{@contact.full_name}'?", method: 'delete', toggle: "tooltip" } do
+            %i.fa.fa-trash-o 
+            %span.action Delete
+          = link_to url_for([:edit, @company, @contact]), class: "btn-fam pull-right", title: "Edit Contact", data: { toggle: "tooltip" }  do
+            %i.fa.fa-pencil
+            %span.action Edit
+          = link_to contact_url(@contact, format: 'vcf'), class: "btn-fam pull-right", title: "Download VCard", data: { toggle: "tooltip" } do
+            %i.fa.fa-phone
+            %span.action Vcard
 
         .secondary.contact.info.row
           .col-sm-3
@@ -51,28 +57,29 @@
     .contact.details
       .first.contact
         .board.for.contact
-          %h3
+          %h3 Relationships
           %h2
             = link_to @contact.company.name, @contact.company
+          %h4 
             - if @contact.job_title
-              &mdash;
               = @contact.job_title
-
-          %h3
-            = @contact.company.name
-            Relationships
-          %table.table.table-hover
+          %h5 
+            Relationship to the Company
+          %table.table-hover.table-condensed
             - @contact.company.internal_company_relationships.ordered_by_internal_company_name.each do |internal_company_relationship|
               %tr
                 %td
-                  = link_to internal_company_relationship.internal_company.name, internal_company_relationship.internal_company
+                  %span.bold 
+                    = link_to internal_company_relationship.internal_company.name, internal_company_relationship.internal_company
                 %td
-                  Role:
-                  = internal_company_relationship.role.text
+                  %span.light Role:
+                  %span.dark
+                    = internal_company_relationship.role.text
                   %br
                 %td
-                  Status:
-                  = internal_company_relationship.record_status
+                  %span.light Status:
+                  %span.dark
+                    = internal_company_relationship.record_status
                   %br
 
         .board.for.contact
