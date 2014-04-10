@@ -68,7 +68,7 @@ class CompaniesController < ApplicationController
     if @company.update_attributes(company_params)
       render "success"
     else
-      render  "edit_section"
+      render "edit_section"
     end
   end
 
@@ -82,6 +82,7 @@ class CompaniesController < ApplicationController
   def company_params
     params.require(:company).permit(:name, :website, :phone, :company_logo, :company_type_id,
                                     affiliate_affiliations_attributes: [:id, :archived, :affiliate_id, :role, :_destroy],
+                                    principal_affiliations_attributes: [:id, :archived, :principal_id, :role, :_destroy],
                                     internal_company_relationships_attributes: [:id, :archived, :internal_company_id, :role, :_destroy],
                                     addresses_attributes: [:id, :address_line_1, :address_line_2, :city, :state, :zip, :country, :_destroy],
                                     phone_numbers_attributes: [:id, :extension, :kind, :phone_number, :_destroy]

@@ -1,0 +1,45 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %button.close{ "data-dismiss" => "modal", type: "button" } ×
+      %h2.modal-title
+        Manage Agencies
+    #modal-form
+      = simple_nested_form_for @company, url: update_section_company_url(@company, section: "principals"), html: { class: "form-horizontal" }, remote: true do |f|
+        .modal-body
+          - if @company.errors.any?
+            .alert.alert-danger
+              %a.close{ "data-dismiss" => "alert", href: "#" } ×
+              - @company.errors.full_messages.each do |message|
+                %p
+                  = message
+          .row
+            .col-md-10.col-md-offset-1
+              .row
+                .col-md-12
+                  %table.table
+                    %thead
+                      %tr
+                        %th
+                          Company
+                        %th
+                          Inactive
+                        %th
+                    %tbody#affiliation-fields
+                      = f.fields_for :principal_affiliations, @company.principal_affiliations.present? ? @company.principal_affiliations.ordered_by_principal_name : @company.principal_affiliations.build, wrapper: false do |affiliation_form|
+                        %tr.fields
+                          %td
+                            .col-md-12
+                              = affiliation_form.input :principal_id, collection: Company.with_affiliation_principal_company_types.map{ |c| ["#{c.name} (#{c.company_type})", c.id] }, include_blank: "Select company" , label: false
+                          %td
+                            .col-md-12
+                              = affiliation_form.input :archived, label: false, wrapper: false
+                          %td
+                            .col-md-12
+                              = affiliation_form.link_to_remove "Remove", class: "btn btn-danger btn-xs", data: { confirm: "Are you sure you want to delete this?"}
+
+                  = f.link_to_add  "Add Agency", :principal_affiliations, class: "btn btn-default", data: { target: "#affiliation-fields" }
+
+        .modal-footer
+          %button.btn.btn-default{ "data-dismiss" => "modal", type: "button" } Close
+          = f.submit "Save", class: "btn btn-primary", data: { toggle: "button", "loading-text" => "Saving" }

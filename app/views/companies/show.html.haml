@@ -75,31 +75,10 @@
       .second.company.row
         .col-sm-12
           .board.for.company
-            %h3 Affiliations
-            = link_to edit_section_company_url(@company, section: "affiliations"), class: "btn-fam no-border", remote: true do
-              %i.fa.fa-pencil
-
-            %table.table.table-hover
-              %thead
-                %tr
-                  %th Company
-                  %th Role(s)
-                  %th Status
-                  %th Added
-                  %th Last Modified
-              %tbody
-                - @company.affiliate_affiliations.ordered_by_affiliate_name.each do |affiliation|
-                  %tr
-                    %td
-                      = link_to affiliation.affiliate.name, affiliation.affiliate
-                    %td
-                      = affiliation.role.text
-                    %td
-                      = affiliation.record_status
-                    %td
-                      = l(affiliation.created_at, format: :only_date)
-                    %td
-                      = l(affiliation.updated_at, format: :only_date)
+            - if @company.company_type.can_be_affiliation_principal?
+              = render "affiliations_table", header: "Affiliates", affiliations: @company.affiliate_affiliations.ordered_by_affiliate_name, edit_section: "affiliates", affiliation_relation: :affiliate
+            - elsif @company.company_type.can_be_affiliation_affiliate?
+              = render "affiliations_table", header: "Managed By", affiliations: @company.principal_affiliations.ordered_by_principal_name, edit_section: "principals", affiliation_relation: :principal
 
     .company.details
       .third.company.row

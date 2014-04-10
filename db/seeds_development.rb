@@ -8,8 +8,8 @@ contact_job_titles = [
 ]
 
 company_logos = Dir['spec/fixtures/company_logos/*']
-company_types = CompanyType.not_internal
 internal_companies = Company.internal
+company_types = CompanyType.all  - internal_companies
 
 80.times do |i|
   company = Company.create!(
@@ -28,11 +28,10 @@ internal_companies = Company.internal
       ],
       company_logo: File.open(company_logos.sample)
   )
-  Company.order("RANDOM()").where("id NOT IN (?)", internal_companies.map(&:id) + [company.id]).limit(3).each do |affiliate|
-    company.affiliate_affiliations.create(affiliate: affiliate, role: Affiliation.role.values.sample)
-  end
 
-  company.principals << Company.order("RANDOM()").where("id NOT IN (?)", internal_companies.map(&:id) + [company.id]).limit(3)
+  Company.with_affiliation_principal_company_types.each do |company|
+    company.affiliate_affiliations.create(affiliate: Company.with_affiliation_affiliate_company_types.sample)
+  end
 
   internal_companies.sample(2).each do |internal_company|
     company.internal_company_relationships.create!(internal_company: internal_company, role:  InternalCompanyRelationship.role.values.sample)

@@ -21,6 +21,7 @@ class Company < ActiveRecord::Base
   accepts_nested_attributes_for :addresses, reject_if: lambda { |address| address[:address_line_1].blank? }, allow_destroy: true
   accepts_nested_attributes_for :phone_numbers, reject_if: lambda { |phone_number| phone_number[:phone_number].blank? }, allow_destroy: true
   accepts_nested_attributes_for :affiliate_affiliations, reject_if: lambda { |affiliation| affiliation[:affiliate_id].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :principal_affiliations, reject_if: lambda { |affiliation| affiliation[:principal_id].blank? }, allow_destroy: true
   accepts_nested_attributes_for :internal_company_relationships, reject_if: lambda { |relationship| relationship[:internal_company_id].blank? }, allow_destroy: true
 
   mount_uploader :company_logo, CompanyLogoUploader
@@ -31,9 +32,16 @@ class Company < ActiveRecord::Base
   scope :ordered_by_affiliate_name, -> { includes(affiliate_affiliations: :affiliate).order("companies.name") }
   scope :ordered_by_name, -> { order("companies.name") }
   scope :internal, -> { where(company_type_id: CompanyType.internal.id ) }
-  scope :except_internal, -> { where("company_type_id != ?", CompanyType.internal.id ) }
 
   class << self
+    def with_affiliation_affiliate_company_types
+      Company.where("company_type_id IN (?)", CompanyType.affiliate_company_types)
+    end
+
+    def with_affiliation_principal_company_types
+      Company.where("company_type_id IN (?)", CompanyType.principal_company_types)
+    end
+
     def search(term)
       return Company.none if term.blank?
       term_like = "%#{term}%"

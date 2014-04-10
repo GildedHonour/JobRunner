@@ -12,8 +12,8 @@
             = "#{(relationship.role.text)}"
   %td
     %ul.list-unstyled
-      - company.affiliate_affiliations.ordered_by_affiliate_name.each do |affiliation|
+      - company.affiliates.ordered_by_name.each do |affiliate|
         %li
-          = affiliation.affiliate.name
+          = affiliate.name
           %code
-            = "#{(affiliation.role.text)}"
+            = affiliate.company_type.name
