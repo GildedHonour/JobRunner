@@ -11,6 +11,7 @@ gem "devise_invitable"
 # Model related
 gem "enumerize"
 gem "kaminari"
+gem "paper_trail"
 
 # View related
 gem "haml-rails"

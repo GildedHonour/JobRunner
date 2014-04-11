@@ -148,6 +148,9 @@ GEM
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     orm_adapter (0.5.0)
+    paper_trail (3.0.1)
+      activerecord (>= 3.0, < 5.0)
+      activesupport (>= 3.0, < 5.0)
     pg (0.17.1)
     polyglot (0.3.4)
     pry (0.9.12.6)
@@ -268,6 +271,7 @@ DEPENDENCIES
   letter_opener
   neat
   nested_form
+  paper_trail
   pg
   pry-rails
   quiet_assets
