@@ -70,7 +70,6 @@
 }
 
 .contact.details {
-//  padding: rem(0) rem(25px) rem(15px) rem(69px);
   @include row();
   background-color: #fff;
   border-top: 5px solid $gray-02;
@@ -81,7 +80,7 @@
   padding-bottom: 50px;
   border-right: 1px solid #d0dcdc;
   height: 300px;
-  padding: 0 0 0 rem(75px);
+  padding: 0 rem(75px) 0 rem(75px);
   a {
     color: #000;
     border-bottom: 1px dashed #01a4e1;
@@ -121,7 +120,8 @@
 .board.for.contact h5, .board.for.contact th {
   font-family: "Verb Black", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
   font-size: rem(17px);
-  border-bottom: 5px solid $gray-02;
+  border-bottom: 3px solid $gray-02;
+  padding-bottom: 1rem;
 }
 
 .board.for.contact table {

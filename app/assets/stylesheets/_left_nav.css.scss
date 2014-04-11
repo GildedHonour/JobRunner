@@ -42,23 +42,23 @@ a:hover {
 
 .menu .side{
   padding-top: 90px;
-    border-right: 1px solid #cdd5d5;
+  border-right: 1px solid #cdd5d5;
+}
+
+.menu.wrapper {
+  min-height: 500px;
+  float: left;
+  height: 100%;
 }
 
 .closed.menu.wrapper {
   background: #dbe4e4;
   width: 70px;
-  min-height: 1000px;
-  float: left;
-  height: 100%;
 }
 
 .expanded.menu.wrapper {
   background: #f2f3f3;
   width: 150px;
-  min-height: 1000px;
-  float: left;
-  height: 100%;
 }
 
 .menu.item {

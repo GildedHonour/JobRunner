@@ -84,16 +84,29 @@
 
         .board.for.contact
           %h3 User Account
-          %dl.dl-horizontal
-            %dt Account
-            %dd
-              - if @contact.user.present?
-                = @contact.user.email
-                - unless @contact.user.invitation_accepted?
-                  (Pending confirmation)
-              - else
-                = link_to "Invite user", new_contact_user_url(@contact), remote: true, class: "btn btn-primary"
-
+          %table.table-hover.table-condensed
+            %tr
+              %td
+                %span.light Account:
+              %td
+                - if @contact.user.present?
+                  %span.dark
+                    = @contact.user.email
+                    - unless @contact.user.invitation_accepted?
+                      (Pending confirmation)
+                - else
+                  %span.dark
+                    = link_to "Invite user", new_contact_user_url(@contact), remote: true, class: ""
+            %tr
+              %td
+                %span.light Level:
+              %td  
+                %span.dark N/A
+            %tr
+              %td
+                %span.light Module Access:
+              %td  
+                %span.dark None
     .contact.details
       .contact
         .board.for.contact.communications
@@ -101,35 +114,40 @@
             Communications
             = link_to edit_section_contact_url(@contact, section: "communications"), class: "btn-fam no-border", remote: true do
               %i.fa.fa-pencil
-          %dl.dl-horizontal
-            %dt Do not email
-            %dd
-              = human_boolean(@contact.do_not_email)
-            %dt Do not mail
-            %dd
-              = human_boolean(@contact.do_not_mail)
-
-        .board.for.contact.other
-          %h3
-            Other
             = link_to edit_section_contact_url(@contact, section: "other"), class: "btn-fam no-border", remote: true do
               %i.fa.fa-pencil
-          %dl.dl-horizontal
-            %dt
-              Birthday
-            %dd
-              = @contact.birthday && l(@contact.birthday, format: :only_date_month)
-            %dt
-              Contest Participant
-            %dd
-              = human_boolean(@contact.contest_participant)
-            %dt
-              Sources
-            %dd
-              = @contact.contact_sources.to_sentence
-
-    .contact.details
-      .second.contact
+          %table.table-hover.table-condensed
+            %tr
+              %td 
+                %span.light Do not email:
+              %td
+                %span.dark
+                  = human_boolean(@contact.do_not_email)
+            %tr
+              %td
+                %span.light Do not mail:
+              %td
+                %span.dark
+                  = human_boolean(@contact.do_not_mail)
+            %tr
+              %td
+                %span.light Birthday:
+              %td
+                %span.dark
+                  = @contact.birthday && l(@contact.birthday, format: :only_date_month)
+            %tr
+              %td
+                %span.light Contest Participant:
+              %td
+                %span.dark
+                  = human_boolean(@contact.contest_participant)
+            %tr
+              %td
+                %span.light Sources:
+              %td
+                %span.dark
+                  = @contact.contact_sources.to_sentence
+        
         .board.for.contact.notes
           %h3
             Notes
