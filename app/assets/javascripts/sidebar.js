@@ -1,4 +1,4 @@
-$(function() {
+$(document).on('page:change', function() {
     $(".family.menu").height( $("#main").height() );
     $('.family.menu').hover(function () {
         $('.expanded.wrapper').fadeIn();
