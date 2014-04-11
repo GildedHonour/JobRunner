@@ -35,10 +35,10 @@
     = content_for :view_specific_filters do
       %h3.filter.header
         = link_to 'javascript:void(0)', data: { toggle: "collapse", target: "#affiliations-filter ul" }, class: "#{'collapsed' if params[:ac].blank?}" do
-          Affiliations of
+          Accounts of
           %i.glyphicon.glyphicon-chevron-up.pull-right
           %i.glyphicon.glyphicon-chevron-down.pull-right
-          = button_tag "?", data: { toggle: "tooltip", title: tooltip_text_for_filter(:affiliations_of) }, class: "btn btn-link btn-xs filter-help"
+          = button_tag "?", data: { toggle: "tooltip", title: tooltip_text_for_filter(:accounts_of) }, class: "btn btn-link btn-xs filter-help"
 
       .filter.wrapper#affiliations-filter
         %ul.list.default.list-unstyled{ class: "#{'collapse' if params[:ac].blank?}" }
