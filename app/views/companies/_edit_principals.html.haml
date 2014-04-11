@@ -30,7 +30,7 @@
                         %tr.fields
                           %td
                             .col-md-12
-                              = affiliation_form.input :principal_id, collection: Company.with_affiliation_principal_company_types.map{ |c| ["#{c.name} (#{c.company_type})", c.id] }, include_blank: "Select company" , label: false
+                              = affiliation_form.input :principal_id, collection: Company.with_affiliation_principal_company_types.ordered_by_name.map{ |c| ["#{c.name} (#{c.company_type})", c.id] }, include_blank: "Select company" , label: false
                           %td
                             .col-md-12
                               = affiliation_form.input :archived, label: false, wrapper: false

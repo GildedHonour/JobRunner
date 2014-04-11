@@ -3,7 +3,6 @@ class Company < ActiveRecord::Base
 
   has_many :addresses, -> { order "created_at" }, dependent: :destroy, as: :addressable
 
-  # All affiliations
   has_many :affiliate_affiliations, foreign_key: 'principal_id', dependent: :destroy, class_name: 'Affiliation'
   has_many :affiliates, -> { order "name" }, through: :affiliate_affiliations, source: :affiliate, class_name: 'Company'
 
@@ -26,7 +25,6 @@ class Company < ActiveRecord::Base
 
   mount_uploader :company_logo, CompanyLogoUploader
 
-  # Validations
   validates :name, presence: true, uniqueness: true
 
   scope :ordered_by_affiliate_name, -> { includes(affiliate_affiliations: :affiliate).order("companies.name") }
@@ -50,11 +48,6 @@ class Company < ActiveRecord::Base
 
     def affiliated_to_company(company_ids)
       includes(:principal_affiliations).references(:principal_affiliations).where('affiliations.principal_id IN (?)', company_ids).references(:affiliate_affiliations)
-    end
-
-    def all_principals
-      principal_ids = Affiliation.pluck(:principal_id).uniq
-      principal_ids.present? ? Company.order("name").where(id: principal_ids) : Company.none
     end
 
     def with_company_types(company_type_ids)
