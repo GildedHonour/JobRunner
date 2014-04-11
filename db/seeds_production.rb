@@ -2,10 +2,9 @@
     "Agency",
     "Commercial",
     "Internal",
-    "Media",
-    "Other / Admin",
+    "List Broker",
+    "List Manager",
     "Nonprofit",
-    "Supplier / Service Provider",
 ].each { |company_type| CompanyType.find_or_create_by!(name: company_type) }
 
 [
