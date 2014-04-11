@@ -31,6 +31,10 @@ class Company < ActiveRecord::Base
   scope :ordered_by_name, -> { order("companies.name") }
   scope :internal, -> { where(company_type_id: CompanyType.internal.id ) }
 
+  def all_principal_and_affiliates
+    (self.affiliates + self.principals).sort_by(&:name)
+  end
+
   class << self
     def with_affiliation_affiliate_company_types
       Company.where("company_type_id IN (?)", CompanyType.affiliate_company_types)
@@ -68,9 +72,5 @@ class Company < ActiveRecord::Base
         references([:principal_affiliations, :internal_company_relationships]).
         where("affiliations.archived IN (?) OR internal_company_relationships.archived IN (?)", archived_status, archived_status)
     end
-  end
-
-  def affiliate_affiliations_of_affiliate(company)
-    self.affiliate_affiliations.where(affiliate_id: company).order("created_at")
   end
 end
