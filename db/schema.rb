@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408194207) do
+ActiveRecord::Schema.define(version: 20140410182242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 20140408194207) do
   add_index "addresses", ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type", using: :btree
 
   create_table "affiliations", force: true do |t|
-    t.string   "role"
     t.boolean  "archived",     default: false
     t.integer  "affiliate_id"
     t.integer  "principal_id"

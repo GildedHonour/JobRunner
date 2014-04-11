@@ -42,7 +42,7 @@
 
       .filter.wrapper#affiliations-filter
         %ul.list.default.list-unstyled{ class: "#{'collapse' if params[:ac].blank?}" }
-          - Company.all_principals.each do |principal|
+          - Company.with_affiliation_principal_company_types.ordered_by_name.each do |principal|
             %li.checkbox
               = check_box_tag "affiliation_filter[company_ids]", principal.id, (params[:ac] || []).include?(principal.id.to_s)
               = principal.name

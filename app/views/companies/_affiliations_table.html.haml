@@ -1,0 +1,26 @@
+%h3
+  = header
+= link_to edit_section_company_url(@company, section: edit_section), class: "btn-fam no-border", remote: true do
+  %i.fa.fa-pencil
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th Company
+      %th Company Type
+      %th Status
+      %th Added
+      %th Last Modified
+  %tbody
+    - affiliations.each do |affiliation|
+      %tr
+        %td
+          = link_to affiliation.send(affiliation_relation).name, affiliation.send(affiliation_relation)
+        %td
+          = affiliation.send(affiliation_relation).company_type
+        %td
+          = affiliation.record_status
+        %td
+          = l(affiliation.created_at, format: :only_date)
+        %td
+          = l(affiliation.updated_at, format: :only_date)
