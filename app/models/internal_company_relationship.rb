@@ -7,7 +7,7 @@ class InternalCompanyRelationship < ActiveRecord::Base
 
   validates :role, presence: true, uniqueness: { scope: [:internal_company_id, :company_id] }
 
-  enumerize :role, in: %i(client prospect supplier list_broker list_manager list_owner), default: :client
+  enumerize :role, in: %i(client media prospect supplier other_/_admin), default: :client
 
   scope :ordered_by_internal_company_name, -> { includes(:company).order("companies.name") }
 end
