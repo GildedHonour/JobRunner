@@ -75,9 +75,9 @@
       .second.company.row
         .col-sm-12
           .board.for.company
-            - if @company.company_type.can_be_affiliation_principal?
+            - if @company.company_type.try(:can_be_affiliation_principal?)
               = render "affiliations_table", header: "Affiliates", affiliations: @company.affiliate_affiliations.ordered_by_affiliate_name, edit_section: "affiliates", affiliation_relation: :affiliate
-            - elsif @company.company_type.can_be_affiliation_affiliate?
+            - elsif @company.company_type.try(:can_be_affiliation_affiliate?)
               = render "affiliations_table", header: "Managed By", affiliations: @company.principal_affiliations.ordered_by_principal_name, edit_section: "principals", affiliation_relation: :principal
 
     .company.details
