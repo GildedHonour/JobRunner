@@ -1,0 +1,15 @@
+development:
+  adapter: postgresql
+  database: development
+  username: postgres
+  database: jobrunner_development
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: postgresql
+  username: postgres
+  database: jobrunner_test
+  password: database
+  pool: 5
+  timeout: 5000
