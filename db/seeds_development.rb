@@ -9,7 +9,7 @@ contact_job_titles = [
 
 company_logos = Dir['spec/fixtures/company_logos/*']
 internal_companies = Company.internal
-company_types = CompanyType.all  - internal_companies
+company_types = CompanyType.all  -  [CompanyType.internal]
 
 80.times do |i|
   company = Company.create!(

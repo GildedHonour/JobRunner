@@ -66,7 +66,7 @@
           %h5 
             Relationship to the Company
           %table.table-hover.table-condensed
-            - @contact.company.internal_company_relationships.ordered_by_internal_company_name.each do |internal_company_relationship|
+            - @contact.company.internal_company_relationships.ordered_by_status_and_internal_company_name.each do |internal_company_relationship|
               %tr
                 %td
                   %span.bold 

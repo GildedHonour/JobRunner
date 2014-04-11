@@ -9,5 +9,5 @@ class InternalCompanyRelationship < ActiveRecord::Base
 
   enumerize :role, in: %i(client media prospect supplier other_/_admin), default: :client
 
-  scope :ordered_by_internal_company_name, -> { includes(:company).order("companies.name") }
+  scope :ordered_by_status_and_internal_company_name, -> { includes(:internal_company).order("internal_company_relationships.archived, companies.name") }
 end

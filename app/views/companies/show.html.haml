@@ -58,10 +58,10 @@
                   %th Added
                   %th Last Modified
               %tbody
-                - @company.internal_company_relationships.ordered_by_internal_company_name.each do |relationship|
+                - @company.internal_company_relationships.ordered_by_status_and_internal_company_name.each do |relationship|
                   %tr
                     %td
-                      = link_to relationship.internal_company.name, relationship.company
+                      = link_to relationship.internal_company.name, relationship.internal_company
                     %td
                       = relationship.role.text
                     %td
