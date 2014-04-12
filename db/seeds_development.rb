@@ -22,8 +22,8 @@ company_types = CompanyType.all  -  [CompanyType.internal]
               address_line_1: Faker::Address.street_address,
               address_line_2: Faker::Address.street_name,
               city: Faker::Address.city,
-              state: Faker::Address.us_state,
-              zip: Faker::Address.zip_code
+              state: Faker::AddressUS.state,
+              zip: Faker::AddressUS.zip_code
           )
       ],
       company_logo: File.open(company_logos.sample)
@@ -52,8 +52,8 @@ end
               address_line_1: Faker::Address.street_address,
               address_line_2: Faker::Address.street_name,
               city: Faker::Address.city,
-              state: Faker::Address.us_state,
-              zip: Faker::Address.zip_code
+              state: Faker::AddressUS.state,
+              zip: Faker::AddressUS.zip_code
           )
       ],
       job_title: contact_job_titles.sample,

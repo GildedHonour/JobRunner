@@ -36,14 +36,14 @@
                 %span.label
                   Email
               .col-sm-9
-                = @contact.emails.map{ |email| mail_to(email) }.join("<br>").html_safe
+                = @contact.emails.map{ |email| mail_to(email) }.map(&:to_s).join("<br>").html_safe
           .col-sm-3
             .row
               .col-sm-3
                 %span.label
                   Phone
               .col-sm-9
-                = @contact.phone_numbers.join("<br>").html_safe
+                = @contact.phone_numbers.map(&:to_s).join("<br>").html_safe
           .col-sm-6
             .row
               .col-sm-2
