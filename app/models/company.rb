@@ -1,4 +1,6 @@
 class Company < ActiveRecord::Base
+  has_paper_trail
+
   include Archivable
 
   has_many :addresses, -> { order "created_at" }, dependent: :destroy, as: :addressable
