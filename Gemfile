@@ -46,9 +46,6 @@ gem "database_cleaner"
 gem 'awesome_print'
 
 group :development do
-  gem 'capistrano'
-  gem 'capistrano-rails'
-  gem 'capistrano-rbenv', '~> 2.0'
   gem 'letter_opener'
   gem 'quiet_assets'
   gem 'pry-rails'
