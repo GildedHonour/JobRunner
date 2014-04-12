@@ -1,4 +1,6 @@
 class InternalCompanyRelationship < ActiveRecord::Base
+  has_paper_trail
+
   extend Enumerize
   include Archivable
 
