@@ -1,4 +1,6 @@
 class PhoneNumber < ActiveRecord::Base
+  has_paper_trail
+
   extend Enumerize
   belongs_to :phonable, polymorphic: true, touch: true
 

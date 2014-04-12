@@ -1,4 +1,6 @@
 class Affiliation < ActiveRecord::Base
+  has_paper_trail
+
   include Archivable
 
   belongs_to :affiliate, class_name: 'Company'

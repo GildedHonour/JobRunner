@@ -1,4 +1,6 @@
 class Address < ActiveRecord::Base
+  has_paper_trail
+
   extend Enumerize
 
   belongs_to :addressable, polymorphic: true, touch: true
