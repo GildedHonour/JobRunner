@@ -1,8 +1,8 @@
 Jobrunner::Application.configure do
 
   #Configuration
-  config.system_email = "system@jobrunner.pmgdirect.net"
-  config.action_mailer.default_url_options = { host: 'jobrunner-staging.herokuapp.com' }
+  config.system_email = "production@contacts.pmgdirect.net"
+  config.action_mailer.default_url_options = { host: 'contacts.pmgdirect.net' }
 
   ActionMailer::Base.smtp_settings = {
       :address        => 'smtp.sendgrid.net',

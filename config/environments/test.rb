@@ -1,7 +1,7 @@
 Jobrunner::Application.configure do
 
   #Configuration
-  config.system_email = "development@jobrunner.pmgdirect.net"
+  config.system_email = "test@contacts.pmgdirect.net"
   config.action_mailer.default_url_options = { host: 'localhost.test' }
 
 

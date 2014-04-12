@@ -5,6 +5,7 @@ class CreateVersions < ActiveRecord::Migration
       t.integer  :item_id,   :null => false
       t.string   :event,     :null => false
       t.string   :whodunnit
+      t.string   :whodunnit_email
       t.text     :object
       t.text     :object_changes
       t.datetime :created_at
