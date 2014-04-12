@@ -1,4 +1,4 @@
-if ENV['DEVELOPMENT'] || Rails.env.development?
+if Rails.env.staging? || Rails.env.development?
   DatabaseCleaner.strategy = :truncation
   DatabaseCleaner.clean
 
