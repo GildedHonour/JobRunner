@@ -34,6 +34,7 @@ gem "turbolinks"
 # Server
 gem "pg"
 gem "unicorn"
+gem "bugsnag"
 
 # File uploads
 gem "fog", ">= 1.3.1" # Required by carrierwave
