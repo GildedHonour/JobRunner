@@ -2,9 +2,10 @@ require 'csv'
 
 class DailyAuditReportGenerator
   def perform params
-    report_date = 1.day.ago.beginning_of_day
+    report_start_time = 1.day.ago.beginning_of_day
+    report_end_time = report_start_time.end_of_day
     report = []
-    PaperTrail::Version.where("created_at > ? AND whodunnit_email IS NOT NULL", report_date).order("created_at ASC").each do |version|
+    PaperTrail::Version.where("created_at > ? AND created_at <= ? AND whodunnit_email IS NOT NULL", report_start_time, report_end_time).order("created_at ASC").each do |version|
       changes = format_object_change version
       if changes.present?
         report << [
@@ -18,11 +19,13 @@ class DailyAuditReportGenerator
       end
     end
 
-    report_csv_data = CSV.generate do |csv|
-      csv << ["User", "Timestamp", "Item", "Item ID", "Event", "Changes"]
-      report.each { |r| csv << r }
+    if report.present?
+      report_csv_data = CSV.generate do |csv|
+        csv << ["User", "Timestamp", "Item", "Item ID", "Event", "Changes"]
+        report.each { |r| csv << r }
+      end
+      SystemMailer.daily_audit_report(report_start_time, report_csv_data.to_s, report.size).deliver
     end
-    SystemMailer.daily_audit_report(report_date, report_csv_data.to_s).deliver
   end
 
   def format_object_change version
