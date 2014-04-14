@@ -16,31 +16,29 @@ class CompaniesController < ApplicationController
     if @company.save
       redirect_to company_url(@company)
     else
-      render "new"
+      render :new
     end
   end
 
   def edit
-    render "new"
+    render :new
   end
 
   def update
     if @company.update_attributes(company_params)
       redirect_to company_url(@company)
     else
-      render "new"
+      render :new
     end
   end
 
   def index
     @companies = params[:search].present? ? Company.search(params[:search]) : Company.all
-
     @companies = @companies.with_affiliations_and_relationships_with_archived_status(params[:a])  if params[:a].present?
     @companies = @companies.affiliated_to_company(params[:ac])                                    if params[:ac].present?
     @companies = @companies.with_company_types(params[:ct])                                       if params[:ct].present?
     @companies = @companies.with_internal_relationship_role(params[:irr])                         if params[:irr].present?
     @companies = @companies.relationship_with_company(params[:rc])                                if params[:rc].present?
-
     @companies = params[:name_sort] == "down" ? @companies.order("companies.name DESC") : @companies.order("companies.name ASC")
     @companies = @companies.page(params[:page]).per(PAGE_SIZE) unless request.format == :csv
 
@@ -66,9 +64,9 @@ class CompaniesController < ApplicationController
   def update_section
     @section = params[:section]
     if @company.update_attributes(company_params)
-      render "success"
+      render :success
     else
-      render  "edit_section"
+      render  :edit_section
     end
   end
 
@@ -81,10 +79,10 @@ class CompaniesController < ApplicationController
   private
   def company_params
     params.require(:company).permit(:name, :website, :phone, :company_logo, :company_type_id,
-                                    affiliate_affiliations_attributes: [:id, :archived, :affiliate_id, :role, :_destroy],
-                                    internal_company_relationships_attributes: [:id, :archived, :internal_company_id, :role, :_destroy],
-                                    addresses_attributes: [:id, :address_line_1, :address_line_2, :city, :state, :zip, :country, :_destroy],
-                                    phone_numbers_attributes: [:id, :extension, :kind, :phone_number, :_destroy]
+      affiliate_affiliations_attributes: [:id, :archived, :affiliate_id, :role, :_destroy],
+      internal_company_relationships_attributes: [:id, :archived, :internal_company_id, :role, :_destroy],
+      addresses_attributes: [:id, :address_line_1, :address_line_2, :city, :state, :zip, :country, :_destroy],
+      phone_numbers_attributes: [:id, :extension, :kind, :phone_number, :_destroy]
     )
   end
 

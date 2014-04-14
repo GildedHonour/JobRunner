@@ -44,6 +44,7 @@ gem "rmagick"
 gem "ffaker"
 gem "database_cleaner"
 gem 'awesome_print'
+gem 'sqlite3'
 
 group :development do
   gem 'capistrano'

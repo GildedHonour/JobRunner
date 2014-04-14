@@ -10,12 +10,16 @@
           = link_to contacts_url_with_saved_filters do
             %span.glyphicon.glyphicon-chevron-left
             View all contacts
+
       .profile
         = render "profile"
       .basic.contact.info
         .contact.name
           %span
+            = get_next_prev_contact_link(false, "Previous contact")
             = @contact.full_name
+            = get_next_prev_contact_link(true, "Next contact")
+
           = link_to url_for([@company, @contact]), class: "btn-fam no-border pull-right", title: "Delete", data: { confirm: "Are you sure you want to delete the contact '#{@contact.full_name}'?", method: 'delete', toggle: "tooltip" } do
             %i.fa.fa-trash-o.pull-right
           = link_to url_for([:edit, @company, @contact]), class: "btn-fam no-border pull-right", title: "Edit Contact", data: { toggle: "tooltip" }  do

@@ -6,7 +6,6 @@ class ContactsController < ApplicationController
   before_filter :load_contacts
   before_filter :save_filters, only: :index
 
-
   def new
     @contact = @contacts.build
     respond_with @contact
@@ -17,41 +16,45 @@ class ContactsController < ApplicationController
     if @contact.save
       redirect_to save_success_url
     else
-      render "new"
+      render :new
     end
   end
 
   def edit
-    render "new"
+    render :new
   end
 
   def update
     if @contact.update_attributes(contact_params)
       redirect_to save_success_url
     else
-      render "new"
+      render :new
     end
   end
 
   def index
     @contacts = params[:search].present? ? @contacts.search(params[:search]) : @contacts
-
     @contacts = @contacts.with_archived_status(params[:a])                                    if params[:a].present?
     @contacts = @contacts.with_birthday_months(params[:bm])                                   if params[:bm].present?
     @contacts = @contacts.contacts_of_companies_with_company_types(params[:ct])               if params[:ct].present?
     @contacts = @contacts.contacts_of_companies_with_internal_relationship_role(params[:irr]) if params[:irr].present?
     @contacts = @contacts.contacts_of_companies_with_relationship_to(params[:rc])             if params[:rc].present?
-
     @contacts = params[:first_name_sort] == "down" ? @contacts.order("first_name DESC") : @contacts.order("first_name ASC")
     @contacts = @contacts.page(params[:page]).per(PAGE_SIZE) unless request.format == :csv
+
+    save_ids
 
     respond_with @contacts
   end
 
   def show
+    @contacts_ids = restore_ids
     respond_with do |format|
       format.html { respond_with @contact }
-      format.vcf { send_data(@contact.to_vcf, filename: "#{@contact.full_name}.vcf", "Content-Disposition" => "attachment", "Content-type" => "text/x-vcard; charset=utf-8") }
+      format.vcf do 
+        send_data(@contact.to_vcf, filename: "#{@contact.full_name}.vcf", 
+          "Content-Disposition" => "attachment", "Content-type" => "text/x-vcard; charset=utf-8")
+      end
     end
   end
 
@@ -70,13 +73,14 @@ class ContactsController < ApplicationController
   def update_section
     @section = params[:section]
     if @contact.update_attributes(contact_params)
-      render "success"
+      render :success
     else
-      render "edit_section"
+      render :edit_section
     end
   end
 
   private
+
   def contact_params
     params.require(:contact).permit(:first_name, :middle_name, :last_name, :prefix, :job_title, :company_id, :birthday,
                                     :contest_participant, :send_mmi_ballgame_emails, :do_not_mail, :do_not_email, :send_cookies, contact_source_ids: [],
@@ -107,5 +111,38 @@ class ContactsController < ApplicationController
 
   def save_success_url
     @company ? company_url(@company) : contact_url(@contact)
+  end
+
+  def save_ids
+    session[:contacts_ids] = @contacts.map(&:id)
+  end
+
+  def restore_ids
+    if request.referer && URI(request.referer).path
+
+      # URI(request.referer).path may be 
+      # "/contacts/" instead of "/contacts"
+      # in that case we have to remove the last slash
+
+      referer_path = 
+        if URI(request.referer).path[-1] == "/"
+          URI(request.referer).path[0...URI(request.referer).path.size - 1]
+        else
+          URI(request.referer).path
+        end
+
+      if referer_path == contacts_path || referer_show_action?(referer_path)
+        session[:contacts_ids] || @contacts.map(&:id)
+      else
+        @contacts.map(&:id)
+      end
+    else
+      @contacts.map(&:id)
+    end
+  end
+
+  def referer_show_action?(referer_path)
+    rec_ref_url = Rails.application.routes.recognize_path(referer_path)
+    rec_ref_url[:controller] == "contacts" && rec_ref_url[:action] == "show"
   end
 end

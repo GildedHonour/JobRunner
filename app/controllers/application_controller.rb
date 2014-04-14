@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   private
+  
   def determine_layout
     user_signed_in? ? "application" : "public"
   end
