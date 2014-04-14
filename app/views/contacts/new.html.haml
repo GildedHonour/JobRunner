@@ -57,7 +57,7 @@
                         = f.hidden_field :company_id
                       - else
                         .col-md-6
-                          = f.input :company_id, collection: Company.all.map{ |c| [c.name, c.id] }, include_blank: "Select Company", label: false
+                          = f.input :company_id, collection: Company.ordered_by_name.map{ |c| [c.name, c.id] }, include_blank: "Select Company", label: false
                       .col-md-6
                         = f.input :job_title, placeholder: "Job Title", label: false
 

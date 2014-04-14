@@ -2,10 +2,9 @@
     "Agency",
     "Commercial",
     "Internal",
-    "Media",
-    "Other / Admin",
+    "List Broker",
+    "List Manager",
     "Nonprofit",
-    "Supplier / Service Provider",
 ].each { |company_type| CompanyType.find_or_create_by!(name: company_type) }
 
 [
@@ -24,8 +23,8 @@
       Address.new(
         address_line_1: Faker::Address.street_address,
         city: Faker::Address.city,
-        state: Faker::Address.us_state,
-        zip: Faker::Address.zip_code
+        state: Faker::AddressUS.state,
+        zip: Faker::AddressUS.zip_code
       )
     ]
   )

@@ -5,7 +5,7 @@ module CompaniesHelper
       roles: "Shows companies related to any internal company in the selected role",
       status: "Shows companies with the selected affiliation or relationship status",
       company_type: "Shows companies of the selected type",
-      affiliations_of: "Shows companies which are affiliated to the selected company"
+      accounts_of: "Shows companies affiliated to the selected company"
     }[filter]
   end
 end

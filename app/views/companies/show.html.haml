@@ -27,7 +27,7 @@
                 %span.label
                   Phone
               .col-sm-9
-                = @company.phone_numbers.join("<br>").html_safe
+                = @company.phone_numbers.map(&:to_s).join("<br>").html_safe
           .col-sm-3
             %span.label Web
             = @company.website
@@ -39,7 +39,7 @@
               .col-sm-8
                 - @company.addresses.each do |address|
                   .address
-                    = [address.address_line_1, address.address_line_2, address.city, address.state, address.zip].compact.join(", ")
+                    = [address.address_line_1, address.address_line_2, address.city, address.state, address.zip].compact.map(&:to_s).join(", ")
 
     .company.details
       .first.company.row
@@ -58,10 +58,10 @@
                   %th Added
                   %th Last Modified
               %tbody
-                - @company.internal_company_relationships.ordered_by_internal_company_name.each do |relationship|
+                - @company.internal_company_relationships.ordered_by_status_and_internal_company_name.each do |relationship|
                   %tr
                     %td
-                      = link_to relationship.internal_company.name, relationship.company
+                      = link_to relationship.internal_company.name, relationship.internal_company
                     %td
                       = relationship.role.text
                     %td
@@ -75,31 +75,10 @@
       .second.company.row
         .col-sm-12
           .board.for.company
-            %h3 Affiliations
-            = link_to edit_section_company_url(@company, section: "affiliations"), class: "btn-fam no-border", remote: true do
-              %i.fa.fa-pencil
-
-            %table.table.table-hover
-              %thead
-                %tr
-                  %th Company
-                  %th Role(s)
-                  %th Status
-                  %th Added
-                  %th Last Modified
-              %tbody
-                - @company.affiliate_affiliations.ordered_by_affiliate_name.each do |affiliation|
-                  %tr
-                    %td
-                      = link_to affiliation.affiliate.name, affiliation.affiliate
-                    %td
-                      = affiliation.role.text
-                    %td
-                      = affiliation.record_status
-                    %td
-                      = l(affiliation.created_at, format: :only_date)
-                    %td
-                      = l(affiliation.updated_at, format: :only_date)
+            - if @company.company_type.try(:can_be_affiliation_principal?)
+              = render "affiliations_table", header: "Affiliates", affiliations: @company.affiliate_affiliations.ordered_by_affiliate_name, edit_section: "affiliates", affiliation_relation: :affiliate
+            - elsif @company.company_type.try(:can_be_affiliation_affiliate?)
+              = render "affiliations_table", header: "Managed By", affiliations: @company.principal_affiliations.ordered_by_principal_name, edit_section: "principals", affiliation_relation: :principal
 
     .company.details
       .third.company.row
@@ -130,7 +109,7 @@
                     %td
                       = contact.emails.map{ |email| mail_to(email) }.join("<br>").html_safe
                     %td
-                      = contact.phone_numbers.join(",")
+                      = contact.phone_numbers.map(&:to_s).join(",")
                     %td
                       = contact.record_status
                     %td
