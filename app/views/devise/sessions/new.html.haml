@@ -1,9 +1,9 @@
 .row 
-	= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-		.col-sm-4
-			= f.text_field :email, autofocus: true, class: "form-control", placeholder: "name@pmgdirect.net"
-		.col-sm-4
-			= f.text_field :password, class: "form-control", placeholder: "password"
-		.col-sm-4
-			= f.submit "Sign in", class: 'btn-fam'
-	= render "devise/shared/links"
+  = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .col-sm-4
+      = f.input_field :email, autofocus: true, class: "form-control", placeholder: "name@pmgdirect.net"
+    .col-sm-4
+      = f.input_field :password, class: "form-control", placeholder: "password"
+    .col-sm-4
+      = f.submit "Sign in", class: 'btn-fam'
+  = render "devise/shared/links"
