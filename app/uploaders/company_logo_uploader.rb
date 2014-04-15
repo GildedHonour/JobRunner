@@ -12,4 +12,8 @@ class CompanyLogoUploader < CarrierWave::Uploader::Base
   def extension_white_list
     %w(jpg jpeg gif png)
   end
+
+  def default_url
+    ActionController::Base.helpers.asset_path([version_name, "fallback.png"].compact.join('_'))
+  end
 end

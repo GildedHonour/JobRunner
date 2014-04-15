@@ -35,3 +35,4 @@
 //= require sidebar
 //= require url_helper
 //= require index_search_filter_view
+//= require nprogress

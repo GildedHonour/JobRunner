@@ -1,5 +1,13 @@
-.company.intro, .go.and.profile {
+.company.intro {
+  // Panel styles
   @include row();
+  padding: 0 0 0 rem(35px);
+  margin: 0 0 2rem;
+}
+
+.company-action {
+  @include outer-container;
+  margin-bottom: rem(30px);
 }
 
 .company.logo {
@@ -8,22 +16,36 @@
 }
 .company.logo img {
   width: 100%; // update the thumnail width
+  margin-top: 10px;
 }
 
 .company.info {
   @include span-columns(21);
   font-family: "Verb Light", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+}
 
+.secondary.company.info {
+  @include span-columns(24);
+  font-family: "Verb Light", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
 }
 
 .company.name {
   font-size: rem(58px);
   border-bottom: 5px solid $black-01;
   padding-left: rem(25px);
+  .label {
+    color: $gray-03;
+    padding: 0;
+  }
   .btn-fam {
     position: relative;
-    bottom: -20px;
+    bottom: -15px;
+    margin-right: 10px;
   }
+}
+
+.address {
+  display: inline;
 }
 
 .secondary.company.info {
@@ -48,6 +70,11 @@
 
 .board.for.company {
   @include span-columns(24);
+  margin-bottom: 1rem;
+  table {
+    width: 100%;
+    font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+  }
 }
 
 .board.for.company h3 {
@@ -81,6 +108,16 @@
   font-family: "Verb Black", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
   font-size: rem(17px);
   border-bottom: 5px solid $gray-02;
+}
+
+.board.for.company th {
+  font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+  text-transform: uppercase;
+  font-size: 8.25pt;
+  border-bottom: 5px solid #dfe7e7;
+  color: #b0bcbc;
+  padding: 4px 8px;
+  background: transparent;
 }
 
 .board.for.company.communications table {

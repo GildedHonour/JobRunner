@@ -1,45 +1,40 @@
 .neat-row
   .show.content
-    .go.and.profile
-      .go.back
-        = link_to companies_url_with_saved_filters do
-          %span.glyphicon.glyphicon-chevron-left
-          View all companies
-      .profile
-        = render "profile"
     .company.intro
+      .neat-row.company-action
+        .go.back
+          = link_to companies_url_with_saved_filters do
+            %span.glyphicon.glyphicon-chevron-left
+            View all companies
+        .profile-container
+          = render "profile"      
       .company.logo
         = image_tag @company.company_logo.url, alt: @company.name
       .company.info.pull-right
         .company.name
           = @company.name
-          = link_to company_url(@company), class: "btn-fam no-border pull-right", data: { confirm: "Are you sure you want to delete the company '#{@company.name}'?", method: 'delete' } do
-            %i.fa.fa-trash-o.pull-right
-          = link_to edit_company_url(@company), class: "btn-fam no-border pull-right" do
-            %i.fa.fa-pencil.pull-right
-        .secondary.company.info.row
-          .col-sm-2
-            %span.label{ style: "white-space: normal;" }
-              = @company.company_type
-          .col-sm-4
-            .row
-              .col-sm-3
-                %span.label
-                  Phone
-              .col-sm-9
-                = @company.phone_numbers.map(&:to_s).join("<br>").html_safe
+          %span.label{ style: "white-space: normal;" }
+            &mdash; 
+            = @company.company_type
+          = link_to company_url(@company), class: "btn-fam pull-right err", data: { confirm: "Are you sure you want to delete the company '#{@company.name}'?", method: 'delete' } do
+            %i.fa.fa-trash-o
+            %span.action Delete
+          = link_to edit_company_url(@company), class: "btn-fam pull-right" do
+            %i.fa.fa-pencil
+            %span.action Edit
+        .secondary.company.info
+          .col-sm-6
+            %span.label Address
+            - @company.addresses.each do |address|
+              .address
+                = [address.address_line_1, address.address_line_2, address.city, address.state, address.zip].compact.map(&:to_s).join(", ")
+          .col-sm-3
+            %span.label Phone
+            = @company.phone_numbers.map(&:to_s).join("<br>").html_safe
           .col-sm-3
             %span.label Web
-            = @company.website
-          .col-sm-3
-            .row
-              .col-sm-4
-                %span.label
-                  Address
-              .col-sm-8
-                - @company.addresses.each do |address|
-                  .address
-                    = [address.address_line_1, address.address_line_2, address.city, address.state, address.zip].compact.map(&:to_s).join(", ")
+            %a{href: "http://#{@company.website}"}
+              = @company.website
 
     .company.details
       .first.company.row
@@ -49,7 +44,7 @@
             = link_to edit_section_company_url(@company, section: "internal_company_relationships"), class: "btn-fam no-border", remote: true do
               %i.fa.fa-pencil
 
-            %table.table.table-hover
+            %table.table-hover.table-condensed
               %thead
                 %tr
                   %th Company
