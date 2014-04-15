@@ -11,7 +11,7 @@ if Rails.env.production?
     }
     config.fog_directory  = Rails.application.secrets.s3_public_bucket
     config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}
-    config.asset_host = "//#{Rails.application.secrets.s3_public_bucket}.s3.amazonaws.com"
+    config.asset_host = "//#{Rails.application.secrets.cloud_front_url}"
   end
 else
   CarrierWave.configure do |config|

@@ -1,0 +1,37 @@
+.login {
+  .logo {
+    display: block;
+    position: absolute;
+    top: 70%;
+    left: 85%;  
+  }
+  p {
+    padding: 1em;
+    font-size: 15px;
+    font-family: Verb;
+  } 
+  .light {
+    color: #8aa0a0;
+  }
+  .dark {
+    color: #555a5a;
+  } 
+  background: url(asset-path("rick_vintage.png"));
+
+  background-size: 100% auto;
+  background-position: 0px -100px;
+  #main {
+    max-width: 100%;
+    border-top: 2px solid $gray-06;
+    -moz-box-shadow: inset 0px 1px 3px $gray-02;
+    -webkit-box-shadow: inset 0px 1px 3px $gray-02;
+    box-shadow: inset 0px 1px 3px $gray-02;
+    background-color: #fff;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  .row {
+    padding: 1rem 0;
+  }
+}

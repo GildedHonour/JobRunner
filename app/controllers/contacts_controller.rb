@@ -97,7 +97,7 @@ class ContactsController < ApplicationController
   end
 
   def save_filters
-    active_filters = %i(a bm ct irr rc search name_sort).select{ |filter_param| params[filter_param].present? }
+    active_filters = %i(a bm ct irr rc search first_name_sort).select{ |filter_param| params[filter_param].present? }
     if active_filters.present?
       session[:contact_filter_params] = params.slice(*active_filters)
     else
