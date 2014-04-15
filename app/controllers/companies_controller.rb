@@ -33,7 +33,7 @@ class CompaniesController < ApplicationController
   end
 
   def index
-    @companies = params[:search].present? ? Company.search(params[:search]) : Company.all
+    @companies = params[:search].present? ? Company.eager_load_associations.search(params[:search]) : Company.all.eager_load_associations
 
     @companies = @companies.with_affiliations_and_relationships_with_archived_status(params[:a])  if params[:a].present?
     @companies = @companies.affiliated_to_company(params[:ac])                                    if params[:ac].present?

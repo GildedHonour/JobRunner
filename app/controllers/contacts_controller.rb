@@ -92,7 +92,7 @@ class ContactsController < ApplicationController
 
   def load_contacts
     @company = Company.find(params[:company_id]) if params[:company_id].present?
-    @contacts = @company ? @company.contacts : Contact.all
+    @contacts = @company ? @company.contacts : Contact.all.eager_load_associations
     @contact = @contacts.find(params[:id]) if params[:id].present?
   end
 
