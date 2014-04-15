@@ -13,6 +13,9 @@ class ApplicationController < ActionController::Base
     contacts_url(session[:contact_filter_params] || {})
   end
 
+  def info_for_paper_trail
+  { whodunnit_email: current_user.try(:email) }
+end
   private
   
   def determine_layout

@@ -2,22 +2,27 @@
   // Panel styles
   @include row();
   padding: 0 0 0 rem(35px);
-  background-color: $background-gray;
+}
+
+.contact-action {
+  @include outer-container;
+  margin-bottom: rem(30px);
 }
 
 .go.back {
-  @include span-columns(18 of 24);
-  font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
-  font-size: rem(14px);
-  padding: rem(10px) rem(25px);
-  margin-bottom: rem(40px);
+  @include span-columns(17);
 
+  font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+  font-size: rem(20px);
+  padding: rem(13px) rem(25px);
+  border-bottom: 4px solid $gray-06;
   a {
     color: $black-02;
-    border-bottom: 4px solid $gray-06;
     display: block;
     padding-left: rem(25px);
     padding-bottom: 1rem;
+    position: relative;
+    top: rem(12px);
   }
   .glyphicon-chevron-left {
     font-size: rem(22px);
@@ -25,9 +30,19 @@
   }
 }
 
+.profile-container {
+  @include span-columns(6);
+  @include omega();
+  float: right;
+}
+
 .basic.contact.info {
   @include span-columns(24 of 24);
   font-family: "Verb Light", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+}
+
+.prefix {
+  color: #9bb3b3;
 }
 
 .contact.name {
@@ -36,7 +51,8 @@
   padding-left: rem(25px);
   .btn-fam {
     position: relative;
-    bottom: -20px;
+    margin-right: 10px;
+    bottom: -15px;
   }
 }
 
@@ -54,16 +70,24 @@
 }
 
 .contact.details {
-//  padding: rem(0) rem(25px) rem(15px) rem(69px);
   @include row();
   background-color: #fff;
   border-top: 5px solid $gray-02;
-  padding: 0 0 0 rem(75px);
 }
 
 .board.for.contact {
   @include span-columns(12 of 24);
   padding-bottom: 50px;
+  border-right: 1px solid #d0dcdc;
+  height: 300px;
+  padding: 0 rem(75px) 0 rem(75px);
+  a {
+    color: #000;
+    border-bottom: 1px dashed #01a4e1;
+    &:hover {
+      border-bottom: 1px solid #01a4e1;
+    }
+  }
 }
 
 .board.for.contact h3 {
@@ -86,9 +110,9 @@
 }
 
 .board.for.contact h4 {
-  font-family: "Lora Regular", "Georgia", "Times", serif;
+  font-family: "Verb Regular", "Georgia", "Times", serif;
   font-size: rem(26px);
-  color: #666;
+  color: #9bb3b3;
   text-transform: none;
   margin-bottom: rem(36px);
 }
@@ -96,7 +120,22 @@
 .board.for.contact h5, .board.for.contact th {
   font-family: "Verb Black", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
   font-size: rem(17px);
-  border-bottom: 5px solid $gray-02;
+  border-bottom: 3px solid $gray-02;
+  padding-bottom: 1rem;
+}
+
+.board.for.contact table {
+  font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+  .bold {
+    font-family: "Verb Extra Bold", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+    font-weight: 600;
+  }
+  .light {
+    color: #8aa0a0;
+  }
+  .dark {
+    color: #555a5a;
+  } 
 }
 
 .board.for.contact.communications table {

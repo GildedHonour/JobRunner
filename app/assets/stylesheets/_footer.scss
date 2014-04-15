@@ -1,0 +1,25 @@
+.footer {
+	border-top: 5px solid $gray-02;
+	background-color: #f5f8f8;
+	min-height: 200px;
+	position: relative;
+	left: 5%;
+	width: 95%;
+	font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+	.f-brand {
+		font-family: "verbsemibold'", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+		font-weight: 500;
+		color: #a1c2c2;
+		font-size: rem(18px);
+	}
+	.copyright {
+		color: #b6d0d0;
+		font-size: rem(18px);
+	}
+	.footer-wrapper {
+		padding: 1rem .5rem;
+		border: 1px solid #cdd5d5;
+		min-height: 200px;
+		height: 100%;
+	}
+}

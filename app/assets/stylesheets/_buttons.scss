@@ -1,16 +1,17 @@
 .btn-fam {
-	font-size: 12pt;
+	font-size: rem(20px);
 	@include border-radius(20px, 20px);
 	border-color: #d6e0e0;
-	border-width: 5px;
+	border-width: 3px;
 	background-color: #fff;
 	min-width: 90px;
-	font-family: "verbsemibold", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
+	font-family: "Verb Regular", "Tahoma", "Trebuchet", "Verdana", "Arial", sans-serif;
 	color: #91aaaa;
-	padding: 6px 15px;
+	padding: 3px 15px;
 	border-style: solid;
 	.fa {
-		font-size: 14pt;
+		font-size: rem(24px);
+		vertical-align: text-top;
 	}
 	&:hover {
 		border-color: shade(#d6e0e0, 20%);
