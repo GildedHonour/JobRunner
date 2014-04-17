@@ -50,6 +50,7 @@ group :development do
   gem "letter_opener"
   gem "quiet_assets"
   gem "pry-rails"
+  gem "pry-nav"
   gem "spring"
 end
 

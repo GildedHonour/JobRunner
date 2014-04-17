@@ -14,8 +14,9 @@ class ApplicationController < ActionController::Base
   end
 
   def info_for_paper_trail
-  { whodunnit_email: current_user.try(:email) }
-end
+    { whodunnit_email: current_user.try(:email) }
+  end
+  
   private
   
   def determine_layout

@@ -5,6 +5,8 @@ class ContactsController < ApplicationController
 
   before_filter :load_contacts
   before_filter :save_filters, only: :index
+  before_filter :set_saved_filters_default_page, only: [:index, :show]
+
 
   def new
     @contact = @contacts.build
@@ -33,27 +35,21 @@ class ContactsController < ApplicationController
   end
 
   def index
-    @contacts = params[:search].present? ? @contacts.search(params[:search]) : @contacts
-    @contacts = @contacts.with_archived_status(params[:a])                                    if params[:a].present?
-    @contacts = @contacts.with_birthday_months(params[:bm])                                   if params[:bm].present?
-    @contacts = @contacts.contacts_of_companies_with_company_types(params[:ct])               if params[:ct].present?
-    @contacts = @contacts.contacts_of_companies_with_internal_relationship_role(params[:irr]) if params[:irr].present?
-    @contacts = @contacts.contacts_of_companies_with_relationship_to(params[:rc])             if params[:rc].present?
-    @contacts = params[:first_name_sort] == "down" ? @contacts.order("first_name DESC") : @contacts.order("first_name ASC")
-    @contacts = @contacts.page(params[:page]).per(PAGE_SIZE) unless request.format == :csv
-
-    save_ids
-
-    respond_with @contacts
+    @contacts = apply_filters(@contacts)
+    respond_with(@contacts)
   end
 
   def show
-    @contacts_ids = restore_ids
+    @contacts = apply_filters(@contacts, incl_neighbours: true)
+    @contacts_ids = @contacts.map(&:id)
+    set_saved_filters_new_page!
+    
     respond_with do |format|
       format.html { respond_with @contact }
       format.vcf do 
-        send_data(@contact.to_vcf, filename: "#{@contact.full_name}.vcf", 
-          "Content-Disposition" => "attachment", "Content-type" => "text/x-vcard; charset=utf-8")
+        send_data(@contact.to_vcf, filename: "#{@contact.full_name}.vcf", "Content-Disposition" => "attachment",
+                  "Content-type" => "text/x-vcard; charset=utf-8"
+        )
       end
     end
   end
@@ -103,46 +99,89 @@ class ContactsController < ApplicationController
   def save_filters
     active_filters = %i(a bm ct irr rc search name_sort).select{ |filter_param| params[filter_param].present? }
     if active_filters.present?
-      session[:contact_filter_params] = params.slice(*active_filters)
+      set_saved_filters(params.slice(*active_filters))
     else
-      session[:contact_filter_params] = nil
+      set_saved_filters(nil)
     end
+  end
+
+  def get_saved_filters
+    session[:contact_filter_params]
+  end
+
+  def set_saved_filters(value)
+    session[:contact_filter_params] = value
+  end
+
+  def set_saved_filters_page(value)
+    session[:contact_filter_params][:page] = value
+  end
+
+  def set_saved_filters_default_page
+    maybe_page = get_saved_filters[:page]
+    set_saved_filters_page(maybe_page || 1)
   end
 
   def save_success_url
     @company ? company_url(@company) : contact_url(@contact)
   end
 
-  def save_ids
-    session[:contacts_ids] = @contacts.map(&:id)
-  end
+  def apply_filters(source, incl_neighbours: false)
+    source_filtered = source
+    if get_saved_filters
+      source_filtered = get_saved_filters.has_key?(:search) ? source.search(get_saved_filters[:search]) : source
+      source_filtered = source_filtered.with_archived_status(get_saved_filters[:a]) if get_saved_filters.has_key?(:a)
+      source_filtered = source_filtered.with_birthday_months(get_saved_filters[:bm]) if get_saved_filters.has_key?(:bm)
+      
+      source_filtered = source_filtered.contacts_of_companies_with_company_types(get_saved_filters[:ct]) if get_saved_filters.has_key?(:ct)
+      source_filtered = source_filtered.contacts_of_companies_with_internal_relationship_role(get_saved_filters[:irr]) if get_saved_filters.has_key?(:irr)
+      source_filtered = source_filtered.contacts_of_companies_with_relationship_to(get_saved_filters[:rc]) if get_saved_filters.has_key?(:rc)
 
-  def restore_ids
-    if request.referer && URI(request.referer).path
-
-      # URI(request.referer).path may be 
-      # "/contacts/" instead of "/contacts"
-      # in that case we have to remove the last slash
-
-      referer_path = 
-        if URI(request.referer).path[-1] == "/"
-          URI(request.referer).path[0...URI(request.referer).path.size - 1]
-        else
-          URI(request.referer).path
-        end
-
-      if referer_path == contacts_path || referer_show_action?(referer_path)
-        session[:contacts_ids] || @contacts.map(&:id)
-      else
-        @contacts.map(&:id)
+      source_filtered = get_saved_filters[:name_sort] == "down" ? source_filtered.order("first_name DESC") : source_filtered.order("first_name ASC")
+      
+      unless request.format == :csv
+        source_filtered = source_filtered.page(get_saved_filters[:page]).per(PAGE_SIZE) 
+        source_filtered = include_neighbours(source_filtered) if incl_neighbours 
       end
-    else
-      @contacts.map(&:id)
     end
+
+    source_filtered
   end
 
-  def referer_show_action?(referer_path)
-    rec_ref_url = Rails.application.routes.recognize_path(referer_path)
-    rec_ref_url[:controller] == "contacts" && rec_ref_url[:action] == "show"
+  def set_saved_filters_new_page!
+    @contact_index = @contacts_ids.find_index { |x| x == @contact.id }
+    
+    # if the element is not found in the filtered result 
+    # (which includes 1 element from the previous page and 1 element from the next page) that means 
+    # either it doesn't exist at all in db or
+    # it is entered manually in the address bar in the browser (so that it's not in the filtered result but does exist in db)
+    # thus we don't have to modify current page number in the search filter in the session
+    return unless @contact_index
+
+    # get the page of @contact.id according to its 
+    # position (@contact_index) in the result set
+    new_page_index = (@contact_index / PAGE_SIZE) + 1 
+    set_saved_filters_page(new_page_index)
+  end
+
+  def include_neighbours(source)
+    source_arr = source.to_a
+    
+    # check if it is not the last page
+    # so we can include the first contact from the next page
+    is_last_page = ((source_arr.size / PAGE_SIZE) + 1) == get_saved_filters[:page]
+    unless is_last_page
+      first_element = Kaminari.paginate_array(source_arr).page(get_saved_filters[:page] + 1).per(1) 
+      source_arr += first_element
+    end
+    
+    # check if it is not the first page
+    # so we can include the last contact from the previous page
+    unless get_saved_filters[:page] == 1
+      last_element = Kaminari.paginate_array(source_arr).page(get_saved_filters[:page] - 1).per(PAGE_SIZE)
+      source_arr.unshift(res[-1])
+    end
+
+    source_arr
   end
 end
