@@ -7,7 +7,6 @@ class ContactsController < ApplicationController
   before_filter :save_filters, only: :index
   before_filter :set_saved_filters_default_page, only: [:index, :show]
 
-
   def new
     @contact = @contacts.build
     respond_with @contact
@@ -118,7 +117,8 @@ class ContactsController < ApplicationController
   end
 
   def set_saved_filters_default_page
-    maybe_page = get_saved_filters[:page]
+    set_saved_filters({}) unless get_saved_filters
+    maybe_page = get_saved_filters[:page] 
     set_saved_filters_page(maybe_page || 1)
   end
 
