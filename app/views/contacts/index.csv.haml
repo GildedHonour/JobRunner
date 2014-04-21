@@ -2,7 +2,7 @@
 
 - content = CSV.generate do |csv|
   - csv << ["Prefix", "First Name", "Middle Name", "Last Name", "Primary Email", "Job Title", "Company" ,"Address", "Address 2", "City", "State", "Zip", "Country", "Birthday", "Do Not Email", "Do Not Mail", "Source", "Contest participant", "Primary Phone", "Notes"]
-  - @contacts.each do |contact|
+  - @entities.each do |contact|
     - address = contact.addresses.first || Address.new
     - phone_number = contact.phone_numbers.first || PhoneNumber.new
     - notes = contact.notes.present? ? contact.notes.map(&:note).join(".") : "None"

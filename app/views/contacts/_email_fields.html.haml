@@ -6,7 +6,7 @@
           .panel-title
             Emails
         .panel-body
-          = f.fields_for :emails, @contact.emails.present? ? @contact.emails : @contact.emails.build do |email_form|
+          = f.fields_for :emails, @entity.emails.present? ? @entity.emails : @entity.emails.build do |email_form|
             .row
               .form-group
                 .col-md-9

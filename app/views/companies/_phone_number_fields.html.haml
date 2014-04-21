@@ -1,6 +1,6 @@
 .row.top-buffer-15
   #phone_numbers
-    = f.fields_for :phone_numbers, (@company.persisted? || @company.phone_numbers.present?) ? @company.phone_numbers : @company.phone_numbers.build, wrapper: false do |phone_number_form|
+    = f.fields_for :phone_numbers, (@entity.persisted? || @entity.phone_numbers.present?) ? @entity.phone_numbers : @entity.phone_numbers.build, wrapper: false do |phone_number_form|
       .col-md-4.fields
         .panel.panel-default
           .panel-heading

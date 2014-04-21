@@ -26,9 +26,9 @@
                 %i.fa.fa-plus
                 = link_to "Add a new company", new_company_url
         %tbody#companies-listing
-          = render @companies
+          = render @entities
       #companies-pagination
-        = paginate(@companies)
+        = paginate(@entities)
   .profile.on.listing.pages
     = render "profile"
 
