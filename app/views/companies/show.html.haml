@@ -15,7 +15,6 @@
           = get_next_prev_entity_link(false, "Previous company")
           = @entity.name
           = get_next_prev_entity_link(true, "Next company")
-
           = link_to company_url(@entity), class: "btn-fam no-border pull-right", data: { confirm: "Are you sure you want to delete the company '#{@entity.name}'?", method: 'delete' } do
             %i.fa.fa-trash-o.pull-right
           = link_to edit_company_url(@entity), class: "btn-fam no-border pull-right" do
