@@ -1,8 +1,5 @@
 $(function(){
-    $(document).on('page:fetch', function() {
-        $("#loading-indicator").show();
-    });
-    $(document).on('page:change', function() {
-        $("#loading-indicator").hide();
-    });
+	$(document).on('page:fetch',   function() { NProgress.start(); });
+	$(document).on('page:change',  function() { NProgress.done(); });
+	$(document).on('page:restore', function() { NProgress.remove(); });
 });

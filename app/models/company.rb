@@ -64,6 +64,10 @@ class Company < ActiveRecord::Base
       includes(:internal_company_relationships).references(:internal_company_relationships).where('internal_company_relationships.role IN (?)', roles)
     end
 
+    def eager_load_associations
+      includes(:affiliates, :principals, :internal_companies, :company_type)
+    end
+
     def relationship_with_company(company_ids)
       includes(:internal_company_relationships).references(:internal_company_relationships).where('internal_company_relationships.internal_company_id IN (?)', company_ids)
     end

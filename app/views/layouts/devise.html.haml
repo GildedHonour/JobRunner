@@ -4,11 +4,18 @@
     %title
       Jobrunner
     = stylesheet_link_tag "application", media: "all"
+    = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
-  %body
-    #main{ style: 'margin-top: 80px;'}
+  %body{ class: "login" }
+    .logo
+      %img{ src: "http://pmgdirect.net/wp-content/themes/pmg/_i/logo.png"}
+    %p.bg-primary 
+      PMG World headquarters, 1998, Severna Park Maryland <br />
+      %span Employee Number 1: 
+      %span Rick Powell
+    #main
       .row
-        .col-sm-4.col-md-offset-4
+        .col-sm-4.col-sm-offset-8
           - if notice || alert
             %p.alert.alert-warning
               = notice || alert
@@ -16,5 +23,5 @@
             %p.alert.alert-warning
               = @user.errors.full_messages.to_sentence
       .row
-        .col-sm-4.col-md-offset-4
+        .col-sm-4.col-sm-offset-8
           = yield

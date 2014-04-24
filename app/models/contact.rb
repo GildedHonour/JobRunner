@@ -38,6 +38,10 @@ class Contact < ActiveRecord::Base
       includes(:company).references(:company).where("first_name ILIKE ? OR last_name ILIKE ? OR concat(first_name, last_name) ILIKE ? OR companies.name ILIKE ?", term_like, term_like, term_like.gsub(/\s/, ""), term_like)
     end
 
+    def eager_load_associations
+      includes(:addresses, :notes, :emails, :phone_numbers)
+    end
+
     def with_birthday_months(month_ids)
       where('extract(month from birthday) IN (?)', month_ids)
     end
