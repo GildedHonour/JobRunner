@@ -1,5 +1,5 @@
 class SystemMailer < ActionMailer::Base
-  SYSTEM_RECIPIENTS = %w(chip@pmgdirect.net vicky@pmgdirect.net cindy@pmgdirect.net sean@engageyourcause.com lori@mmidirect.com projects@akshay.cc)
+  SYSTEM_RECIPIENTS = %w(chip@pmgdirect.net vicky@pmgdirect.net cwright@pmgdirect.net sean@engageyourcause.com lori@mmidirect.com projects@akshay.cc)
 
   def daily_audit_report(date, report_csv_data, no_of_entries)
     mail(subject: "Audit report for #{l(date, format: :only_date)}",
