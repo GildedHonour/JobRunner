@@ -1,4 +1,6 @@
 module CompaniesHelper
+  include BackForwardLinkGenerator
+
   def tooltip_text_for_filter(filter)
     {
       relationships: "Shows companies related to the selected internal company",

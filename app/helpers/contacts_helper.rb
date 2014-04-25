@@ -1,4 +1,6 @@
 module ContactsHelper
+  include BackForwardLinkGenerator
+  
   def tooltip_text_for_filter(filter)
     {
       relationships: "Shows all contacts of a company where the company is related to the selected internal company",

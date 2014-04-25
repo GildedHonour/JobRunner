@@ -12,9 +12,9 @@
         = image_tag @entity.company_logo.url, alt: @entity.name
       .company.info.pull-right
         .company.name
-          = get_next_prev_entity_link(false, "Previous company")
+          = link_to_previous_entity("Previous company")
           = @entity.name
-          = get_next_prev_entity_link(true, "Next company")
+          = link_to_next_entity("Next company")
           %span.label{ style: "white-space: normal;" }
             &mdash; 
             = @entity.company_type

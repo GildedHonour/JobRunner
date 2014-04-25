@@ -1,11 +1,7 @@
 class ContactsController < ApplicationController
-  include BackForwardNavigator
-  
+  include SearchFiltersSaver
+
   respond_to :html, :js, :csv, :vcf
-  
-  before_filter :load_entities
-  before_filter :save_filters, only: :index
-  before_filter :set_saved_filters_default_page, only: [:index, :show]
 
   def new
     @entity = @entities.build

@@ -1,5 +1,13 @@
-module BackForwardNavigator
+module SearchFiltersSaver
+  extend ActiveSupport::Concern
+  
   PAGE_SIZE = 100
+
+  included do
+    before_filter :load_entities
+    before_filter :save_filters, only: :index
+    before_filter :set_saved_filters_default_page, only: [:index, :show]
+  end
 
   def include_neighbours(source)
     source_arr = source.to_a
@@ -79,24 +87,7 @@ module BackForwardNavigator
     end
   end
 
-  def get_next_prev_entity_link(is_forward, title)
-    arrow = is_forward ? "right" : "left"
-    span_tag = content_tag(:span, nil, class: "glyphicon glyphicon-chevron-#{arrow}")
-    m_np_id = maybe_next_prev_entity_id(is_forward)
-    return span_tag unless m_np_id
-    link_to(entity_path.call(m_np_id), title: title) { span_tag }
-  end
-
   private
-
-  def maybe_next_prev_entity_id(is_forward) 
-    return nil unless @entity_index
-    if is_forward
-      @entity_index != @entities_ids.size - 1 ? @entities_ids[@entity_index + 1] : nil
-    else
-      @entity_index != 0 ? @entities_ids[@entity_index - 1] : nil
-    end
-  end
 
   def params_fileter_key
     (@entity_prefix + "_filter_params").to_sym

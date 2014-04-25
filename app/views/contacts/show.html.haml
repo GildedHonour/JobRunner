@@ -16,12 +16,11 @@
       .basic.contact.info
         .contact.name
           %span
-            = get_next_prev_entity_link(false, "Previous contact")
+            = link_to_previous_entity("Previous contact")
             %span.prefix
               = @entity.prefix
-            
             = @entity.full_name
-            = get_next_prev_entity_link(true, "Next contact")
+            = link_to_next_entity("Next contact")
           = link_to url_for([@company, @entity]), class: "btn-fam pull-right err", title: "Delete", data: { confirm: "Are you sure you want to delete the contact '#{@entity.full_name}'?", method: 'delete', toggle: "tooltip" } do
             %i.fa.fa-trash-o 
             %span.action Delete
