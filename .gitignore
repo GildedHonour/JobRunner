@@ -8,11 +8,11 @@
 /.bundle
 
 # Ignore the default SQLite database.
-database.yml
+config/database.yml
 .idea
 public/uploads
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-jobrunner.sublime-project
-jobrunner.sublime-workspace
+*.sublime-project
+*.sublime-workspace

@@ -10,12 +10,12 @@
 
     .company.details
       %h1
-        - if @company.persisted?
-          = "Edit #{@company.name}"
+        - if @entity.persisted?
+          = "Edit #{@entity.name}"
         - else
           New Company
 
-      = simple_nested_form_for @company do |f|
+      = simple_nested_form_for @entity do |f|
         .row
           .col-md-4
             %h2
@@ -26,16 +26,16 @@
                 = f.input :website, placeholder: "Website", label: false
                 = f.input :company_type_id, collection: CompanyType.all, include_blank: "Company Type", label: false
                 = f.input :company_logo
-                - if @company.company_logo.present?
-                  = image_tag @company.company_logo.url
+                - if @entity.company_logo.present?
+                  = image_tag @entity.company_logo.url
                   = link_to "x", delete_company_logo_company_url , class: "btn btn-danger btn-xs", data: { method: "patch" }
 
         .row
           .col-md-12
             %h2
               Contact Info
-            = render 'address_fields', f: f
-            = render 'phone_number_fields', f: f
+            = render "address_fields", f: f
+            = render "phone_number_fields", f: f
 
         %br
         .form-group

@@ -5,12 +5,12 @@
       %h2.modal-title
         Manage Agencies
     #modal-form
-      = simple_nested_form_for @company, url: update_section_company_url(@company, section: "principals"), html: { class: "form-horizontal" }, remote: true do |f|
+      = simple_nested_form_for @entity, url: update_section_company_url(@entity, section: "principals"), html: { class: "form-horizontal" }, remote: true do |f|
         .modal-body
-          - if @company.errors.any?
+          - if @entity.errors.any?
             .alert.alert-danger
               %a.close{ "data-dismiss" => "alert", href: "#" } ×
-              - @company.errors.full_messages.each do |message|
+              - @entity.errors.full_messages.each do |message|
                 %p
                   = message
           .row
@@ -26,7 +26,7 @@
                           Inactive
                         %th
                     %tbody#affiliation-fields
-                      = f.fields_for :principal_affiliations, @company.principal_affiliations.present? ? @company.principal_affiliations.ordered_by_principal_name : @company.principal_affiliations.build, wrapper: false do |affiliation_form|
+                      = f.fields_for :principal_affiliations, @entity.principal_affiliations.present? ? @entity.principal_affiliations.ordered_by_principal_name : @entity.principal_affiliations.build, wrapper: false do |affiliation_form|
                         %tr.fields
                           %td
                             .col-md-12

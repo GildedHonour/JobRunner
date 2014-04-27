@@ -6,12 +6,12 @@
         %thead
           %tr
             %th.sortable
-              - if(params[:first_name_sort] == "down")
-                = link_to contacts_url(params.merge(first_name_sort: "up")) do
+              - if(params[:name_sort] == "down")
+                = link_to contacts_url(params.merge(name_sort: "up")) do
                   Name
                   %i.fa.fa-angle-down
               - else
-                = link_to contacts_url(params.merge(first_name_sort: "down")) do
+                = link_to contacts_url(params.merge(name_sort: "down")) do
                   Name
                   %i.fa.fa-angle-up
             %th
@@ -24,9 +24,9 @@
               .wrap
                 %i.fa.fa-plus
                 = link_to "Add a new contact", new_contact_url
-          = render @contacts
+          = render @entities
       #contacts-pagination
-        = paginate(@contacts)
+        = paginate(@entities)
   .profile.on.listing.pages
     = render "profile"
 

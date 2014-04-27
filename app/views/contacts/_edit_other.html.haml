@@ -5,7 +5,7 @@
       %h2.modal-title
         Manage Other Details
     #modal-form
-      = simple_nested_form_for @contact, url: update_section_contact_url(@contact, section: "other"), remote: true, html: { class: 'form-horizontal' }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, boolean: :horizontal_boolean } do |f|
+      = simple_nested_form_for @entity, url: update_section_contact_url(@entity, section: "other"), remote: true, html: { class: 'form-horizontal' }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, boolean: :horizontal_boolean } do |f|
         .modal-body
           .row
             .col-sm-10.col-sm-offset-2
