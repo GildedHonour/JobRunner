@@ -184,6 +184,8 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
     rake (10.2.2)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rmagick (2.13.2)
     rspec-core (2.14.7)
     rspec-expectations (2.14.5)
@@ -270,6 +272,7 @@ DEPENDENCIES
   quiet_assets
   rails (= 4.1.0)
   rails_12factor
+  rest-client
   rmagick
   rspec-rails
   sass-rails (~> 4.0.0)

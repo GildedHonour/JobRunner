@@ -51,6 +51,7 @@ group :development do
   gem "quiet_assets"
   gem "pry-rails"
   gem "pry-nav"
+  gem "rest-client"
   gem "spring"
 end
 
