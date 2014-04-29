@@ -15,6 +15,10 @@ class CompanyType < ActiveRecord::Base
     self.name
   end
 
+  def code
+    self.name.underscore
+  end
+
   class << self
     def affiliate_company_types
       all_company_types.values_at(:nonprofit, :commercial)

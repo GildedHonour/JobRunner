@@ -20,4 +20,8 @@ Jobrunner::Application.routes.draw do
     end
   end
   resources :notes
+
+  namespace "api" do
+    resources :company_types
+  end
 end
