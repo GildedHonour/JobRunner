@@ -22,6 +22,7 @@ Jobrunner::Application.routes.draw do
   resources :notes
 
   namespace "api" do
-    resources :company_types
+    resources :company_types, defaults: { format: 'json' }
+    resources :companies, defaults: { format: 'json' }
   end
 end
