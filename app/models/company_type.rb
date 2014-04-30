@@ -24,6 +24,10 @@ class CompanyType < ActiveRecord::Base
       all_company_types.values_at("nonprofit", "commercial")
     end
 
+    def list_manager_company_type
+      all_company_types["list_manager"]
+    end
+
     def principal_company_types
       all_company_types.values_at("agency")
     end
@@ -32,7 +36,6 @@ class CompanyType < ActiveRecord::Base
       all_company_types["internal"]
     end
 
-    private
     def all_company_types
       return @all_company_types if @all_company_types
       @all_company_types = {}
