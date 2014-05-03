@@ -13,7 +13,7 @@ module Jobrunner
     config.sass.preferred_syntax = :scss
 
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-    config.assets.precompile += %w(.svg .eot .woff .ttf)
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
     config.action_controller.include_all_helpers = false
     config.autoload_paths += %W(#{config.root}/workers)
 
