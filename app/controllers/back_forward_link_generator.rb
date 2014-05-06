@@ -11,7 +11,7 @@ module BackForwardLinkGenerator
 
   def link_to_previous_entity_impl(is_forward, title)
     arrow = is_forward ? "right" : "left"
-    span_tag = content_tag(:span, nil, class: "glyphicon glyphicon-chevron-#{arrow}")
+    span_tag = content_tag(:span, nil, class: "fa fa-arrow-circle-#{arrow}")
     m_np_id = maybe_next_prev_entity_id(is_forward)
     return span_tag unless m_np_id
     link_to(entity_path.call(m_np_id), title: title) { span_tag }
