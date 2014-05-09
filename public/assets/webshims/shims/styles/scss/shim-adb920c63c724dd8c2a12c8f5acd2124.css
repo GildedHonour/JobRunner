@@ -1,0 +1,724 @@
+/* line 11, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/_extends.scss */
+.ws-popover {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+/* line 19, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/_extends.scss */
+.ws-popover *, .ws-popover:before, .ws-popover:after,
+.ws-popover :after,
+.ws-popover :before {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+/* line 4, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.ws-important-hide {
+  display: none !important;
+  visibility: hidden !important;
+  position: absolute;
+  top: -999999px;
+}
+
+/* line 11, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+[hidden] {
+  display: none;
+}
+
+/* line 12, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+article, aside, canvas, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+  display: block;
+}
+
+/* line 16, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+audio {
+  display: none;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+/* line 23, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+video {
+  overflow: hidden;
+}
+
+/* line 29, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+video,
+audio[controls],
+audio.webshims-controls {
+  display: inline-block;
+  min-height: 45px;
+  min-width: 40px;
+}
+
+/* line 36, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+video > *,
+audio > * {
+  visibility: hidden;
+}
+/* line 39, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.no-swf video > *, .no-swf
+audio > * {
+  visibility: inherit;
+}
+
+/* line 44, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.polyfill-mediaelement > iframe {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 52, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.flashblocker-assumed {
+  min-height: 20px;
+  min-width: 20px;
+  z-index: 99999;
+}
+
+/* line 58, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.cue-display {
+  position: absolute !important;
+  margin: 0;
+  padding: 0px !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  border: none !important;
+  background: none !important;
+  text-align: center;
+  visibility: hidden;
+  font-family: sans-serif;
+  font-size: 12px;
+  white-space: pre-wrap;
+  overflow: hidden;
+}
+/* line 73, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.cue-display b {
+  font-weight: bold;
+}
+/* line 77, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.cue-display i {
+  font-style: italic;
+}
+/* line 81, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.cue-display u {
+  text-decoration: underline;
+}
+/* line 85, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.cue-display span.cue-wrapper {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: block;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  font-size: 160%;
+  color: #fff;
+  visibility: visible !important;
+}
+/* line 99, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.cue-display .cue-line {
+  display: block;
+}
+/* line 103, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.cue-display span.cue {
+  display: inline-block;
+  padding: 3px 5px;
+  background: #000;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+}
+/* line 111, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.cue-display .description-cues {
+  position: absolute;
+  top: -99px;
+  left: -99px;
+  display: block;
+  width: 5px;
+  height: 5px;
+  overflow: hidden;
+}
+
+/* line 122, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+mark {
+  background-color: #ff9;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+/* reset */
+/* line 138, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.ws-range,
+.ws-range *,
+.placeholder-box,
+.placeholder-text,
+.input-buttons,
+.input-buttons *,
+.details-open-indicator,
+.ws-input-seperator,
+progress span.progress-value {
+  margin: 0;
+  padding: 0;
+  border: none;
+  width: auto;
+  background: transparent none;
+}
+
+/* line 145, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+output {
+  position: relative;
+}
+
+/* line 149, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.webshims-visual-hide {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* line 159, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.webshims-visual-hide * {
+  visibility: hidden !important;
+}
+
+/* placeholder */
+/* line 164, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.placeholder-box {
+  position: relative;
+  display: inline-block;
+  zoom: 1;
+}
+
+/* line 170, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.placeholder-box-input {
+  vertical-align: bottom;
+}
+
+/* line 174, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.placeholder-box-left {
+  float: left;
+}
+
+/* line 178, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.placeholder-box-right {
+  float: right;
+}
+
+/* line 182, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.placeholder-text {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  color: #999;
+  line-height: 1;
+  cursor: text;
+}
+/* line 193, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.placeholder-visible .placeholder-text, .placeholder-text.placeholder-visible {
+  display: inline-block;
+}
+/* line 197, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.placeholder-box-input .placeholder-text {
+  white-space: nowrap;
+}
+
+/* line 202, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.placeholder-visible {
+  color: #999;
+}
+
+/* line 206, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.placeholder-focused.placeholder-visible {
+  color: #ccc;
+}
+
+/*
+ * popovers
+ */
+/* line 213, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.ws-popover {
+  font-size: 13px;
+  display: block;
+  visibility: hidden;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  outline: none;
+  padding: 0 0.9230769231em 0;
+  margin: 0 0 0 -0.9230769231em;
+  z-index: 1100;
+  min-width: 3.8461538462em;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform: translate3d(0px, 0px, 0px);
+  transform: translate3d(0px, 0px, 0px);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: visibility 400ms ease-in-out;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  direction: ltr;
+  -webkit-tap-highlight-color: transparent;
+}
+/* line 239, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.ws-popover.ws-is-rtl {
+  direction: rtl;
+  margin: 0 0 0 0.9230769231em;
+}
+/* line 244, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.ws-popover.no-transition {
+  display: none;
+}
+/* line 248, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.ws-popover.ws-po-visible {
+  visibility: visible;
+  display: block;
+}
+
+/* line 254, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.ws-po-outerbox {
+  position: relative;
+  opacity: 0;
+  padding: 0.8461538462em 0 0.6923076923em;
+  -webkit-transform: translate(0, -100%);
+  transform: translate(0, -100%);
+  transition: all 400ms ease-in-out;
+}
+/* line 263, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+[data-vertical="bottom"] .ws-po-outerbox {
+  -webkit-transform: translate(0, 100%);
+  transform: translate(0, 100%);
+  padding: 0.3076923077em 0 0.8461538462em;
+}
+/* line 269, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+[data-vertical="middle"] .ws-po-outerbox {
+  -webkit-transform: translate(0, 0) scale(0.3);
+  transform: translate(0, 0) scale(0.3);
+  padding: 0.3076923077em 0;
+}
+/* line 276, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.ws-popover.ws-po-visible .ws-po-outerbox, div.ws-popover[data-vertical][data-horizontal].ws-po-visible .ws-po-outerbox {
+  opacity: 1;
+  -webkit-transform: translate(0, 0) scale(1);
+  transform: translate(0, 0) scale(1);
+}
+
+/* line 283, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.ws-po-box {
+  border: 0.0769230769em solid #cccccc;
+  background: #fff;
+  padding: 0.3846153846em 0.3846153846em 0.2307692308em;
+  border-radius: 0.2307692308em;
+  box-shadow: 0 0.0769230769em 0.3846153846em rgba(0, 0, 0, 0.25);
+}
+/* line 291, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.ws-po-box button {
+  display: inline-block;
+  overflow: visible;
+  position: relative;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  font-family: inherit;
+  background: transparent;
+  cursor: pointer;
+  touch-action: none;
+}
+/* line 305, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.ws-po-box button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+/* line 310, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.ws-po-box button[disabled] {
+  cursor: default;
+  color: #888;
+}
+
+/* line 317, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.ws-po-arrow {
+  position: absolute;
+  top: 0.3076923077em;
+  left: 1.5384615385em;
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 0.6153846154em solid transparent;
+  border-right: 0.6153846154em solid transparent;
+  border-bottom: 0.6153846154em solid #cccccc;
+  border-top: none;
+  zoom: 1;
+}
+/* line 330, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.ws-is-rtl .ws-po-arrow {
+  left: auto;
+  right: 1.5384615385em;
+}
+/* line 336, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+[data-horizontal="center"] .ws-po-arrow {
+  left: 50%;
+  margin-left: -0.3076923077em;
+}
+/* line 341, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+[data-horizontal="right"] .ws-po-arrow {
+  left: auto;
+  right: 1.5384615385em;
+}
+/* line 346, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+[data-vertical="bottom"] .ws-po-arrow {
+  top: auto;
+  bottom: 0.3076923077em;
+  border-bottom: none;
+  border-top: 0.6153846154em solid #cccccc;
+}
+/* line 353, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+html .ws-po-arrow {
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+/* line 357, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+html .ws-po-arrow .ws-po-arrowbox {
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+/* line 365, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+[data-vertical="middle"] .ws-po-arrow {
+  display: none;
+}
+/* line 369, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.ws-po-arrow .ws-po-arrowbox {
+  position: relative;
+  top: 0.0769230769em;
+  left: -0.5384615385em;
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 0.5384615385em solid transparent;
+  border-right: 0.5384615385em solid transparent;
+  border-bottom: 0.5384615385em solid #fefefe;
+  border-top: none;
+  z-index: 999999999;
+}
+/* line 383, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.ws-is-rtl .ws-po-arrow .ws-po-arrowbox {
+  left: auto;
+  right: -0.5384615385em;
+}
+/* line 388, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+[data-vertical="bottom"] .ws-po-arrow .ws-po-arrowbox {
+  top: -0.6153846154em;
+  border-bottom: none;
+  border-top: 0.5384615385em solid #fefefe;
+}
+
+/* line 398, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+datalist {
+  display: none;
+}
+
+/* line 402, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+input[data-wslist]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+/* line 406, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.datalist-polyfill {
+  position: absolute !important;
+}
+/* line 409, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.datalist-polyfill .ws-po-box {
+  padding: 0.3846153846em 0;
+}
+/* line 413, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.datalist-polyfill .datalist-box {
+  position: relative;
+  max-height: 15.3846153846em;
+  overflow: hidden;
+  overflow-x: hidden !important;
+  overflow-y: auto;
+}
+/* line 420, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.datalist-polyfill .datalist-box ul, .datalist-polyfill .datalist-box li {
+  font-size: 100%;
+  list-style: none !important;
+}
+/* line 425, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.datalist-polyfill .datalist-box ul {
+  position: static !important;
+  overflow: hidden;
+  margin: 0;
+  padding: 0.0769230769em 0;
+  height: auto !important;
+  background-color: #fff;
+  color: #000;
+}
+/* line 435, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.datalist-polyfill .datalist-box li {
+  margin: 0.0769230769em 0;
+  padding: 0.1538461538em 0.7692307692em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: default;
+  zoom: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: #fff;
+  transition: background-color 400ms;
+  touch-action: none;
+}
+/* line 449, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.datalist-polyfill .datalist-box mark {
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 454, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.datalist-polyfill .datalist-box .option-value {
+  display: inline-block;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  color: #000;
+  float: left;
+  transition: color 400ms;
+}
+/* line 463, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.datalist-polyfill .datalist-box .option-label {
+  display: none;
+  max-width: 100%;
+  float: right;
+  font-size: 90%;
+  color: #666;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  margin-top: 0.15em;
+  margin-left: 0.7692307692em;
+  text-align: right;
+  transition: color 400ms;
+}
+/* line 478, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.datalist-polyfill .datalist-box .has-option-label .option-label {
+  display: inline-block;
+}
+/* line 483, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.datalist-polyfill .datalist-box .hidden-item {
+  display: none !important;
+}
+/* line 487, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.datalist-polyfill .datalist-box .active-item {
+  cursor: default;
+  background-color: #39f;
+}
+/* line 491, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.datalist-polyfill .datalist-box .active-item .option-value {
+  color: #fff;
+}
+/* line 494, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.datalist-polyfill .datalist-box .active-item .option-label {
+  color: #eee;
+}
+/* line 502, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.datalist-polyfill.ws-is-rtl .option-value {
+  float: right;
+}
+/* line 506, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.datalist-polyfill.ws-is-rtl .option-label {
+  float: left;
+  margin-right: 0.7692307692em;
+  margin-left: 0;
+  text-align: left;
+}
+
+/* line 516, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.validity-alert {
+  display: inline-block;
+  z-index: 1000000000;
+}
+
+/* line 521, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.ws-errorbox {
+  display: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  clear: both;
+}
+/* line 530, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.ws-errorbox p {
+  margin: 2px 0 3px;
+  padding: 0;
+  color: #a94442;
+}
+
+/* line 538, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+progress {
+  position: relative;
+  display: inline-block;
+  width: 164px;
+  height: 20px;
+  overflow: hidden;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: -0.2em;
+}
+/* line 548, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+progress > * {
+  display: none !important;
+}
+/* line 553, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+progress[data-position], progress.ws-style {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  border: 1px solid #ddd;
+  background: #f0f0f0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+  border-radius: 4px;
+}
+/* line 35, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/_api-shim.scss */
+progress[data-position]::-webkit-progress-bar, progress.ws-style::-webkit-progress-bar {
+  border: 1px solid #ddd;
+  background: #f0f0f0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+  border-radius: 4px;
+  border: 0 none;
+}
+/* line 40, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/_api-shim.scss */
+progress[data-position]::-moz-progress-bar, progress.ws-style::-moz-progress-bar {
+  border: 1px solid #ddd;
+  background: #f0f0f0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+  border-radius: 4px;
+}
+/* line 44, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/_api-shim.scss */
+progress[data-position]::-ms-fill, progress.ws-style::-ms-fill {
+  animation-name: none;
+  border: 1px solid #ddd;
+  background: #f0f0f0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+  border-radius: 4px;
+}
+/* line 562, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+progress[data-position] > span.progress-value, progress.ws-style > span.progress-value {
+  left: 0;
+}
+/* line 566, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+progress[data-position].ws-is-rtl > span.progress-value, progress.ws-style.ws-is-rtl > span.progress-value {
+  left: auto;
+  right: 0;
+}
+/* line 50, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/_api-shim.scss */
+progress[data-position]::-webkit-progress-value, progress.ws-style::-webkit-progress-value {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.15) inset;
+  background: #0063a6 url(progress.png);
+  border: 0;
+}
+/* line 53, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/_api-shim.scss */
+progress[data-position]::-moz-progress-bar, progress.ws-style::-moz-progress-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.15) inset;
+  background: #0063a6 url(progress.png);
+  border: 0;
+}
+/* line 56, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/_api-shim.scss */
+progress[data-position]::-ms-fill, progress.ws-style::-ms-fill {
+  animation-name: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.15) inset;
+  background: #0063a6 url(progress.png);
+  border: 0;
+}
+/* line 60, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/_api-shim.scss */
+progress[data-position] > span.progress-value, progress.ws-style > span.progress-value {
+  display: block !important;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.15) inset;
+  background: #0063a6 url(progress.png);
+  border: 0;
+}
+/* line 66, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/_api-shim.scss */
+progress[data-position]:indeterminate::-webkit-progress-bar, progress.ws-style:indeterminate::-webkit-progress-bar {
+  background-image: url(progress.gif);
+}
+/* line 69, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/_api-shim.scss */
+progress[data-position]:indeterminate::-moz-progress-bar, progress.ws-style:indeterminate::-moz-progress-bar {
+  background-image: url(progress.gif);
+}
+/* line 72, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/_api-shim.scss */
+progress[data-position]:indeterminate, progress.ws-style:indeterminate {
+  animation-name: none;
+  background-image: url(progress.gif);
+}
+/* line 76, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/_api-shim.scss */
+progress[data-position].ws-indeterminate > span.progress-value, progress.ws-style.ws-indeterminate > span.progress-value {
+  display: block !important;
+  width: 100%;
+  right: 0;
+  background-image: url(progress.gif);
+}
+
+/* line 588, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+details {
+  overflow: hidden;
+}
+
+/* line 591, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+summary {
+  position: relative;
+}
+
+/* line 594, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.closed-details-child {
+  display: none !important;
+}
+
+/* line 598, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.details-open-indicator {
+  margin: -1px 0 0;
+  display: inline-block;
+  margin-right: 0.4em;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 0.7692307692em 0.3846153846em 0 0.3846153846em;
+  border-color: #000 transparent transparent transparent;
+  vertical-align: middle;
+}
+/* line 612, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+.closed-details-summary .details-open-indicator {
+  border-width: 0.3846153846em 0 0.3846153846em 0.7692307692em;
+  border-color: transparent transparent transparent #000;
+}
+
+/* line 618, /home/alex/.rvm/gems/ruby-2.1.1/gems/webshims-rails-1.12.3/vendor/assets/javascripts/webshims/shims/styles/scss/shim.scss */
+summary.summary-has-focus {
+  outline: 1px dotted #aaa;
+  outline-offset: -1px;
+}
