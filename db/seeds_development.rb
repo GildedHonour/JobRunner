@@ -7,7 +7,6 @@ contact_job_titles = [
     "Sales Lead"
 ]
 
-company_logos = Dir['spec/fixtures/company_logos/*']
 internal_companies = Company.internal
 company_types = CompanyType.all  -  [CompanyType.internal]
 
@@ -25,8 +24,7 @@ company_types = CompanyType.all  -  [CompanyType.internal]
               state: Faker::AddressUS.state,
               zip: Faker::AddressUS.zip_code
           )
-      ],
-      company_logo: File.open(company_logos.sample)
+      ]
   )
 
   Company.with_affiliation_principal_company_types.each do |company|
