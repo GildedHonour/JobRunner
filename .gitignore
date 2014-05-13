@@ -16,3 +16,4 @@ public/uploads
 /tmp
 *.sublime-project
 *.sublime-workspace
+public/assets/
