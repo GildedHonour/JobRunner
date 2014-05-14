@@ -7,24 +7,26 @@ contact_job_titles = [
     "Sales Lead"
 ]
 
+company_logos = Dir['spec/fixtures/company_logos/*']
 internal_companies = Company.internal
 company_types = CompanyType.all  -  [CompanyType.internal]
 
 80.times do |i|
   company = Company.create!(
-      name: "#{Faker::Company.name}",
-      website: Faker::Internet.domain_name,
-      company_type: company_types.sample,
-      phone_numbers: [PhoneNumber.new(phone_number: Faker.numerify("(###) ###-####"))],
-      addresses: [
-          Address.new(
-              address_line_1: Faker::Address.street_address,
-              address_line_2: Faker::Address.street_name,
-              city: Faker::Address.city,
-              state: Faker::AddressUS.state,
-              zip: Faker::AddressUS.zip_code
-          )
-      ]
+    name: "#{Faker::Company.name}",
+    website: Faker::Internet.domain_name,
+    company_type: company_types.sample,
+    phone_numbers: [PhoneNumber.new(phone_number: Faker.numerify("(###) ###-####"))],
+    addresses: [
+        Address.new(
+            address_line_1: Faker::Address.street_address,
+            address_line_2: Faker::Address.street_name,
+            city: Faker::Address.city,
+            state: Faker::AddressUS.state,
+            zip: Faker::AddressUS.zip_code
+        )
+    ],
+    company_logo: File.open(company_logos.sample)
   )
 
   Company.with_affiliation_principal_company_types.each do |company|
