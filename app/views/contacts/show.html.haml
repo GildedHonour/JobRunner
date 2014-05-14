@@ -1,3 +1,10 @@
+:javascript
+  $(function() {
+    $("#btn_reinvite").click(function() {
+      
+    });
+  });
+
 .neat-row
   .show.content
     .contact.intro
@@ -96,6 +103,7 @@
                     = @entity.user.email
                     - unless @entity.user.invitation_accepted?
                       (Pending confirmation)
+                      %button.btn.btn-primary{ id: "btn_reinvite" } Reinvite
                 - else
                   %span.dark
                     = link_to "Invite user", new_contact_user_url(@entity), remote: true, class: ""
@@ -168,3 +176,4 @@
                   = link_to "edit", edit_note_url(note), remote: true
                   |
                   = link_to "delete", note_url(note), data: { confirm: "Are you sure?", method: 'delete' }
+
