@@ -1,0 +1,6 @@
+%li
+  = "<strong>#{activity.whodunnit_email}</strong> #{activity.event}d <strong>#{activity.item_description}</strong> at <em>#{l(activity.created_at)}</em>".html_safe
+  .well
+    - activity.item_changes.each do |key, change|
+      = "<strong>#{key}</strong> changed from <em>#{change.first}</em> to <em>#{change.last}</em>".html_safe
+

@@ -1,5 +1,5 @@
 class Contact < ActiveRecord::Base
-  has_paper_trail
+  has_paper_trail ignore: [:created_at, :updated_at], meta: { item_descriptor: :audit_descriptor }
 
   extend Enumerize
   include Archivable
@@ -83,5 +83,9 @@ class Contact < ActiveRecord::Base
     end
 
     card.to_s
+  end
+
+  def audit_descriptor
+    "#{self.full_name} - #{self.company.name}"
   end
 end
