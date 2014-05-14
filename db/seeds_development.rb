@@ -9,24 +9,24 @@ contact_job_titles = [
 
 company_logos = Dir['spec/fixtures/company_logos/*']
 internal_companies = Company.internal
-company_types = CompanyType.all  -  [CompanyType.internal]
+company_types = CompanyType.all - [CompanyType.internal]
 
 80.times do |i|
   company = Company.create!(
-      name: "#{Faker::Company.name}",
-      website: Faker::Internet.domain_name,
-      company_type: company_types.sample,
-      phone_numbers: [PhoneNumber.new(phone_number: Faker.numerify("(###) ###-####"))],
-      addresses: [
-          Address.new(
-              address_line_1: Faker::Address.street_address,
-              address_line_2: Faker::Address.street_name,
-              city: Faker::Address.city,
-              state: Faker::AddressUS.state,
-              zip: Faker::AddressUS.zip_code
-          )
-      ],
-      company_logo: File.open(company_logos.sample)
+    name: "#{Faker::Company.name}",
+    website: Faker::Internet.domain_name,
+    company_type: company_types.sample,
+    phone_numbers: [PhoneNumber.new(phone_number: Faker.numerify("(###) ###-####"))],
+    addresses: [
+        Address.new(
+            address_line_1: Faker::Address.street_address,
+            address_line_2: Faker::Address.street_name,
+            city: Faker::Address.city,
+            state: Faker::AddressUS.state,
+            zip: Faker::AddressUS.zip_code
+        )
+    ],
+    company_logo: File.open(company_logos.sample)
   )
 
   Company.with_affiliation_principal_company_types.each do |company|
@@ -62,28 +62,28 @@ end
 end
 
 Contact.create!(
-    first_name: "Sean",
-    last_name: "Powell",
-    prefix: "Mr.",
-    job_title: "Project Manager",
-    user: User.new(email: 'sean@engageyourcause.com', password: 'password'),
-    company: Company.all.sample
+  first_name: "Sean",
+  last_name: "Powell",
+  prefix: "Mr.",
+  job_title: "Project Manager",
+  user: User.new(email: 'sean@engageyourcause.com', password: 'password'),
+  company: Company.all.sample
 )
 
 Contact.create!(
-    first_name: "Akshay",
-    last_name: "Rawat",
-    prefix: "Mr.",
-    job_title: "Developer",
-    user: User.new(email: 'projects@akshay.cc', password: 'password'),
-    company: Company.all.sample
+  first_name: "Akshay",
+  last_name: "Rawat",
+  prefix: "Mr.",
+  job_title: "Developer",
+  user: User.new(email: 'projects@akshay.cc', password: 'password'),
+  company: Company.all.sample
 )
 
 Contact.create!(
-    first_name: "Lori",
-    last_name: "Barao",
-    prefix: "Ms.",
-    job_title: "Project Manager",
-    user: User.new(email: 'lori@mmidirect.com', password: 'password'),
-    company: Company.all.sample
+  first_name: "Lori",
+  last_name: "Barao",
+  prefix: "Ms.",
+  job_title: "Project Manager",
+  user: User.new(email: 'lori@mmidirect.com', password: 'password'),
+  company: Company.all.sample
 )
