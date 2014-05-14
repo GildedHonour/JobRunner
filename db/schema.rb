@@ -96,14 +96,6 @@ ActiveRecord::Schema.define(version: 20140429185918) do
   add_index "contacts", ["company_id"], name: "index_contacts_on_company_id", using: :btree
   add_index "contacts", ["user_id"], name: "index_contacts_on_user_id", using: :btree
 
-  create_table "contacts_companies", force: true do |t|
-    t.string   "contact_id"
-    t.string   "company_id"
-    t.string   "is_active"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "emails", force: true do |t|
     t.integer  "emailable_id"
     t.string   "emailable_type"
