@@ -1,84 +1,75 @@
 class CompaniesController < ApplicationController
+  include SearchFiltersSaver
+
   respond_to :html, :js, :csv
 
-  PAGE_SIZE = 100
-
-  before_filter :load_company
-  before_filter :save_filters, only: :index
-
   def new
-    @company = Company.new(params[:company])
-    respond_with @company
+    @entity = Company.new(params[:company])
+    respond_with(@entity)
   end
 
   def create
-    @company = Company.new(company_params)
-    if @company.save
-      redirect_to company_url(@company)
+    @entity = Company.new(company_params)
+    if @entity.save
+      redirect_to company_url(@entity)
     else
-      render "new"
+      render(:new)
     end
   end
 
   def edit
-    render "new"
+    render(:new)
   end
 
   def update
-    if @company.update_attributes(company_params)
-      redirect_to company_url(@company)
+    if @entity.update_attributes(company_params)
+      redirect_to company_url(@entity)
     else
-      render "new"
+      render(:new)
     end
   end
 
   def index
-    @companies = params[:search].present? ? Company.eager_load_associations.search(params[:search]) : Company.all.eager_load_associations
-
-    @companies = @companies.with_affiliations_and_relationships_with_archived_status(params[:a])  if params[:a].present?
-    @companies = @companies.affiliated_to_company(params[:ac])                                    if params[:ac].present?
-    @companies = @companies.with_company_types(params[:ct])                                       if params[:ct].present?
-    @companies = @companies.with_internal_relationship_role(params[:irr])                         if params[:irr].present?
-    @companies = @companies.relationship_with_company(params[:rc])                                if params[:rc].present?
-
-    @companies = params[:name_sort] == "down" ? @companies.order("companies.name DESC") : @companies.order("companies.name ASC")
-    @companies = @companies.page(params[:page]).per(PAGE_SIZE) unless request.format == :csv
-
-    respond_with @companies
+    @entities = apply_filters(@entities)
+    respond_with(@entities)
   end
 
   def show
-    respond_with @company
+    @entities = apply_filters(@entities, incl_neighbours: true)
+    @entities_ids = @entities.map(&:id)
+    set_saved_filters_new_page!
+    respond_with(@entity)
   end
 
   def destroy
-    @company.destroy
+    @entity.destroy
     redirect_to companies_url_with_saved_filters
   end
 
   def edit_section
     @section = params[:section]
     respond_to do |format|
-      format.js { render("edit_section") }
+      format.js { render(:edit_section) }
     end
   end
 
   def update_section
     @section = params[:section]
-    if @company.update_attributes(company_params)
-      render "success"
+    if @entity.update_attributes(company_params)
+      render(:success)
     else
-      render "edit_section"
+      render(:edit_section)
     end
   end
 
   def delete_company_logo
-    @company.remove_company_logo!
-    @company.save
-    redirect_to edit_company_url(@company)
+    @entity.remove_company_logo!
+    @entity.save
+    redirect_to edit_company_url(@entity)
   end
 
   private
+
   def company_params
     params.require(:company).permit(:name, :website, :phone, :company_logo, :company_type_id,
                                     affiliate_affiliations_attributes: [:id, :archived, :affiliate_id, :role, :_destroy],
@@ -89,16 +80,25 @@ class CompaniesController < ApplicationController
     )
   end
 
-  def load_company
-    @company = Company.includes(:internal_companies, :affiliates).find(params[:id]) if params[:id].present?
+  def load_entities
+    @entity_prefix = "company"
+    @entities = Company.all
+    @entity = Company.includes(:internal_companies, :affiliates).find(params[:id]) if params[:id].present?
   end
 
-  def save_filters
-    active_filters = %i(a ac ct irr rc search name_sort).select{ |filter_param| params[filter_param].present? }
-    if active_filters.present?
-      session[:company_filter_params] = params.slice(*active_filters)
-    else
-      session[:company_filter_params] = nil
-    end
+  def filter_items
+    %i(a ac ct irr rc search name_sort)
+  end
+
+  def apply_filters_concrete(source)
+    source_filtered = get_saved_filters.has_key?(:search) ? source.search(get_saved_filters[:search]) : source
+    source_filtered = source_filtered.with_affiliations_and_relationships_with_archived_status(get_saved_filters[:a]) if get_saved_filters.has_key?(:a)
+    source_filtered = source_filtered.affiliated_to_company(get_saved_filters[:ac]) if get_saved_filters.has_key?(:ac)
+    
+    source_filtered = source_filtered.with_company_types(get_saved_filters[:ct]) if get_saved_filters.has_key?(:ct)
+    source_filtered = source_filtered.with_internal_relationship_role(get_saved_filters[:irr]) if get_saved_filters.has_key?(:irr)
+    source_filtered = source_filtered.relationship_with_company(get_saved_filters[:rc]) if get_saved_filters.has_key?(:rc)
+
+    source_filtered = get_saved_filters[:name_sort] == "down" ? source_filtered.order("companies.name DESC") : source_filtered.order("companies.name ASC")
   end
 end

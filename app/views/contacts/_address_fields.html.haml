@@ -1,6 +1,6 @@
 .row
   #addresses
-    = f.fields_for :addresses, (@contact.persisted? || @contact.addresses.present?) ? @contact.addresses : @contact.addresses.build, wrapper: false do |address_form|
+    = f.fields_for :addresses, (@entity.persisted? || @entity.addresses.present?) ? @entity.addresses : @entity.addresses.build, wrapper: false do |address_form|
       .col-md-4.fields
         .panel.panel-default
           .panel-heading

@@ -16,20 +16,23 @@ gem "paper_trail"
 # View related
 gem "haml-rails"
 gem "nested_form"
-gem 'simple_form', '~> 3.0.0', github: 'plataformatec/simple_form', branch: 'master'
+gem "simple_form", "~> 3.0.0", github: "plataformatec/simple_form", branch: "master"
 gem "vpim"
 gem "webshims-rails"
 
 # Assets
 gem "sass-rails", "~> 4.0.0"
 gem "compass-rails", "~> 1.1.2"
-gem 'bootstrap-sass', '~> 3.1.1.0'
+gem "bootstrap-sass", "~> 3.1.1.0"
 gem "neat"
 gem "bourbon"
 gem "uglifier", ">= 1.3.0"
 gem "coffee-rails", "~> 4.0.0"
 gem "jquery-rails"
 gem "turbolinks"
+
+# API
+gem "active_model_serializers"
 
 # Server
 gem "pg"
@@ -44,13 +47,15 @@ gem "rmagick"
 # Seed data
 gem "ffaker"
 gem "database_cleaner"
-gem 'awesome_print'
+gem "awesome_print"
 
 group :development do
-  gem 'letter_opener'
-  gem 'quiet_assets'
-  gem 'pry-rails'
-  gem 'spring'
+  gem "letter_opener"
+  gem "quiet_assets"
+  gem "pry-rails"
+  gem "pry-nav"
+  gem "rest-client"
+  gem "spring"
 end
 
 group :production do

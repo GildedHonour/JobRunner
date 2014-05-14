@@ -11,7 +11,7 @@
             Inactive
           %th
       %tbody#internal-company-relationships-fields
-        = f.fields_for :internal_company_relationships, (@company.persisted? || @company.internal_company_relationships.present?) ? @company.internal_company_relationships.ordered_by_status_and_internal_company_name : @company.internal_company_relationships.build, wrapper: false do |relationship_form|
+        = f.fields_for :internal_company_relationships, (@entity.persisted? || @entity.internal_company_relationships.present?) ? @entity.internal_company_relationships.ordered_by_status_and_internal_company_name : @entity.internal_company_relationships.build, wrapper: false do |relationship_form|
           %tr.fields
             %td
               .col-md-12

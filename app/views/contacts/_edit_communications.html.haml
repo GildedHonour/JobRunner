@@ -1,18 +1,25 @@
 .modal-dialog
   .modal-content
     .modal-header
-      %button.close{ "data-dismiss" => "modal", type: "button" } ×
+      %button.close{ "data-dismiss" => :modal, type: :button } ×
       %h2.modal-title
         Manage Commications
     #modal-form
-      = simple_nested_form_for @contact, url: update_section_contact_url(@contact, section: "communications"), remote: true, html: { class: "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { boolean: :horizontal_boolean }  do |f|
+      = simple_nested_form_for @entity, url: update_section_contact_url(@entity), remote: true, html: { class: "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { boolean: :horizontal_boolean, check_boxes: :horizontal_radio_and_checkboxes, }  do |f|
         .modal-body
           .row
             .col-sm-10.col-sm-offset-2
-              = hidden_field_tag :section, :communications
+              .form-group.form-inline
+                %label.control-label.col-sm-3{ for: "birthday" }
+                  Birthday
+                .col-sm-9
+                  = f.date_select :birthday, { discard_year: true, include_blank: true }, { class: "form-control" }
+
+              = f.input :contest_participant, wrapper: :horizontal_boolean
+              = f.association :contact_sources, as: :check_boxes, wrapper: :horizontal_radio_and_checkboxes
               = f.input :do_not_email
               = f.input :do_not_mail
 
         .modal-footer
-          %button.btn.btn-default{ "data-dismiss" => "modal", type: "button" } Close
-          = f.submit "Save", class: "btn btn-primary", data: { toggle: "button", "loading-text" => "Saving" }
+          %button.btn.btn-default{ "data-dismiss" => :modal, type: :button } Close
+          = f.submit "Save", class: "btn btn-primary", data: { toggle: :button, "loading-text" => "Saving" }

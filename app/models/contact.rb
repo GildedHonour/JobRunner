@@ -6,18 +6,14 @@ class Contact < ActiveRecord::Base
 
   validates :first_name ,presence: true
   validates :last_name, presence: true
-
   validates :company_id, presence: true
 
   belongs_to :company
   belongs_to :user
-
   has_many :addresses, -> { order "created_at ASC" }, dependent: :destroy, as: :addressable
   has_many :notes, -> { order "created_at DESC" }, dependent: :destroy, as: :notable
-
   has_many :emails, -> { order "created_at ASC" }, as: :emailable, dependent: :destroy
   has_many :phone_numbers, -> { order "created_at ASC" }, as: :phonable, dependent: :destroy
-
   has_and_belongs_to_many :contact_sources
 
   enumerize :prefix, in: %i(Mr. Mrs. Ms. Miss. Prof.)
@@ -74,10 +70,7 @@ class Contact < ActiveRecord::Base
         maker.add_tel(phone_number_str) { |t| t.location = phone_number.kind }
       end
 
-      self.emails.each do |email|
-        maker.add_email(email.value)
-      end
-
+      self.emails.each { |email| maker.add_email(email.value) }
       self.addresses.each do |address|
         maker.add_addr do |addr|
           addr.pobox = address.address_line_1
