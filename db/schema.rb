@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140504111521) do
+ActiveRecord::Schema.define(version: 20140429185918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,14 @@ ActiveRecord::Schema.define(version: 20140504111521) do
 
   add_index "affiliations", ["affiliate_id"], name: "index_affiliations_on_affiliate_id", using: :btree
   add_index "affiliations", ["principal_id"], name: "index_affiliations_on_principal_id", using: :btree
+
+  create_table "api_auths", force: true do |t|
+    t.string   "app"
+    t.text     "password"
+    t.boolean  "archived",   default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "companies", force: true do |t|
     t.string   "name"

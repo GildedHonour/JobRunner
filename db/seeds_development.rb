@@ -9,7 +9,7 @@ contact_job_titles = [
 
 company_logos = Dir['spec/fixtures/company_logos/*']
 internal_companies = Company.internal
-company_types = CompanyType.all  -  [CompanyType.internal]
+company_types = CompanyType.all - [CompanyType.internal]
 
 80.times do |i|
   company = Company.create!(
@@ -62,28 +62,28 @@ end
 end
 
 Contact.create!(
-    first_name: "Sean",
-    last_name: "Powell",
-    prefix: "Mr.",
-    job_title: "Project Manager",
-    user: User.new(email: 'sean@engageyourcause.com', password: 'password'),
-    company: Company.all.sample
+  first_name: "Sean",
+  last_name: "Powell",
+  prefix: "Mr.",
+  job_title: "Project Manager",
+  user: User.new(email: 'sean@engageyourcause.com', password: 'password'),
+  company: Company.all.sample
 )
 
 Contact.create!(
-    first_name: "Akshay",
-    last_name: "Rawat",
-    prefix: "Mr.",
-    job_title: "Developer",
-    user: User.new(email: 'projects@akshay.cc', password: 'password'),
-    company: Company.all.sample
+  first_name: "Akshay",
+  last_name: "Rawat",
+  prefix: "Mr.",
+  job_title: "Developer",
+  user: User.new(email: 'projects@akshay.cc', password: 'password'),
+  company: Company.all.sample
 )
 
 Contact.create!(
-    first_name: "Lori",
-    last_name: "Barao",
-    prefix: "Ms.",
-    job_title: "Project Manager",
-    user: User.new(email: 'lori@mmidirect.com', password: 'password'),
-    company: Company.all.sample
+  first_name: "Lori",
+  last_name: "Barao",
+  prefix: "Ms.",
+  job_title: "Project Manager",
+  user: User.new(email: 'lori@mmidirect.com', password: 'password'),
+  company: Company.all.sample
 )

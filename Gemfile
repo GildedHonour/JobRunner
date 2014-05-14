@@ -31,6 +31,9 @@ gem "coffee-rails", "~> 4.0.0"
 gem "jquery-rails"
 gem "turbolinks"
 
+# API
+gem "active_model_serializers"
+
 # Server
 gem "pg"
 gem "unicorn"
@@ -51,6 +54,7 @@ group :development do
   gem "quiet_assets"
   gem "pry-rails"
   gem "pry-nav"
+  gem "rest-client"
   gem "spring"
 end
 
