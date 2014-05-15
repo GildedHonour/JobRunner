@@ -53,14 +53,12 @@ class ContactsController < ApplicationController
   end
 
   def edit_section
-    @section = params[:section]
     respond_to do |format|
       format.js { render(:edit_section) }
     end
   end
 
   def update_section
-    @section = params[:section]
     if @entity.update_attributes(contact_params)
       render(:success)
     else

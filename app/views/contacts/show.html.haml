@@ -178,9 +178,7 @@
         .board.for.contact.communications
           %h3
             Communications
-            = link_to edit_section_contact_url(@entity, section: "communications"), class: "btn-fam no-border", remote: true do
-              %i.fa.fa-pencil
-            = link_to edit_section_contact_url(@entity, section: "other"), class: "btn-fam no-border", remote: true do
+            = link_to edit_section_contact_url(@entity), class: "btn-fam no-border", remote: true do
               %i.fa.fa-pencil
           %table.table-hover.table-condensed
             %tr
