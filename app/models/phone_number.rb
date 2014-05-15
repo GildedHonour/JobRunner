@@ -17,7 +17,11 @@ class PhoneNumber < ActiveRecord::Base
     str
   end
 
-  def audit_descriptor
-    "phone number #{self.to_s} for #{self.phonable.audit_descriptor}"
+  def audit_meta
+    {
+        item_descriptor: "phone number #{self.to_s} for #{self.phonable.audit_meta[:item_descriptor]}",
+        item_root_class: self.phonable.class,
+        item_root_object_id: self.phonable.id
+    }
   end
 end

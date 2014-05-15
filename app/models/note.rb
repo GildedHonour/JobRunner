@@ -5,7 +5,11 @@ class Note < ActiveRecord::Base
 	belongs_to :notable, polymorphic: true
   belongs_to :user
 
-  def audit_descriptor
-    "note '#{self.note}' for #{self.notable.audit_descriptor}"
+  def audit_meta
+    {
+        item_descriptor: "note '#{self.note}' for #{self.notable.audit_meta[:item_descriptor]}",
+        item_root_class: self.notable.class,
+        item_root_object_id: self.notable.id
+    }
   end
 end

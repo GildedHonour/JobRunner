@@ -1,2 +1,2 @@
 %li
-  = "<strong>#{activity.whodunnit_email}</strong> created #{a_an_helper(activity.item_description)} <strong>#{activity.item_description}</strong> at <em>#{l(activity.created_at)}</em>".html_safe
+  = "<strong>#{activity.whodunnit_email}</strong> created #{a_an_helper(activity.item_description)} <strong>#{link_to_if(activity.item_page_link.present?, activity.item_description, activity.item_page_link)}</strong> at <em>#{l(activity.created_at)}</em>".html_safe

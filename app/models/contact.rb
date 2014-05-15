@@ -84,7 +84,11 @@ class Contact < ActiveRecord::Base
     card.to_s
   end
 
-  def audit_descriptor
-    "contact #{self.full_name}"
+  def audit_meta
+    {
+        item_descriptor: "contact #{self.full_name}",
+        item_root_class: self.class,
+        item_root_object_id: self.id
+    }
   end
 end

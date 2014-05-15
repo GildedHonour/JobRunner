@@ -9,7 +9,11 @@ class Email < ActiveRecord::Base
     self.value
   end
 
-  def audit_descriptor
-    "email #{self.to_s} for #{self.emailable.audit_descriptor}"
+  def audit_meta
+    {
+        item_descriptor: "email #{self.to_s} for #{self.emailable.audit_meta[:item_descriptor]}",
+        item_root_class: self.emailable.class,
+        item_root_object_id: self.emailable.id
+    }
   end
 end

@@ -81,7 +81,11 @@ class Company < ActiveRecord::Base
     end
   end
 
-  def audit_descriptor
-    "company #{self.name}"
+  def audit_meta
+    {
+        item_descriptor: "company #{self.name}",
+        item_root_class: self.class,
+        item_root_object_id: self.id
+    }
   end
 end
