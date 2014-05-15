@@ -16,4 +16,12 @@ class Affiliation < ActiveRecord::Base
   def audit_descriptor
     "affiliation between #{principal.name} and #{affiliate.name}(affiliate)"
   end
+
+  def audit_meta
+    {
+        item_descriptor: "affiliation between #{principal.name} and #{affiliate.name}(affiliate)",
+        item_root_class: self.affiliate.class,
+        item_root_object_id: self.affiliate.id
+    }
+  end
 end

@@ -6,7 +6,11 @@ class User < ActiveRecord::Base
 
   has_many :contacts
 
-  def audit_descriptor
-    "user for #{contacts.first.audit_descriptor}"
+  def audit_meta
+    {
+        item_descriptor: "user for #{contacts.first.audit_meta[:item_descriptor]}",
+        item_root_class: contacts.first.class,
+        item_root_object_id: contacts.first.id
+    }
   end
 end
