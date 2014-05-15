@@ -1,7 +1,62 @@
 :javascript
   $(function() {
-    $("#btn_reinvite").click(function() {
+    var lblReinvitationResult = $("#reinvitation_result");
+    function showSuccessLabel() {
+      if (lblReinvitationResult.hasClass("label-danger")) {
+        lblReinvitationResult.removeClass("label-danger");
+      }
       
+      if (!lblReinvitationResult.hasClass("label-success")) {
+        lblReinvitationResult.addClass("label-success");
+      }
+
+      lblReinvitationResult.text("Done");
+      lblReinvitationResult.show();
+    };
+
+    function showErrorLabel() {
+      if (lblReinvitationResult.hasClass("label-success")) {
+        lblReinvitationResult.removeClass("label-success");
+      }
+      
+      if (!lblReinvitationResult.hasClass("label-danger")) {
+        lblReinvitationResult.addClass("label-danger");
+      }
+
+      lblReinvitationResult.text("Error, try again");
+      lblReinvitationResult.show();
+    };
+
+    var btnReinvite = $("#btn_reinvite");
+    function setButtonEnabled(isEnabled) {
+      if (isEnabled) {
+        btnReinvite.removeClass("disabled");
+        btnReinvite.prop("disabled", false);
+      } else {
+        btnReinvite.addClass("disabled");
+        btnReinvite.prop("disabled", true);
+      }
+    };
+
+    var btnReinviteInitialText = btnReinvite.text();
+    $("#btn_reinvite").click(function(e) {
+      e.preventDefault();
+      setButtonEnabled(false);
+      btnReinvite.text("Re-inviting...");
+      $.ajax({
+        type: "POST",
+        url: "#{reinvite_contact_url(@entity.id)}"
+      })
+      .done(function(msg) {
+        showSuccessLabel();
+      })
+      .fail(function(jqXHR, textStatus) {
+        showErrorLabel();
+      })
+      .always(function() {
+        btnReinvite.text(btnReinviteInitialText);
+        setButtonEnabled(true);
+      });
     });
   });
 
@@ -104,6 +159,7 @@
                     - unless @entity.user.invitation_accepted?
                       (Pending confirmation)
                       %button.btn.btn-primary{ id: "btn_reinvite" } Reinvite
+                      %span.label#reinvitation_result{ style: "display: none" }
                 - else
                   %span.dark
                     = link_to "Invite user", new_contact_user_url(@entity), remote: true, class: ""

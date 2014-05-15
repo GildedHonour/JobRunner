@@ -37,7 +37,6 @@ class ContactsController < ApplicationController
   def show
     @entities = apply_filters(@entities, incl_neighbours: true)
     set_saved_filters_new_page!
-    
     respond_with do |format|
       format.html { respond_with @entity }
       format.vcf do 
@@ -66,6 +65,13 @@ class ContactsController < ApplicationController
       render(:success)
     else
       render(:edit_section)
+    end
+  end
+
+  def reinvite
+    @user = User.invite!({ email: @entity.user.email }, current_user)
+    respond_to do |format|
+      format.json { render(json: :ok) } 
     end
   end
 

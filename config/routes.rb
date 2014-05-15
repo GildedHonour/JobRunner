@@ -7,6 +7,7 @@ Jobrunner::Application.routes.draw do
     member do
       get :edit_section
       patch :update_section
+      post :reinvite
     end
   end
 
@@ -15,7 +16,6 @@ Jobrunner::Application.routes.draw do
     member do
       get :edit_section
       patch :update_section
-
       patch :delete_company_logo
     end
   end

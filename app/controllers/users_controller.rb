@@ -19,14 +19,6 @@ class UsersController < ApplicationController
     end
   end
   
-  def reinvite
-    @user = User.invite!(@entity.user.email, current_user)
-    partial = @user.errors.present? ? :new : :success
-    respond_to do |format|
-      format.js { render(partial) }
-    end
-  end
-
   def update
     create and return
   end
