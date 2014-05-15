@@ -2,6 +2,7 @@ class Company < ActiveRecord::Base
   has_paper_trail
 
   include Archivable
+  include Audited
 
   has_many :addresses, -> { order "created_at" }, dependent: :destroy, as: :addressable
 
@@ -78,5 +79,9 @@ class Company < ActiveRecord::Base
         references([:principal_affiliations, :internal_company_relationships]).
         where("affiliations.archived IN (?) OR internal_company_relationships.archived IN (?)", archived_status, archived_status)
     end
+  end
+
+  def audit_descriptor
+    "company #{self.name}"
   end
 end

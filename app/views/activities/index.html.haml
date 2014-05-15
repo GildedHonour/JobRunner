@@ -2,6 +2,6 @@
   .index.content
     %h1
       Activities
-    %ul.list-unstyled
+    %ul
       - @activities.each do |activity|
         = render("#{activity.event}_activity", activity: activity)

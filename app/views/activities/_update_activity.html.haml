@@ -1,6 +1,8 @@
-%li
-  = "<strong>#{activity.whodunnit_email}</strong> #{activity.event}d <strong>#{activity.item_description}</strong> at <em>#{l(activity.created_at)}</em>".html_safe
-  .well
-    - activity.item_changes.each do |key, change|
-      = "<strong>#{key}</strong> changed from <em>#{change.first}</em> to <em>#{change.last}</em>".html_safe
-
+- unless activity.item_changes.values.flatten.all?(&:blank?) || activity.item_changes.keys.all?{ |key| key.ends_with?("_id") }
+  %li
+    = "<strong>#{activity.whodunnit_email}</strong> updated the <strong>#{activity.item_description}</strong> at <em>#{l(activity.created_at)}</em>".html_safe
+    %ul
+      - activity.item_changes.each do |key, change|
+        - unless change.all?(&:blank?) || key.ends_with?("_id")
+          %li
+            = "<strong>#{key}</strong> changed from <em>#{change.first}</em> to <em>#{change.last}</em>".html_safe

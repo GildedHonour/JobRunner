@@ -1,8 +1,7 @@
 class Contact < ActiveRecord::Base
-  has_paper_trail ignore: [:created_at, :updated_at], meta: { item_descriptor: :audit_descriptor }
-
   extend Enumerize
   include Archivable
+  include Audited
 
   validates :first_name ,presence: true
   validates :last_name, presence: true
@@ -86,6 +85,6 @@ class Contact < ActiveRecord::Base
   end
 
   def audit_descriptor
-    "#{self.full_name} - #{self.company.name}"
+    "contact #{self.full_name}"
   end
 end
