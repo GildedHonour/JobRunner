@@ -8,10 +8,18 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   %body{ class: "#{controller.controller_name} #{controller.action_name}" }
-    #loading-indicator{style: 'display:none;'}
+    #loading-indicator{style: "display:none;"}
       Loading..
     #main
       = render "left_nav"
-      = yield
+      .neat-row
+        .row
+          .col-sm-4.col-sm-offset-8
+            - flash_keys = [:info, :success, :danger]
+            - flash_keys.each do |x|
+              - if flash[x]
+                %p{class: "alert alert-#{x.to_s}"}
+                  = flash[x]
+        = yield
       = render "footer"
     #page-modal.modal.fade

@@ -1,233 +1,177 @@
-:javascript
-  $(function() {
-    var lblReinvitationResult = $("#reinvitation_result");
-    function showSuccessLabel() {
-      if (lblReinvitationResult.hasClass("label-danger")) {
-        lblReinvitationResult.removeClass("label-danger");
-      }
-      
-      if (!lblReinvitationResult.hasClass("label-success")) {
-        lblReinvitationResult.addClass("label-success");
-      }
+.show.content
+  .contact.intro
+    .neat-row.contact-action
+      .go.back
+        - if(@company)
+          = link_to company_url(@company) do
+            %span.glyphicon.glyphicon-chevron-left
+            = "Back to #{@company.name}"
+        - else
+          = link_to contacts_url_with_saved_filters do
+            %span.glyphicon.glyphicon-chevron-left
+            Back to contacts list
+      .profile-container
+        = render "profile"
+    .basic.contact.info
+      .contact.name
+        %span
+          = link_to_previous_entity("Previous contact")
+          %span.prefix
+            = @entity.prefix
+          = @entity.full_name
+          = link_to_next_entity("Next contact")
+        = link_to url_for([@company, @entity]), class: "btn-fam pull-right err", title: "Delete", data: { confirm: "Are you sure you want to delete the contact '#{@entity.full_name}'?", method: 'delete', toggle: "tooltip" } do
+          %i.fa.fa-trash-o 
+          %span.action Delete
+        = link_to url_for([:edit, @company, @entity]), class: "btn-fam pull-right", title: "Edit Contact", data: { toggle: "tooltip" }  do
+          %i.fa.fa-pencil
+          %span.action Edit
+        = link_to contact_url(@entity, format: 'vcf'), class: "btn-fam pull-right", title: "Download VCard", data: { toggle: "tooltip" } do
+          %i.fa.fa-phone
+          %span.action Vcard
 
-      lblReinvitationResult.text("Done");
-      lblReinvitationResult.show();
-    };
+      .secondary.contact.info.row
+        .col-sm-3
+          .row
+            .col-sm-3
+              %span.label
+                Email
+            .col-sm-9
+              = @entity.emails.map{ |email| mail_to(email) }.map(&:to_s).join("<br>").html_safe
+        .col-sm-3
+          .row
+            .col-sm-3
+              %span.label
+                Phone
+            .col-sm-9
+              = @entity.phone_numbers.map(&:to_s).join("<br>").html_safe
+        .col-sm-6
+          .row
+            .col-sm-2
+              %span.label
+                Address
+            .col-sm-10
+              - @entity.addresses.each do |address|
+                .address
+                  = [address.address_line_1, address.address_line_2, address.city, address.state, address.zip].compact.join(", ")
 
-    function showErrorLabel() {
-      if (lblReinvitationResult.hasClass("label-success")) {
-        lblReinvitationResult.removeClass("label-success");
-      }
-      
-      if (!lblReinvitationResult.hasClass("label-danger")) {
-        lblReinvitationResult.addClass("label-danger");
-      }
-
-      lblReinvitationResult.text("Error, try again");
-      lblReinvitationResult.show();
-    };
-
-    var btnReinvite = $("#btn_reinvite");
-    function setButtonEnabled(isEnabled) {
-      if (isEnabled) {
-        btnReinvite.removeClass("disabled");
-        btnReinvite.prop("disabled", false);
-      } else {
-        btnReinvite.addClass("disabled");
-        btnReinvite.prop("disabled", true);
-      }
-    };
-
-    var btnReinviteInitialText = btnReinvite.text();
-    $("#btn_reinvite").click(function(e) {
-      e.preventDefault();
-      setButtonEnabled(false);
-      btnReinvite.text("Re-inviting...");
-      $.ajax({
-        type: "POST",
-        url: "#{reinvite_contact_url(@entity.id)}"
-      })
-      .done(function(msg) {
-        showSuccessLabel();
-      })
-      .fail(function(jqXHR, textStatus) {
-        showErrorLabel();
-      })
-      .always(function() {
-        btnReinvite.text(btnReinviteInitialText);
-        setButtonEnabled(true);
-      });
-    });
-  });
-
-.neat-row
-  .show.content
-    .contact.intro
-      .neat-row.contact-action
-        .go.back
-          - if(@company)
-            = link_to company_url(@company) do
-              %span.glyphicon.glyphicon-chevron-left
-              = "Back to #{@company.name}"
-          - else
-            = link_to contacts_url_with_saved_filters do
-              %span.glyphicon.glyphicon-chevron-left
-              Back to contacts list
-        .profile-container
-          = render "profile"
-      .basic.contact.info
-        .contact.name
-          %span
-            = link_to_previous_entity("Previous contact")
-            %span.prefix
-              = @entity.prefix
-            = @entity.full_name
-            = link_to_next_entity("Next contact")
-          = link_to url_for([@company, @entity]), class: "btn-fam pull-right err", title: "Delete", data: { confirm: "Are you sure you want to delete the contact '#{@entity.full_name}'?", method: 'delete', toggle: "tooltip" } do
-            %i.fa.fa-trash-o 
-            %span.action Delete
-          = link_to url_for([:edit, @company, @entity]), class: "btn-fam pull-right", title: "Edit Contact", data: { toggle: "tooltip" }  do
-            %i.fa.fa-pencil
-            %span.action Edit
-          = link_to contact_url(@entity, format: 'vcf'), class: "btn-fam pull-right", title: "Download VCard", data: { toggle: "tooltip" } do
-            %i.fa.fa-phone
-            %span.action Vcard
-
-        .secondary.contact.info.row
-          .col-sm-3
-            .row
-              .col-sm-3
-                %span.label
-                  Email
-              .col-sm-9
-                = @entity.emails.map{ |email| mail_to(email) }.map(&:to_s).join("<br>").html_safe
-          .col-sm-3
-            .row
-              .col-sm-3
-                %span.label
-                  Phone
-              .col-sm-9
-                = @entity.phone_numbers.map(&:to_s).join("<br>").html_safe
-          .col-sm-6
-            .row
-              .col-sm-2
-                %span.label
-                  Address
-              .col-sm-10
-                - @entity.addresses.each do |address|
-                  .address
-                    = [address.address_line_1, address.address_line_2, address.city, address.state, address.zip].compact.join(", ")
-
-    .contact.details
-      .first.contact
-        .board.for.contact
-          %h3 Relationships
-          %h2
-            = link_to @entity.company.name, @entity.company
-          %h4 
-            - if @entity.job_title
-              = @entity.job_title
-          %h5 
-            Relationship to the Company
-          %table.table-hover.table-condensed
-            - @entity.company.internal_company_relationships.ordered_by_status_and_internal_company_name.each do |internal_company_relationship|
-              %tr
-                %td
-                  %span.bold 
-                    = link_to internal_company_relationship.internal_company.name, internal_company_relationship.internal_company
-                %td
-                  %span.light Role:
-                  %span.dark
-                    = internal_company_relationship.role.text
-                  %br
-                %td
-                  %span.light Status:
-                  %span.dark
-                    = internal_company_relationship.record_status
-                  %br
-
-        .board.for.contact
-          %h3 User Account
-          %table.table-hover.table-condensed
+  .contact.details
+    .first.contact
+      .board.for.contact
+        %h3 Relationships
+        %h2
+          = link_to @entity.company.name, @entity.company
+        %h4 
+          - if @entity.job_title
+            = @entity.job_title
+        %h5 
+          Relationship to the Company
+        %table.table-hover.table-condensed
+          - @entity.company.internal_company_relationships.ordered_by_status_and_internal_company_name.each do |internal_company_relationship|
             %tr
               %td
-                %span.light Account:
+                %span.bold 
+                  = link_to internal_company_relationship.internal_company.name, internal_company_relationship.internal_company
               %td
-                - if @entity.user.present?
-                  %span.dark
-                    = @entity.user.email
-                    - unless @entity.user.invitation_accepted?
-                      (Pending confirmation)
+                %span.light Role:
+                %span.dark
+                  = internal_company_relationship.role.text
+                %br
+              %td
+                %span.light Status:
+                %span.dark
+                  = internal_company_relationship.record_status
+                %br
+
+      .board.for.contact
+        %h3 User Account
+        %table.table-hover.table-condensed
+          %tr
+            %td
+              %span.light Account:
+            %td
+              - if @user && @user.errors.any?
+                .alert.alert-danger
+                  - @user.errors.full_messages.each do |message|
+                    %p
+                      = message
+
+              - if @entity.user.present?
+                %span.dark
+                  = @entity.user.email
+                  - unless @entity.user.invitation_accepted?
+                    (Pending confirmation)
+                    = form_tag("#{reinvite_contact_url(@entity.id)}") do
                       %button.btn.btn-primary{ id: "btn_reinvite" } Reinvite
                       %span.label#reinvitation_result{ style: "display: none" }
-                - else
-                  %span.dark
-                    = link_to "Invite user", new_contact_user_url(@entity), remote: true, class: ""
-            %tr
-              %td
-                %span.light Level:
-              %td  
-                %span.dark N/A
-            %tr
-              %td
-                %span.light Module Access:
-              %td  
-                %span.dark None
-    .contact.details
-      .contact
-        .board.for.contact.communications
-          %h3
-            Communications
-            = link_to edit_section_contact_url(@entity), class: "btn-fam no-border", remote: true do
-              %i.fa.fa-pencil
-          %table.table-hover.table-condensed
-            %tr
-              %td 
-                %span.light Do not email:
-              %td
+              - else
                 %span.dark
-                  = human_boolean(@entity.do_not_email)
-            %tr
-              %td
-                %span.light Do not mail:
-              %td
-                %span.dark
-                  = human_boolean(@entity.do_not_mail)
-            %tr
-              %td
-                %span.light Birthday:
-              %td
-                %span.dark
-                  = @entity.birthday && l(@entity.birthday, format: :only_date_month)
-            %tr
-              %td
-                %span.light Contest Participant:
-              %td
-                %span.dark
-                  = human_boolean(@entity.contest_participant)
-            %tr
-              %td
-                %span.light Sources:
-              %td
-                %span.dark
-                  = @entity.contact_sources.to_sentence
-        
-        .board.for.contact.notes
-          %h3
-            Notes
-            = link_to new_note_url(notable_id: @entity.id, notable_type: "Contact"), class: "btn-fam no-border", remote: true do
-              %i.fa.fa-plus
+                  = link_to "Invite user", new_contact_user_url(@entity), remote: true, class: ""
+          %tr
+            %td
+              %span.light Level:
+            %td  
+              %span.dark N/A
+          %tr
+            %td
+              %span.light Module Access:
+            %td  
+              %span.dark None
+  .contact.details
+    .contact
+      .board.for.contact.communications
+        %h3
+          Communications
+          = link_to edit_section_contact_url(@entity), class: "btn-fam no-border", remote: true do
+            %i.fa.fa-pencil
+        %table.table-hover.table-condensed
+          %tr
+            %td 
+              %span.light Do not email:
+            %td
+              %span.dark
+                = human_boolean(@entity.do_not_email)
+          %tr
+            %td
+              %span.light Do not mail:
+            %td
+              %span.dark
+                = human_boolean(@entity.do_not_mail)
+          %tr
+            %td
+              %span.light Birthday:
+            %td
+              %span.dark
+                = @entity.birthday && l(@entity.birthday, format: :only_date_month)
+          %tr
+            %td
+              %span.light Contest Participant:
+            %td
+              %span.dark
+                = human_boolean(@entity.contest_participant)
+          %tr
+            %td
+              %span.light Sources:
+            %td
+              %span.dark
+                = @entity.contact_sources.to_sentence
+      
+      .board.for.contact.notes
+        %h3
+          Notes
+          = link_to new_note_url(notable_id: @entity.id, notable_type: "Contact"), class: "btn-fam no-border", remote: true do
+            %i.fa.fa-plus
 
-          %ul.list-unstyled.notes
-            - @entity.notes.each do |note|
-              %li
-                .note
-                  = simple_format(note.note)
-                .meta.text-muted
-                  = l(note.updated_at)
-                  - if note.user #Imported from legacy data
-                    = note.user.contacts.first.full_name
-                  = link_to "edit", edit_note_url(note), remote: true
-                  |
-                  = link_to "delete", note_url(note), data: { confirm: "Are you sure?", method: 'delete' }
+        %ul.list-unstyled.notes
+          - @entity.notes.each do |note|
+            %li
+              .note
+                = simple_format(note.note)
+              .meta.text-muted
+                = l(note.updated_at)
+                - if note.user #Imported from legacy data
+                  = note.user.contacts.first.full_name
+                = link_to "edit", edit_note_url(note), remote: true
+                |
+                = link_to "delete", note_url(note), data: { confirm: "Are you sure?", method: 'delete' }
 

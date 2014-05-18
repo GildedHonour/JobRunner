@@ -1,6 +1,5 @@
 class CompaniesController < ApplicationController
   include SearchFiltersSaver
-
   respond_to :html, :js, :csv
 
   def new

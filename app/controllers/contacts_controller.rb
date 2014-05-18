@@ -1,6 +1,5 @@
 class ContactsController < ApplicationController
   include SearchFiltersSaver
-
   respond_to :html, :js, :csv, :vcf
 
   def new
@@ -38,7 +37,7 @@ class ContactsController < ApplicationController
     @entities = apply_filters(@entities, incl_neighbours: true)
     set_saved_filters_new_page!
     respond_with do |format|
-      format.html { respond_with @entity }
+      format.html { respond_with(@entity) }
       format.vcf do 
         send_data(@entity.to_vcf, filename: "#{@entity.full_name}.vcf", "Content-Disposition" => "attachment",
                   "Content-type" => "text/x-vcard; charset=utf-8"
@@ -68,9 +67,11 @@ class ContactsController < ApplicationController
 
   def reinvite
     @user = User.invite!({ email: @entity.user.email }, current_user)
-    respond_to do |format|
-      format.json { render(json: :ok) } 
-    end
+    flash[:success] = "The user has been re-invited successfully."
+    redirect_to(contact_url(@entity))
+  rescue
+    flash[:danger] = "Something went wrong, try again."
+    render(:show)
   end
 
   private
