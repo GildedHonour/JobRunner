@@ -11,6 +11,20 @@ module ContactsHelper
     }[filter]
   end
 
+  def country_state_list_user_friendly
+    Address.country_state_list.map do |item| 
+      item.map do |x|
+        if x.is_a?(Array)
+          # state or province
+          x.map { |x2| [x2.to_s.capitalize.gsub(/[_]/, " "), x2.to_s] } 
+        else
+          # country
+          x.to_s.upcase
+        end
+      end
+    end
+  end
+
   private
 
   def entity_path

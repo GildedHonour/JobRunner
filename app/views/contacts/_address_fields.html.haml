@@ -11,14 +11,13 @@
             = address_form.input :address_line_2, as: :string, placeholder: "Address Line 2", label: false
             .row
               .col-md-6
+                .form-group.select.optional.contact_addresses_country
+                  %div
+                    = address_form.select(:state, grouped_options_for_select(country_state_list_user_friendly, address_form.try(:object).try(:state).try(:to_sym)), {}, label: false, class: "select optional form-control user-success")
                 = address_form.input :city, placeholder: "City", label: false, input_html: { required: true }
               .col-md-6
-                = address_form.input :state, placeholder: "State", label: false, input_html: { required: true }
-            .row
-              .col-md-6
                 = address_form.input :zip, placeholder: "Zip", label: false, input_html: { required: true }
-              .col-md-6
-                = address_form.input :country, collection: Address.country.values.map{|option| [option.upcase, option] }, label: false
+
             = address_form.link_to_remove "Remove", class: "btn btn-danger"
   .col-md-4
     = f.link_to_add  "Add address", :addresses, class: "btn btn-default", data: { target: "#addresses" }

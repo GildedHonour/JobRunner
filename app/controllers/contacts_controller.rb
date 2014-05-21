@@ -1,6 +1,5 @@
 class ContactsController < ApplicationController
   include SearchFiltersSaver
-
   respond_to :html, :js, :csv, :vcf
 
   def new
@@ -22,7 +21,7 @@ class ContactsController < ApplicationController
   end
 
   def update
-    if @entity.update_attributes(contact_params)
+    if @entity.update_attributes(contact_params_with_country_parsed)
       redirect_to(save_success_url)
     else
       render(:new)
@@ -76,6 +75,16 @@ class ContactsController < ApplicationController
                                     emails_attributes: [:id, :value, :_destroy],
                                     phone_numbers_attributes: [:id, :extension, :kind, :phone_number, :_destroy]
     )
+  end
+
+  def contact_params_with_country_parsed
+    cp = contact_params
+    cp["addresses_attributes"].keys.each do |key|
+      st = cp["addresses_attributes"][key]["state"].to_sym
+      cp["addresses_attributes"][key]["country"] = Address.get_country_by_state(st).to_s
+    end
+
+    cp
   end
 
   def destroy_success_url
