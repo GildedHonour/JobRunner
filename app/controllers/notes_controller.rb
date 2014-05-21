@@ -10,7 +10,6 @@ class NotesController < ApplicationController
     note = Note.new(note_params)
     note.user = current_user
     note.save!
-
     redirect_to note.notable
   end
 
@@ -23,18 +22,17 @@ class NotesController < ApplicationController
     note.attributes = note_params
     note.user = current_user
     note.save!
-
     redirect_to note.notable
   end
 
   def destroy
     note = Note.find(params[:id])
     note.destroy
-
     redirect_to note.notable
   end
 
   private
+  
   def note_params
     params.require(:note).permit(:notable_id, :notable_type, :note)
   end

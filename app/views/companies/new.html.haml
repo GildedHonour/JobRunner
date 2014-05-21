@@ -1,43 +1,42 @@
-.neat-row
-  .show.content
-    .go.and.profile
-      .go.back
-        = link_to companies_url_with_saved_filters do
-          %span.glyphicon.glyphicon-chevron-left
-          Back to companies list
-      .profile
-        = render "profile"
+.show.content
+  .go.and.profile
+    .go.back
+      = link_to companies_url_with_saved_filters do
+        %span.glyphicon.glyphicon-chevron-left
+        Back to companies list
+    .profile
+      = render "profile"
 
-    .company.details
-      %h1
-        - if @entity.persisted?
-          = "Edit #{@entity.name}"
-        - else
-          New Company
+  .company.details
+    %h1
+      - if @entity.persisted?
+        = "Edit #{@entity.name}"
+      - else
+        New Company
 
-      = simple_nested_form_for @entity do |f|
-        .row
-          .col-md-4
-            %h2
-              Profile
-            .panel.panel-default
-              .panel-body
-                = f.input :name, placeholder: "Company Name", label: false
-                = f.input :website, placeholder: "Website", label: false
-                = f.input :company_type_id, collection: CompanyType.all, include_blank: "Company Type", label: false
-                = f.input :company_logo
-                - if @entity.company_logo.present?
-                  = image_tag @entity.company_logo.url
-                  = link_to "x", delete_company_logo_company_url , class: "btn btn-danger btn-xs", data: { method: "patch" }
+    = simple_nested_form_for @entity do |f|
+      .row
+        .col-md-4
+          %h2
+            Profile
+          .panel.panel-default
+            .panel-body
+              = f.input :name, placeholder: "Company Name", label: false
+              = f.input :website, placeholder: "Website", label: false
+              = f.input :company_type_id, collection: CompanyType.all, include_blank: "Company Type", label: false
+              = f.input :company_logo
+              - if @entity.company_logo.present?
+                = image_tag @entity.company_logo.url
+                = link_to "x", delete_company_logo_company_url , class: "btn btn-danger btn-xs", data: { method: "patch" }
 
-        .row
-          .col-md-12
-            %h2
-              Contact Info
-            = render "address_fields", f: f
-            = render "phone_number_fields", f: f
+      .row
+        .col-md-12
+          %h2
+            Contact Info
+          = render "address_fields", f: f
+          = render "phone_number_fields", f: f
 
-        %br
-        .form-group
-          = link_to "Back", back_url_or(companies_url_with_saved_filters), class: "btn btn-default"
-          = f.submit "Save", class: "btn btn-primary"
+      %br
+      .form-group
+        = link_to "Back", back_url_or(companies_url_with_saved_filters), class: "btn btn-default"
+        = f.submit "Save", class: "btn btn-primary"

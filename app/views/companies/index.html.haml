@@ -1,50 +1,49 @@
-.neat-row
-  .index.content
-    = render "action_panel", search_url: companies_url, csv_export_url: companies_url(params.merge(format: 'csv'))
-    .contacts.holder
-      %table.table.for.table-hover
-        %thead
-          %tr
-            %th
-            %th.sortable
-              - if(params[:name_sort] == "down")
-                = link_to companies_url(params.merge(name_sort: "up")) do
-                  Name
-                  %i.fa.fa-angle-down
-              - else
-                = link_to companies_url(params.merge(name_sort: "down")) do
-                  Name
-                  %i.fa.fa-angle-up
-            %th
-              Relationship(s)
-            %th
-              Affiliation(s)
-        %tbody
-          %tr
-            %td.add.a.company{ colspan: 5 }
-              .wrap
-                %i.fa.fa-plus
-                = link_to "Add a new company", new_company_url
-        %tbody#companies-listing
-          = render @entities
-      #companies-pagination
-        = paginate(@entities)
-  .profile.on.listing.pages
-    = render "profile"
+.index.content
+  = render "action_panel", search_url: companies_url, csv_export_url: companies_url(params.merge(format: 'csv'))
+  .contacts.holder
+    %table.table.for.table-hover
+      %thead
+        %tr
+          %th
+          %th.sortable
+            - if(params[:name_sort] == "down")
+              = link_to companies_url(params.merge(name_sort: "up")) do
+                Name
+                %i.fa.fa-angle-down
+            - else
+              = link_to companies_url(params.merge(name_sort: "down")) do
+                Name
+                %i.fa.fa-angle-up
+          %th
+            Relationship(s)
+          %th
+            Affiliation(s)
+      %tbody
+        %tr
+          %td.add.a.company{ colspan: 5 }
+            .wrap
+              %i.fa.fa-plus
+              = link_to "Add a new company", new_company_url
+      %tbody#companies-listing
+        = render @entities
+    #companies-pagination
+      = paginate(@entities)
+.profile.on.listing.pages
+  = render "profile"
 
-    = content_for :view_specific_filters do
-      %h3.filter.header
-        = link_to 'javascript:void(0)', data: { toggle: "collapse", target: "#affiliations-filter ul" }, class: "#{'collapsed' if params[:ac].blank?}" do
-          Accounts of
-          %i.glyphicon.glyphicon-chevron-up.pull-right
-          %i.glyphicon.glyphicon-chevron-down.pull-right
-          = button_tag "?", data: { toggle: "tooltip", title: tooltip_text_for_filter(:accounts_of) }, class: "btn btn-link btn-xs filter-help"
+  = content_for :view_specific_filters do
+    %h3.filter.header
+      = link_to 'javascript:void(0)', data: { toggle: "collapse", target: "#affiliations-filter ul" }, class: "#{'collapsed' if params[:ac].blank?}" do
+        Accounts of
+        %i.glyphicon.glyphicon-chevron-up.pull-right
+        %i.glyphicon.glyphicon-chevron-down.pull-right
+        = button_tag "?", data: { toggle: "tooltip", title: tooltip_text_for_filter(:accounts_of) }, class: "btn btn-link btn-xs filter-help"
 
-      .filter.wrapper#affiliations-filter
-        %ul.list.default.list-unstyled{ class: "#{'collapse' if params[:ac].blank?}" }
-          - Company.with_affiliation_principal_company_types.ordered_by_name.each do |principal|
-            %li.checkbox
-              = check_box_tag "affiliation_filter[company_ids]", principal.id, (params[:ac] || []).include?(principal.id.to_s)
-              = principal.name
+    .filter.wrapper#affiliations-filter
+      %ul.list.default.list-unstyled{ class: "#{'collapse' if params[:ac].blank?}" }
+        - Company.with_affiliation_principal_company_types.ordered_by_name.each do |principal|
+          %li.checkbox
+            = check_box_tag "affiliation_filter[company_ids]", principal.id, (params[:ac] || []).include?(principal.id.to_s)
+            = principal.name
 
-    = render "companies_contacts_shared/filter_sidebar"
+  = render "companies_contacts_shared/filter_sidebar"

@@ -1,49 +1,48 @@
-.neat-row
-  .index.content
-    = render "action_panel", search_url: contacts_url, csv_export_url: contacts_url(params.merge(format: 'csv'))
-    .contacts.holder
-      %table.table.table-hover
-        %thead
-          %tr
-            %th.sortable
-              - if(params[:name_sort] == "down")
-                = link_to contacts_url(params.merge(name_sort: "up")) do
-                  Name
-                  %i.fa.fa-angle-down
-              - else
-                = link_to contacts_url(params.merge(name_sort: "down")) do
-                  Name
-                  %i.fa.fa-angle-up
-            %th
-              Company
-            %th
-              Title
-        %tbody#contacts-listing
-          %tr
-            %td.add.a.contact{ colspan: 4 }
-              .wrap
-                %i.fa.fa-plus
-                = link_to "Add a new contact", new_contact_url
-          = render @entities
-      #contacts-pagination
-        = paginate(@entities)
-  .profile.on.listing.pages
-    = render "profile"
+.index.content
+  = render "action_panel", search_url: contacts_url, csv_export_url: contacts_url(params.merge(format: 'csv'))
+  .contacts.holder
+    %table.table.table-hover
+      %thead
+        %tr
+          %th.sortable
+            - if(params[:name_sort] == "down")
+              = link_to contacts_url(params.merge(name_sort: "up")) do
+                Name
+                %i.fa.fa-angle-down
+            - else
+              = link_to contacts_url(params.merge(name_sort: "down")) do
+                Name
+                %i.fa.fa-angle-up
+          %th
+            Company
+          %th
+            Title
+      %tbody#contacts-listing
+        %tr
+          %td.add.a.contact{ colspan: 4 }
+            .wrap
+              %i.fa.fa-plus
+              = link_to "Add a new contact", new_contact_url
+        = render @entities
+    #contacts-pagination
+      = paginate(@entities)
+.profile.on.listing.pages
+  = render "profile"
 
-    = content_for :view_specific_filters do
-      %h3.filter.header
-        = link_to 'javascript:void(0)', data: { toggle: "collapse", target: "#birthdays-filter ul" } do
-          Birthday
-          %i.glyphicon.glyphicon-chevron-up.pull-right
-          %i.glyphicon.glyphicon-chevron-down.pull-right
-          = button_tag "?", data: { toggle: "tooltip", title: tooltip_text_for_filter(:birthday)}, class: "btn btn-link btn-xs filter-help"
+  = content_for :view_specific_filters do
+    %h3.filter.header
+      = link_to 'javascript:void(0)', data: { toggle: "collapse", target: "#birthdays-filter ul" } do
+        Birthday
+        %i.glyphicon.glyphicon-chevron-up.pull-right
+        %i.glyphicon.glyphicon-chevron-down.pull-right
+        = button_tag "?", data: { toggle: "tooltip", title: tooltip_text_for_filter(:birthday)}, class: "btn btn-link btn-xs filter-help"
 
-      .filter.wrapper#birthdays-filter
-        %ul.list.default.list-unstyled.in
-          - Date::MONTHNAMES.compact.each_with_index do |month, index|
-            - month_index = index + 1;
-            %li.checkbox
-              = check_box_tag "birthday_filter[month_ids]", month_index, (params[:bm] || []).include?(month_index.to_s)
-              = month
+    .filter.wrapper#birthdays-filter
+      %ul.list.default.list-unstyled.in
+        - Date::MONTHNAMES.compact.each_with_index do |month, index|
+          - month_index = index + 1;
+          %li.checkbox
+            = check_box_tag "birthday_filter[month_ids]", month_index, (params[:bm] || []).include?(month_index.to_s)
+            = month
 
-    = render "companies_contacts_shared/filter_sidebar"
+  = render "companies_contacts_shared/filter_sidebar"

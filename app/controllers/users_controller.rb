@@ -4,8 +4,7 @@ class UsersController < ApplicationController
   def new
     @contact = Contact.find(params[:contact_id])
     @user = @contact.build_user
-
-    respond_with @user
+    respond_with(@user)
   end
 
   def create
@@ -14,12 +13,12 @@ class UsersController < ApplicationController
       user.contacts << @contact
     end
 
-    partial = @user.errors.present? ? "new" : "success"
+    partial = @user.errors.present? ? :new : :success
     respond_to do |format|
       format.js { render(partial) }
     end
   end
-
+  
   def update
     create and return
   end
@@ -28,6 +27,7 @@ class UsersController < ApplicationController
   end
 
   private
+
   def user_params
     params.require(:user).permit(:email)
   end

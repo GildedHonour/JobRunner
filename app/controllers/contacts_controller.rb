@@ -1,6 +1,5 @@
 class ContactsController < ApplicationController
   include SearchFiltersSaver
-
   respond_to :html, :js, :csv, :vcf
 
   def new
@@ -37,9 +36,8 @@ class ContactsController < ApplicationController
   def show
     @entities = apply_filters(@entities, incl_neighbours: true)
     set_saved_filters_new_page!
-    
     respond_with do |format|
-      format.html { respond_with @entity }
+      format.html { respond_with(@entity) }
       format.vcf do 
         send_data(@entity.to_vcf, filename: "#{@entity.full_name}.vcf", "Content-Disposition" => "attachment",
                   "Content-type" => "text/x-vcard; charset=utf-8"
@@ -65,6 +63,15 @@ class ContactsController < ApplicationController
     else
       render(:edit_section)
     end
+  end
+
+  def reinvite
+    @user = User.invite!({ email: @entity.user.email }, current_user)
+    flash[:success] = "The user has been re-invited successfully."
+    redirect_to(contact_url(@entity))
+  rescue
+    flash[:danger] = "Something went wrong, try again."
+    render(:show)
   end
 
   private
@@ -98,14 +105,14 @@ class ContactsController < ApplicationController
   end
 
   def apply_filters_concrete(source)
-      source_filtered = get_saved_filters.has_key?(:search) ? source.search(get_saved_filters[:search]) : source
-      source_filtered = source_filtered.with_archived_status(get_saved_filters[:a]) if get_saved_filters.has_key?(:a)
-      source_filtered = source_filtered.with_birthday_months(get_saved_filters[:bm]) if get_saved_filters.has_key?(:bm)
-      
-      source_filtered = source_filtered.contacts_of_companies_with_company_types(get_saved_filters[:ct]) if get_saved_filters.has_key?(:ct)
-      source_filtered = source_filtered.contacts_of_companies_with_internal_relationship_role(get_saved_filters[:irr]) if get_saved_filters.has_key?(:irr)
-      source_filtered = source_filtered.contacts_of_companies_with_relationship_to(get_saved_filters[:rc]) if get_saved_filters.has_key?(:rc)
+    source_filtered = get_saved_filters.has_key?(:search) ? source.search(get_saved_filters[:search]) : source
+    source_filtered = source_filtered.with_archived_status(get_saved_filters[:a]) if get_saved_filters.has_key?(:a)
+    source_filtered = source_filtered.with_birthday_months(get_saved_filters[:bm]) if get_saved_filters.has_key?(:bm)
+    
+    source_filtered = source_filtered.contacts_of_companies_with_company_types(get_saved_filters[:ct]) if get_saved_filters.has_key?(:ct)
+    source_filtered = source_filtered.contacts_of_companies_with_internal_relationship_role(get_saved_filters[:irr]) if get_saved_filters.has_key?(:irr)
+    source_filtered = source_filtered.contacts_of_companies_with_relationship_to(get_saved_filters[:rc]) if get_saved_filters.has_key?(:rc)
 
-      source_filtered = get_saved_filters[:name_sort] == "down" ? source_filtered.order("first_name DESC") : source_filtered.order("first_name ASC")
+    source_filtered = get_saved_filters[:name_sort] == "down" ? source_filtered.order("first_name DESC") : source_filtered.order("first_name ASC")
   end
 end
