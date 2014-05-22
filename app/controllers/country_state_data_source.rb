@@ -22,9 +22,5 @@ module CountryStateDataSource
         )
       end
     end
-    # .col-md-6
-    #   .form-group.select.optional.company_addresses_country
-    #     %div
-    #       = form_item.select(:state, grouped_options_for_select(country_state_data_source, form_item.try(:object).try(:state).try(:to_sym)), {}, label: false, class: "select optional form-control user-success")
   end
 end
