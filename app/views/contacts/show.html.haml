@@ -99,12 +99,12 @@
               - if @entity.user.present?
                 %span.dark
                   = @entity.user.email
-                  - unless @entity.user.invitation_accepted?
+                  - if !@entity.user.invitation_accepted? && @current_user.admin?
                     (Pending confirmation)
                     = form_tag("#{reinvite_contact_url(@entity.id)}") do
                       %button.btn.btn-primary{ id: "btn_reinvite" } Reinvite
                       %span.label#reinvitation_result{ style: "display: none" }
-              - else
+              - elsif current_user.admin?
                 %span.dark
                   = link_to "Invite user", new_contact_user_url(@entity), remote: true, class: ""
           %tr
