@@ -49,7 +49,7 @@ GEM
     bourbon (3.1.8)
       sass (>= 3.2.0)
       thor
-    bugsnag (1.8.8)
+    bugsnag (2.0.1)
       httparty (>= 0.6, < 1.0)
       multi_json (~> 1.0)
     builder (3.2.2)
@@ -134,7 +134,7 @@ GEM
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (5.3.2)
-    multi_json (1.9.2)
+    multi_json (1.10.1)
     multi_xml (0.5.5)
     neat (1.5.1)
       bourbon (>= 3.1)
