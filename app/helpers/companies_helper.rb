@@ -1,6 +1,7 @@
 module CompaniesHelper
   include BackForwardLinkGenerator
-
+  include CountryStateDataSource
+  
   def tooltip_text_for_filter(filter)
     {
       relationships: "Shows companies related to the selected internal company",

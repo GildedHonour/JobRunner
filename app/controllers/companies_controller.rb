@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
   include SearchFiltersSaver
-
+  include AddressParamsParser
   respond_to :html, :js, :csv
 
   def new
@@ -9,7 +9,7 @@ class CompaniesController < ApplicationController
   end
 
   def create
-    @entity = Company.new(company_params)
+    @entity = Company.new(permitted_params)
     if @entity.save
       redirect_to company_url(@entity)
     else
@@ -22,8 +22,8 @@ class CompaniesController < ApplicationController
   end
 
   def update
-    if @entity.update_attributes(company_params)
-      redirect_to company_url(@entity)
+    if @entity.update_attributes(permitted_params_with_country_parsed)
+      redirect_to(company_url(@entity))
     else
       render(:new)
     end
@@ -55,7 +55,7 @@ class CompaniesController < ApplicationController
 
   def update_section
     @section = params[:section]
-    if @entity.update_attributes(company_params)
+    if @entity.update_attributes(permitted_params)
       render(:success)
     else
       render(:edit_section)
@@ -70,7 +70,7 @@ class CompaniesController < ApplicationController
 
   private
 
-  def company_params
+  def permitted_params
     params.require(:company).permit(:name, :website, :phone, :company_logo, :company_type_id,
                                     affiliate_affiliations_attributes: [:id, :archived, :affiliate_id, :role, :_destroy],
                                     principal_affiliations_attributes: [:id, :archived, :principal_id, :role, :_destroy],

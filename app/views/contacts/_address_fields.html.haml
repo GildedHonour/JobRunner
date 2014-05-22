@@ -11,9 +11,7 @@
             = address_form.input :address_line_2, as: :string, placeholder: "Address Line 2", label: false
             .row
               .col-md-6
-                .form-group.select.optional.contact_addresses_country
-                  %div
-                    = address_form.select(:state, grouped_options_for_select(country_state_list_user_friendly, address_form.try(:object).try(:state).try(:to_sym)), {}, label: false, class: "select optional form-control user-success")
+                = country_state_select address_form, "contact"
                 = address_form.input :city, placeholder: "City", label: false, input_html: { required: true }
               .col-md-6
                 = address_form.input :zip, placeholder: "Zip", label: false, input_html: { required: true }
