@@ -4,7 +4,7 @@ module CountryStateDataSource
       item.map do |x|
         if x.is_a?(Array)
           # state or province
-          x.map { |x2| [x2.to_s.titleize.gsub(/[_]/, " "), x2.to_s] } 
+          x.map { |x2| [x2.to_s.titleize, x2.to_s] } 
         else
           # country
           x.to_s.upcase
