@@ -20,7 +20,7 @@ class Address < ActiveRecord::Base
             :nebraska, :nevada, :new_hampshire, :new_jersey, :new_mexico, :new_york, :north_carolina,
             :north_dakota, :ohio, :oklahoma, :oregon, :pennsylvania, :rhode_island, :south_carolina, 
             :south_dakota, :tennessee, :texas, :utah, :vermont, :virginia, :washington, :west_virginia, 
-            :wisconish, :wyoming],  
+            :wisconsin, :wyoming],  
       canada: [:ontario, :quebec, :nova_scotia, :new_brunswick, :manitoba, :british_columbia, 
               :prince_edward_island, :saskatchewan, :alberta, :newfoundland_and_labrador]
     }
