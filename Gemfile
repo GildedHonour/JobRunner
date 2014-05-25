@@ -36,8 +36,9 @@ gem "active_model_serializers"
 
 # Server
 gem "pg"
-gem "unicorn"
+gem "puma"
 gem "bugsnag"
+gem "rack-timeout"
 
 # File uploads
 gem "fog", ">= 1.3.1" # Required by carrierwave
@@ -50,6 +51,7 @@ gem "database_cleaner"
 gem "awesome_print"
 
 group :development do
+  gem "foreman"
   gem "letter_opener"
   gem "quiet_assets"
   gem "pry-rails"
