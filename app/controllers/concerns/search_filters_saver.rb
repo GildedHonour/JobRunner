@@ -1,6 +1,5 @@
 module SearchFiltersSaver
   extend ActiveSupport::Concern
-  
   PAGE_SIZE = 100
 
   included do
@@ -12,6 +11,8 @@ module SearchFiltersSaver
   def include_neighbours(source)
     source_arr = source.to_a
     
+    # binding.pry
+
     # check if it is not the last page
     # so we can include the first contact from the next page
     is_last_page = ((source_arr.size / PAGE_SIZE) + 1) == get_saved_filters[:page]
@@ -24,7 +25,7 @@ module SearchFiltersSaver
     # so we can include the last contact from the previous page
     unless get_saved_filters[:page] == 1
       last_element = Kaminari.paginate_array(source_arr).page(get_saved_filters[:page] - 1).per(PAGE_SIZE)
-      source_arr.unshift(res[-1])
+      source_arr.unshift(last_element[-1])
     end
 
     source_arr
@@ -41,9 +42,13 @@ module SearchFiltersSaver
     # thus we don't have to modify current page number in the search filter in the session
     return unless @entity_index
 
-    # get the page of @contact.id according to its 
-    # position (@contact_index) in the result set
-    new_page_index = (@entity_index / PAGE_SIZE) + 1 
+    binding.pry
+
+
+
+    # get the page of @entity.id according to its 
+    # position (@entity_index) in the result set
+    new_page_index = (@entity_index / PAGE_SIZE) + 1  #todo error: @entity_index is never more than PAGE_SIZE because it's within one page
     set_saved_filters_page(new_page_index)
   end
 
@@ -52,8 +57,12 @@ module SearchFiltersSaver
     if get_saved_filters
       source_filtered = apply_filters_concrete(source)
       unless request.format == :csv
-        source_filtered = source_filtered.page(get_saved_filters[:page]).per(PAGE_SIZE) 
+        # source_filtered = source_filtered.page(get_saved_filters[:page]).per(PAGE_SIZE) 
+        # source_filtered = include_neighbours(source_filtered) if incl_neighbours 
+
+
         source_filtered = include_neighbours(source_filtered) if incl_neighbours 
+        source_filtered = Kaminari.paginate_array(source_filtered).page(get_saved_filters[:page]).per(PAGE_SIZE) 
       end
     end
 
@@ -75,7 +84,7 @@ module SearchFiltersSaver
   def set_saved_filters_default_page
     set_saved_filters({}) unless get_saved_filters
     maybe_page = get_saved_filters[:page] 
-    set_saved_filters_page(maybe_page || 1)
+    set_saved_filters_page(maybe_page || params[:page].to_i || 1)
   end
 
   def save_filters

@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   layout :determine_layout
-
   before_filter :authenticate_user!
   helper_method :companies_url_with_saved_filters, :contacts_url_with_saved_filters
 
@@ -10,6 +9,10 @@ class ApplicationController < ActionController::Base
   end
 
   def contacts_url_with_saved_filters
+
+    binding.pry
+
+    
     contacts_url(session[:contact_filter_params] || {})
   end
 

@@ -2,6 +2,11 @@ class ContactsController < ApplicationController
   include SearchFiltersSaver
   respond_to :html, :js, :csv, :vcf
 
+  def index
+    @entities = apply_filters(@entities)
+    respond_with(@entities)
+  end
+  
   def new
     @entity = @entities.build
     respond_with(@entity)
@@ -26,11 +31,6 @@ class ContactsController < ApplicationController
     else
       render(:new)
     end
-  end
-
-  def index
-    @entities = apply_filters(@entities)
-    respond_with(@entities)
   end
 
   def show
