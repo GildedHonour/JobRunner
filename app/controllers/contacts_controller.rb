@@ -1,6 +1,7 @@
 class ContactsController < ApplicationController
   include SearchFiltersSaver
   respond_to :html, :js, :csv, :vcf
+  before_filter :authenticate_admin!, only: [:new_invite, :invite, :re_invite]
 
   def new
     @entity = @entities.build
