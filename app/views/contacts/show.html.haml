@@ -101,12 +101,12 @@
                   = @entity.user.email
                   - if !@entity.user.invitation_accepted? && @current_user.admin?
                     (Pending confirmation)
-                    = form_tag("#{reinvite_contact_url(@entity.id)}") do
+                    = form_tag("#{re_invite_contact_url(@entity.id)}") do
                       %button.btn.btn-primary{ id: "btn_reinvite" } Reinvite
                       %span.label#reinvitation_result{ style: "display: none" }
               - elsif current_user.admin?
                 %span.dark
-                  = link_to "Invite user", new_contact_user_url(@entity), remote: true, class: ""
+                  = link_to "Invite user", new_invite_contact_url(@entity), remote: true, class: ""
           %tr
             %td
               %span.light Level:
