@@ -7,7 +7,7 @@ module AddressParamsParser
       st = ppwc["addresses_attributes"][key]["state"].to_sym
       ppwc["addresses_attributes"][key]["country"] = Address.get_country_by_state(st).to_s
     end
-
+    
     ppwc
   end
 end
