@@ -9,15 +9,14 @@ class Address < ActiveRecord::Base
   validates :city, presence: true
   validates :state, presence: true
   validates :zip, presence: true
-  
-  def self.country_state_list
-    usa = Country.new("us")
-    usa_states = get_states(usa)
-    ca = Country.new("ca")
-    ca_states = get_states(ca)
-    [{ usa: usa_states }, { canada: ca_states }]
-  end
 
+  def self.country_state_list
+    [
+      { usa: get_states(Country.new("us")) }, 
+      { canada: get_states(Country.new("ca")) }
+    ]
+  end
+  
   def self.get_country_by_state(short_state_name)
     country = nil
     country_state_list.each do |x|
@@ -36,7 +35,7 @@ class Address < ActiveRecord::Base
         y1.each { |x2| long_state_name = x2.values[0] if x2.keys[0] == short_state_name.to_s.upcase } 
       end
     end
-    
+
     long_state_name
   end
 
