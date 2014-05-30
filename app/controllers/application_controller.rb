@@ -20,6 +20,15 @@ class ApplicationController < ActionController::Base
     { whodunnit_email: current_user.try(:email) }
   end
   
+  protected
+
+  def authenticate_admin!
+    unless current_user.try(&:admin?)
+      flash[:danger] = "Only admins can access this url."
+      redirect_to(root_url) 
+    end
+  end
+
   private
   
   def determine_layout

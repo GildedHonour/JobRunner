@@ -6,7 +6,7 @@ class ApiController < ActionController::Base
   
   def authenticate!
     unless authenticate_with_http_basic { |app, password| ApiAuth.where(app: app, password: password).present? }
-      render json: { reason: "unauthorized" } , status: 401
+      render(json: { reason: "unauthorized" }, status: 401)
     end
   end
 end

@@ -1,6 +1,7 @@
 class ContactsController < ApplicationController
   include SearchFiltersSaver
   respond_to :html, :js, :csv, :vcf
+  before_filter :authenticate_admin!, only: [:new_invite, :invite, :re_invite]
 
   def index
     @entities = apply_filters(@entities)
@@ -65,7 +66,23 @@ class ContactsController < ApplicationController
     end
   end
 
-  def reinvite
+  def new_invite
+    @entity = Contact.find(params[:id])
+    @user = @entity.build_user
+    respond_with(@user)
+  end
+
+  def invite
+    @entity = Contact.find(params[:id])
+    @user = User.invite!({ email: params[:user][:email] }, current_user) { |user| user.contacts << @entity } 
+    partial = @user.errors.present? ? :new_invite : :success_invite
+    respond_to do |format|
+      format.js { render(partial) }
+    end
+  end
+
+  def re_invite
+    @entity = Contact.find(params[:id])
     @user = User.invite!({ email: @entity.user.email }, current_user)
     flash[:success] = "The user has been re-invited successfully."
     redirect_to(contact_url(@entity))
@@ -83,6 +100,10 @@ class ContactsController < ApplicationController
                                     emails_attributes: [:id, :value, :_destroy],
                                     phone_numbers_attributes: [:id, :extension, :kind, :phone_number, :_destroy]
     )
+  end
+
+  def user_params
+    params.require(:user).permit(:email)
   end
 
   def destroy_success_url
