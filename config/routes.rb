@@ -3,27 +3,29 @@ Jobrunner::Application.routes.draw do
   root to: redirect("/contacts")
 
   resources :activities
+  resources :notes
   resources :contacts do
-    resources :users
     member do
       get :edit_section
       patch :update_section
+      get :new_invite
+      post :re_invite
+      post :invite
     end
   end
 
   resources :companies do
-    resources :contacts
     member do
       get :edit_section
       patch :update_section
-
       patch :delete_company_logo
     end
-  end
-  resources :notes
 
+    resources :contacts
+  end
+  
   namespace "api" do
-    resources :company_types, defaults: { format: 'json' }
-    resources :companies, defaults: { format: 'json' }
+    resources :company_types, defaults: { format: "json" }
+    resources :companies, defaults: { format: "json" }
   end
 end

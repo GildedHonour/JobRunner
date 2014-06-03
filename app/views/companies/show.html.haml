@@ -1,27 +1,47 @@
-.neat-row
-  .show.content
-    .company.intro
-      .neat-row.company-action
-        .go.back
-          = link_to companies_url_with_saved_filters do
-            %span.glyphicon.glyphicon-chevron-left
-            View all companies
-        .profile-container
-          = render "profile"      
-      .company.logo
-        = image_tag @entity.company_logo.url, alt: @entity.name
-      .company.info.pull-right
-        .company.name
-          = link_to_previous_entity("Previous company")
-          = @entity.name
-          = link_to_next_entity("Next company")
-          %span.label{ style: "white-space: normal;" }
-            &mdash; 
-            = @entity.company_type
-          = link_to company_url(@entity), class: "btn-fam pull-right err", data: { confirm: "Are you sure you want to delete the company '#{@entity.name}'?", method: 'delete' } do
-            %i.fa.fa-trash-o
-            %span.action Delete
-          = link_to edit_company_url(@entity), class: "btn-fam pull-right" do
+.show.content
+  .company.intro
+    .neat-row.company-action
+      .go.back
+        = link_to companies_url_with_saved_filters do
+          %span.glyphicon.glyphicon-chevron-left
+          Back to Companies
+      .profile-container
+        = render "profile"      
+    .company.logo
+      = image_tag @entity.company_logo.url, alt: @entity.name
+    .company.info.pull-right
+      .company.name
+        = link_to_previous_entity("Previous company")
+        = @entity.name
+        = link_to_next_entity("Next company")
+        %span.label{ style: "white-space: normal;" }
+          &mdash; 
+          = @entity.company_type
+        = link_to company_url(@entity), class: "btn-fam pull-right err", data: { confirm: "Are you sure you want to delete the company '#{@entity.name}'?", method: 'delete' } do
+          %i.fa.fa-trash-o
+          %span.action Delete
+        = link_to edit_company_url(@entity), class: "btn-fam pull-right" do
+          %i.fa.fa-pencil
+          %span.action Edit
+      .secondary.company.info
+        .col-sm-6
+          %span.label Address
+          - @entity.addresses.each do |address|
+            .address
+              = [address.address_line_1, address.address_line_2, address.city, address.state, address.zip].compact.map(&:to_s).join(", ")
+        .col-sm-3
+          %span.label Phone
+          = @entity.phone_numbers.map(&:to_s).join("<br>").html_safe
+        .col-sm-3
+          %span.label Web
+          %a{href: "http://#{@entity.website}"}
+            = @entity.website
+  .company.details
+    .first.company.row
+      .col-sm-12
+        .board.for.company
+          %h3 Relationships
+          = link_to edit_section_company_url(@entity, section: "internal_company_relationships"), class: "btn-fam no-border", remote: true do
             %i.fa.fa-pencil
             %span.action Edit
         .secondary.company.info
@@ -45,68 +65,68 @@
             = link_to edit_section_company_url(@entity, section: "internal_company_relationships"), class: "btn-fam no-border", remote: true do
               %i.fa.fa-pencil
 
-            %table.table-hover.table-condensed
-              %thead
+          %table.table-hover.table-condensed
+            %thead
+              %tr
+                %th Company
+                %th Role(s)
+                %th Status
+                %th Added
+                %th Last Modified
+            %tbody
+              - @entity.internal_company_relationships.ordered_by_status_and_internal_company_name.each do |relationship|
                 %tr
-                  %th Company
-                  %th Role(s)
-                  %th Status
-                  %th Added
-                  %th Last Modified
-              %tbody
-                - @entity.internal_company_relationships.ordered_by_status_and_internal_company_name.each do |relationship|
-                  %tr
-                    %td
-                      = link_to relationship.internal_company.name, relationship.internal_company
-                    %td
-                      = relationship.role.text
-                    %td
-                      = relationship.record_status
-                    %td
-                      = l(relationship.created_at, format: :only_date)
-                    %td
-                      = l(relationship.updated_at, format: :only_date)
+                  %td
+                    = link_to relationship.internal_company.name, relationship.internal_company
+                  %td
+                    = relationship.role.text
+                  %td
+                    = relationship.record_status
+                  %td
+                    = l(relationship.created_at, format: :only_date)
+                  %td
+                    = l(relationship.updated_at, format: :only_date)
 
-    .company.details
-      .second.company.row
-        .col-sm-12
-          .board.for.company
-            - if @entity.company_type.try(:can_be_affiliation_principal?)
-              = render "affiliations_table", header: "Affiliates", affiliations: @entity.affiliate_affiliations.ordered_by_affiliate_name, edit_section: "affiliates", affiliation_relation: :affiliate
-            - elsif @entity.company_type.try(:can_be_affiliation_affiliate?)
-              = render "affiliations_table", header: "Managed By", affiliations: @entity.principal_affiliations.ordered_by_principal_name, edit_section: "principals", affiliation_relation: :principal
+  .company.details
+    .second.company.row
+      .col-sm-12
+        .board.for.company
+          - if @entity.company_type.try(:can_be_affiliation_principal?)
+            = render "affiliations_table", header: "Affiliates", affiliations: @entity.affiliate_affiliations.ordered_by_affiliate_name, edit_section: "affiliates", affiliation_relation: :affiliate
+          - elsif @entity.company_type.try(:can_be_affiliation_affiliate?)
+            = render "affiliations_table", header: "Managed By", affiliations: @entity.principal_affiliations.ordered_by_principal_name, edit_section: "principals", affiliation_relation: :principal
 
-    .company.details
-      .third.company.row
-        .col-sm-12
-          .board.for.company
-            %h3 People
-            %table.table.table-hover
-              %thead
+  .company.details
+    .third.company.row
+      .col-sm-12
+        .board.for.company
+          %h3 People
+          %table.table.table-hover
+            %thead
+              %tr
+                %th Name
+                %th Title
+                %th Email
+                %th Phone
+                %th Status
+                %th Last Modified
+            %tbody
+              %tr
+                %td.add.a.contact{ colspan: 6 }
+                  .wrap
+                    %i.fa.fa-plus
+                    = link_to "Add a new contact", new_company_contact_url(@entity)
+              - @entity.contacts.each do |contact|
                 %tr
-                  %th Name
-                  %th Title
-                  %th Email
-                  %th Phone
-                  %th Status
-                  %th Last Modified
-              %tbody
-                %tr
-                  %td.add.a.contact{ colspan: 6 }
-                    .wrap
-                      %i.fa.fa-plus
-                      = link_to "Add a new contact", new_company_contact_url(@entity)
-                - @entity.contacts.each do |contact|
-                  %tr
-                    %td
-                      = link_to contact.full_name, company_contact_url(@entity, contact)
-                    %td
-                      = contact.job_title
-                    %td
-                      = contact.emails.map{ |email| mail_to(email) }.join("<br />").html_safe
-                    %td
-                      = contact.phone_numbers.map(&:to_s).join(",")
-                    %td
-                      = contact.record_status
-                    %td
-                      = l(contact.updated_at, format: :only_date)
+                  %td
+                    = link_to contact.full_name, company_contact_url(@entity, contact)
+                  %td
+                    = contact.job_title
+                  %td
+                    = contact.emails.map{ |email| mail_to(email) }.join("<br />").html_safe
+                  %td
+                    = contact.phone_numbers.map(&:to_s).join(",")
+                  %td
+                    = contact.record_status
+                  %td
+                    = l(contact.updated_at, format: :only_date)

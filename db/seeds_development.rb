@@ -7,7 +7,7 @@ contact_job_titles = [
     "Sales Lead"
 ]
 
-company_logos = Dir['spec/fixtures/company_logos/*']
+company_logos = Dir["spec/fixtures/company_logos/*"]
 internal_companies = Company.internal
 company_types = CompanyType.all - [CompanyType.internal]
 
@@ -66,7 +66,7 @@ Contact.create!(
   last_name: "Powell",
   prefix: "Mr.",
   job_title: "Project Manager",
-  user: User.new(email: 'sean@engageyourcause.com', password: 'password'),
+  user: User.new(email: "sean@engageyourcause.com", password: "password"),
   company: Company.all.sample
 )
 
@@ -75,7 +75,7 @@ Contact.create!(
   last_name: "Rawat",
   prefix: "Mr.",
   job_title: "Developer",
-  user: User.new(email: 'projects@akshay.cc', password: 'password'),
+  user: User.new(email: "projects@akshay.cc", password: "password"),
   company: Company.all.sample
 )
 
@@ -84,6 +84,16 @@ Contact.create!(
   last_name: "Barao",
   prefix: "Ms.",
   job_title: "Project Manager",
-  user: User.new(email: 'lori@mmidirect.com', password: 'password'),
+  user: User.new(email: "lori@mmidirect.com", password: "password"),
+  company: Company.all.sample
+)
+
+
+Contact.create!(
+  first_name: "Alex",
+  last_name: "M",
+  prefix: "Mr.",
+  job_title: "Developer",
+  user: User.new(email: "me@gildedhonour.com", password: "password", admin: true),
   company: Company.all.sample
 )

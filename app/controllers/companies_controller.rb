@@ -1,6 +1,7 @@
 class CompaniesController < ApplicationController
   include SearchFiltersSaver
   include AddressParamsParser
+
   respond_to :html, :js, :csv
 
   def new
