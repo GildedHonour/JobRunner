@@ -51,7 +51,7 @@ class Address < ActiveRecord::Base
   private
 
   def self.get_states(country)
-    excluded_subdivisions = { "US" => ["AA", "AE"] }
+    excluded_subdivisions = { "US" => ["AA", "AE", "AP"] }
     country.states.map do |x, y|
       { x => y["name"] } unless excluded_subdivisions[country.alpha2].try(:include?, x)
     end.compact
