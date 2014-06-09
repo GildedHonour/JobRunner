@@ -3,8 +3,11 @@ class ContactsController < ApplicationController
   respond_to :html, :js, :csv, :vcf
   before_filter :authenticate_admin!, only: [:new_invite, :invite, :re_invite]
 
+  ENTITY_PREFIX = "contact"
+  FILTER_ITEMS = [:a, :bm, :ct, :irr, :rc, :search, :name_sort]
+
   def index
-    @entities = apply_filters(@entities)
+    @entities, @entities_all_pages = apply_filters(@entities)
     respond_with(@entities)
   end
   
@@ -35,7 +38,7 @@ class ContactsController < ApplicationController
   end
 
   def show
-    @entities = apply_filters(@entities, incl_neighbours: true)
+    @entities, @entities_all_pages = apply_filters(@entities)
     set_saved_filters_new_page!
     respond_with do |format|
       format.html { respond_with(@entity) }
@@ -111,14 +114,9 @@ class ContactsController < ApplicationController
   end
 
   def load_entities
-    @entity_prefix = "contact"
     @company = Company.find(params[:company_id]) if params[:company_id].present?
     @entities = @company ? @company.contacts : Contact.all
     @entity = @entities.find(params[:id]) if params[:id].present?
-  end
-
-  def filter_items
-    %i(a bm ct irr rc search name_sort)
   end
 
   def save_success_url
@@ -129,11 +127,10 @@ class ContactsController < ApplicationController
     source_filtered = get_saved_filters.has_key?(:search) ? source.search(get_saved_filters[:search]) : source
     source_filtered = source_filtered.with_archived_status(get_saved_filters[:a]) if get_saved_filters.has_key?(:a)
     source_filtered = source_filtered.with_birthday_months(get_saved_filters[:bm]) if get_saved_filters.has_key?(:bm)
-    
     source_filtered = source_filtered.contacts_of_companies_with_company_types(get_saved_filters[:ct]) if get_saved_filters.has_key?(:ct)
     source_filtered = source_filtered.contacts_of_companies_with_internal_relationship_role(get_saved_filters[:irr]) if get_saved_filters.has_key?(:irr)
-    source_filtered = source_filtered.contacts_of_companies_with_relationship_to(get_saved_filters[:rc]) if get_saved_filters.has_key?(:rc)
 
+    source_filtered = source_filtered.contacts_of_companies_with_relationship_to(get_saved_filters[:rc]) if get_saved_filters.has_key?(:rc)
     source_filtered = get_saved_filters[:name_sort] == "down" ? source_filtered.order("first_name DESC") : source_filtered.order("first_name ASC")
   end
 end

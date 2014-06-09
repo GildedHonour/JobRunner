@@ -1,6 +1,14 @@
 class CompaniesController < ApplicationController
   include SearchFiltersSaver
   respond_to :html, :js, :csv
+  
+  ENTITY_PREFIX = "company"
+  FILTER_ITEMS = [:a, :ac, :ct, :irr, :rc, :search, :name_sort]
+  
+  def index
+    @entities, @entities_all_pages = apply_filters(@entities)
+    respond_with(@entities)
+  end
 
   def new
     @entity = Company.new(params[:company])
@@ -28,13 +36,8 @@ class CompaniesController < ApplicationController
     end
   end
 
-  def index
-    @entities = apply_filters(@entities)
-    respond_with(@entities)
-  end
-
   def show
-    @entities = apply_filters(@entities, incl_neighbours: true)
+    @entities, @entities_all_pages = apply_filters(@entities)
     @entities_ids = @entities.map(&:id)
     set_saved_filters_new_page!
     respond_with(@entity)
@@ -80,24 +83,18 @@ class CompaniesController < ApplicationController
   end
 
   def load_entities
-    @entity_prefix = "company"
     @entities = Company.all
     @entity = Company.includes(:internal_companies, :affiliates).find(params[:id]) if params[:id].present?
-  end
-
-  def filter_items
-    %i(a ac ct irr rc search name_sort)
   end
 
   def apply_filters_concrete(source)
     source_filtered = get_saved_filters.has_key?(:search) ? source.search(get_saved_filters[:search]) : source
     source_filtered = source_filtered.with_affiliations_and_relationships_with_archived_status(get_saved_filters[:a]) if get_saved_filters.has_key?(:a)
     source_filtered = source_filtered.affiliated_to_company(get_saved_filters[:ac]) if get_saved_filters.has_key?(:ac)
-    
     source_filtered = source_filtered.with_company_types(get_saved_filters[:ct]) if get_saved_filters.has_key?(:ct)
     source_filtered = source_filtered.with_internal_relationship_role(get_saved_filters[:irr]) if get_saved_filters.has_key?(:irr)
+    
     source_filtered = source_filtered.relationship_with_company(get_saved_filters[:rc]) if get_saved_filters.has_key?(:rc)
-
     source_filtered = get_saved_filters[:name_sort] == "down" ? source_filtered.order("companies.name DESC") : source_filtered.order("companies.name ASC")
   end
 end
