@@ -5,11 +5,11 @@ class ApplicationController < ActionController::Base
   helper_method :companies_url_with_saved_filters, :contacts_url_with_saved_filters
 
   def companies_url_with_saved_filters
-    companies_url(session[:company_filter_params] || {})
+    companies_url(session[:company_filter_params] || {}) # todo - refactor the key
   end
 
   def contacts_url_with_saved_filters
-    contacts_url(session[:contact_filter_params] || {})
+    contacts_url(session[:contact_filter_params] || {}) # todo - refactor the key
   end
 
   def info_for_paper_trail
