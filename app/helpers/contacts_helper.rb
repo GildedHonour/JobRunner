@@ -1,5 +1,6 @@
 module ContactsHelper
   include BackForwardLinkGenerator
+  include CountryStateDataSource
   
   def tooltip_text_for_filter(filter)
     {

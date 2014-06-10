@@ -43,6 +43,27 @@
           %h3 Relationships
           = link_to edit_section_company_url(@entity, section: "internal_company_relationships"), class: "btn-fam no-border", remote: true do
             %i.fa.fa-pencil
+            %span.action Edit
+        .secondary.company.info
+          .col-sm-6
+            %span.label Address
+            - @entity.addresses.each do |address|
+              .address
+                = [address.address_line_1, address.address_line_2, address.city, Address.get_long_state_name(address.state), address.zip].compact.map(&:to_s).join(", ")
+          .col-sm-3
+            %span.label Phone
+            = @entity.phone_numbers.map(&:to_s).join("<br>").html_safe
+          .col-sm-3
+            %span.label Web
+            %a{href: "http://#{@entity.website}"}
+              = @entity.website
+    .company.details
+      .first.company.row
+        .col-sm-12
+          .board.for.company
+            %h3 Relationships
+            = link_to edit_section_company_url(@entity, section: "internal_company_relationships"), class: "btn-fam no-border", remote: true do
+              %i.fa.fa-pencil
 
           %table.table-hover.table-condensed
             %thead

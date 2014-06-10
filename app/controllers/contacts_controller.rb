@@ -1,5 +1,7 @@
 class ContactsController < ApplicationController
   include SearchFiltersSaver
+  include AddressParamsParser
+
   respond_to :html, :js, :csv, :vcf
   before_filter :authenticate_admin!, only: [:new_invite, :invite, :re_invite]
 
@@ -17,7 +19,7 @@ class ContactsController < ApplicationController
   end
 
   def create
-    @entity = @entities.build(contact_params)
+    @entity = @entities.build(permitted_params)
     if @entity.save
       redirect_to(save_success_url)
     else
@@ -30,7 +32,7 @@ class ContactsController < ApplicationController
   end
 
   def update
-    if @entity.update_attributes(contact_params)
+    if @entity.update_attributes(permitted_params_with_country_parsed)
       redirect_to(save_success_url)
     else
       render(:new)
@@ -62,7 +64,7 @@ class ContactsController < ApplicationController
   end
 
   def update_section
-    if @entity.update_attributes(contact_params)
+    if @entity.update_attributes(permitted_params)
       render(:success)
     else
       render(:edit_section)
@@ -96,7 +98,7 @@ class ContactsController < ApplicationController
 
   private
 
-  def contact_params
+  def permitted_params
     params.require(:contact).permit(:first_name, :middle_name, :last_name, :prefix, :job_title, :company_id, :birthday,
                                     :contest_participant, :send_mmi_ballgame_emails, :do_not_mail, :do_not_email, :send_cookies, contact_source_ids: [],
                                     addresses_attributes: [:id, :address_line_1, :address_line_2, :city, :state, :zip, :country, :_destroy],
