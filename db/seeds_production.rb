@@ -1,10 +1,13 @@
 [
+    "Admin",
     "Agency",
     "Commercial",
     "Internal",
     "List Broker",
     "List Manager",
     "Nonprofit",
+    "Mailshop",
+    "Printer"
 ].each { |company_type| CompanyType.find_or_create_by!(name: company_type) }
 
 [
