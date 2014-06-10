@@ -1,23 +1,18 @@
 class Company < ActiveRecord::Base
   has_paper_trail
-
   include Archivable
   include Audited
 
   has_many :addresses, -> { order "created_at" }, dependent: :destroy, as: :addressable
-
   has_many :affiliate_affiliations, foreign_key: 'principal_id', dependent: :destroy, class_name: 'Affiliation'
   has_many :affiliates, -> { order "name" }, through: :affiliate_affiliations, source: :affiliate, class_name: 'Company'
-
   has_many :principal_affiliations, foreign_key: 'affiliate_id', dependent: :destroy, class_name: 'Affiliation'
   has_many :principals, through: :principal_affiliations, source: :principal, class_name: 'Company'
 
   has_many :internal_company_relationships, dependent: :destroy
   has_many :internal_companies, through: :internal_company_relationships, source: :internal_company, class_name: 'Company'
-
   has_many :contacts, -> { order "first_name" },  dependent: :destroy
   has_many :phone_numbers, -> { order "created_at ASC" }, as: :phonable, dependent: :destroy
-
   belongs_to :company_type
 
   accepts_nested_attributes_for :addresses, reject_if: lambda { |address| address[:address_line_1].blank? }, allow_destroy: true
@@ -27,7 +22,6 @@ class Company < ActiveRecord::Base
   accepts_nested_attributes_for :internal_company_relationships, reject_if: lambda { |relationship| relationship[:internal_company_id].blank? }, allow_destroy: true
 
   mount_uploader :company_logo, CompanyLogoUploader
-
   validates :name, presence: true, uniqueness: true
 
   scope :ordered_by_affiliate_name, -> { includes(affiliate_affiliations: :affiliate).order("companies.name") }
@@ -83,9 +77,9 @@ class Company < ActiveRecord::Base
 
   def audit_meta
     {
-        item_descriptor: "company #{self.name}",
-        item_root_class: self.class,
-        item_root_object_id: self.id
+      item_descriptor: "company #{self.name}",
+      item_root_class: self.class,
+      item_root_object_id: self.id
     }
   end
 end

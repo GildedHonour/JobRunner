@@ -16,7 +16,6 @@ class Contact < ActiveRecord::Base
   has_and_belongs_to_many :contact_sources
 
   enumerize :prefix, in: %i(Mr. Mrs. Ms. Miss. Prof.)
-
   accepts_nested_attributes_for :notes
   accepts_nested_attributes_for :addresses, reject_if: lambda { |address| address[:address_line_1].blank? }, allow_destroy: true
   accepts_nested_attributes_for :emails, reject_if: lambda { |email| email[:value].blank? }, allow_destroy: true
@@ -86,9 +85,9 @@ class Contact < ActiveRecord::Base
 
   def audit_meta
     {
-        item_descriptor: "contact #{self.full_name}",
-        item_root_class: self.class,
-        item_root_object_id: self.id
+      item_descriptor: "contact #{self.full_name}",
+      item_root_class: self.class,
+      item_root_object_id: self.id
     }
   end
 end
