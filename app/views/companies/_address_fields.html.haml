@@ -11,14 +11,11 @@
             = address_form.input :address_line_2, as: :string, placeholder: "Address Line 2", label: false
             .row
               .col-md-6
+                = country_state_select address_form, "company"
                 = address_form.input :city, placeholder: "City", label: false
               .col-md-6
-                = address_form.input :state, placeholder: "State", label: false
-            .row
-              .col-md-6
                 = address_form.input :zip, placeholder: "Zip", label: false
-              .col-md-6
-                = address_form.input :country, collection: Address.country.values.map{|option| [option.upcase, option] }, label: false
+
             = address_form.link_to_remove "Remove", class: "btn btn-danger"
   .col-md-4
     = f.link_to_add  "Add address", :addresses, class: "btn btn-default", data: { target: "#addresses" }

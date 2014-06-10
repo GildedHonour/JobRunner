@@ -1,35 +1,60 @@
-.show.content
-  .contact.intro
-    .neat-row.contact-action
-      .go.back
-        - if(@company)
-          = link_to company_url(@company) do
-            %span.glyphicon.glyphicon-chevron-left
-            = "Back to #{@company.name}"
-        - else
-          = link_to contacts_url_with_saved_filters do
-            %span.glyphicon.glyphicon-chevron-left
-            Back to Contacts
-      .profile-container
-        = render "profile"
-    .basic.contact.info
-      .contact.name
-        %span
-          = link_to_previous_entity("Previous contact")
-          %span.prefix
-            = @entity.prefix
-          = @entity.full_name
-          = link_to_next_entity("Next contact")
-        = link_to url_for([@company, @entity]), class: "btn-fam pull-right err", title: "Delete", data: { confirm: "Are you sure you want to delete the contact '#{@entity.full_name}'?", method: 'delete', toggle: "tooltip" } do
-          %i.fa.fa-trash-o 
-          %span.action Delete
-        = link_to url_for([:edit, @company, @entity]), class: "btn-fam pull-right", title: "Edit Contact", data: { toggle: "tooltip" }  do
-          %i.fa.fa-pencil
-          %span.action Edit
-        = link_to contact_url(@entity, format: 'vcf'), class: "btn-fam pull-right", title: "Download VCard", data: { toggle: "tooltip" } do
-          %i.fa.fa-phone
-          %span.action Vcard
+.neat-row
+  .show.content
+    .contact.intro
+      .neat-row.contact-action
+        .go.back
+          - if(@company)
+            = link_to company_url(@company) do
+              %span.glyphicon.glyphicon-chevron-left
+              = "Back to #{@company.name}"
+          - else
+            = link_to contacts_url_with_saved_filters do
+              %span.glyphicon.glyphicon-chevron-left
+              Back to contacts list
+        .profile-container
+          = render "profile"
+      .basic.contact.info
+        .contact.name
+          %span
+            = link_to_previous_entity("Previous contact")
+            %span.prefix
+              = @entity.prefix
+            = @entity.full_name
+            = link_to_next_entity("Next contact")
+          = link_to url_for([@company, @entity]), class: "btn-fam pull-right err", title: "Delete", data: { confirm: "Are you sure you want to delete the contact '#{@entity.full_name}'?", method: 'delete', toggle: "tooltip" } do
+            %i.fa.fa-trash-o 
+            %span.action Delete
+          = link_to url_for([:edit, @company, @entity]), class: "btn-fam pull-right", title: "Edit Contact", data: { toggle: "tooltip" }  do
+            %i.fa.fa-pencil
+            %span.action Edit
+          = link_to contact_url(@entity, format: 'vcf'), class: "btn-fam pull-right", title: "Download VCard", data: { toggle: "tooltip" } do
+            %i.fa.fa-phone
+            %span.action Vcard
 
+        .secondary.contact.info.row
+          .col-sm-3
+            .row
+              .col-sm-3
+                %span.label
+                  Email
+              .col-sm-9
+                = @entity.emails.map{ |email| mail_to(email) }.map(&:to_s).join("<br>").html_safe
+          .col-sm-3
+            .row
+              .col-sm-3
+                %span.label
+                  Phone
+              .col-sm-9
+                = @entity.phone_numbers.map(&:to_s).join("<br>").html_safe
+          .col-sm-6
+            .row
+              .col-sm-2
+                %span.label
+                  Address
+              .col-sm-10
+                - @entity.addresses.each do |address|
+                  .address
+                    = [address.address_line_1, address.address_line_2, address.city, Address.get_long_state_name(address.state), address.zip].compact.join(", ")
       .secondary.contact.info.row
         .col-sm-3
           .row
