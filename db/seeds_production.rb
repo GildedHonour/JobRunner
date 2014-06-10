@@ -2,11 +2,14 @@
     "Admin",
     "Agency",
     "Commercial",
+    "Data Services",
+    "Fulfillment/Mail Processing",
     "Internal",
     "List Broker",
     "List Manager",
     "Nonprofit",
     "Mailshop",
+    "Media/Trade Groups",
     "Printer"
 ].each { |company_type| CompanyType.find_or_create_by!(name: company_type) }
 
