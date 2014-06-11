@@ -43,51 +43,29 @@
           %h3 Relationships
           = link_to edit_section_company_url(@entity, section: "internal_company_relationships"), class: "btn-fam no-border", remote: true do
             %i.fa.fa-pencil
-            %span.action Edit
-        .secondary.company.info
-          .col-sm-6
-            %span.label Address
-            - @entity.addresses.each do |address|
-              .address
-                = [address.address_line_1, address.address_line_2, address.city, Address.get_long_state_name(address.state), address.zip].compact.map(&:to_s).join(", ")
-          .col-sm-3
-            %span.label Phone
-            = @entity.phone_numbers.map(&:to_s).join("<br>").html_safe
-          .col-sm-3
-            %span.label Web
-            %a{href: "http://#{@entity.website}"}
-              = @entity.website
-    .company.details
-      .first.company.row
-        .col-sm-12
-          .board.for.company
-            %h3 Relationships
-            = link_to edit_section_company_url(@entity, section: "internal_company_relationships"), class: "btn-fam no-border", remote: true do
-              %i.fa.fa-pencil
 
-          %table.table-hover.table-condensed
-            %thead
+        %table.table-hover.table-condensed
+          %thead
+            %tr
+              %th Company
+              %th Role(s)
+              %th Status
+              %th Added
+              %th Last Modified
+          %tbody
+            - @entity.internal_company_relationships.ordered_by_status_and_internal_company_name.each do |relationship|
               %tr
-                %th Company
-                %th Role(s)
-                %th Status
-                %th Added
-                %th Last Modified
-            %tbody
-              - @entity.internal_company_relationships.ordered_by_status_and_internal_company_name.each do |relationship|
-                %tr
-                  %td
-                    = link_to relationship.internal_company.name, relationship.internal_company
-                  %td
-                    = relationship.role.text
-                  %td
-                    = relationship.record_status
-                  %td
-                    = l(relationship.created_at, format: :only_date)
-                  %td
-                    = l(relationship.updated_at, format: :only_date)
+                %td
+                  = link_to relationship.internal_company.name, relationship.internal_company
+                %td
+                  = relationship.role.text
+                %td
+                  = relationship.record_status
+                %td
+                  = l(relationship.created_at, format: :only_date)
+                %td
+                  = l(relationship.updated_at, format: :only_date)
 
-  .company.details
     .second.company.row
       .col-sm-12
         .board.for.company
@@ -96,7 +74,6 @@
           - elsif @entity.company_type.try(:can_be_affiliation_affiliate?)
             = render "affiliations_table", header: "Managed By", affiliations: @entity.principal_affiliations.ordered_by_principal_name, edit_section: "principals", affiliation_relation: :principal
 
-  .company.details
     .third.company.row
       .col-sm-12
         .board.for.company
