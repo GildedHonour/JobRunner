@@ -15,7 +15,7 @@ module Jobrunner
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
     config.action_controller.include_all_helpers = false
-    config.autoload_paths += %W(#{config.root}/workers)
+    config.autoload_paths += %W(#{config.root}/workers #{config.root}/uploaders)
 
     config.time_zone = 'Eastern Time (US & Canada)'
 
