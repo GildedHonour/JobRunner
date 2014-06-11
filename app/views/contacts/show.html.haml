@@ -55,30 +55,6 @@
                 - @entity.addresses.each do |address|
                   .address
                     = [address.address_line_1, address.address_line_2, address.city, Address.get_long_state_name(address.state), address.zip].compact.join(", ")
-      .secondary.contact.info.row
-        .col-sm-3
-          .row
-            .col-sm-3
-              %span.label
-                Email
-            .col-sm-9
-              = @entity.emails.map{ |email| mail_to(email) }.map(&:to_s).join("<br>").html_safe
-        .col-sm-3
-          .row
-            .col-sm-3
-              %span.label
-                Phone
-            .col-sm-9
-              = @entity.phone_numbers.map(&:to_s).join("<br>").html_safe
-        .col-sm-6
-          .row
-            .col-sm-2
-              %span.label
-                Address
-            .col-sm-10
-              - @entity.addresses.each do |address|
-                .address
-                  = [address.address_line_1, address.address_line_2, address.city, address.state, address.zip].compact.join(", ")
 
   .contact.details
     .first.contact
@@ -199,4 +175,3 @@
                 = link_to "edit", edit_note_url(note), remote: true
                 |
                 = link_to "delete", note_url(note), data: { confirm: "Are you sure?", method: 'delete' }
-
