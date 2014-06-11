@@ -1,7 +1,7 @@
 [
     "Admin",
     "Agency",
-    "Commercial",
+    "Commercial Mailer",
     "Data Services",
     "Fulfillment/Mail Processing",
     "Internal",
