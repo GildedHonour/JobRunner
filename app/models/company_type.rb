@@ -21,7 +21,7 @@ class CompanyType < ActiveRecord::Base
 
   class << self
     def affiliate_company_types
-      all_company_types.values_at("nonprofit", "commercial")
+      all_company_types.values_at("nonprofit", "commercial_mailer")
     end
 
     def list_manager_company_type
