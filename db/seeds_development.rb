@@ -25,8 +25,7 @@ company_types = CompanyType.all - [CompanyType.internal]
         state: get_random_usa_state_short_name,
         zip: Faker::AddressUS.zip_code
       )
-    ],
-    company_logo: File.open(company_logos.sample)
+    ]
   )
 
   Company.with_affiliation_principal_company_types.each do |company|
