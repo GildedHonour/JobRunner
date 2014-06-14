@@ -1,7 +1,7 @@
 require 'carrierwave/orm/activerecord'
 include CarrierWave::RMagick
 
-if Rails.env.production?
+if Rails.env.production? || Rails.env.staging?
   CarrierWave.configure do |config|
     config.storage = :fog
     config.fog_credentials = {
