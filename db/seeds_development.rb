@@ -96,3 +96,5 @@ Contact.create!(
   user: User.new(email: "me@gildedhonour.com", password: "password", admin: true),
   company: Company.all.sample
 )
+
+ApiAuth.create!(app: "jobrunner-staging", password:  BCrypt::Password.create("f1398e799a514z"))

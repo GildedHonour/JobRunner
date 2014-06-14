@@ -3,10 +3,13 @@ class ApiController < ActionController::Base
   respond_to :json
 
   private
-  
+
   def authenticate!
-    unless authenticate_with_http_basic { |app, password| ApiAuth.where(app: app, password: password).present? }
-      render(json: { reason: "unauthorized" }, status: 401)
+    authenticated = authenticate_with_http_basic do |app, password|
+      app = ApiAuth.where(app: app).first
+      app && BCrypt::Password.new(app.password).is_password?(password)
     end
+
+    render(json: { reason: "unauthorized" }, status: 401) unless authenticated
   end
 end
