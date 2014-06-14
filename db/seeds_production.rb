@@ -1,16 +1,16 @@
 [
-    "Admin",
-    "Agency",
-    "Commercial Mailer",
-    "Data Services",
-    "Fulfillment/Mail Processing",
-    "Internal",
-    "List Broker",
-    "List Manager",
-    "Nonprofit",
-    "Mailshop",
-    "Media/Trade Groups",
-    "Printer"
+  "Admin",
+  "Agency",
+  "Commercial Mailer",
+  "Data Services",
+  "Fulfillment/Mail Processing",
+  "Internal",
+  "List Broker",
+  "List Manager",
+  "Nonprofit",
+  "Mailshop",
+  "Media/Trade Groups",
+  "Printer"
 ].each { |company_type| CompanyType.find_or_create_by!(name: company_type) }
 
 [
@@ -29,7 +29,7 @@
       Address.new(
         address_line_1: Faker::Address.street_address,
         city: Faker::Address.city,
-        state: Faker::AddressUS.state,
+        state: get_random_usa_state_short_name,
         zip: Faker::AddressUS.zip_code
       )
     ]
