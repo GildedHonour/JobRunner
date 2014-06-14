@@ -1,10 +1,10 @@
 contact_job_titles = [
-    "Developer",
-    "Designer",
-    "Project Manager",
-    "Business Development",
-    "Marketing Manager",
-    "Sales Lead"
+  "Developer",
+  "Designer",
+  "Project Manager",
+  "Business Development",
+  "Marketing Manager",
+  "Sales Lead"
 ]
 
 company_logos = Dir["spec/fixtures/company_logos/*"]
@@ -18,13 +18,13 @@ company_types = CompanyType.all - [CompanyType.internal]
     company_type: company_types.sample,
     phone_numbers: [PhoneNumber.new(phone_number: Faker.numerify("(###) ###-####"))],
     addresses: [
-        Address.new(
-            address_line_1: Faker::Address.street_address,
-            address_line_2: Faker::Address.street_name,
-            city: Faker::Address.city,
-            state: Faker::AddressUS.state,
-            zip: Faker::AddressUS.zip_code
-        )
+      Address.new(
+        address_line_1: Faker::Address.street_address,
+        address_line_2: Faker::Address.street_name,
+        city: Faker::Address.city,
+        state: get_random_usa_state_short_name,
+        zip: Faker::AddressUS.zip_code
+      )
     ],
     company_logo: File.open(company_logos.sample)
   )
@@ -40,24 +40,24 @@ end
 
 300.times do |i|
   Contact.create!(
-      first_name: Faker::Name.first_name,
-      last_name: "#{Faker::Name.last_name}",
-      prefix: Contact.prefix.values.sample,
-      birthday: (rand(11) + 1).months.ago - (30 + rand(10)).years,
-      job_title: "Project Manager",
-      emails: [Email.new(value: Faker::Internet.email)],
-      phone_numbers: [PhoneNumber.new(phone_number: Faker.numerify("(###) ###-####"))],
-      addresses: [
-          Address.new(
-              address_line_1: Faker::Address.street_address,
-              address_line_2: Faker::Address.street_name,
-              city: Faker::Address.city,
-              state: Faker::AddressUS.state,
-              zip: Faker::AddressUS.zip_code
-          )
-      ],
-      job_title: contact_job_titles.sample,
-      company_id: Company.order("RANDOM()").first.id
+    first_name: Faker::Name.first_name,
+    last_name: "#{Faker::Name.last_name}",
+    prefix: Contact.prefix.values.sample,
+    birthday: (rand(11) + 1).months.ago - (30 + rand(10)).years,
+    job_title: "Project Manager",
+    emails: [Email.new(value: Faker::Internet.email)],
+    phone_numbers: [PhoneNumber.new(phone_number: Faker.numerify("(###) ###-####"))],
+    addresses: [
+      Address.new(
+        address_line_1: Faker::Address.street_address,
+        address_line_2: Faker::Address.street_name,
+        city: Faker::Address.city,
+        state: get_random_usa_state_short_name,
+        zip: Faker::AddressUS.zip_code
+      )
+    ],
+    job_title: contact_job_titles.sample,
+    company_id: Company.order("RANDOM()").first.id
   )
 end
 
@@ -87,7 +87,6 @@ Contact.create!(
   user: User.new(email: "lori@mmidirect.com", password: "password"),
   company: Company.all.sample
 )
-
 
 Contact.create!(
   first_name: "Alex",
