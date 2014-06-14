@@ -5,10 +5,12 @@ class ApiController < ActionController::Base
   private
 
   def authenticate!
+    api_auth = nil
     authenticated = authenticate_with_http_basic do |app, password|
-      app = ApiAuth.where(app: app).first
-      app && BCrypt::Password.new(app.password).is_password?(password)
+      api_auth = ApiAuth.where(app: app).first
+      api_auth && BCrypt::Password.new(api_auth.password).is_password?(password)
     end
+    logger.info { "[API Access]: #{api_auth.app}" } if authenticated
 
     render(json: { reason: "unauthorized" }, status: 401) unless authenticated
   end
