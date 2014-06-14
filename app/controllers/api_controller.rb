@@ -10,7 +10,7 @@ class ApiController < ActionController::Base
       api_auth = ApiAuth.where(app: app).first
       api_auth && BCrypt::Password.new(api_auth.password).is_password?(password)
     end
-    logger.info { "[API Access]: #{api_auth.app}" } if authenticated
+    puts "[API Access]: #{api_auth.app}" if authenticated
 
     render(json: { reason: "unauthorized" }, status: 401) unless authenticated
   end
