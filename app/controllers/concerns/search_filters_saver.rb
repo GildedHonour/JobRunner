@@ -26,13 +26,15 @@ module SearchFiltersSaver
 
   def apply_filters(source)
     source_filtered_all = source
+
     if get_saved_filters
       source_filtered_all = apply_filters_concrete(source)
-      
-      unless request.format == :csv 
-        source_filtered_pagenated = Kaminari.paginate_array(source_filtered_all)
-          .page(get_saved_filters[:page]).per(PAGE_SIZE)
-      end 
+      source_filtered_pagenated = 
+        if request.format == :csv
+          source_filtered_all
+        else
+          Kaminari.paginate_array(source_filtered_all).page(get_saved_filters[:page]).per(PAGE_SIZE)
+        end 
     end
 
     [source_filtered_pagenated, source_filtered_all]
