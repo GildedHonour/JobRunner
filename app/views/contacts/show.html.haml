@@ -54,7 +54,8 @@
               .col-sm-10
                 - @entity.addresses.each do |address|
                   .address
-                    = [address.address_line_1, address.address_line_2, address.city, Address.get_long_state_name(address.state), address.zip].compact.join(", ")
+                    = [address.address_line_1, address.address_line_2, address.city, Address.get_long_state_name(address.state), address.zip].compact.select { |x| x != "" }.join(", ")
+                    %br
 
   .contact.details
     .first.contact
