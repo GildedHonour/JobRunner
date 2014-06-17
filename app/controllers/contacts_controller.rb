@@ -117,7 +117,7 @@ class ContactsController < ApplicationController
 
   def load_entities
     @company = Company.find(params[:company_id]) if params[:company_id].present?
-    @entities = @company ? @company.contacts : Contact.all
+    @entities = @company ? @company.contacts : Contact.includes(:company)
     @entity = @entities.find(params[:id]) if params[:id].present?
   end
 

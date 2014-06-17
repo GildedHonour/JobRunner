@@ -85,7 +85,7 @@ class CompaniesController < ApplicationController
   end
 
   def load_entities
-    @entities = Company.all
+    @entities = Company.includes(:company_type, :internal_companies, :affiliates)
     @entity = Company.includes(:internal_companies, :affiliates).find(params[:id]) if params[:id].present?
   end
 
