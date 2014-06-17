@@ -2,7 +2,9 @@
   %td
     = image_tag company.company_logo.mini_thumb.url, alt: company.name
   %td
-    = link_to company.name, company_url(company)
+    = link_to company.name, company_url(company)  
+  %td
+    = company.company_type
   %td
     %ul.list-unstyled
       - company.internal_company_relationships.each do |relationship|
