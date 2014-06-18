@@ -23,7 +23,7 @@
             .panel-body
               = f.input :name, placeholder: "Company Name", label: false
               = f.input :website, placeholder: "Website", label: false
-              = f.input :company_type_id, collection: CompanyType.all, include_blank: "Company Type", label: false
+              = f.input :company_type_id, collection: CompanyType.all.ordered_by_name, include_blank: "Company Type", label: false
               = f.input :company_logo
               - if @entity.company_logo.present?
                 = image_tag @entity.company_logo.url
