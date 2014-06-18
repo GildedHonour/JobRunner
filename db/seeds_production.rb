@@ -11,7 +11,7 @@
   "Mailshop",
   "Media/Trade Groups",
   "Printer"
-].each { |company_type| CompanyType.find_or_create_by!(name: company_type) }
+].each { |company_type| CompanyType.find_or_create_by!(name: company_type, code: company_type.underscore.gsub(" ", "_")) }
 
 [
   "MMI Website",
