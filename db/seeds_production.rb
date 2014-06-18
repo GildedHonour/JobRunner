@@ -4,13 +4,15 @@
   "Commercial Mailer",
   "Data Services",
   "Fulfillment/Mail Processing",
+  "Graphic Design",
   "Internal",
   "List Broker",
   "List Manager",
   "Nonprofit",
   "Mailshop",
   "Media/Trade Groups",
-  "Printer"
+  "Printer",
+  "Telemarketing"
 ].each { |company_type| CompanyType.find_or_create_by!(name: company_type, code: company_type.underscore.gsub(" ", "_")) }
 
 [
