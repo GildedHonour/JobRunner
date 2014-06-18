@@ -6,6 +6,6 @@
     - address = contact.addresses.first || Address.new
     - phone_number = contact.phone_numbers.first || PhoneNumber.new
     - notes = contact.notes.present? ? contact.notes.map(&:note).join(".") : "None"
-    - csv << [contact.prefix, contact.first_name, contact.middle_name, contact.last_name, contact.emails.first, contact.job_title, contact.company.name, contact.company.company_type, address.address_line_1, address.address_line_2, address.city, address.state, address.zip, address.country.upcase, contact.birthday && l(contact.birthday, format: :only_date_month), human_boolean(contact.do_not_email), human_boolean(contact.do_not_mail), contact.contact_sources.map(&:to_s).join(","), human_boolean(contact.contest_participant), phone_number, notes]
+    - csv << [contact.prefix, contact.first_name, contact.middle_name, contact.last_name, contact.emails.first, contact.job_title, contact.company.name, contact.company.company_type, address.address_line_1, address.address_line_2, address.city, address.state.try(:upcase), address.zip, address.country.upcase, contact.birthday && l(contact.birthday, format: :only_date_month), human_boolean(contact.do_not_email), human_boolean(contact.do_not_mail), contact.contact_sources.map(&:to_s).join(","), human_boolean(contact.contest_participant), phone_number, notes]
 
 = raw content
