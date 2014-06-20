@@ -3,7 +3,7 @@ class AddCodeToCompanyTypes < ActiveRecord::Migration
     add_column :company_types, :code, :string
 
     CompanyType.all.each do |company_type|
-      company_type.update_attribute(:code, company_type.name.underscore.gsub(" ", "_"))
+      company_type.update_attribute(:code, company_type.name.underscore.gsub(/\s|\//, '_'))
     end
   end
 end
