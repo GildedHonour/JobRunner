@@ -12,7 +12,7 @@
   "Media/Trade Groups",
   "Printer",
   "Telemarketing"
-].each { |company_type| CompanyType.find_or_create_by!(name: company_type, code: company_type.underscore.gsub(" ", "_")) }
+].each { |company_type| CompanyType.find_or_create_by!(name: company_type, code: company_type.underscore.gsub(/\s|\//, '_')) }
 
 [
   "MMI Website",
