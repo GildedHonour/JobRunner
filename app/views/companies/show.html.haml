@@ -28,7 +28,7 @@
           %span.label Address
           - @entity.addresses.each do |address|
             .address
-              = [address.address_line_1, address.address_line_2, address.city, Address.get_long_state_name(address.state), address.zip].compact.select { |x| x != "" }.join(", ")
+              = [address.address_line_1, address.address_line_2, address.city, Address.get_long_state_name(address.state), address.zip].compact.reject(&:blank?).join(", ")
               %br
         .col-sm-3
           %span.label Phone
