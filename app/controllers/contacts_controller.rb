@@ -2,7 +2,7 @@ class ContactsController < ApplicationController
   include SearchFiltersSaver
   include AddressParamsParser
 
-  respond_to :html, :js, :csv, :vcf
+  respond_to :html, :js, :csv, :vcf, :json
   before_filter :authenticate_admin!, only: [:new_invite, :invite, :re_invite]
 
   ENTITY_PREFIX = "contact"
@@ -94,6 +94,16 @@ class ContactsController < ApplicationController
   rescue
     flash[:danger] = "Something went wrong, try again."
     render(:show)
+  end
+
+  def get_addresses
+    comp = Company.find(params[:comp_id])
+    respond_to do |format|
+      # binding.pry
+      format.json do 
+        render(json: { addresses: comp.addresses })
+      end
+    end
   end
 
   private
