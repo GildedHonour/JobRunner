@@ -1,6 +1,25 @@
 $(function() {
   var chkUseCompContInfo = $("#use_comp_cont_info");
   var chkContactCompanyId = $("#contact_company_id");
+  var modal = $('#myModal');
+  var addresses = [];
+
+  $(document).on("click", "#btn_choose_address", function() {
+    var id = parseInt(modal.find(".modal-body input[type=radio]:checked")[0].value, 10);
+    modal.modal("hide");
+    for (var i = 0; i < addresses.length; i++) {
+      if (addresses[i].id == id) {
+        $("#contact_addresses_attributes_0_address_line_1").val(addresses[i].address_line_1);
+        $("#contact_addresses_attributes_0_address_line_2").val(addresses[i].address_line_2);
+        $("#contact_addresses_attributes_0_city").val(addresses[i].city);
+        $("#contact_addresses_attributes_0_zip").val(addresses[i].zip);
+        $("#contact_addresses_attributes_0_state").val(addresses[i].state);
+        disableAddressForm();
+        break;
+      }
+    }
+
+  });
 
   //todo refactor name
   function disableCheckboxIfNeeded() {
@@ -13,18 +32,14 @@ $(function() {
 
   function clearError() {
     $("#contact_info_errors_container").html("");
+    $("#contact_info_container").html("");
   };
 
-  disableCheckboxIfNeeded();
+  modal.on('hidden.bs.modal', function () {
+    //chkUseCompContInfo.prop("checked", false); // only if the modal was closed by arrow
+  });
 
-  //todo - refactor
-  var addressFormFields = [
-    $("#contact_addresses_attributes_0_address_line_1"), 
-    $("#contact_addresses_attributes_0_address_line_2"), 
-    $("#contact_addresses_attributes_0_city"), 
-    $("#contact_addresses_attributes_0_zip"), 
-    $("#contact_addresses_attributes_0_state")
-  ];
+  disableCheckboxIfNeeded();
 
   function resetAddressForm() {
     //todo - refactor
@@ -40,26 +55,17 @@ $(function() {
     }
 
     $("#contact_addresses_attributes_0_state").val("ak");
-    //todo - remove all other address forms if exist
+    $("#addresses .col-md-4.fields").not(":eq(0)").remove();
   };
 
   function disableAddressForm() {
     $("#addresses :input").prop("disabled", true);
-    //todo - disable button "Remove"
+    $("#addresses .btn.btn-danger.remove_nested_fields").attr("disabled", true);
   };
 
   function enableAddressForm() {
-    //todo - refactor
-    var items = [
-      $("#contact_addresses_attributes_0_address_line_1"),
-      $("#contact_addresses_attributes_0_address_line_2"), 
-      $("#contact_addresses_attributes_0_city"),
-      $("#contact_addresses_attributes_0_zip")
-    ];
-
-    for (var i in items) {
-      items[i].prop("disabled", true);
-    }
+    $("#addresses :input").prop("disabled", false);
+    $("#addresses .btn.btn-danger.remove_nested_fields").attr("disabled", false);
   };
 
   $(document).on("page:change", function() {
@@ -119,7 +125,39 @@ $(function() {
 
           default:
             //3 two or more addresses
-            console.log("the number of the addresses is: >= 2");
+            var adr = data.addresses;
+            addresses = adr;
+            $("#contact_info_container").html("This company has also <a href='#' class='.show_modal'>other addresses</a>.");
+
+
+            var str = "<form action='#'>";
+            for (var i in adr) {
+              str += "<input type='radio' ";
+              str += "value='" + adr[i].id + "' ";
+              if (i == 0) {
+                str += "checked='checked' ";
+              }
+              str += "name='addresses' />";
+
+              str += "<label>";
+              str += " " + adr[i].address_line_1 + ", ";
+              if (adr[i].address_line_2 !== undefined) {
+                str += " " + adr[i].address_line_2 + ", ";
+              }
+              
+              str += " " + adr[i].city + ", ";
+              str += " " + adr[i].zip + ", ";
+              str += " " + adr[i].state.toUpperCase() + ", ";
+              str += " " + adr[i].country.toUpperCase();
+              str += "</label>";
+
+              
+              str += "<br />";
+            }
+            str += "</form>";
+
+            $("#myModal .modal-body").html(str);
+            $("#myModal").modal("show");
         }
       })
       .fail(function() {
@@ -127,8 +165,16 @@ $(function() {
       });
     } else {
       resetAddressForm();
+      clearError();
+      enableAddressForm();
+      
     }
 
+  });
+  
+  $("#contact_info_container").on("click", "a", function(e) {
+    e.preventDefault();
+    $("#myModal").modal("show");
   });
 
   $(document).on("change", "#contact_company_id", function() {
@@ -139,6 +185,7 @@ $(function() {
     clearError();
     disableCheckboxIfNeeded();
     resetAddressForm();
+    enableAddressForm();
   });
 
 });

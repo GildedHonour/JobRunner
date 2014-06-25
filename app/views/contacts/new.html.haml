@@ -4,6 +4,7 @@
     return base.replace("--CHANGE_ME--", id);
   };
 
+#page-modal2
 .show.content
   .go.and.profile
     .go.back
@@ -74,6 +75,7 @@
             %input{type: :checkbox, id: "use_comp_cont_info"}
             Use the contact info of the company
           .row
+            #contact_info_container
             #contact_info_errors_container
           = render "address_fields", f: f
           = render "phone_number_fields", f: f
@@ -83,3 +85,16 @@
       .form-group
         = link_to "Back", back_url_or(contacts_url_with_saved_filters), class: "btn btn-default"
         = f.submit "Save", class: "btn btn-primary"
+
+#myModal.modal.fade{tabindex: -1, role: :dialog, "aria-labelledby" => "myModalLabel", "aria-hidden" => true}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button{type: :button, class: "close", "data-dismiss" => :modal, "aria-hidden" => true}
+          &times;
+        %h4.modal-title#myModalLabel
+          Choose an address
+      .modal-body
+      .modal-footer
+        %button{type: :button, class: "btn btn-primary", id: "btn_choose_address"}
+          Ok

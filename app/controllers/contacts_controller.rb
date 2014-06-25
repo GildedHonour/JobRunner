@@ -99,7 +99,6 @@ class ContactsController < ApplicationController
   def get_addresses
     comp = Company.find(params[:comp_id])
     respond_to do |format|
-      # binding.pry
       format.json do 
         render(json: { addresses: comp.addresses })
       end
