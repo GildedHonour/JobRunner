@@ -6,7 +6,9 @@ $(function() {
 
   $(document).on("click", "#btn_choose_address", function() {
     var id = parseInt(modal.find(".modal-body input[type=radio]:checked")[0].value, 10);
+    $("#contact_info_container").html("This company has also <a href='#'>other addresses</a>.");
     modal.modal("hide");
+    
     for (var i = 0; i < addresses.length; i++) {
       if (addresses[i].id == id) {
         $("#contact_addresses_attributes_0_address_line_1").val(addresses[i].address_line_1);
@@ -18,12 +20,26 @@ $(function() {
         break;
       }
     }
+  });
 
+  $(document).on("click", "#close_modal", function() {
+    if (
+      $("#contact_addresses_attributes_0_address_line_1").val() === "" &&
+      $("#contact_addresses_attributes_0_address_line_2").val() === "" &&
+      $("#contact_addresses_attributes_0_city").val() === "" &&
+      $("#contact_addresses_attributes_0_zip").val() === "" 
+    ) {
+      chkUseCompContInfo.prop("checked", false);
+    } else {
+      $("#contact_info_container").html("This company has also <a href='#'>other addresses</a>.");
+    }
+
+    modal.modal("hide");
   });
 
   //todo refactor name
   function disableCheckboxIfNeeded() {
-    chkUseCompContInfo.prop("disabled", $("#contact_company_id").val() == "");
+    chkUseCompContInfo.prop("disabled", $("#contact_company_id").val() === "");
   };
 
   function showError() {
@@ -127,9 +143,6 @@ $(function() {
             //3 two or more addresses
             var adr = data.addresses;
             addresses = adr;
-            $("#contact_info_container").html("This company has also <a href='#' class='.show_modal'>other addresses</a>.");
-
-
             var str = "<form action='#'>";
             for (var i in adr) {
               str += "<input type='radio' ";
@@ -150,12 +163,10 @@ $(function() {
               str += " " + adr[i].state.toUpperCase() + ", ";
               str += " " + adr[i].country.toUpperCase();
               str += "</label>";
-
-              
               str += "<br />";
             }
-            str += "</form>";
 
+            str += "</form>";
             $("#myModal .modal-body").html(str);
             $("#myModal").modal("show");
         }
@@ -167,7 +178,6 @@ $(function() {
       resetAddressForm();
       clearError();
       enableAddressForm();
-      
     }
 
   });
