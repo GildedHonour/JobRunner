@@ -6,7 +6,7 @@ $(function() {
 
   $(document).on("click", "#btn_choose_address", function() {
     var id = parseInt(modal.find(".modal-body input[type=radio]:checked")[0].value, 10);
-    $("#contact_info_container").html("This company has also <a href='#'>other addresses</a>.");
+    $("#contact_info_container").html("This company also has <a href='#'>other addresses</a>.");
     modal.modal("hide");
     
     for (var i = 0; i < addresses.length; i++) {
