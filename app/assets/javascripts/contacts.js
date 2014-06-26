@@ -31,7 +31,7 @@ $(function() {
     ) {
       chkUseCompContInfo.prop("checked", false);
     } else {
-      $("#contact_info_container").html("This company has also <a href='#'>other addresses</a>.");
+      $("#contact_info_container").html("This company also has <a href='#'>other addresses</a>.");
     }
 
     modal.modal("hide");
@@ -43,7 +43,7 @@ $(function() {
   };
 
   function showError() {
-    $("#contact_info_errors_container").html("This company has no addresses, type it in manually.");
+    $("#contact_info_errors_container").html("This company doesn't have an address.");
   };
 
   function clearError() {
