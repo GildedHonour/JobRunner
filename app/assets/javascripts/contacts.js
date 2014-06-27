@@ -1,4 +1,4 @@
-$(function() {
+$(document).ready(function() {
   var chkUseCompContInfo = $("#use_comp_cont_info");
   var chkContactCompanyId = $("#contact_company_id");
   var modal = $('#myModal');
