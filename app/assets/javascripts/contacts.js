@@ -110,6 +110,9 @@ $(function() {
   });
 
   $(document).on("click", "#use_comp_cont_info", function() {
+
+    debugger;
+
     if (this.checked) {
       $.ajax({
         url: getAddressUrl(chkContactCompanyId.val())
@@ -172,6 +175,9 @@ $(function() {
         }
       })
       .fail(function() {
+        debugger;
+        chkUseCompContInfo.prop("checked", false);
+        // add error label
         alert("error");
       });
     } else {
