@@ -1,11 +1,11 @@
-$(document).ready(function() {
+function ready() {
   var chkUseCompContInfo = $("#use_comp_cont_info");
-  var chkContactCompanyId = $("#contact_company_id");
-  var modal = $('#myModal');
+  // var contactCompanyId = $("#contact_company_id");
+  var modal = $("#myModal");
   var addresses = [];
 
   $(document).on("click", "#btn_choose_address", function() {
-    var id = parseInt(modal.find(".modal-body input[type=radio]:checked")[0].value, 10);
+    var id = parseInt(modal.find(".modal-body input[type=radio]:checked").val(), 10); 
     $("#contact_info_container").html("This company also has <a href='#'>other addresses</a>.");
     modal.modal("hide");
     
@@ -50,10 +50,6 @@ $(document).ready(function() {
     $("#contact_info_errors_container").html("");
     $("#contact_info_container").html("");
   };
-
-  modal.on('hidden.bs.modal', function () {
-    //chkUseCompContInfo.prop("checked", false); // only if the modal was closed by arrow
-  });
 
   disableCheckboxIfNeeded();
 
@@ -110,19 +106,15 @@ $(document).ready(function() {
   });
 
   $(document).on("click", "#use_comp_cont_info", function() {
-
-    debugger;
-
     if (this.checked) {
       $.ajax({
-        url: getAddressUrl(chkContactCompanyId.val())
+        url: getAddressUrl($("#contact_company_id").val())
       })
       .done(function(data) {
         switch (data.addresses.length) {
           case 0:
             //1 no address
             //todo - red label
-            console.log("the number of the addresses is: 0");
             chkUseCompContInfo.prop("disabled", true);
             chkUseCompContInfo.prop("checked", false);
             showError();
@@ -131,14 +123,12 @@ $(document).ready(function() {
           case 1:
             //2 single address
             //fill out
-            console.log("the number of the addresses is: 1");
             var address = data.addresses[0];
             $("#contact_addresses_attributes_0_address_line_1").val(address.address_line_1);
             $("#contact_addresses_attributes_0_address_line_2").val(address.address_line_2);
             $("#contact_addresses_attributes_0_city").val(address.city);
             $("#contact_addresses_attributes_0_zip").val(address.zip);
             $("#contact_addresses_attributes_0_state").val(address.state);
-
             disableAddressForm();
             break;
 
@@ -155,8 +145,8 @@ $(document).ready(function() {
               }
               str += "name='addresses' />";
 
-              str += "<label>";
-              str += " " + adr[i].address_line_1 + ", ";
+              str += "<label style='font-size: 16px; font-weight: normal'>";
+              str += adr[i].address_line_1 + ", ";
               if (adr[i].address_line_2 !== undefined) {
                 str += " " + adr[i].address_line_2 + ", ";
               }
@@ -175,17 +165,14 @@ $(document).ready(function() {
         }
       })
       .fail(function() {
-        debugger;
         chkUseCompContInfo.prop("checked", false);
-        // add error label
-        alert("error");
+        alert("Something went wrong, try again.");
       });
     } else {
       resetAddressForm();
       clearError();
       enableAddressForm();
     }
-
   });
   
   $("#contact_info_container").on("click", "a", function(e) {
@@ -203,5 +190,7 @@ $(document).ready(function() {
     resetAddressForm();
     enableAddressForm();
   });
+};
 
-});
+jQuery(document).ready(ready);
+jQuery(document).on("page:load", ready);
