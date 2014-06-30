@@ -12,11 +12,20 @@ function ready() {
     
     for (var i = 0; i < addresses.length; i++) {
       if (addresses[i].id == id) {
-        $("#contact_addresses_attributes_0_address_line_1").val(addresses[i].address_line_1);
-        $("#contact_addresses_attributes_0_address_line_2").val(addresses[i].address_line_2);
-        $("#contact_addresses_attributes_0_city").val(addresses[i].city);
-        $("#contact_addresses_attributes_0_zip").val(addresses[i].zip);
-        $("#contact_addresses_attributes_0_state").val(addresses[i].state);
+
+        //todo - look only amoung visible ones
+        // $("#contact_addresses_attributes_0_address_line_1").val(addresses[i].address_line_1);
+        // $("#contact_addresses_attributes_0_address_line_2").val(addresses[i].address_line_2);
+        // $("#contact_addresses_attributes_0_city").val(addresses[i].city);
+        // $("#contact_addresses_attributes_0_zip").val(addresses[i].zip);
+        // $("#contact_addresses_attributes_0_state").val(addresses[i].state);
+
+        $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(0)").val(addresses[i].address_line_1)
+        $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(1)").val(addresses[i].address_line_2)
+        $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(2)").val(addresses[i].city)
+        $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(3)").val(addresses[i].zip)
+        $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(4)").val(addresses[i].state)
+
         disableAddressForm();
         break;
       }
@@ -152,7 +161,7 @@ function ready() {
         url: getAddressUrl($("#contact_company_id").val())
       })
       .done(function(data) {
-        debugger;
+        
 
         switch (data.addresses.length) {
           case 0:
@@ -162,14 +171,27 @@ function ready() {
             break;
           
           case 1:
-
-            //todo - look for only among :visible ones
+            
             var address = data.addresses[0];
-            $("#contact_addresses_attributes_0_address_line_1").val(address.address_line_1);
-            $("#contact_addresses_attributes_0_address_line_2").val(address.address_line_2);
-            $("#contact_addresses_attributes_0_city").val(address.city);
-            $("#contact_addresses_attributes_0_zip").val(address.zip);
-            $("#contact_addresses_attributes_0_state").val(address.state);
+            // div.col-md-4.fields:visible:eq(0) div.panel-body
+
+            // $("div.col-md-4.fields:visible:eq(0) div.panel-body [id^=contact_addresses_attributes_][id=$_address_line_1]").val(address.address_line_1);
+            // $("div.col-md-4.fields:visible:eq(0) div.panel-body [id^=contact_addresses_attributes_][id=$_address_line_2]").val(address.address_line_2);
+            // $("div.col-md-4.fields:visible:eq(0) div.panel-body [id^=contact_addresses_attributes_][id=$_city]").val(address.city);
+            // $("div.col-md-4.fields:visible:eq(0) div.panel-body [id^=contact_addresses_attributes_][id=$_zip]").val(address.zip);
+            // $("div.col-md-4.fields:visible:eq(0) div.panel-body [id^=contact_addresses_attributes_][id=$_state]").val(address.state);
+
+            $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(0)").val(address.address_line_1)
+            $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(1)").val(address.address_line_2)
+            $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(2)").val(address.city)
+            $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(3)").val(address.zip)
+            $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(4)").val(address.state)
+
+            // $("#contact_addresses_attributes_0_address_line_1").val(address.address_line_1);
+            // $("#contact_addresses_attributes_0_address_line_2").val(address.address_line_2);
+            // $("#contact_addresses_attributes_0_city").val(address.city);
+            // $("#contact_addresses_attributes_0_zip").val(address.zip);
+            // $("#contact_addresses_attributes_0_state").val(address.state);
             disableAddressForm();
             break;
 
