@@ -38,20 +38,21 @@ function ready() {
   });
 
   //todo refactor name
-  function disableCheckboxIfNeeded() {
+  function setChkState() {
     chkUseCompContInfo.prop("disabled", $("#contact_company_id").val() === "");
   };
 
-  function showError() {
+  function showErrors() {
+    //todo append
     $("#contact_info_errors_container").html("This company doesn't have an address.");
   };
 
-  function clearError() {
+  function clearErrors() {
     $("#contact_info_errors_container").html("");
     $("#contact_info_container").html("");
   };
 
-  disableCheckboxIfNeeded();
+  setChkState();
 
   function resetAddressForm() {
     //todo - refactor
@@ -67,13 +68,26 @@ function ready() {
     }
 
     $("#contact_addresses_attributes_0_state").val("ak");
-    $("#addresses .col-md-4.fields").not(":eq(0)").remove();
+    $("#addresses .col-md-4.fields:visible").not(":eq(0)").remove();
   };
 
   function disableAddressForm() {
     $("#addresses :input").prop("disabled", true);
-    $("#addresses .btn.btn-danger.remove_nested_fields").attr("disabled", true);
   };
+
+  //remove
+  $(document).on("click", "#addresses .btn.btn-danger.remove_nested_fields:visible:eq(0)", function() {
+    chkUseCompContInfo.prop("disabled", true);
+    chkUseCompContInfo.prop("checked", false);
+  });
+
+  //add
+  $(document).on("click", "div.row div.col-md-4 .btn.btn-default.add_nested_fields", function() {
+    if ($("#contact_company_id").val() !== "") {
+      debugger;
+      chkUseCompContInfo.prop("disabled", false);
+    }
+  });
 
   function enableAddressForm() {
     $("#addresses :input").prop("disabled", false);
@@ -106,23 +120,24 @@ function ready() {
   });
 
   $(document).on("click", "#use_comp_cont_info", function() {
+    
     if (this.checked) {
       $.ajax({
         url: getAddressUrl($("#contact_company_id").val())
       })
       .done(function(data) {
+        debugger;
+
         switch (data.addresses.length) {
           case 0:
-            //1 no address
-            //todo - red label
             chkUseCompContInfo.prop("disabled", true);
             chkUseCompContInfo.prop("checked", false);
-            showError();
+            showErrors();
             break;
           
           case 1:
-            //2 single address
-            //fill out
+
+            //todo - look for only among :visible ones
             var address = data.addresses[0];
             $("#contact_addresses_attributes_0_address_line_1").val(address.address_line_1);
             $("#contact_addresses_attributes_0_address_line_2").val(address.address_line_2);
@@ -133,7 +148,6 @@ function ready() {
             break;
 
           default:
-            //3 two or more addresses
             var adr = data.addresses;
             addresses = adr;
             var str = "<form action='#'>";
@@ -143,9 +157,9 @@ function ready() {
               if (i == 0) {
                 str += "checked='checked' ";
               }
-              str += "name='addresses' />";
+              str += "name='addresses' style='margin-left: 5px;'/>";
 
-              str += "<label style='font-size: 16px; font-weight: normal'>";
+              str += "<label style='font-size: 16px; font-weight: normal; margin-left: 10px;'>";
               str += adr[i].address_line_1 + ", ";
               if (adr[i].address_line_2 !== undefined) {
                 str += " " + adr[i].address_line_2 + ", ";
@@ -170,7 +184,7 @@ function ready() {
       });
     } else {
       resetAddressForm();
-      clearError();
+      clearErrors();
       enableAddressForm();
     }
   });
@@ -181,12 +195,16 @@ function ready() {
   });
 
   $(document).on("change", "#contact_company_id", function() {
+
+    //todo
+    // if there is no AddressForm then make it disabled
+
     if ((chkUseCompContInfo).is(":checked")) {
       chkUseCompContInfo.prop("checked", false);
     };
 
-    clearError();
-    disableCheckboxIfNeeded();
+    clearErrors();
+    setChkState();
     resetAddressForm();
     enableAddressForm();
   });
