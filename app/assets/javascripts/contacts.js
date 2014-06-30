@@ -70,22 +70,22 @@ function ready() {
   function resetAddressForm() {
     //todo - refactor
     var items = [
-      $("#contact_addresses_attributes_0_address_line_1"),
-      $("#contact_addresses_attributes_0_address_line_2"), 
-      $("#contact_addresses_attributes_0_city"),
-      $("#contact_addresses_attributes_0_zip")
+      $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(0)"),
+      $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(1)"),
+      $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(2)"),
+      $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(3)")
     ];
 
     for (var i in items) {
       items[i].val("");
     }
 
-    $("#contact_addresses_attributes_0_state").val("ak");
+    $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(4)").val("ak");
     $("#addresses .col-md-4.fields:visible").not(":eq(0)").remove();
   };
 
   function disableAddressForm() {
-    $("#addresses :input").prop("disabled", true);
+    $("#addresses div.col-md-4.fields:visible:eq(0) :input").prop("disabled", true);
   };
 
   setChkState();
