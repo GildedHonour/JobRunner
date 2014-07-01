@@ -12,20 +12,11 @@ function ready() {
     
     for (var i = 0; i < addresses.length; i++) {
       if (addresses[i].id == id) {
-
-        //todo - look only amoung visible ones
-        // $("#contact_addresses_attributes_0_address_line_1").val(addresses[i].address_line_1);
-        // $("#contact_addresses_attributes_0_address_line_2").val(addresses[i].address_line_2);
-        // $("#contact_addresses_attributes_0_city").val(addresses[i].city);
-        // $("#contact_addresses_attributes_0_zip").val(addresses[i].zip);
-        // $("#contact_addresses_attributes_0_state").val(addresses[i].state);
-
         $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(0)").val(addresses[i].address_line_1)
         $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(1)").val(addresses[i].address_line_2)
         $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(2)").val(addresses[i].city)
         $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(3)").val(addresses[i].zip)
-        $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(4)").val(addresses[i].state)
-
+        $("div.col-md-4.fields:visible:eq(0) div.panel-body select:eq(0)").val(addresses[i].state)
         disableAddressForm();
         break;
       }
@@ -70,22 +61,23 @@ function ready() {
   function resetAddressForm() {
     //todo - refactor
     var items = [
-      $("#contact_addresses_attributes_0_address_line_1"),
-      $("#contact_addresses_attributes_0_address_line_2"), 
-      $("#contact_addresses_attributes_0_city"),
-      $("#contact_addresses_attributes_0_zip")
+      $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(0)"),
+      $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(1)"),
+      $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(2)"),
+      $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(3)")
     ];
 
     for (var i in items) {
       items[i].val("");
     }
 
-    $("#contact_addresses_attributes_0_state").val("ak");
+    $("div.col-md-4.fields:visible:eq(0) div.panel-body select:eq(0)").val("ak");
     $("#addresses .col-md-4.fields:visible").not(":eq(0)").remove();
   };
 
   function disableAddressForm() {
     $("#addresses :input").prop("disabled", true);
+    $("#addresses :select").prop("disabled", true);
   };
 
   setChkState();
@@ -121,13 +113,14 @@ function ready() {
       chkUseCompContInfo.prop("checked", false);
     }
 
-    //resetAddressForm();
+    resetAddressForm();
     enableAddressForm();
     clearErrors();
   });
 
   function enableAddressForm() {
     $("#addresses :input").prop("disabled", false);
+    $("#addresses :select").prop("disabled", false);
   };
 
   $(document).on("page:change", function() {
@@ -171,27 +164,12 @@ function ready() {
             break;
           
           case 1:
-            
             var address = data.addresses[0];
-            // div.col-md-4.fields:visible:eq(0) div.panel-body
-
-            // $("div.col-md-4.fields:visible:eq(0) div.panel-body [id^=contact_addresses_attributes_][id=$_address_line_1]").val(address.address_line_1);
-            // $("div.col-md-4.fields:visible:eq(0) div.panel-body [id^=contact_addresses_attributes_][id=$_address_line_2]").val(address.address_line_2);
-            // $("div.col-md-4.fields:visible:eq(0) div.panel-body [id^=contact_addresses_attributes_][id=$_city]").val(address.city);
-            // $("div.col-md-4.fields:visible:eq(0) div.panel-body [id^=contact_addresses_attributes_][id=$_zip]").val(address.zip);
-            // $("div.col-md-4.fields:visible:eq(0) div.panel-body [id^=contact_addresses_attributes_][id=$_state]").val(address.state);
-
-            $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(0)").val(address.address_line_1)
-            $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(1)").val(address.address_line_2)
-            $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(2)").val(address.city)
-            $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(3)").val(address.zip)
-            $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(4)").val(address.state)
-
-            // $("#contact_addresses_attributes_0_address_line_1").val(address.address_line_1);
-            // $("#contact_addresses_attributes_0_address_line_2").val(address.address_line_2);
-            // $("#contact_addresses_attributes_0_city").val(address.city);
-            // $("#contact_addresses_attributes_0_zip").val(address.zip);
-            // $("#contact_addresses_attributes_0_state").val(address.state);
+            $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(0)").val(address.address_line_1);
+            $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(1)").val(address.address_line_2);
+            $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(2)").val(address.city);
+            $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(3)").val(address.zip);
+            $("div.col-md-4.fields:visible:eq(0) div.panel-body select:eq(0)").val(address.state);
             disableAddressForm();
             break;
 
@@ -205,8 +183,8 @@ function ready() {
               if (i == 0) {
                 str += "checked='checked' ";
               }
-              str += "name='addresses' style='margin-left: 5px;'/>";
 
+              str += "name='addresses' style='margin-left: 5px;'/>";
               str += "<label style='font-size: 16px; font-weight: normal; margin-left: 10px;'>";
               str += adr[i].address_line_1 + ", ";
               if (adr[i].address_line_2 !== undefined) {
