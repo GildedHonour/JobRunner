@@ -75,11 +75,6 @@ function ready() {
     $("#addresses .col-md-4.fields:visible").not(":eq(0)").remove();
   };
 
-  function disableAddressForm() {
-    $("#addresses :input").prop("disabled", true);
-    $("#addresses :select").prop("disabled", true);
-  };
-
   setChkState();
 
   //add
@@ -120,7 +115,12 @@ function ready() {
 
   function enableAddressForm() {
     $("#addresses :input").prop("disabled", false);
-    $("#addresses :select").prop("disabled", false);
+    $("#addresses select").prop("disabled", false);
+  };
+
+  function disableAddressForm() {
+    $("#addresses :input").prop("disabled", true);
+    $("#addresses select").prop("disabled", true);
   };
 
   $(document).on("page:change", function() {
