@@ -2,6 +2,14 @@ function ready() {
   var chkUseCompContInfo = $("#chk_use_company_contact_info");
   var mdlChooseAddress = $("#choose_address");
   var addresses = [];
+  var addressFormInputs = [
+    $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(0)"),
+    $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(1)"),
+    $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(2)"),
+    $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(3)")
+  ];
+
+  var addressFormDropDown = $("div.col-md-4.fields:visible:eq(0) div.panel-body select:eq(0)")
 
   /*Modal dialog - button "ok"*/
   $(document).on("click", "#btn_choose_address", function() {
@@ -21,14 +29,9 @@ function ready() {
     }
   });
 
-  /*Modal dialog - close*/
+  /*Modal dialog - button close*/
   $(document).on("click", "#close_modal", function() {
-    if (
-      $("#contact_addresses_attributes_0_address_line_1").val() === "" &&
-      $("#contact_addresses_attributes_0_address_line_2").val() === "" &&
-      $("#contact_addresses_attributes_0_city").val() === "" &&
-      $("#contact_addresses_attributes_0_zip").val() === "" 
-    ) {
+    if (isAddressFormEmpty()) {
       chkUseCompContInfo.prop("checked", false);
     } else {
       $("#contact_info_container").html("This company also has <a href='#'>other addresses</a>.");
@@ -52,23 +55,13 @@ function ready() {
   };
 
   function resetAddressForm() {
-    //todo - refactor
-    var items = [
-      $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(0)"),
-      $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(1)"),
-      $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(2)"),
-      $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(3)")
-    ];
-
-    for (var i in items) {
+    for (var i in addressFormInputs) {
       items[i].val("");
     }
 
-    $("div.col-md-4.fields:visible:eq(0) div.panel-body select:eq(0)").val("ak");
+    addressFormDropDown.val("ak");
     $("#addresses .col-md-4.fields:visible").not(":eq(0)").remove();
   };
-
-  
 
   /*Address From - add address*/
   $(document).on("click", "div.row div.col-md-4 .btn.btn-default.add_nested_fields", function() {
@@ -113,6 +106,17 @@ function ready() {
     $("#addresses :input").prop("disabled", !isEnabled);
     $("#addresses select").prop("disabled", !isEnabled);
   };
+
+  function isAddressFormEmpty() {
+    var allAdressFormItems = addressFormInputs.push(addressFormDropDown);
+    for (var i in allAdressFormItems) {
+      if (addressFormInputs[i] !== "") {
+        return false;
+      }
+    }
+
+    return true;
+  }
 
   $(document).on("page:change", function() {
     $(document).on("submit", "body.contacts form#contact_form", function() {
