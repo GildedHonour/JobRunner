@@ -12,7 +12,7 @@ function ready() {
   var addressFormDropDown = $("div.col-md-4.fields:visible:eq(0) div.panel-body select:eq(0)")
 
   /*Modal dialog - button "ok"*/
-  $(document).on("click", "#btn_choose_address", function() {
+  $(document).on("click", "#choose_address_ok", function() {
     var id = parseInt(mdlChooseAddress.find(".modal-body input[type=radio]:checked").val(), 10); 
     $("#contact_info_container").html("This company also has <a href='#'>other addresses</a>.");
     mdlChooseAddress.modal("hide");
@@ -56,7 +56,7 @@ function ready() {
 
   function resetAddressForm() {
     for (var i in addressFormInputs) {
-      items[i].val("");
+      addressFormInputs[i].val("");
     }
 
     addressFormDropDown.val("ak");
@@ -143,7 +143,7 @@ function ready() {
     });
   });
 
-  $(document).on("click", "#use_comp_cont_info", function() {
+  $(document).on("click", "#chk_use_company_contact_info", function() {
     if (this.checked) {
       $.ajax({
         url: getAddressUrl($("#contact_company_id").val())
