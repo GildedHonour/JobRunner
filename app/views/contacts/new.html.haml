@@ -71,7 +71,7 @@
           %h2
             Contact Info
           %label
-            %input{type: :checkbox, id: "use_comp_cont_info"}
+            %input{type: :checkbox, id: "chk_use_company_contact_info"}
             Use the contact info of the company
           .row
             #contact_info_container{style: "padding-left: 30px; font-weight: bold;"}
@@ -85,15 +85,15 @@
         = link_to "Back", back_url_or(contacts_url_with_saved_filters), class: "btn btn-default"
         = f.submit "Save", class: "btn btn-primary"
 
-#myModal.modal.fade{tabindex: -1, role: :dialog, "aria-labelledby" => "myModalLabel", "aria-hidden" => true}
+#choose_address.modal.fade{tabindex: -1, role: :dialog, "aria-labelledby" => "choose_address_title", "aria-hidden" => true}
   .modal-dialog
     .modal-content
       .modal-header
-        %button{type: :button, class: "close", "data-dismiss" => :modal, "aria-hidden" => true, id: "close_modal"}
+        %button{type: :button, class: "close", "data-dismiss" => :modal, "aria-hidden" => true, id: "choose_address_close"}
           &times;
-        %h4.modal-title#myModalLabel
+        %h4.modal-title#choose_address_title
           Choose an address
       .modal-body
       .modal-footer
-        %button{type: :button, class: "btn btn-primary", id: "btn_choose_address"}
+        %button{type: :button, class: "btn btn-primary", id: "choose_address_ok"}
           Ok

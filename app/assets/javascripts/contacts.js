@@ -1,15 +1,13 @@
 function ready() {
-  var chkUseCompContInfo = $("#use_comp_cont_info");
-  // var contactCompanyId = $("#contact_company_id");
-  var modal = $("#myModal");
+  var chkUseCompContInfo = $("#chk_use_company_contact_info");
+  var mdlChooseAddress = $("#choose_address");
   var addresses = [];
 
-  //modal - use an address
+  /*Modal dialog - button "ok"*/
   $(document).on("click", "#btn_choose_address", function() {
-    var id = parseInt(modal.find(".modal-body input[type=radio]:checked").val(), 10); 
+    var id = parseInt(mdlChooseAddress.find(".modal-body input[type=radio]:checked").val(), 10); 
     $("#contact_info_container").html("This company also has <a href='#'>other addresses</a>.");
-    modal.modal("hide");
-    
+    mdlChooseAddress.modal("hide");
     for (var i = 0; i < addresses.length; i++) {
       if (addresses[i].id == id) {
         $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(0)").val(addresses[i].address_line_1)
@@ -17,13 +15,13 @@ function ready() {
         $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(2)").val(addresses[i].city)
         $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(3)").val(addresses[i].zip)
         $("div.col-md-4.fields:visible:eq(0) div.panel-body select:eq(0)").val(addresses[i].state)
-        disableAddressForm();
+        setAddressFormState(false);
         break;
       }
     }
   });
 
-  //modal - close
+  /*Modal dialog - close*/
   $(document).on("click", "#close_modal", function() {
     if (
       $("#contact_addresses_attributes_0_address_line_1").val() === "" &&
@@ -36,13 +34,8 @@ function ready() {
       $("#contact_info_container").html("This company also has <a href='#'>other addresses</a>.");
     }
 
-    modal.modal("hide");
+    mdlChooseAddress.modal("hide");
   });
-
-  //todo refactor name
-  function setChkState() {
-    chkUseCompContInfo.prop("disabled", $("#contact_company_id").val() === "");
-  };
 
   function showErrors() {
     //todo append
@@ -75,16 +68,16 @@ function ready() {
     $("#addresses .col-md-4.fields:visible").not(":eq(0)").remove();
   };
 
-  setChkState();
+  
 
-  //add
+  /*Address From - add address*/
   $(document).on("click", "div.row div.col-md-4 .btn.btn-default.add_nested_fields", function() {
-    if ($("#contact_company_id").val() !== "") {
+    if (isCompanySelected()) {
       chkUseCompContInfo.prop("disabled", false);
     }
   });
 
-  //remove
+  /*Address From - remove address*/
   $(document).on("click", "#addresses .btn.btn-danger.remove_nested_fields:visible:eq(0)", function() {
     if (!doesAddressFormExist()) {
       chkUseCompContInfo.prop("disabled", true);
@@ -92,35 +85,33 @@ function ready() {
     }
   });
 
-  //drop down
+  /*Drop Down - select company*/
   $(document).on("change", "#contact_company_id", function() {
     if ((chkUseCompContInfo).is(":checked")) {
       chkUseCompContInfo.prop("checked", false);
     }
 
-    //company is selected
-    if ($("#contact_company_id").val() !== "") {
-      if (doesAddressFormExist()) {
-        chkUseCompContInfo.prop("disabled", false);
-      }
+    if (isCompanySelected() && doesAddressFormExist()) {
+      chkUseCompContInfo.prop("disabled", false);
     } else {
       chkUseCompContInfo.prop("disabled", true);
       chkUseCompContInfo.prop("checked", false);
     }
 
     resetAddressForm();
-    enableAddressForm();
+    setAddressFormState(true);
     clearErrors();
   });
 
-  function enableAddressForm() {
-    $("#addresses :input").prop("disabled", false);
-    $("#addresses select").prop("disabled", false);
-  };
+  function isCompanySelected() {
+    return $("#contact_company_id").val() !== "";
+  }
 
-  function disableAddressForm() {
-    $("#addresses :input").prop("disabled", true);
-    $("#addresses select").prop("disabled", true);
+  /* Address Form - set enabled / disabled state
+  true - enabled, false - disabled */
+  function setAddressFormState(isEnabled) {
+    $("#addresses :input").prop("disabled", !isEnabled);
+    $("#addresses select").prop("disabled", !isEnabled);
   };
 
   $(document).on("page:change", function() {
@@ -154,15 +145,13 @@ function ready() {
         url: getAddressUrl($("#contact_company_id").val())
       })
       .done(function(data) {
-        
-
         switch (data.addresses.length) {
           case 0:
             chkUseCompContInfo.prop("disabled", true);
             chkUseCompContInfo.prop("checked", false);
             showErrors();
             break;
-          
+
           case 1:
             var address = data.addresses[0];
             $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(0)").val(address.address_line_1);
@@ -170,7 +159,7 @@ function ready() {
             $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(2)").val(address.city);
             $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(3)").val(address.zip);
             $("div.col-md-4.fields:visible:eq(0) div.panel-body select:eq(0)").val(address.state);
-            disableAddressForm();
+            setAddressFormState(false);
             break;
 
           default:
@@ -200,8 +189,8 @@ function ready() {
             }
 
             str += "</form>";
-            $("#myModal .modal-body").html(str);
-            $("#myModal").modal("show");
+            mdlChooseAddress.find(".modal-body").html(str);
+            mdlChooseAddress.modal("show");
         }
       })
       .fail(function() {
@@ -211,14 +200,20 @@ function ready() {
     } else {
       resetAddressForm();
       clearErrors();
-      enableAddressForm();
+      setAddressFormState(true);
     }
   });
   
   $("#contact_info_container").on("click", "a", function(e) {
     e.preventDefault();
-    $("#myModal").modal("show");
+    mdlChooseAddress.modal("show");
   });
+
+  function setChkState() {
+    chkUseCompContInfo.prop("disabled", $("#contact_company_id").val() === "");
+  };
+
+  setChkState();
 };
 
 jQuery(document).ready(ready);
