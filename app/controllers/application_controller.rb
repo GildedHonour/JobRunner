@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   layout :determine_layout
-  before_filter :authenticate_user!
+  before_filter :ensure_logged_in
   helper_method :companies_url_with_saved_filters, :contacts_url_with_saved_filters
 
   def companies_url_with_saved_filters
@@ -15,7 +15,15 @@ class ApplicationController < ActionController::Base
   def info_for_paper_trail
     { whodunnit_email: current_user.try(:email) }
   end
-  
+
+  def ensure_logged_in
+    redirect_to user_omniauth_authorize_path(:cas) unless user_signed_in?
+  end
+
+  def self.public_controller
+    skip_before_filter :ensure_logged_in
+  end
+
   protected
 
   def authenticate_admin!
