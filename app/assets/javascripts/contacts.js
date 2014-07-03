@@ -9,7 +9,9 @@ function ready() {
     $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(3)")
   ];
 
-  var addressFormDropDown = $("div.col-md-4.fields:visible:eq(0) div.panel-body select:eq(0)")
+  var addressFormDropDown = $("div.col-md-4.fields:visible:eq(0) div.panel-body select:eq(0)");
+  var allAdressFormItems = addressFormInputs.concat(addressFormDropDown);
+  var addressFormKeys = ["address_line_1", "address_line_2", "city", "zip", "state"];
 
   /*Modal dialog - button "ok"*/
   $(document).on("click", "#choose_address_ok", function() {
@@ -18,11 +20,10 @@ function ready() {
     mdlChooseAddress.modal("hide");
     for (var i = 0; i < addresses.length; i++) {
       if (addresses[i].id == id) {
-        $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(0)").val(addresses[i].address_line_1)
-        $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(1)").val(addresses[i].address_line_2)
-        $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(2)").val(addresses[i].city)
-        $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(3)").val(addresses[i].zip)
-        $("div.col-md-4.fields:visible:eq(0) div.panel-body select:eq(0)").val(addresses[i].state)
+        for (var j in allAdressFormItems) {
+          allAdressFormItems[j].val(addresses[i][addressFormKeys[j]]);
+        }
+
         setAddressFormState(false);
         break;
       }
@@ -41,7 +42,6 @@ function ready() {
   });
 
   function showErrors() {
-    //todo append
     $("#contact_info_errors_container").html("This company doesn't have an address.");
   };
 
@@ -108,9 +108,8 @@ function ready() {
   };
 
   function isAddressFormEmpty() {
-    var allAdressFormItems = addressFormInputs.push(addressFormDropDown);
     for (var i in allAdressFormItems) {
-      if (addressFormInputs[i] !== "") {
+      if (allAdressFormItems[i] !== "") {
         return false;
       }
     }
@@ -143,6 +142,7 @@ function ready() {
     });
   });
 
+  /*AddressForm checkbox - use the contact info of the company*/
   $(document).on("click", "#chk_use_company_contact_info", function() {
     if (this.checked) {
       $.ajax({
@@ -157,12 +157,10 @@ function ready() {
             break;
 
           case 1:
-            var address = data.addresses[0];
-            $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(0)").val(address.address_line_1);
-            $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(1)").val(address.address_line_2);
-            $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(2)").val(address.city);
-            $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(3)").val(address.zip);
-            $("div.col-md-4.fields:visible:eq(0) div.panel-body select:eq(0)").val(address.state);
+            for (var i in allAdressFormItems) {
+              allAdressFormItems[i].val(data.addresses[0][addressFormKeys[i]]);
+            }
+            
             setAddressFormState(false);
             break;
 
