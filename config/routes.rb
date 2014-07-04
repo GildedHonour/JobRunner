@@ -5,6 +5,10 @@ Jobrunner::Application.routes.draw do
   resources :activities
   resources :notes
   resources :contacts do
+    collection do
+      get "get_addresses/:company_id" => "contacts#get_addresses", as: :get_addresses
+    end
+
     member do
       get :edit_section
       patch :update_section

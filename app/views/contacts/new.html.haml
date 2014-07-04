@@ -1,3 +1,6 @@
+:javascript
+  window.getRawAddressesContactsUrl = "#{get_addresses_contacts_url(":contact_id")}";
+
 .show.content
   .go.and.profile
     .go.back
@@ -64,8 +67,12 @@
         .col-md-12
           %h2
             Contact Info
+          %label
+            %input{type: :checkbox, id: "chk_use_company_contact_info"}
+            Use the contact info of the company
           .row
-            #contact_info_errors_container
+            #contact_info_container{style: "padding-left: 30px; font-weight: bold;"}
+            #contact_info_errors_container{style: "padding-left: 30px; color: red; font-weight: bold;"}
           = render "address_fields", f: f
           = render "phone_number_fields", f: f
           = render "email_fields", f: f
@@ -74,3 +81,16 @@
       .form-group
         = link_to "Back", back_url_or(contacts_url_with_saved_filters), class: "btn btn-default"
         = f.submit "Save", class: "btn btn-primary"
+
+#choose_address.modal.fade{tabindex: -1, role: :dialog, "aria-labelledby" => "choose_address_title", "aria-hidden" => true}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button{type: :button, class: "close", "data-dismiss" => :modal, "aria-hidden" => true, id: "choose_address_close"}
+          &times;
+        %h4.modal-title#choose_address_title
+          Choose an address
+      .modal-body
+      .modal-footer
+        %button{type: :button, class: "btn btn-primary", id: "choose_address_ok"}
+          Ok
