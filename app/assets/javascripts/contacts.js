@@ -13,6 +13,10 @@ function ready() {
   var allAdressFormItems = addressFormInputs.concat(addressFormDropDown);
   var addressFormKeys = ["address_line_1", "address_line_2", "city", "zip", "state"];
 
+  function getAddressesContactsUrl(id) {
+    return getRawAddressesContactsUrl.replace(":contact_id", id);
+  };
+
   /*Modal dialog - button "ok"*/
   $(document).on("click", "#choose_address_ok", function() {
     var id = parseInt(mdlChooseAddress.find(".modal-body input[type=radio]:checked").val(), 10); 
@@ -146,7 +150,7 @@ function ready() {
   $(document).on("click", "#chk_use_company_contact_info", function() {
     if (this.checked) {
       $.ajax({
-        url: getAddressUrl($("#contact_company_id").val())
+        url: getAddressesContactsUrl($("#contact_company_id").val())
       })
       .done(function(data) {
         switch (data.addresses.length) {
