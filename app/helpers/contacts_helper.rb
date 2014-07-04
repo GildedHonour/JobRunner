@@ -19,9 +19,6 @@ module ContactsHelper
   end
 
   def csv_company_name(contact)
-    if contact.first_name == "Pia2"
-      binding.pry
-    end
     contact.full_name == contact.company.name ? "" : contact.company.name 
   end
 end
