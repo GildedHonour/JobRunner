@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_paper_trail
   include Audited
 
-  devise :invitable, :database_authenticatable, :registerable, :recoverable, :trackable, :validatable, :omniauthable
+  devise :invitable, :database_authenticatable, :recoverable, :trackable, :validatable, :omniauthable
 
   has_many :contacts
 
