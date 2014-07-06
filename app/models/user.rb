@@ -17,6 +17,11 @@ class User < ActiveRecord::Base
     }
   end
 
+  def authorized_for_application_host?(application_host)
+    return false if application_host.blank?
+    self.authorized_applications.exists?(host: application_host)
+  end
+
   def self.from_omniauth(auth)
     find_by_id(auth[:extra][:uuid])
   end
