@@ -97,3 +97,4 @@ Contact.create!(
 )
 
 ApiAuth.create!(app: "jobrunner-staging", password:  BCrypt::Password.create("f1398e799a514z"))
+ApiAuth.create!(app: "pmg-cas-staging", password:  BCrypt::Password.create("b09beeefa6e1496"))

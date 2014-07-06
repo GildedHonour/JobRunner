@@ -15,10 +15,6 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.oauth_info = { info: auth.info.to_h }.merge(extra: auth.extra.raw_info.to_h)
-    end
+    find_by_id(auth[:extra][:uuid])
   end
 end

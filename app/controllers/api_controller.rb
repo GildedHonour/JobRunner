@@ -3,7 +3,6 @@ class ApiController < ActionController::Base
   respond_to :json
 
   private
-
   def authenticate!
     api_auth = nil
     authenticated = authenticate_with_http_basic do |app, password|

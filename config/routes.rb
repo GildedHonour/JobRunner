@@ -34,5 +34,6 @@ Jobrunner::Application.routes.draw do
     resources :companies, defaults: { format: "json" } do
       resources :contacts
     end
+    resources :sessions, defaults: { format: "json" }
   end
 end
