@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
 
   has_many :contacts
 
+  has_many :application_authorizations, dependent: :destroy
+  has_many :authorized_applications, through: :application_authorizations
+
   def audit_meta
     {
         item_descriptor: "user for #{contacts.first.audit_meta[:item_descriptor]}",
