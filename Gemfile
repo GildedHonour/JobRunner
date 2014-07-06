@@ -7,7 +7,7 @@ gem "rails", "4.1.4"
 # Authentication
 gem "devise"
 gem "devise_invitable"
-gem "omniauth-cas"
+gem "omniauth-cas", github: "dlindahl/omniauth-cas", branch: "master"
 
 # Model related
 gem "enumerize"

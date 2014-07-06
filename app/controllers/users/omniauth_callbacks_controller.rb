@@ -1,12 +1,6 @@
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-    skip_before_filter :verify_authenticity_token, only: [:failure]
-
     public_controller
-
-    def failure
-      redirect_to root_url
-    end
 
     def cas
       user = User.from_omniauth(request.env["omniauth.auth"])

@@ -1,4 +1,14 @@
 GIT
+  remote: git://github.com/dlindahl/omniauth-cas.git
+  revision: 19766032f1e4962429c7ed4ff725f6d90c7e8d0c
+  branch: master
+  specs:
+    omniauth-cas (1.0.4)
+      addressable (~> 2.3)
+      nokogiri (~> 1.5)
+      omniauth (~> 1.1.0)
+
+GIT
   remote: git://github.com/plataformatec/simple_form.git
   revision: 6b3f9db8906336d8df80475c71b75613e3fc895b
   branch: master
@@ -155,10 +165,6 @@ GEM
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
-    omniauth-cas (1.0.4)
-      addressable (~> 2.3)
-      nokogiri (~> 1.6)
-      omniauth (~> 1.1.0)
     orm_adapter (0.5.0)
     paper_trail (3.0.1)
       activerecord (>= 3.0, < 5.0)
@@ -283,7 +289,7 @@ DEPENDENCIES
   letter_opener
   neat
   nested_form
-  omniauth-cas
+  omniauth-cas!
   paper_trail
   pg
   pry-nav

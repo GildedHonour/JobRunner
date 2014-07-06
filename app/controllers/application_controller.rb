@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
 
   private
   def after_sign_out_path_for(resource_or_scope)
-    "#{Rails.application.secrets.cas_url}/logout?" + { url: 'www.google.com', service: request.original_url }.to_query
+    "#{Rails.application.secrets.cas_url}/logout?" + { service: root_url }.to_query
   end
 
   def determine_layout
