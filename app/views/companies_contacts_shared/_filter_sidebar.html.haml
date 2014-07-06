@@ -3,12 +3,38 @@
     %i.fa.fa-filter
     Filters
 
+
+
+
+
+
+  %h3.filter.header
+    = link_to 'javascript:void(0)', data: { toggle: "collapse", target: "#exclude-do-not-mail-email-filter ul" } do
+      Exclude Do Not
+      %i.glyphicon.glyphicon-chevron-up.pull-right
+      %i.glyphicon.glyphicon-chevron-down.pull-right
+      = button_tag "?", data: { toggle: "tooltip", title: tooltip_text_for_filter(:relationships) }, class: "btn btn-link btn-xs filter-help"
+
+  .filter.wrapper#exclude-do-not-mail-email-filter
+    %ul.list.default.list-unstyled.in
+      %li.checkbox
+        = check_box_tag "do_not_mail_email_filter[do_not_mail_email]", "mail", (params[:dm_em] || []).include?("mail")
+        Mail
+        %br
+        = check_box_tag "do_not_mail_email_filter[do_not_mail_email]", "email", (params[:dm_em] || []).include?("email")
+        Email
+
+
+
+
+
   %h3.filter.header
     = link_to 'javascript:void(0)', data: { toggle: "collapse", target: "#relationships-filter ul" } do
       Relationships
       %i.glyphicon.glyphicon-chevron-up.pull-right
       %i.glyphicon.glyphicon-chevron-down.pull-right
       = button_tag "?", data: { toggle: "tooltip", title: tooltip_text_for_filter(:relationships) }, class: "btn btn-link btn-xs filter-help"
+
   .filter.wrapper#relationships-filter
     %ul.list.default.list-unstyled.in
       - Company.internal.ordered_by_name.each do |company|
