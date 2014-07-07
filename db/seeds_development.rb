@@ -99,12 +99,11 @@ Contact.create!(
 ApiAuth.create!(app: "jobrunner-staging", password:  BCrypt::Password.create("f1398e799a514z"))
 ApiAuth.create!(app: "pmg-cas-staging", password:  BCrypt::Password.create("b09beeefa6e1496"))
 
-jobrunner_staging = AuthorizedApplication.create(name: "jobrunner-staging", host: "jobrunner-staging.herokuapp.com")
-hobbes_staging = AuthorizedApplication.create(name: "hobbes-staging", host: "hobbes-staging.herokuapp.com")
-localhost = AuthorizedApplication.create(name: "any_app", host: "localhost")
+# Application names much match with the Service Rule name in PMG CAS
+jobrunner_staging = AuthorizedApplication.create(name: "jobrunner-staging")
+hobbes_staging = AuthorizedApplication.create(name: "hobbes-staging")
 
 User.all.each do |user|
   ApplicationAuthorization.create!(user: user, authorized_application: jobrunner_staging)
   ApplicationAuthorization.create!(user: user, authorized_application: hobbes_staging)
-  ApplicationAuthorization.create!(user: user, authorized_application: localhost)
 end

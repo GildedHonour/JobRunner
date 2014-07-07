@@ -62,7 +62,6 @@ ActiveRecord::Schema.define(version: 20140706074713) do
 
   create_table "authorized_applications", force: true do |t|
     t.string   "name"
-    t.string   "host"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
