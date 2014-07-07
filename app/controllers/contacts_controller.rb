@@ -135,9 +135,6 @@ class ContactsController < ApplicationController
   end
 
   def apply_filters_concrete(source)
-
-    # binding.pry
-
     source_filtered = get_saved_filters.has_key?(:search) ? source.search(get_saved_filters[:search]) : source
     source_filtered = source_filtered.with_archived_status(get_saved_filters[:a]) if get_saved_filters.has_key?(:a)
     source_filtered = source_filtered.with_birthday_months(get_saved_filters[:bm]) if get_saved_filters.has_key?(:bm)
@@ -147,9 +144,11 @@ class ContactsController < ApplicationController
     source_filtered = source_filtered.contacts_of_companies_with_relationship_to(get_saved_filters[:rc]) if get_saved_filters.has_key?(:rc)
     source_filtered = get_saved_filters[:name_sort] == "down" ? source_filtered.order("first_name DESC") : source_filtered.order("first_name ASC")
   
-    #todo filter for [:dnm_em]
-    #the same for companies controller
-    # source_filtered = source_filtered.contacts_of_companies_with_relationship_to(get_saved_filters[:dnm_em]) if get_saved_filters.has_key?(:dnm_em)
+    if get_saved_filters.has_key?(:dm_em)
+      source_filtered = source_filtered.do_mail if get_saved_filters[:dm_em].include?("mail")
+      source_filtered = source_filtered.do_email if get_saved_filters[:dm_em].include?("email")
+    end
 
+    source_filtered
   end
 end

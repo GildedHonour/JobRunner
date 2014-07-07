@@ -31,9 +31,9 @@ App.IndexSearchFilterView = {
             selectionInputName: "relationship_filter[company_ids]"
         },
         {
-          selector: "#exclude-do-not-mail-email-filter",
-          searchKeyName: "dm_em",
-          selectionInputName: "do_not_mail_email_filter[do_not_mail_email]"
+            selector: "#exclude-do-not-mail-email-filter",
+            searchKeyName: "dm_em",
+            selectionInputName: "do_not_mail_email_filter[do_not_mail_email]"
         }
     ],
 
