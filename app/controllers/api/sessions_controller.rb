@@ -11,10 +11,5 @@ module Api
         render json: { status: :forbidden }, status: :forbidden
       end
     end
-
-    def oauth_logout
-      env["warden"].logout
-      head :ok
-    end
   end
 end

@@ -254,7 +254,11 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   config.omniauth :cas, url: Rails.application.secrets.cas_url, on_single_sign_out: Proc.new { |request|
-    Api::SessionsController.action(:oauth_logout).call request.env
+    params =  Rack::Utils.parse_query(request.env['rack.input'].read)
+    user = User.where(cas_service_ticket: params['session_index']).first
+    user.force_logout! if user
+
+    true
   }
 
   # ==> Warden configuration

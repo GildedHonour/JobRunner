@@ -23,6 +23,14 @@ class User < ActiveRecord::Base
     self.authorized_applications.exists?(name: application_name)
   end
 
+  def force_logout!
+    self.update_attributes!({ force_logout: true })
+  end
+
+  def process_login!(cas_service_ticket)
+    self.update_attributes({ cas_service_ticket: cas_service_ticket, force_logout: false })
+  end
+
   def self.from_omniauth(auth)
     find_by_id(auth[:extra][:uuid])
   end
