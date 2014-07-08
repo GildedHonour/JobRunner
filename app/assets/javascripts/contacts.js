@@ -215,6 +215,10 @@ function ready() {
     mdlChooseAddress.modal("show");
   });
 
+  $(document).on("click", "#clear_all_filters", function() {
+    $(".filters.wrapper input[type='checkbox']:checked").prop("checked", false).trigger("change");
+  });
+
   function setChkState() {
     chkUseCompContInfo.prop("disabled", $("#contact_company_id").val() === "");
   };
