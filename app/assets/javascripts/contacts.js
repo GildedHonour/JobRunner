@@ -215,6 +215,7 @@ function ready() {
     mdlChooseAddress.modal("show");
   });
 
+  /*Filters - clear all*/
   $(document).on("click", "#clear_all_filters", function() {
     $(".filters.wrapper input[type='checkbox']:checked").prop("checked", false).trigger("change");
   });
