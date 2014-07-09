@@ -13,6 +13,10 @@ function ready() {
   var allAdressFormItems = addressFormInputs.concat(addressFormDropDown);
   var addressFormKeys = ["address_line_1", "address_line_2", "city", "zip", "state"];
 
+  function getAddressesContactsUrl(id) {
+    return getRawAddressesContactsUrl.replace(":contact_id", id);
+  };
+
   /*Modal dialog - button "ok"*/
   $(document).on("click", "#choose_address_ok", function() {
     var id = parseInt(mdlChooseAddress.find(".modal-body input[type=radio]:checked").val(), 10); 
@@ -63,14 +67,14 @@ function ready() {
     $("#addresses .col-md-4.fields:visible").not(":eq(0)").remove();
   };
 
-  /*Address From - add address*/
+  /*Address Form - add address*/
   $(document).on("click", "div.row div.col-md-4 .btn.btn-default.add_nested_fields", function() {
     if (isCompanySelected()) {
       chkUseCompContInfo.prop("disabled", false);
     }
   });
 
-  /*Address From - remove address*/
+  /*Address Form - remove address*/
   $(document).on("click", "#addresses .btn.btn-danger.remove_nested_fields:visible:eq(0)", function() {
     if (!doesAddressFormExist()) {
       chkUseCompContInfo.prop("disabled", true);
@@ -142,11 +146,11 @@ function ready() {
     });
   });
 
-  /*AddressForm checkbox - use the contact info of the company*/
+  /*Address Form checkbox - use the contact info of the company*/
   $(document).on("click", "#chk_use_company_contact_info", function() {
     if (this.checked) {
       $.ajax({
-        url: getAddressUrl($("#contact_company_id").val())
+        url: getAddressesContactsUrl($("#contact_company_id").val())
       })
       .done(function(data) {
         switch (data.addresses.length) {

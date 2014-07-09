@@ -1,8 +1,5 @@
 :javascript
-  var getAddressUrl = function(id) {
-    var base = "#{get_addresses_contacts_url("--CHANGE_ME--")}";
-    return base.replace("--CHANGE_ME--", id);
-  };
+  window.getRawAddressesContactsUrl = "#{get_addresses_contacts_url(":contact_id")}";
 
 .show.content
   .go.and.profile

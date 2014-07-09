@@ -6,7 +6,7 @@ Jobrunner::Application.routes.draw do
   resources :notes
   resources :contacts do
     collection do
-      get "get_addresses/:comp_id" => "contacts#get_addresses", as: :get_addresses
+      get "get_addresses/:company_id" => "contacts#get_addresses", as: :get_addresses
     end
 
     member do
