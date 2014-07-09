@@ -3,13 +3,13 @@ function ready() {
   var mdlChooseAddress = $("#choose_address");
   var addresses = [];
   var addressFormInputs = [
-    $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(0)"),
-    $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(1)"),
-    $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(2)"),
-    $("div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(3)")
+    "div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(0)",
+    "div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(1)",
+    "div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(2)",
+    "div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(3)"
   ];
 
-  var addressFormDropDown = $("div.col-md-4.fields:visible:eq(0) div.panel-body select:eq(0)");
+  var addressFormDropDown = "div.col-md-4.fields:visible:eq(0) div.panel-body select:eq(0)";
   var allAdressFormItems = addressFormInputs.concat(addressFormDropDown);
   var addressFormKeys = ["address_line_1", "address_line_2", "city", "zip", "state"];
 
@@ -21,7 +21,7 @@ function ready() {
     for (var i = 0; i < addresses.length; i++) {
       if (addresses[i].id == id) {
         for (var j in allAdressFormItems) {
-          allAdressFormItems[j].val(addresses[i][addressFormKeys[j]]);
+          $(allAdressFormItems[j]).val(addresses[i][addressFormKeys[j]]);
         }
 
         setAddressFormState(false);
@@ -56,10 +56,10 @@ function ready() {
 
   function resetAddressForm() {
     for (var i in addressFormInputs) {
-      addressFormInputs[i].val("");
+      $(addressFormInputs[i]).val("");
     }
 
-    addressFormDropDown.val("ak");
+    $(addressFormDropDown).val("ak");
     $("#addresses .col-md-4.fields:visible").not(":eq(0)").remove();
   };
 
@@ -109,7 +109,7 @@ function ready() {
 
   function isAddressFormEmpty() {
     for (var i in allAdressFormItems) {
-      if (allAdressFormItems[i] !== "") {
+      if ($(allAdressFormItems[i]) !== "") {
         return false;
       }
     }
@@ -158,7 +158,7 @@ function ready() {
 
           case 1:
             for (var i in allAdressFormItems) {
-              allAdressFormItems[i].val(data.addresses[0][addressFormKeys[i]]);
+              $(allAdressFormItems[i]).val(data.addresses[0][addressFormKeys[i]]);
             }
             
             setAddressFormState(false);
