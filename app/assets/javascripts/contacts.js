@@ -107,8 +107,9 @@ function ready() {
   /* Address Form - set enabled / disabled state
   true - enabled, false - disabled */
   function setAddressFormState(isEnabled) {
-    $("#addresses :input").prop("disabled", !isEnabled);
-    $("#addresses select").prop("disabled", !isEnabled);
+    for (var i in allAdressFormItems) {
+      $(allAdressFormItems[i]).prop("disabled", !isEnabled);
+    }
   };
 
   function isAddressFormEmpty() {
@@ -213,6 +214,14 @@ function ready() {
   $("#contact_info_container").on("click", "a", function(e) {
     e.preventDefault();
     mdlChooseAddress.modal("show");
+  });
+
+  /*Contact form - on submit*/
+  $("#contact_form").on("submit", function (e) {
+    for (var j in allAdressFormItems) {
+      var element = $(allAdressFormItems[j]);
+      $("<input>").attr({type: "hidden", name: element.attr("name"), value: element.val()}).appendTo($(this));
+    }
   });
 
   function setChkState() {
