@@ -2,6 +2,7 @@
   %h4.filters
     %i.fa.fa-filter
     Filters
+    = button_tag "Clear All", class: "btn btn-link btn-xs filter-help", id: "clear_all_filters"
 
   %h3.filter.header
     = link_to 'javascript:void(0)', data: { toggle: "collapse", target: "#relationships-filter ul" } do

@@ -22,7 +22,7 @@ class Contact < ActiveRecord::Base
   accepts_nested_attributes_for :phone_numbers, reject_if: lambda { |phone_number| phone_number[:phone_number].blank? }, allow_destroy: true
 
   def full_name
-    [self.first_name, self.middle_name, self.last_name].compact.join(" ")
+    [self.first_name, self.middle_name, self.last_name].reject(&:blank?).join(" ")
   end
 
   class << self
