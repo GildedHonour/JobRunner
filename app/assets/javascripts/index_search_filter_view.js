@@ -53,7 +53,7 @@ App.IndexSearchFilterView = {
                 captureLength: 0,
                 highlight: true,
                 callback: function(term) {
-                    Turbolinks.visit(App.addParamToCurrentUrl({ search: term }));
+                    Turbolinks.visit(App.addParamToCurrentUrl({ search: term, page: "1" }));
                 }
             });
             $('#typeahead-search').focus().val($('#typeahead-search').val());
