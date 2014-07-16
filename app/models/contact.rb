@@ -53,11 +53,11 @@ class Contact < ActiveRecord::Base
     end
 
     def do_mail
-      where(do_not_mail: false)
+      where(do_not_mail: [false, nil])
     end
 
     def do_email
-      where(do_not_email: false)
+      where(do_not_email: [false, nil])
     end
   end
 
