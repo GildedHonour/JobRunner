@@ -29,12 +29,17 @@ App.IndexSearchFilterView = {
             selector: "#relationships-filter",
             searchKeyName: "rc",
             selectionInputName: "relationship_filter[company_ids]"
+        },
+        {
+            selector: "#exclude-do-not-mail-email-filter",
+            searchKeyName: "dm_em",
+            selectionInputName: "do_not_mail_email_filter[do_not_mail_email]"
         }
     ],
 
     bindEvents: function(bodyClass) {
         $.each(this.filters, function(index, filter) {
-            $(document).on('change', bodyClass + ' ' + filter.selector, function() {
+            $(document).on("change", bodyClass + " " + filter.selector, function() {
                 var selectedCompanies = $.map($('input[name="' + filter.selectionInputName + '"]:checked'), function(company_input) {
                     return $(company_input).val();
                 });
@@ -66,7 +71,7 @@ $(function() {
     App.IndexSearchFilterView.bindEvents("body.companies.index");
 });
 
-$(document).on('page:change', function() {
+$(document).on("page:change", function() {
     App.IndexSearchFilterView.initPlugins("body.contacts.index");
     App.IndexSearchFilterView.initPlugins("body.companies.index");
 });

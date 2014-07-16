@@ -6,7 +6,7 @@ class ContactsController < ApplicationController
   before_filter :authenticate_admin!, only: [:new_invite, :invite, :re_invite]
 
   ENTITY_PREFIX = "contact"
-  FILTER_ITEMS = [:a, :bm, :ct, :irr, :rc, :search, :name_sort]
+  FILTER_ITEMS = [:a, :bm, :ct, :irr, :rc, :search, :name_sort, :dm_em]
 
   def index
     @entities, @entities_all_pages = apply_filters(@entities)
@@ -143,5 +143,12 @@ class ContactsController < ApplicationController
 
     source_filtered = source_filtered.contacts_of_companies_with_relationship_to(get_saved_filters[:rc]) if get_saved_filters.has_key?(:rc)
     source_filtered = get_saved_filters[:name_sort] == "down" ? source_filtered.order("first_name DESC") : source_filtered.order("first_name ASC")
+  
+    if get_saved_filters.has_key?(:dm_em)
+      source_filtered = source_filtered.do_mail if get_saved_filters[:dm_em].include?("mail")
+      source_filtered = source_filtered.do_email if get_saved_filters[:dm_em].include?("email")
+    end
+
+    source_filtered
   end
 end
