@@ -1,7 +1,13 @@
 function ready() {
   var chkUseCompContInfo = $("#chk_use_company_contact_info");
-  var mdlChooseAddress = $("#choose_address");
+  var chkUseCompPhoneNumber = $("#chk_use_company_phone_number");
+  
+  var mdlgChooseAddress = $("#choose_address");
+  var mdlgChoosePhoneNumber = $("#choose_phone_number");
+  
   var addresses = [];
+  var phoneNumbers = [];
+  
   var addressFormInputs = [
     "div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(0)",
     "div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(1)",
@@ -9,19 +15,29 @@ function ready() {
     "div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(3)"
   ];
 
+  var phoneNumberFormInputs = [
+    "#phone_numbers div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(0)",
+    "#phone_numbers div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(1)",
+  ];
+
   var addressFormDropDown = "div.col-md-4.fields:visible:eq(0) div.panel-body select:eq(0)";
+  var phoneNumberFormDropDown = "#phone_numbers div.col-md-4.fields:visible:eq(0) div.panel-body select:eq(0)";
+  
   var allAdressFormItems = addressFormInputs.concat(addressFormDropDown);
+  var allPhoneNumberFormItems = [phoneNumberFormDropDown].concat(phoneNumberFormInputs);
+
   var addressFormKeys = ["address_line_1", "address_line_2", "city", "zip", "state"];
+  var phoneNumberFormKeys = ["kind" ,"phone_number", "extension"];
 
   function getAddressesContactsUrl(id) {
     return getRawAddressesContactsUrl.replace(":contact_id", id);
   };
 
-  /*Modal dialog - button "ok"*/
+  /*Modal dialog Choose Address - button "ok"*/
   $(document).on("click", "#choose_address_ok", function() {
-    var id = parseInt(mdlChooseAddress.find(".modal-body input[type=radio]:checked").val(), 10); 
+    var id = parseInt(mdlgChooseAddress.find(".modal-body input[type='radio']:checked").val(), 10); 
     $("#contact_info_container").html("This company also has <a href='#'>other addresses</a>.");
-    mdlChooseAddress.modal("hide");
+    mdlgChooseAddress.modal("hide");
     for (var i = 0; i < addresses.length; i++) {
       if (addresses[i].id == id) {
         for (var j in allAdressFormItems) {
@@ -34,7 +50,7 @@ function ready() {
     }
   });
 
-  /*Modal dialog - button close*/
+  /*Modal dialog Choose Address - button close*/ //todo remove?
   $(document).on("click", "#close_modal", function() {
     if (isAddressFormEmpty()) {
       chkUseCompContInfo.prop("checked", false);
@@ -42,14 +58,14 @@ function ready() {
       $("#contact_info_container").html("This company also has <a href='#'>other addresses</a>.");
     }
 
-    mdlChooseAddress.modal("hide");
+    mdlgChooseAddress.modal("hide");
   });
 
-  function showErrors() {
+  function showAddressFormErrors() {
     $("#contact_info_errors_container").html("This company doesn't have an address.");
   };
 
-  function clearErrors() {
+  function clearAddressFormErrors() {
     $("#contact_info_errors_container").html("");
     $("#contact_info_container").html("");
   };
@@ -57,6 +73,13 @@ function ready() {
   function doesAddressFormExist() {
     return $("div.col-md-4.fields:visible").length > 1;
   };
+
+  //todo
+  function doesPhoneNumberFormExist() {
+    // return $("div.col-md-4.fields:visible").length > 1;
+    return true;
+  };
+  
 
   function resetAddressForm() {
     for (var i in addressFormInputs) {
@@ -88,8 +111,14 @@ function ready() {
       chkUseCompContInfo.prop("checked", false);
     }
 
-    if (isCompanySelected() && doesAddressFormExist()) {
-      chkUseCompContInfo.prop("disabled", false);
+    if (isCompanySelected()) {
+      if (doesAddressFormExist()) {
+        chkUseCompContInfo.prop("disabled", false);  
+      }
+
+      if (doesPhoneNumberFormExist()) {
+        chkUseCompPhoneNumber.prop("disabled", false);  
+      }
     } else {
       chkUseCompContInfo.prop("disabled", true);
       chkUseCompContInfo.prop("checked", false);
@@ -97,12 +126,12 @@ function ready() {
 
     resetAddressForm();
     setAddressFormState(true);
-    clearErrors();
+    clearAddressFormErrors();
   });
 
   function isCompanySelected() {
     return $("#contact_company_id").val() !== "";
-  }
+  };
 
   /* Address Form - set enabled / disabled state
   true - enabled, false - disabled */
@@ -158,7 +187,7 @@ function ready() {
           case 0:
             chkUseCompContInfo.prop("disabled", true);
             chkUseCompContInfo.prop("checked", false);
-            showErrors();
+            showAddressFormErrors();
             break;
 
           case 1:
@@ -196,8 +225,8 @@ function ready() {
             }
 
             str += "</form>";
-            mdlChooseAddress.find(".modal-body").html(str);
-            mdlChooseAddress.modal("show");
+            mdlgChooseAddress.find(".modal-body").html(str);
+            mdlgChooseAddress.modal("show");
         }
       })
       .fail(function() {
@@ -206,14 +235,14 @@ function ready() {
       });
     } else {
       resetAddressForm();
-      clearErrors();
+      clearAddressFormErrors();
       setAddressFormState(true);
     }
   });
   
   $("#contact_info_container").on("click", "a", function(e) {
     e.preventDefault();
-    mdlChooseAddress.modal("show");
+    mdlgChooseAddress.modal("show");
   });
 
   /*Contact form - on submit*/
@@ -229,11 +258,126 @@ function ready() {
     $(".filters.wrapper input[type='checkbox']:checked").prop("checked", false).trigger("change");
   });
 
+  /*Checkboxes Use the contact info and Phone Numbers of the company*/
   function setChkState() {
     chkUseCompContInfo.prop("disabled", $("#contact_company_id").val() === "");
+    chkUseCompPhoneNumber.prop("disabled", $("#contact_company_id").val() === "");
   };
 
   setChkState();
+
+  /*******************************************************************************************************/
+  function getPhoneNumbersContactsUrl(id) {
+    return getRawPhoneNumbersContactsUrl.replace(":contact_id", id);
+  };
+
+  /*Phone Form checkbox - use the phones of the company*/
+  $(document).on("click", "#chk_use_company_phone_number", function() {
+    if (this.checked) {
+      $.ajax({
+        url: getPhoneNumbersContactsUrl($("#contact_company_id").val())
+      })
+      .done(function(data) {
+        switch (data.phone_numbers.length) {
+          case 0:
+            chkUseCompPhoneNumber.prop("disabled", true);
+            chkUseCompPhoneNumber.prop("checked", false);
+            showUseCompPhoneNumberErrors();
+            break;
+
+          case 1:
+            for (var i in allPhoneNumberFormItems) {
+              $(allPhoneNumberFormItems[i]).val(data.phone_numbers[0][phoneNumberFormKeys[i]]);
+            }
+            
+            setPhoneNumberFormState(false);
+            break;
+
+          default:
+            var phn = data.phone_numbers;
+            phoneNumbers = phn;
+            var str = "<form action='#'>";
+            for (var i in phn) {
+                
+                // debugger; //todo
+
+              str += "<input type='checkbox' ";
+              str += "value='" + phn[i].id + "' ";
+              str += "name='phone_numbers' style='margin-left: 5px;'/>";
+              str += "<label style='font-size: 16px; font-weight: normal; margin-left: 10px;'>";
+              str += phn[i].str;
+              str += "</label>";
+              str += "<br />";
+            }
+
+            str += "</form>";
+            mdlgChoosePhoneNumber.find(".modal-body").html(str);
+            mdlgChoosePhoneNumber.modal("show");
+        }
+      })
+      .fail(function() {
+        chkUseCompPhoneNumber.prop("checked", false);
+        alert("Something went wrong, try again.");
+      });
+    } else {
+      resetPhoneNumberForm();
+      clearPhoneNumberErrors();
+      setPhoneNumberFormState(true);
+    }
+  });
+
+  function showUseCompPhoneNumberErrors() {
+
+  };
+
+  /* Phone Number Form - set enabled / disabled state
+    true - enabled, false - disabled */
+  function setPhoneNumberFormState(isEnabled) {
+    for (var i in allPhoneNumberFormItems) {
+      $(allPhoneNumberFormItems[i]).prop("disabled", !isEnabled);
+    }
+  };
+
+  function resetPhoneNumberForm() {
+    for (var i in phoneNumberFormInputs) {
+      $(phoneNumberFormInputs[i]).val("");
+    }
+
+    $(phoneNumberFormDropDown).val("business");
+    $("#phone_numbers .col-md-4.fields:visible").not(":eq(0)").remove();
+  };
+
+  function clearPhoneNumberErrors() {
+    $("#phone_numbers_container").html("");
+  };
+
+  /*Modal dialog Choose Address - button "ok"*/
+  $(document).on("click", "#choose_phone_number_ok", function() {
+    var id = parseInt(mdlgChoosePhoneNumber.find(".modal-body input[type='checkbox']:checked").val(), 10); 
+    $("#phone_numbers_container").html("This company also has <a href='#'>other phone numbers</a>.");
+    mdlgChoosePhoneNumber.modal("hide");
+    for (var i = 0; i < phoneNumbers.length; i++) {
+      if (phoneNumbers[i].id == id) {
+        for (var j in allPhoneNumberFormItems) {
+          $(allPhoneNumberFormItems[j]).val(phoneNumbers[i][phoneNumberFormKeys[j]]);
+        }
+
+        setPhoneNumberFormState(false);
+        break;
+      }
+    }
+  });
+
+  /*Modal dialog Choose Address - button close*/ //todo remove?
+  $(document).on("click", "#close_modal", function() {
+    if (isPhoneNumberFormEmpty()) {
+      chkUseCompPhoneNumber.prop("checked", false);
+    } else {
+      $("#phone_numbers_container").html("This company also has <a href='#'>other phone numbers</a>.");
+    }
+
+    mdlgChoosePhoneNumber.modal("hide");
+  });
 };
 
 jQuery(document).ready(ready);
