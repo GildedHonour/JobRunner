@@ -50,8 +50,8 @@ function ready() {
     }
   });
 
-  /*Modal dialog Choose Address - button close*/ //todo remove?
-  $(document).on("click", "#close_modal", function() {
+  /*Modal dialog choose address - button close*/
+  $(document).on("click", "#choose_address_close", function() {
     if (isAddressFormEmpty()) {
       chkUseCompContInfo.prop("checked", false);
     } else {
@@ -303,7 +303,7 @@ function ready() {
 
               str += "<input type='checkbox' ";
               str += "value='" + phn[i].id + "' ";
-              str += "name='phone_numbers' style='margin-left: 5px;'/>";
+              str += "name='phone_numbers' style='margin-left: 5px;' />";
               str += "<label style='font-size: 16px; font-weight: normal; margin-left: 10px;'>";
               str += phn[i].str;
               str += "</label>";
@@ -348,28 +348,39 @@ function ready() {
   };
 
   function clearPhoneNumberErrors() {
-    $("#phone_numbers_container").html("");
+    $("#phone_number_errors_container").html("");
   };
 
   /*Modal dialog Choose Address - button "ok"*/
   $(document).on("click", "#choose_phone_number_ok", function() {
-    var id = parseInt(mdlgChoosePhoneNumber.find(".modal-body input[type='checkbox']:checked").val(), 10); 
+    var idsRaw = mdlgChoosePhoneNumber.find(".modal-body input[type='checkbox']:checked");
+    var ids = [];
+    for (var i = 0; i < idsRaw.length; i++) {
+      ids.push(parseInt(idsRaw[i].value, 10));
+    }
+
     $("#phone_numbers_container").html("This company also has <a href='#'>other phone numbers</a>.");
     mdlgChoosePhoneNumber.modal("hide");
-    for (var i = 0; i < phoneNumbers.length; i++) {
-      if (phoneNumbers[i].id == id) {
-        for (var j in allPhoneNumberFormItems) {
-          $(allPhoneNumberFormItems[j]).val(phoneNumbers[i][phoneNumberFormKeys[j]]);
-        }
 
-        setPhoneNumberFormState(false);
-        break;
+    //add 
+    for (var i = 0; i < phoneNumbers.length - 1; i++) {
+      $(".add-new-phone-number-form").trigger("click");
+    }
+
+    for (var i = 0; i < phoneNumbers.length; i++) {
+      for (var j in allPhoneNumberFormItems) {
+
+        var selector = allPhoneNumberFormItems[j].replace("visible:eq(0)", "visible:eq(" + i + ")");
+        // debugger;
+        $(selector).val(phoneNumbers[i][phoneNumberFormKeys[j]]);
       }
+
+      setPhoneNumberFormState(false); //todo - disable all the ones that have been added
     }
   });
 
-  /*Modal dialog Choose Address - button close*/ //todo remove?
-  $(document).on("click", "#close_modal", function() {
+  /*Modal dialog choose Phone number - button close*/
+  $(document).on("click", "#choose_phone_number_close", function() {
     if (isPhoneNumberFormEmpty()) {
       chkUseCompPhoneNumber.prop("checked", false);
     } else {
@@ -378,6 +389,10 @@ function ready() {
 
     mdlgChoosePhoneNumber.modal("hide");
   });
+
+  function isPhoneNumberFormEmpty() {
+    return false; //todo
+  }
 };
 
 jQuery(document).ready(ready);

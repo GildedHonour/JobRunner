@@ -78,6 +78,9 @@
           %label
             %input{type: :checkbox, id: "chk_use_company_phone_number"}
             Use the phone number(s) of the company
+          .row
+            #phone_number_container{style: "padding-left: 30px; font-weight: bold;"}
+            #phone_number_errors_container{style: "padding-left: 30px; color: red; font-weight: bold;"}
           = render "phone_number_fields", f: f
           = render "email_fields", f: f
 
