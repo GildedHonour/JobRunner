@@ -15,4 +15,4 @@
                 = phone_number_form.input :extension, placeholder: "Extension", label: false, input_html: { data: "phone-number-extension-input", autocomplete: "off" }
             = phone_number_form.link_to_remove "Remove", class: "btn btn-danger"
   .col-md-4
-    = f.link_to_add  "Add phone number", :phone_numbers, class: "btn btn-default", data: { target: "#phone_numbers" }
+    = f.link_to_add  "Add phone number", :phone_numbers, class: "btn btn-default add-new-phone-number-form", data: { target: "#phone_numbers" }
