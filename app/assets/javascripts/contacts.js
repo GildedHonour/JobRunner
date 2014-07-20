@@ -109,12 +109,14 @@ function ready() {
       chkUseCompContInfo.prop("checked", false);
     }
 
+    if ((chkUseCompPhoneNumber).is(":checked")) {
+      chkUseCompPhoneNumber.prop("checked", false);
+    }
+
     if (isCompanySelected()) {
       if (doesAddressFormExist()) {
         chkUseCompContInfo.prop("disabled", false);  
       }
-
-
 
       if (doesPhoneNumberFormExist()) {
         chkUseCompPhoneNumber.prop("disabled", false);  
@@ -122,11 +124,18 @@ function ready() {
     } else {
       chkUseCompContInfo.prop("disabled", true);
       chkUseCompContInfo.prop("checked", false);
+
+      chkUseCompPhoneNumber.prop("disabled", true);
+      chkUseCompPhoneNumber.prop("checked", false);
     }
 
     resetAddressForm();
     setAddressFormState(true);
     clearAddressFormErrors();
+
+    resetPhoneNumberForm();
+    setPhoneNumberFormState(true);
+    clearPhoneNumberErrors();
   });
 
   function isCompanySelected() {
@@ -333,9 +342,13 @@ function ready() {
   /* Phone Number Form - set enabled / disabled state
     true - enabled, false - disabled */
   function setPhoneNumberFormState(isEnabled) {
-    for (var i = 0; i < phoneNumbers.length; i++) {
+    /*todo - not all phoneNumbers, only checked ones*/
+    for (var i = 0; i < phoneNumbers.length; i++) { 
       for (var j in allPhoneNumberFormItems) {
         var selector = allPhoneNumberFormItems[j].replace("visible:eq(0)", "visible:eq(" + i + ")");
+        
+        // debugger;
+
         $(selector).prop("disabled", !isEnabled);
       }
     }
@@ -354,6 +367,7 @@ function ready() {
   };
 
   function clearPhoneNumberErrors() {
+    $("#phone_number_container").html("");
     $("#phone_number_errors_container").html("");
   };
 
@@ -362,29 +376,40 @@ function ready() {
     var idsRaw = mdlgChoosePhoneNumber.find(".modal-body input[type='checkbox']:checked");
     var ids = [];
     var selectedPhoneNumbers = [];
+
     for (var i = 0; i < idsRaw.length; i++) {
       var id = parseInt(idsRaw[i].value, 10);
       ids.push(id);
-      if (phoneNumbers[i].id == id) {
-        selectedPhoneNumbers.push(phoneNumbers[i]);
-      }      
+      for (var j in phoneNumbers) { 
+        if (phoneNumbers[j].id === id) {
+          selectedPhoneNumbers.push(phoneNumbers[j]);
+        }  
+      }    
     }
 
-    $("#phone_number_container").html("This company also has <a href='#'>other phone numbers</a>.");
+
+    if (phoneNumbers.length > 1 && selectedPhoneNumbers.length > 0) {
+      $("#phone_number_container").html("This company also has more than 1 <a href='#'>phone number</a>.");
+    }
+
     mdlgChoosePhoneNumber.modal("hide");
 
     for (var i = 0; i < selectedPhoneNumbers.length - 1; i++) {
       $(".add-new-phone-number-form").trigger("click");
     }
 
+
+
     for (var i = 0; i < selectedPhoneNumbers.length; i++) {
       for (var j in allPhoneNumberFormItems) {
         var selector = allPhoneNumberFormItems[j].replace("visible:eq(0)", "visible:eq(" + i + ")");
-        // debugger;
         $(selector).val(selectedPhoneNumbers[i][phoneNumberFormKeys[j]]);
+
+        $(selector).prop("disabled", true);
       }
 
-      setPhoneNumberFormState(false); //todo - disable all the ones that have been added
+      //todo - if a company has only one number...
+      // setPhoneNumberFormState(false); //todo - disable all the ones that have been added
     }
   });
 
@@ -402,10 +427,7 @@ function ready() {
   });
 
   function isPhoneNumberFormEmpty() {
-    
-
-    
-    return false; //todo
+    return $(phoneNumberFormInputs[0]).val() === "" && $(phoneNumberFormDropDown).val() === "business";
   };
 
   $("#phone_number_container").on("click", "a", function(e) {
@@ -413,10 +435,10 @@ function ready() {
     mdlgChoosePhoneNumber.modal("show");
   });
 
+  /* check / uncheck checkboxes in modal dialog for choosing phone number*/
   $(document).on("click", "#choose_phone_number input[type='checkbox']", function() {
     var btn = $("#choose_phone_number button.btn.btn-primary");
     btn.prop("disabled", !isAnyPhoneNumberChecked());
-
   });
 
   function isAnyPhoneNumberChecked() {
