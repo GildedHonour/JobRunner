@@ -71,13 +71,11 @@ function ready() {
   };
 
   function doesAddressFormExist() {
-    return $("div.col-md-4.fields:visible").length > 1;
+    return $("#addresses div.col-md-4.fields:visible").length > 0;
   };
 
-  //todo
   function doesPhoneNumberFormExist() {
-    // return $("div.col-md-4.fields:visible").length > 1;
-    return true;
+    return $("#phone_numbers div.col-md-4.fields:visible").length > 0;
   };
   
 
@@ -115,6 +113,8 @@ function ready() {
       if (doesAddressFormExist()) {
         chkUseCompContInfo.prop("disabled", false);  
       }
+
+
 
       if (doesPhoneNumberFormExist()) {
         chkUseCompPhoneNumber.prop("disabled", false);  
@@ -327,18 +327,24 @@ function ready() {
   });
 
   function showUseCompPhoneNumberErrors() {
-
+    $("#phone_number_errors_container").html("This company doesn't have a phone number.");
   };
 
   /* Phone Number Form - set enabled / disabled state
     true - enabled, false - disabled */
   function setPhoneNumberFormState(isEnabled) {
-    for (var i in allPhoneNumberFormItems) {
-      $(allPhoneNumberFormItems[i]).prop("disabled", !isEnabled);
+    for (var i = 0; i < phoneNumbers.length; i++) {
+      for (var j in allPhoneNumberFormItems) {
+        var selector = allPhoneNumberFormItems[j].replace("visible:eq(0)", "visible:eq(" + i + ")");
+        $(selector).prop("disabled", !isEnabled);
+      }
     }
   };
 
   function resetPhoneNumberForm() {
+    //todo - remove all but the first
+    // reset the first form
+
     for (var i in phoneNumberFormInputs) {
       $(phoneNumberFormInputs[i]).val("");
     }
@@ -355,24 +361,27 @@ function ready() {
   $(document).on("click", "#choose_phone_number_ok", function() {
     var idsRaw = mdlgChoosePhoneNumber.find(".modal-body input[type='checkbox']:checked");
     var ids = [];
+    var selectedPhoneNumbers = [];
     for (var i = 0; i < idsRaw.length; i++) {
-      ids.push(parseInt(idsRaw[i].value, 10));
+      var id = parseInt(idsRaw[i].value, 10);
+      ids.push(id);
+      if (phoneNumbers[i].id == id) {
+        selectedPhoneNumbers.push(phoneNumbers[i]);
+      }      
     }
 
-    $("#phone_numbers_container").html("This company also has <a href='#'>other phone numbers</a>.");
+    $("#phone_number_container").html("This company also has <a href='#'>other phone numbers</a>.");
     mdlgChoosePhoneNumber.modal("hide");
 
-    //add 
-    for (var i = 0; i < phoneNumbers.length - 1; i++) {
+    for (var i = 0; i < selectedPhoneNumbers.length - 1; i++) {
       $(".add-new-phone-number-form").trigger("click");
     }
 
-    for (var i = 0; i < phoneNumbers.length; i++) {
+    for (var i = 0; i < selectedPhoneNumbers.length; i++) {
       for (var j in allPhoneNumberFormItems) {
-
         var selector = allPhoneNumberFormItems[j].replace("visible:eq(0)", "visible:eq(" + i + ")");
         // debugger;
-        $(selector).val(phoneNumbers[i][phoneNumberFormKeys[j]]);
+        $(selector).val(selectedPhoneNumbers[i][phoneNumberFormKeys[j]]);
       }
 
       setPhoneNumberFormState(false); //todo - disable all the ones that have been added
@@ -384,14 +393,34 @@ function ready() {
     if (isPhoneNumberFormEmpty()) {
       chkUseCompPhoneNumber.prop("checked", false);
     } else {
-      $("#phone_numbers_container").html("This company also has <a href='#'>other phone numbers</a>.");
+      if (isAnyPhoneNumberChecked()) {
+        $("#phone_number_container").html("This company also has <a href='#'>other phone numbers</a>.");
+      }
     }
 
     mdlgChoosePhoneNumber.modal("hide");
   });
 
   function isPhoneNumberFormEmpty() {
+    
+
+    
     return false; //todo
+  };
+
+  $("#phone_number_container").on("click", "a", function(e) {
+    e.preventDefault();
+    mdlgChoosePhoneNumber.modal("show");
+  });
+
+  $(document).on("click", "#choose_phone_number input[type='checkbox']", function() {
+    var btn = $("#choose_phone_number button.btn.btn-primary");
+    btn.prop("disabled", !isAnyPhoneNumberChecked());
+
+  });
+
+  function isAnyPhoneNumberChecked() {
+    return $("#choose_phone_number input:checked").length > 0;
   }
 };
 
