@@ -373,6 +373,11 @@ function ready() {
 
   /*Modal dialog Choose Address - button "ok"*/
   $(document).on("click", "#choose_phone_number_ok", function() {
+
+    resetPhoneNumberForm();
+    setPhoneNumberFormState(true);
+    clearPhoneNumberErrors();
+    
     var idsRaw = mdlgChoosePhoneNumber.find(".modal-body input[type='checkbox']:checked");
     var ids = [];
     var selectedPhoneNumbers = [];
@@ -398,13 +403,10 @@ function ready() {
       $(".add-new-phone-number-form").trigger("click");
     }
 
-
-
     for (var i = 0; i < selectedPhoneNumbers.length; i++) {
       for (var j in allPhoneNumberFormItems) {
         var selector = allPhoneNumberFormItems[j].replace("visible:eq(0)", "visible:eq(" + i + ")");
         $(selector).val(selectedPhoneNumbers[i][phoneNumberFormKeys[j]]);
-
         $(selector).prop("disabled", true);
       }
 
