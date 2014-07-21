@@ -282,6 +282,9 @@ function ready() {
 
   /*Phone Form checkbox - use the phones of the company*/
   $(document).on("click", "#chk_use_company_phone_number", function() {
+    
+    resetPhoneNumberForm();
+
     if (this.checked) {
       $.ajax({
         url: getPhoneNumbersContactsUrl($("#contact_company_id").val())
@@ -297,9 +300,13 @@ function ready() {
           case 1:
             for (var i in allPhoneNumberFormItems) {
               $(allPhoneNumberFormItems[i]).val(data.phone_numbers[0][phoneNumberFormKeys[i]]);
+              $(allPhoneNumberFormItems[i]).prop("disabled", true);
             }
             
-            setPhoneNumberFormState(false);
+            // todo
+            // setPhoneNumberFormState(false);
+
+
             break;
 
           default:
@@ -307,9 +314,6 @@ function ready() {
             phoneNumbers = phn;
             var str = "<form action='#'>";
             for (var i in phn) {
-                
-                // debugger; //todo
-
               str += "<input type='checkbox' ";
               str += "value='" + phn[i].id + "' ";
               str += "name='phone_numbers' style='margin-left: 5px;' />";
@@ -343,21 +347,18 @@ function ready() {
     true - enabled, false - disabled */
   function setPhoneNumberFormState(isEnabled) {
     /*todo - not all phoneNumbers, only checked ones*/
+
+    // debugger;
+
     for (var i = 0; i < phoneNumbers.length; i++) { 
       for (var j in allPhoneNumberFormItems) {
         var selector = allPhoneNumberFormItems[j].replace("visible:eq(0)", "visible:eq(" + i + ")");
-        
-        // debugger;
-
         $(selector).prop("disabled", !isEnabled);
       }
     }
   };
 
   function resetPhoneNumberForm() {
-    //todo - remove all but the first
-    // reset the first form
-
     for (var i in phoneNumberFormInputs) {
       $(phoneNumberFormInputs[i]).val("");
     }
@@ -377,7 +378,7 @@ function ready() {
     resetPhoneNumberForm();
     setPhoneNumberFormState(true);
     clearPhoneNumberErrors();
-    
+
     var idsRaw = mdlgChoosePhoneNumber.find(".modal-body input[type='checkbox']:checked");
     var ids = [];
     var selectedPhoneNumbers = [];
@@ -396,7 +397,6 @@ function ready() {
     if (phoneNumbers.length > 1 && selectedPhoneNumbers.length > 0) {
       $("#phone_number_container").html("This company also has more than 1 <a href='#'>phone number</a>.");
     }
-
     mdlgChoosePhoneNumber.modal("hide");
 
     for (var i = 0; i < selectedPhoneNumbers.length - 1; i++) {
