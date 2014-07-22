@@ -19,9 +19,6 @@ class ContactsController < ApplicationController
   end
 
   def create
-
-    binding.pry
-
     @entity = @entities.build(permitted_params)
     if @entity.save
       redirect_to(save_success_url)
