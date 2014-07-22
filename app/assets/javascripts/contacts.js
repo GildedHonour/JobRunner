@@ -7,6 +7,7 @@ function ready() {
   
   var addresses = [];
   var phoneNumbers = [];
+  var selectedPhoneNumbers = [];
   
   var addressFormInputs = [
     "div.col-md-4.fields:visible:eq(0) div.panel-body input:eq(0)",
@@ -260,6 +261,17 @@ function ready() {
       var element = $(allAdressFormItems[j]);
       $("<input>").attr({type: "hidden", name: element.attr("name"), value: element.val()}).appendTo($(this));
     }
+
+    debugger;
+
+    for (var i = 0; i < phoneNumbers.length; i++) { 
+      for (var j in allPhoneNumberFormItems) {
+        var selector = $(allPhoneNumberFormItems[j].replace("visible:eq(0)", "visible:eq(" + i + ")"));
+        
+
+        $("<input>").attr({type: "hidden", name: selector.attr("name"), value: selector.val()}).appendTo($(this));
+      }
+    }
   });
 
   /*Filters - clear all*/
@@ -302,7 +314,8 @@ function ready() {
               $(allPhoneNumberFormItems[i]).val(data.phone_numbers[0][phoneNumberFormKeys[i]]);
               $(allPhoneNumberFormItems[i]).prop("disabled", true);
             }
-            
+
+            phoneNumbers.push("123"); //todo - hack
             // todo
             // setPhoneNumberFormState(false);
 
@@ -381,7 +394,7 @@ function ready() {
 
     var idsRaw = mdlgChoosePhoneNumber.find(".modal-body input[type='checkbox']:checked");
     var ids = [];
-    var selectedPhoneNumbers = [];
+    selectedPhoneNumbers = []; // make the array empty
 
     for (var i = 0; i < idsRaw.length; i++) {
       var id = parseInt(idsRaw[i].value, 10);
@@ -393,8 +406,7 @@ function ready() {
       }    
     }
 
-
-    if (phoneNumbers.length > 1 && selectedPhoneNumbers.length > 0) {
+    if (length > 1 && selectedPhoneNumbers.length > 0) {
       $("#phone_number_container").html("This company also has more than 1 <a href='#'>phone number</a>.");
     }
     mdlgChoosePhoneNumber.modal("hide");

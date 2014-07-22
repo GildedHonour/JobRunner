@@ -19,6 +19,9 @@ class ContactsController < ApplicationController
   end
 
   def create
+
+    binding.pry
+
     @entity = @entities.build(permitted_params)
     if @entity.save
       redirect_to(save_success_url)
@@ -109,8 +112,8 @@ class ContactsController < ApplicationController
     comp = Company.find(params[:company_id])
     respond_to do |format|
       format.json do
-        items = comp.phone_numbers.map do |x| 
-          { id: x.id, kind: x.kind, phone_number: x.phone_number, extension: x.extension, str: x.to_s }
+        items = comp.phone_numbers.map do |phn| 
+          { id: phn.id, kind: phn.kind, phone_number: phn.phone_number, extension: phn.extension, str: phn.to_s }
         end
 
         render(json: { phone_numbers: items })
