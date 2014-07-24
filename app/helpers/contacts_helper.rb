@@ -17,4 +17,8 @@ module ContactsHelper
   def entity_path
     ->(id) { contact_path(id) }
   end
+
+  def csv_company_name(contact)
+    contact.full_name == contact.company.name ? "" : contact.company.name 
+  end
 end

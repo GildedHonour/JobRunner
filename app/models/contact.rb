@@ -22,7 +22,7 @@ class Contact < ActiveRecord::Base
   accepts_nested_attributes_for :phone_numbers, reject_if: lambda { |phone_number| phone_number[:phone_number].blank? }, allow_destroy: true
 
   def full_name
-    [self.first_name, self.middle_name, self.last_name].compact.join(" ")
+    [self.first_name, self.middle_name, self.last_name].reject(&:blank?).join(" ")
   end
 
   class << self
@@ -50,6 +50,14 @@ class Contact < ActiveRecord::Base
 
     def contacts_of_companies_with_company_types(company_type_ids)
       includes(:company).references(:company).where('companies.company_type_id IN (?)', company_type_ids)
+    end
+
+    def do_mail
+      where(do_not_mail: [false, nil])
+    end
+
+    def do_email
+      where(do_not_email: [false, nil])
     end
   end
 
