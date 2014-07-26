@@ -297,7 +297,6 @@ function ready() {
     chkUseCompPhoneNumber.prop("disabled", st);
   })();
 
-  /*******************************************************************************************************/
   function getPhoneNumbersContactsUrl(id) {
     return getRawPhoneNumbersContactsUrl.replace(":contact_id", id);
   };
