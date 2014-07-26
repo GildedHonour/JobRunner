@@ -2,7 +2,7 @@ module Audited
   extend ActiveSupport::Concern
   included do
     has_paper_trail ignore: [
-      :created_at, :updated_at, :last_sign_in_at, :current_sign_in_at, :current_sign_in_ip, :last_sign_in_ip, :sign_in_count,
+      :created_at, :updated_at, :last_sign_in_at, :cas_service_ticket, :current_sign_in_at, :current_sign_in_ip, :force_logout, :last_sign_in_ip, :sign_in_count,
       :encrypted_password, :invitation_token, :reset_password_token
     ], meta: {
         item_descriptor:      Proc.new { |object| object.audit_meta[:item_descriptor] },
