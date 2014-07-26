@@ -304,11 +304,7 @@ function ready() {
 
   /*Phone Form checkbox - use the phones of the company*/
   $(document).on("click", "#chk_use_company_phone_number", function() {
-    
     resetPhoneNumberForm();
-    // clearPhoneNumberErrors();
-    // setPhoneNumberFormState(true); todo?
-
     if (this.checked) {
       $.ajax({
         url: getPhoneNumbersContactsUrl($("#contact_company_id").val())
@@ -326,20 +322,11 @@ function ready() {
               $(allPhoneNumberFormItems[i]).val(data.phone_numbers[0][phoneNumberFormKeys[i]]);
               $(allPhoneNumberFormItems[i]).prop("disabled", true);
             }
-
-            //todo - hack 
-            // remove?
-            phoneNumbers.push(data.phone_numbers[0]); 
-            // todo
-            // setPhoneNumberFormState(false);
-
-
             break;
 
           default:
-            //todo - copy instead of =
-            phoneNumbers = data.phone_numbers;
-            
+            phoneNumbers = data.phone_numbers.slice();
+
             var str = "<form action='#'>";
             for (var i in data.phone_numbers) {
               str += "<input type='checkbox' ";
@@ -367,22 +354,14 @@ function ready() {
     }
   });
   
-  //todo
   /*Modal dialog Choose Address - button "ok"*/
   $(document).on("click", "#choose_phone_number_ok", function() {
-
     resetPhoneNumberForm();
-    // setPhoneNumberFormState(true); //todo - remove?
-    // clearPhoneNumberErrors(); //todo - remove?
-
     selectedPhoneNumbers = getSelectedPhoneNumbers();
-
     addRemainingPhoneNumberForms();
     setPhoneNumberFormsValues();
     mdlgChoosePhoneNumber.modal("hide");
-    // if (phoneNumbers.length > 1) { /* todo - it is already always > 1 */
-      $("#phone_number_container").html("This company also has <a href='#'>other phone numbers</a>.");
-    // }
+    $("#phone_number_container").html("This company also has <a href='#'>other phone numbers</a>.");
   });
 
   /*Modal dialog choose Phone number - button close*/
@@ -465,7 +444,6 @@ function ready() {
     var idsRaw = mdlgChoosePhoneNumber.find(".modal-body input[type='checkbox']:checked");
     for (var i = 0; i < idsRaw.length; i++) {
       var id = parseInt(idsRaw[i].value, 10);
-      // ids.push(id); //todo - remove?
       for (var j in phoneNumbers) { 
         if (phoneNumbers[j].id === id) {
           res.push(phoneNumbers[j]);
