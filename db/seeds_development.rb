@@ -96,13 +96,17 @@ Contact.create!(
   company: Company.all.sample
 )
 
-ApiAuth.create!(app: "jobrunner-staging", password:  BCrypt::Password.create("f1398e799a514z"))
-ApiAuth.create!(app: "pmg-cas-staging", password:  BCrypt::Password.create("b09beeefa6e1496"))
+# Application names muct match with the Service Rule name in PMG CAS
+jobrunner_staging = AuthorizedApplication.create!(name: "jobrunner-staging")
+hobbes_staging = AuthorizedApplication.create!(name: "hobbes-staging")
+pmg_cas_staging = AuthorizedApplication.create!(name: "pmg-cas-staging")
 
-# Application names much match with the Service Rule name in PMG CAS
-jobrunner_staging = AuthorizedApplication.create(name: "jobrunner-staging")
-hobbes_staging = AuthorizedApplication.create(name: "hobbes-staging")
+# API Access
+ApiAuth.create!(authorized_application: jobrunner_staging, password:  BCrypt::Password.create("f1398e799a514z"))
+ApiAuth.create!(authorized_application: hobbes_staging, password:  BCrypt::Password.create("b09beeefa6e1496"))
+ApiAuth.create!(authorized_application: pmg_cas_staging, password:  BCrypt::Password.create("8165ab50838e1450b24"))
 
+# CAS Authorizations for users
 User.all.each do |user|
   ApplicationAuthorization.create!(user: user, authorized_application: jobrunner_staging)
   ApplicationAuthorization.create!(user: user, authorized_application: hobbes_staging)
