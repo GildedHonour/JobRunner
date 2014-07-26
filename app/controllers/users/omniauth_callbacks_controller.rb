@@ -10,7 +10,7 @@ module Users
 
         redirect_to after_sign_in_path_for(user)
       else
-        redirect_to user_omniauth_authorize_path(:cas)
+        raise "User not found: #{request.env["omniauth.auth"].inspect}"
       end
     end
   end
