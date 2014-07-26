@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140618212613) do
+ActiveRecord::Schema.define(version: 20140726035031) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,9 +43,25 @@ ActiveRecord::Schema.define(version: 20140618212613) do
   add_index "affiliations", ["principal_id"], name: "index_affiliations_on_principal_id", using: :btree
 
   create_table "api_auths", force: true do |t|
-    t.string   "app"
     t.text     "password"
-    t.boolean  "archived",   default: false
+    t.boolean  "archived",                  default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "authorized_application_id"
+  end
+
+  create_table "application_authorizations", force: true do |t|
+    t.integer  "authorized_application_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "application_authorizations", ["authorized_application_id"], name: "index_application_authorizations_on_authorized_application_id", using: :btree
+  add_index "application_authorizations", ["user_id"], name: "index_application_authorizations_on_user_id", using: :btree
+
+  create_table "authorized_applications", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -162,8 +178,11 @@ ActiveRecord::Schema.define(version: 20140618212613) do
     t.string   "invited_by_type"
     t.integer  "invitations_count",      default: 0
     t.boolean  "admin"
+    t.boolean  "force_logout"
+    t.string   "cas_service_ticket"
   end
 
+  add_index "users", ["cas_service_ticket"], name: "index_users_on_cas_service_ticket", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
   add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
