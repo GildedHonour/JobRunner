@@ -96,6 +96,15 @@ Contact.create!(
   company: Company.all.sample
 )
 
+Contact.create!(
+  first_name: "PMG",
+  last_name: "Develper",
+  prefix: "Mr.",
+  job_title: "Developer",
+  user: User.new(email: "developer@pmgdirect.net", password: "password", admin: true),
+  company: Company.all.sample
+)
+
 # Application names muct match with the Service Rule name in PMG CAS
 jobrunner_staging = AuthorizedApplication.create!(name: "jobrunner-staging")
 hobbes_staging = AuthorizedApplication.create!(name: "hobbes-staging")
