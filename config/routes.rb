@@ -8,6 +8,7 @@ Jobrunner::Application.routes.draw do
   resources :contacts do
     collection do
       get "get_addresses/:company_id" => "contacts#get_addresses", as: :get_addresses
+      get "get_phone_numbers/:company_id" => "contacts#get_phone_numbers", as: :get_phone_numbers
     end
 
     member do

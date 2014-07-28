@@ -105,6 +105,19 @@ class ContactsController < ApplicationController
     end
   end
 
+   def get_phone_numbers
+    comp = Company.find(params[:company_id])
+    respond_to do |format|
+      format.json do
+        items = comp.phone_numbers.map do |phn| 
+          { id: phn.id, kind: phn.kind, phone_number: phn.phone_number, extension: phn.extension, str: phn.to_s }
+        end
+
+        render(json: { phone_numbers: items })
+      end
+    end
+  end
+
   private
 
   def permitted_params
